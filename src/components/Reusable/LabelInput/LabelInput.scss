@@ -1,0 +1,18 @@
+@use '../../../styles/variables' as v;
+
+.LabelInput {
+  background-color: v.$lightColor;
+  width: 15rem;
+  padding: 1rem;
+
+  .ui.input input {
+    border: 1px solid v.$darkColor;
+    background-color: v.$lightColor;
+    width: 80%;
+  }
+
+  p {
+    margin: 1rem 0;
+    font-weight: bold;
+  }
+}
