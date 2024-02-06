@@ -1,0 +1,35 @@
+@use '../../../styles/variables' as v;
+
+.TravelersList {
+  width: fit-content;
+  background-color: v.$mainColor;
+  padding-bottom: 2rem;
+
+  p {
+    text-align: center;
+    color: v.$lightColor;
+    font-size: 1.5rem;
+    padding: 1rem;
+  }
+
+  span {
+    color: v.$lightColor;
+  }
+
+  img {
+    font-size: 1.5rem;
+  }
+
+  button.ui.button {
+    background-color: v.$lightColor;
+    color: v.$mainColor;
+
+    i.icon {
+      color: v.$mainColor;
+    }
+  }
+
+  div.User {
+    align-items: center;
+  }
+}
