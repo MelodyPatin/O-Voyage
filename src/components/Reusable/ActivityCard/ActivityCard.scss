@@ -1,13 +1,58 @@
 @use '../../../styles/variables' as v;
 
 .ActivityCard {
-  background-color: v.$culture;
+  width: fit-content;
   padding: 1rem;
-  border: 5px solid #9a7311;
+  border-radius: 20px;
   color: v.$darkColor;
+  font-size: 1.5rem;
+  margin: 0.5rem;
+
+  &.restaurant {
+    background-color: rgba(v.$restaurant, 0.5);
+    border: 5px solid v.$restaurant;
+  }
+
+  &.culture {
+    background-color: rgba(v.$culture, 0.5);
+    border: 5px solid v.$culture;
+  }
+
+  &.activity {
+    background-color: rgba(v.$activity, 0.5);
+    border: 5px solid v.$activity;
+  }
+
+  &.pub {
+    background-color: rgba(v.$pub, 0.5);
+    border: 5px solid v.$pub;
+  }
+
+  .title {
+    padding: 0.5rem;
+  }
 
   .FlexGap {
     display: flex;
     justify-content: space-between;
+  }
+
+  .FlexColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem;
+
+    .button.ui.button.SimpleButton {
+      text-decoration: underline;
+    }
+    .ui.selection.dropdown {
+      font-size: 1.1rem;
+    }
+  }
+
+  .hearth {
+    text-align: end;
   }
 }
