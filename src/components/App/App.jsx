@@ -1,4 +1,5 @@
 import Footer from '../Reusable/Footer/Footer';
+import IconButton from '../Reusable/IconButton/IconButton';
 import SimpleButton from '../Reusable/SimpleButton/SimpleButton';
 import './App.scss';
 
@@ -7,7 +8,9 @@ function App() {
     <div className="App">
       <header className="App-header">
       <p>Simple Button</p>
-      <SimpleButton textContent='Heeeyyy'/>
+      <SimpleButton textContent='Continuer'/>
+      <p>Icon Button</p>
+      <IconButton icon="trash" textContent='Supprimer'/>
       <p>Footer</p>
       <Footer />
       </header>
