@@ -3,5 +3,11 @@
 .ActivityCard {
   background-color: v.$culture;
   padding: 1rem;
-  border: 3px solid #ffffff;
+  border: 5px solid #9a7311;
+  color: v.$darkColor;
+
+  .FlexGap {
+    display: flex;
+    justify-content: space-between;
+  }
 }
