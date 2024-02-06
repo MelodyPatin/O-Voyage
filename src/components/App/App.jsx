@@ -2,6 +2,7 @@ import ActivityCard from '../Reusable/ActivityCard/ActivityCard';
 import Footer from '../Reusable/Footer/Footer';
 import IconButton from '../Reusable/IconButton/IconButton';
 import LabelInput from '../Reusable/LabelInput/LabelInput';
+import NavBarNico from '../Reusable/NavBarNico/NavBarNico';
 import SimpleButton from '../Reusable/SimpleButton/SimpleButton';
 import TravelersList from '../Reusable/TravelersList/TravelersList';
 import User from '../Reusable/User/User';
@@ -11,6 +12,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <p>Navbar</p>
+        <NavBarNico />
         <p>Simple Button</p>
         <SimpleButton textContent="Continuer" />
         <p>Icon Button</p>

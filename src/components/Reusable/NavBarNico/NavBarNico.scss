@@ -1,0 +1,48 @@
+@use '../../../styles/variables' as v;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: v.$lightColor;
+  padding: 1rem;
+
+  img {
+    width: 5rem;
+  }
+
+  .menu {
+    display: flex;
+    gap: 1.5rem;
+
+    .icon_label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      p {
+        font-size: 0.5rem;
+        margin-top: 0.5rem;
+      }
+
+      .menu {
+        margin-top: 1rem;
+        background-color: v.$mainColor;
+        border-radius: 0;
+        
+        .item,
+        .User {
+          color: v.$lightColor;
+          font-size: 0.6rem;
+        }
+      }
+    }
+
+    img {
+      font-size: 0.75rem;
+    }
+
+    div.divider.text {
+      font-size: 0.5rem;
+    }
+  }
+}
