@@ -1,3 +1,4 @@
+import ActivityCard from '../Reusable/ActivityCard/ActivityCard';
 import Footer from '../Reusable/Footer/Footer';
 import IconButton from '../Reusable/IconButton/IconButton';
 import SimpleButton from '../Reusable/SimpleButton/SimpleButton';
@@ -14,6 +15,8 @@ function App() {
       <IconButton icon="trash" textContent='Supprimer'/>
       <p>User</p>
       <User firstName="Nicolas" lastName='Guillotte'/>
+      <p>Activity Card</p>
+      <ActivityCard />
       <p>Footer</p>
       <Footer />
       </header>

@@ -1,0 +1,7 @@
+@use '../../../styles/variables' as v;
+
+.ActivityCard {
+  background-color: v.$culture;
+  padding: 1rem;
+  border: 3px solid #ffffff;
+}
