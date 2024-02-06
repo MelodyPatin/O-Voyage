@@ -1,10 +1,11 @@
+import SimpleButton from '../Reusable/SimpleButton/SimpleButton';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <p>Coucou les copaings</p>
+      <SimpleButton textContent='Heeeyyy'/>
       </header>
     </div>
   );

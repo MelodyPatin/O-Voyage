@@ -3,6 +3,7 @@ import React from 'react';
 
 // Import the createRoot function from the react-dom/client module
 import { createRoot } from 'react-dom/client';
+import 'semantic-ui-css/semantic.min.css';
 
 // Import the App component from the App.jsx file located in the components/App directory
 import App from './components/App/App';

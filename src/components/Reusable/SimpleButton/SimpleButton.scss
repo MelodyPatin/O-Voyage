@@ -1,0 +1,9 @@
+@use '../../../styles/variables' as v;
+
+.ui.button {
+  background-color: v.$mainColor;
+  color: v.$lightColor;
+  width: 15rem;
+  height: 3rem;
+  padding: 1rem;
+}
