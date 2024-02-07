@@ -10,7 +10,5 @@ const LoginLogoutButton = () => {
     </div>
   );
 };
-
 LoginLogoutButton.propTypes = {};
-
 export default LoginLogoutButton;
