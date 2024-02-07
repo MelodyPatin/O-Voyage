@@ -5,19 +5,8 @@
   justify-content: space-between;
   padding: 1rem;
 
-  .connectionButton {
-    background-color: v.$lightColor;
-    color: v.$darkColor;
-    box-shadow: 2px 2px 5px v.$darkColor;
-    width: auto;
-    height: auto;
-    padding: 0.6em;
-    font-size: 0.5rem;
-  }
-
-  img {
-    width: 5rem;
-    height: fit-content;
+  @media (min-width: 900px) {
+    padding: 2rem;
   }
 
   .menu {
