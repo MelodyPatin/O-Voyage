@@ -16,11 +16,10 @@
     display: block;
     position: relative;
     margin: 0 auto;
-    top: 25%;
+    top: 15%;
     width: fit-content;
     max-width: 270px;
     height: fit-content;
-    max-height: 330px;
     background-color: v.$lightColor;
     text-align: center;
     padding: 1rem;
@@ -37,6 +36,14 @@
       font-weight: bold;
       margin: 2rem 0;
       line-height: 2rem;
+    }
+
+    .ui.input input {
+      border: 1px solid v.$mainColor;
+      background-color: v.$lightColor;
+      width: 80%;
+      margin-bottom: 1rem;
+      border-radius: 10px;
     }
   }
 }
