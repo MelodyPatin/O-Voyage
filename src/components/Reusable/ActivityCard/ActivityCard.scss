@@ -55,7 +55,13 @@
       bottom: 75px;
       text-decoration: underline;
       width: 12.5rem;
+
+      &:hover {
+        background-color: v.$lightColor;
+        color: v.$mainColor;
+      }
     }
+    
     .ui.selection.dropdown {
       position: absolute;
       top: 120px;

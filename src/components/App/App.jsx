@@ -16,7 +16,7 @@ function App() {
       <p>User</p>
       <User firstName="Nicolas" lastName='Guillotte'/>
       <p>Activity Card</p>
-      <ActivityCard activityTitle='Visite du Parlement de Budapest' />
+      <ActivityCard activityTitle="Visite du Parlement de Budapest" />
       <p>Footer</p>
       <Footer />
       </header>

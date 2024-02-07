@@ -9,10 +9,9 @@ import Selector from './Selector';
 
 const ActivityCard = ({ activityTitle }) => {
   const isLiked = true;
-  let shortenedTitle = activityTitle.substring(0, 28); // Extraire les 20 premiers caractères
+  let shortenedTitle = activityTitle.substring(0, 35);
 
-  // Ajouter des points de suspension si activityTitle dépasse 20 caractères
-  if (activityTitle.length > 28) {
+  if (activityTitle.length > 35) {
     shortenedTitle += '...';
   }
 
