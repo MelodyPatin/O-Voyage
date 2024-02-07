@@ -8,13 +8,12 @@ import TravelersList from '../Reusable/TravelersList/TravelersList';
 import User from '../Reusable/User/User';
 import HomePage from '../HomePage/HomePage';
 import './App.scss';
-import ProfileInfo from '../Reusable/ProfileInfo/ProfileInfo';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ProfileInfo firstName='Mélody' nbTravels={5} nbFriends={10} />
+        <HomePage />
       </header>
     </div>
   );
