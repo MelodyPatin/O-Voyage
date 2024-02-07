@@ -1,21 +1,23 @@
 import React from 'react';
-import './PopupMessage.scss';
+import './Popups.scss';
 import PropTypes from 'prop-types';
 import { XCircleIcon } from '@heroicons/react/24/solid';
+import SimpleButton from '../SimpleButton/SimpleButton';
 
-const PopupMessage = ({ textContent }) => {
+const PopupButton = ({ textContent }) => {
   return (
     <div className="container">
-      <div className="PopupMessage">
+      <div className="Popup">
         <XCircleIcon className="icon" />
         <p>{textContent}</p>
+        <SimpleButton textContent='Confirmer' />
       </div>
     </div>
   );
 };
 
-PopupMessage.propTypes = {
+PopupButton.propTypes = {
   textContent: PropTypes.string.isRequired,
 };
 
-export default PopupMessage;
+export default PopupButton;
