@@ -1,15 +1,16 @@
+import { BellIcon } from '@heroicons/react/24/solid';
 import DropDownSettings from './DropDownSettings';
 import DropDownNotifications from './DropDownNotifications';
-import { Icon } from 'semantic-ui-react';
 import Avatar from '../Avatar/Avatar';
 import DesktopItems from './DesktopItems';
+
 const Menu = () => {
   const desktop = true;
   return (
     <div className="menu">
       {desktop && <DesktopItems />}
       <div className="icon_label">
-        <Icon name="bell" size="large" />
+        <BellIcon className="icon" />
         <DropDownNotifications label="Notifications" />
       </div>
       <div className="icon_label">
