@@ -3,13 +3,14 @@ import './LabelInput.scss';
 import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const LabelInput = ({placeholder, value, label }) => {
+const LabelInput = ({ placeholder, value, label }) => {
   return (
-  <div className="LabelInput">
-    <p>{label}</p>
-    <Input placeholder={placeholder} value={value} />
-  </div>
-)};
+    <div className="LabelInput">
+      <p>{label}</p>
+      <Input placeholder={placeholder} value={value} />
+    </div>
+  );
+};
 
 LabelInput.propTypes = {
   placeholder: PropTypes.string.isRequired,
