@@ -5,7 +5,7 @@ import Menu from './Menu';
 import LoginLogoutButton from './LoginLogoutButton';
 
 const NavBarNico = () => {
-  const isLogged = true;
+  const isLogged = false;
   return (
     <div className="header">
       <img src="/src/assets/MainLogo.png" alt="Logo O'Voyage" />

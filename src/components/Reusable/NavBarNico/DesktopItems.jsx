@@ -1,18 +1,22 @@
-import { Icon } from 'semantic-ui-react';
+import {
+  HomeIcon,
+  PhotoIcon,
+  ChatBubbleLeftRightIcon,
+} from '@heroicons/react/24/solid';
 
 const DesktopItems = () => {
   return (
     <>
       <div className="icon_label">
-        <Icon name="home" size="large" />
+        <HomeIcon className="icon" />
         <p>Accueil</p>
       </div>
       <div className="icon_label">
-        <Icon name="picture" size="large" />
+        <PhotoIcon className="icon" />
         <p>Galerie</p>
       </div>
       <div className="icon_label">
-        <Icon name="chat" size="large" />
+        <ChatBubbleLeftRightIcon className="icon" />
         <p>Message</p>
       </div>
     </>
