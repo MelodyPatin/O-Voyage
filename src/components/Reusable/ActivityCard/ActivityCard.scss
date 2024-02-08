@@ -1,7 +1,8 @@
 @use '../../../styles/variables' as v;
 
+// Hide the scrollbar for all elements
 ::-webkit-scrollbar {
-  display: none; /* Masquer la barre de défilement pour tous les éléments */
+  display: none;
 }
 
 .ActivityCard {
@@ -18,6 +19,7 @@
     padding-top: 0.5rem;
   }
 
+  // Different styles based on the class of the ActivityCard
   &.restaurant {
     background-color: rgba(v.$restaurant, 0.5);
     border: 5px solid v.$restaurant;
@@ -56,12 +58,13 @@
       text-decoration: underline;
       width: 12.5rem;
 
+      // Hover effect for the SimpleButton
       &:hover {
         background-color: v.$lightColor;
         color: v.$mainColor;
       }
     }
-    
+
     .ui.selection.dropdown {
       position: absolute;
       top: 120px;
@@ -73,6 +76,7 @@
         border: 1px solid v.$mainColor;
         border-bottom: 0;
 
+        // Hover effect for dropdown items
         &:hover {
           color: v.$lightColor;
           background-color: v.$mainColor;

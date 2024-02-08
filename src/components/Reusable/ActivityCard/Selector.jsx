@@ -1,7 +1,8 @@
 import React from 'react';
 import { Select } from 'semantic-ui-react';
 
-const countryOptions = [
+// Define an array of days options for the Select component
+const dayOptions = [
   { key: 'd1', value: 'd1', text: 'Jour 1' },
   { key: 'd2', value: 'd2', text: 'Jour 2' },
   { key: 'd3', value: 'd3', text: 'Jour 3' },
@@ -20,7 +21,7 @@ const countryOptions = [
 const Selector = () => (
   <Select
     placeholder="Sélectionner un jour"
-    options={countryOptions}
+    options={dayOptions} // Array of options for the Select dropdown
     className="custom-select"
   />
 );

@@ -2,7 +2,7 @@
 
 .message-container {
   position: relative;
-  height: 100vh;
+  height: 100vh; /* Full height of the viewport */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +27,7 @@
   }
 
   &.error {
-    background-color: v.$restaurant;
+    background-color: v.$secondaryColor;
     color: v.$lightColor;
   }
 }
