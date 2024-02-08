@@ -1,0 +1,24 @@
+@use '../../../styles/variables' as v;
+
+.ItemSuitcase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin: 1rem 0;
+
+  .checkbox {
+    transform: scale(2.5); // Ajustez le facteur d'échelle selon vos besoins
+    border-color: v.$mainColor; // Couleur de la bordure de la case à cocher
+    margin-right: 1rem;
+  }
+
+  .input {
+    border: 1px solid v.$mainColor;
+    border-radius: 5px;    
+  }
+
+  .icon {
+    width: 3rem;
+  }
+}
