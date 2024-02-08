@@ -3,8 +3,13 @@
 .ui.button {
   background-color: v.$mainColor;
   color: v.$lightColor;
-  width: 15rem;
+  width: 14rem;
   height: 3rem;
   padding: 1rem;
   margin: 0.5rem;
+
+  &:hover {
+    background-color: v.$lightColor;
+    color: v.$mainColor;
+  }
 }

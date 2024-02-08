@@ -9,11 +9,17 @@ const countryOptions = [
   { key: 'd5', value: 'd5', text: 'Jour 5' },
   { key: 'd6', value: 'd6', text: 'Jour 6' },
   { key: 'd7', value: 'd7', text: 'Jour 7' },
+  { key: 'd7', value: 'd7', text: 'Jour 7' },
+  { key: 'd7', value: 'd7', text: 'Jour 7' },
+  { key: 'd7', value: 'd7', text: 'Jour 7' },
+  { key: 'd7', value: 'd7', text: 'Jour 7' },
+  { key: 'd7', value: 'd7', text: 'Jour 7' },
+  { key: 'd7', value: 'd7', text: 'Jour 7' },
 ];
 
 const Selector = () => (
   <Select
-    placeholder="Select your country"
+    placeholder="Sélectionner un jour"
     options={countryOptions}
     className="custom-select"
   />

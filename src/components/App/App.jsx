@@ -6,7 +6,8 @@ import NavBarNico from '../Reusable/NavBarNico/NavBarNico';
 import SimpleButton from '../Reusable/SimpleButton/SimpleButton';
 import TravelersList from '../Reusable/TravelersList/TravelersList';
 import User from '../Reusable/User/User';
-import HomePage from './Pages/HomePage/HomePage';
+import HomePage from '../HomePage/HomePage';
+
 import './App.scss';
 
 function App() {

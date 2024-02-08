@@ -1,0 +1,15 @@
+@use '../../../styles/variables' as v;
+
+.ReturnTitle {
+  color: v.$mainColor;
+  display: flex;
+  height: 5rem;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.8rem;
+  border-bottom: 1px solid v.$mainColor;
+
+  h3 {
+    margin-left: 1rem;
+  }
+}
