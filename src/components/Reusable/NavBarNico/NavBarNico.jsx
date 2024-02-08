@@ -14,7 +14,5 @@ const NavBarNico = () => {
     </div>
   );
 };
-
 NavBarNico.propTypes = {};
-
 export default NavBarNico;
