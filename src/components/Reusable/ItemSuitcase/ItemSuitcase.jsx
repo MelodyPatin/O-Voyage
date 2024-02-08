@@ -7,9 +7,13 @@ import PropTypes from 'prop-types';
 const ItemSuitcase = ({ textContent }) => {
   return (
     <div className="ItemSuitcase">
+      {/* Checkbox for item completion status */}
       <Checkbox className="checkbox" />
+      {/* Input for item text */}
       <Input className="input" />
+      {/* CheckIcon for indicating item completion */}
       <CheckIcon className="icon" />
+      {/* XMarkIcon for indicating item deletion or non-completion */}
       <XMarkIcon className="icon" />
     </div>
   );

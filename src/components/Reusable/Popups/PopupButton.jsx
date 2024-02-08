@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import SimpleButton from '../SimpleButton/SimpleButton';
 
+// Functional component : popup with a close button, a text message and a button
 const PopupButton = ({ textContent, buttonContent }) => {
   return (
     <div className="container">

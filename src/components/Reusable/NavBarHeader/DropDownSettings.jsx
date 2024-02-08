@@ -9,10 +9,12 @@ import User from '../User/User';
 import Avatar from '../Avatar/Avatar';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 
+// Component for displaying user settings
 const DropDownSettings = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const onMobile = false;
 
+  // Toggle function to switch between open and closed states
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -27,17 +29,20 @@ const DropDownSettings = () => {
           <p className="notification-title">Vous</p>
         </div>
       </div>
+      {/* Dropdown content */}
       {isOpen && (
         <div className="dropdown-content settings">
-          {/* Contenu du menu déroulant */}
           {onMobile && <XCircleIcon className="cross-icon" />}
-          {!onMobile && <ProfileInfo
-            firstName={'Mélody'}
-            nbTravels={5}
-            nbFriends={10}
-            id="info"
-          />}
+          {!onMobile && (
+            <ProfileInfo
+              firstName="Mélody"
+              nbTravels={5}
+              nbFriends={10}
+              id="info"
+            />
+          )}
           <ul>
+            {/* Settings items */}
             <li className="item">Modifier mon profil</li>
             <li className="item">Mes amis</li>
             <li className="item">Ajouter un ami</li>

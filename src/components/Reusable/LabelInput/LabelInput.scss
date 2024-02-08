@@ -8,7 +8,7 @@
   .ui.input input {
     border: 1px solid v.$mainColor;
     background-color: v.$lightColor;
-    width: 80%;
+    width: 80%; /* Set width for the input within the container */
   }
 
   p {

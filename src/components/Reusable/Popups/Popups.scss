@@ -1,11 +1,15 @@
 @use '../../../styles/variables' as v;
 
+// Full-screen overlay for the modal
 .container {
   width: 100%;
   height: 100%;
   top: 0;
   position: absolute;
-  background-color: rgba(v.$darkColor, 0.7); /* complimenting your modal colors */
+  background-color: rgba(
+    v.$darkColor,
+    0.7
+  ); // Semi-transparent overlay background
 
   &:target {
     visibility: visible;
@@ -13,6 +17,7 @@
   }
 
   .Popup {
+    // Center the modal vertically
     display: block;
     position: relative;
     margin: 0 auto;
@@ -39,6 +44,7 @@
     }
 
     .ui.input input {
+      // Styling for input fields within the modal
       border: 1px solid v.$mainColor;
       background-color: v.$lightColor;
       width: 80%;

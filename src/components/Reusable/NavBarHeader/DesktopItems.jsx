@@ -9,6 +9,7 @@ import { NavLink } from 'react-router-dom';
 const DesktopItems = () => {
   return (
     <>
+      {/* NavLinks with icon */}
       <NavLink className="icon_label" to="/accueil">
         <HomeIcon className="icon" />
         <p>Accueil</p>

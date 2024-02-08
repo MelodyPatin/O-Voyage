@@ -5,14 +5,17 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar/Avatar';
 
 const ReturnTitle = ({ textContent, avatar }) => {
-  // Vérifier si le texte dépasse 17 caractères
-  const displayText = textContent.length > 17 ? textContent.slice(0, 17) + '...' : textContent;
+  // Check if the text exceeds 17 characters // TODO check if it might create problem with some other titles?
+  const displayText =
+    textContent.length > 17 ? `${textContent.slice(0, 17)}...` : textContent;
 
   return (
     <div className="ReturnTitle">
-      <Icon name="arrow left" />
+      <Icon name="arrow left" />{' '}
+      {/* Icon for going back to the previous page */}
       <h3>{displayText}</h3>
-      {{avatar} && <Avatar className="avatar" />}
+      {{ avatar } && <Avatar className="avatar" />}{' '}
+      {/* Display Avatar if avatar prop is true */}
     </div>
   );
 };

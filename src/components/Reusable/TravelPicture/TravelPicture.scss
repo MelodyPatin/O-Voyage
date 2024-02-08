@@ -7,9 +7,13 @@
     width: 100%;
     position: relative;
   }
+
+  // Styling for the hidden file input to select the new photo (triggered indirectly through a label and a visible icon -> more userfriendly)
   #photo-upload {
     display: none;
   }
+
+  // Styling for the pencil icon (used for triggering file upload)
   .icon {
     width: 2.5rem;
     color: v.$lightColor;

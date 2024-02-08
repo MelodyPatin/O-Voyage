@@ -3,9 +3,10 @@ import './User.scss';
 import PropTypes from 'prop-types';
 import Avatar from '../Avatar/Avatar';
 
+// Component representing a user
 const User = ({ firstName, lastName, textContent }) => (
   <div className="User">
-  <Avatar />
+    <Avatar /> {/* Render the Avatar component for user's profile image */}
     <span>
       {firstName} {lastName} {textContent}
     </span>

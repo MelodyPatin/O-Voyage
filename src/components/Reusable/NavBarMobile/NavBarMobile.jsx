@@ -13,6 +13,7 @@ import PropTypes from 'prop-types';
 const NavBarMobile = ({ textContent }) => {
   return (
     <div className="NavBarMobileContainer">
+      {/* List of Icons present in the mobile navbar */}
       <div className="NavBarMobile">
         <HomeIcon className="icon home" />
         <UserGroupIcon className="icon user" />
