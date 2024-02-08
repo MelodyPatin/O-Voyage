@@ -1,0 +1,19 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .container {
+    flex: 1;
+    text-align: center;
+    padding: 1rem;
+
+    .textContent{
+      padding: 5rem;
+    }
+  }
+
+  .footer {
+    margin-top: auto;
+  }
+}
