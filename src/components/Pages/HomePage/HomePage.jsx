@@ -1,4 +1,4 @@
-import NavBar from '../../Reusable/NavBarNico/NavBarNico';
+import NavBar from '../../Reusable/NavBarHeader/NavBarHeader';
 import Header from './Header/Header';
 import Presentation from './Presentation/Presentation';
 import LastPart from './LastPart/LastPart';

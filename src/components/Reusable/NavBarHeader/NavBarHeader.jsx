@@ -1,10 +1,10 @@
 import React from 'react';
-import './NavBarNico.scss';
+import './NavBarHeader.scss';
 import PropTypes from 'prop-types';
 import Menu from './Menu';
 import LoginLogoutButton from './LoginLogoutButton';
 
-const NavBarNico = () => {
+const NavBarHeader = () => {
   const isLogged = true;
   return (
     <div className="header">
@@ -14,5 +14,5 @@ const NavBarNico = () => {
     </div>
   );
 };
-NavBarNico.propTypes = {};
-export default NavBarNico;
+NavBarHeader.propTypes = {};
+export default NavBarHeader;
