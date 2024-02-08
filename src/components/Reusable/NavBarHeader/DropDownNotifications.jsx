@@ -1,23 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import {
-  DropdownMenu,
-  DropdownItem,
-  DropdownDivider,
-  Dropdown,
-} from 'semantic-ui-react';
+  ChevronUpIcon,
+  ChevronDownIcon,
+  BellIcon,
+} from '@heroicons/react/24/solid';
 import User from '../User/User';
 
-const DropDownNotifications = ({ label }) => (
-  <Dropdown text={label} direction="left">
-    <DropdownMenu>
-      <User firstName="Toto" textContent="a liké votre photo" />
-      <User firstName="Toto" textContent="a liké votre photo" />
-      <User firstName="Toto" textContent="a liké votre photo" />
-    </DropdownMenu>
-  </Dropdown>
-);
-DropDownNotifications.propTypes = {
-  label: PropTypes.string.isRequired,
+const DropDownNotifications = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const newNotif = true;
+
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  console.log(isOpen);
+
+  return (
+    <div className="DropDownMenu">
+      <div className="dropdown-trigger" onClick={toggleMenu}>
+        <div className="text">
+          <BellIcon className="bell" />
+          {newNotif && <div className="nb-notifs">3</div>}
+          <p className="notification-title">Notifications</p>
+        </div>
+      </div>
+      {isOpen && (
+        <div className="dropdown-content notification">
+          {/* Contenu du menu déroulant */}
+          <ul>
+            <li className="item">
+              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+            </li>
+            <li className="item">
+              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+            </li>
+            <li className="item">
+              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+            </li>
+            <li className="item">
+              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+            </li>
+          </ul>
+        </div>
+      )}
+    </div>
+  );
 };
+
 export default DropDownNotifications;
