@@ -1,11 +1,11 @@
-import TravelCardCurrent from '../Reusable/TravelCard/TravelCard';
+import HomePage from '../Pages/HomePage/HomePage';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TravelCardCurrent title="Coucou" />
+        <HomePage />
       </header>
     </div>
   );

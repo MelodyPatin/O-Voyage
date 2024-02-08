@@ -1,7 +1,7 @@
-@use '../../../../styles/variables' as v;
+@use '../../../styles/variables' as v;
 
 .homePage {
-  background: url('../../../../assets/BackgroundPictureHomePage.png') top/cover
+  background: url('../../../assets/BackgroundPictureHomePage.png') top/cover
     no-repeat;
   background-size: 300%;
   background-position-y: -60px;
@@ -12,7 +12,7 @@
 
   @media (min-width: 900px) {
     background-size: 100%;
-    background: url('../../../../assets/BackgroundPictureHomePage.png')
+    background: url('../../../assets/BackgroundPictureHomePage.png')
       bottom/cover no-repeat;
     height: 120vh;
     background-position-y: -200px;
