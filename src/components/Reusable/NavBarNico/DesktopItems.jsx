@@ -3,8 +3,9 @@ import {
   PhotoIcon,
   ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/solid';
-import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
 
+import { NavLink } from 'react-router-dom';
+// Import NavLink from react-router-dom
 const DesktopItems = () => {
   return (
     <>
@@ -23,4 +24,5 @@ const DesktopItems = () => {
     </>
   );
 };
+
 export default DesktopItems;
