@@ -17,9 +17,7 @@ const DropDownSettings = ({ label }) => (
     </DropdownMenu>
   </Dropdown>
 );
-
 DropDownSettings.propTypes = {
   label: PropTypes.string.isRequired,
 };
-
 export default DropDownSettings;

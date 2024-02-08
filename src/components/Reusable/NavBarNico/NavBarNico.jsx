@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import Menu from './Menu';
 import LoginLogoutButton from './LoginLogoutButton';
 
-
 const NavBarNico = () => {
   const isLogged = true;
   return (
@@ -15,7 +14,5 @@ const NavBarNico = () => {
     </div>
   );
 };
-
 NavBarNico.propTypes = {};
-
 export default NavBarNico;

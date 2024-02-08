@@ -1,11 +1,11 @@
+import TravelCardCurrent from '../Reusable/TravelCard/TravelCard';
 import './App.scss';
-import NavBarMobile from '../Reusable/NavBarMobile/NavBarMobile';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <NavBarMobile />
+        <TravelCardCurrent title="Coucou" />
       </header>
     </div>
   );
