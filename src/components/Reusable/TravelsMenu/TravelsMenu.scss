@@ -11,7 +11,7 @@
   .dropdown-trigger {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 0.8rem;
 
     .text {
       display: flex;
@@ -19,12 +19,15 @@
       justify-content: space-around;
 
       p {
-        font-size: 1.2rem;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: uppercase;
+        padding-bottom: 0.5rem;
       }
 
       span {
         font-weight: bold;
-        font-size: 1.4rem;
+        font-size: 1.5rem;
+        font-family: 'Inria Serif', serif;
       }
     }
 
@@ -41,6 +44,7 @@
       padding: 0.5rem;
       border-top: 1px solid v.$mainColor;
       line-height: 1.5rem;
+      font-family: 'Montserrat', sans-serif;
     }
 
     // Hover styles for dropdown menu items

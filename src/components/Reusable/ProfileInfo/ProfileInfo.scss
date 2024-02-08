@@ -2,7 +2,7 @@
 
 .ProfileInfo {
   background-color: v.$lightColor;
-  width: fit-content; // Making the width fit its content
+  width: fit-content; // Making the width fit its content // TODO maybe best to set a width for the other use of the component or a max-width and a height
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -10,14 +10,21 @@
   padding: 0.5rem;
   border-radius: 10px;
 
+  .firstName{
+    font-family: 'Inria Serif', serif;
+    font-size: 1.5rem;
+  }
+
   .TravelsFriends {
-    font-size: 0.7rem;
+    font-size: 1rem;
     display: flex;
     align-items: center;
     margin-top: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+
 
     .icon {
-      width: 0.7rem;
+      width: 1rem;
       margin: 0;
       padding: 0;
     }

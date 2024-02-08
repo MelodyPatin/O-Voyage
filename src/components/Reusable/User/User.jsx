@@ -6,6 +6,7 @@ import Avatar from '../Avatar/Avatar';
 // Component representing a user
 const User = ({ firstName, lastName, textContent }) => (
   <div className="User">
+    {/* // TODO should we do a list? */}
     <Avatar /> {/* Render the Avatar component for user's profile image */}
     <span>
       {firstName} {lastName} {textContent}

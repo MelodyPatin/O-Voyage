@@ -17,6 +17,7 @@
 
   .title {
     padding-top: 0.5rem;
+    font-family: 'Inria Serif', serif;
   }
 
   // Different styles based on the class of the ActivityCard
@@ -69,6 +70,8 @@
       position: absolute;
       top: 120px;
       font-size: 0.9rem;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+        sans-serif;
       border: 1px solid v.$mainColor;
 
       .item {

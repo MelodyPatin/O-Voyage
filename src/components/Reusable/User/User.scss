@@ -2,8 +2,10 @@
 
 .User {
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
 
   .ui.avatar.image {
     border: 2px solid black;

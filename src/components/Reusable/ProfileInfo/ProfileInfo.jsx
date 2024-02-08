@@ -8,14 +8,20 @@ const ProfileInfo = ({ firstName, nbTravels, nbFriends }) => {
   return (
     <div className="ProfileInfo">
       {/* Display user's first name */}
-      <p>{firstName}</p>
+      <p className="firstName">{firstName}</p>
       <div className="TravelsFriends">
         {/* Display travel icon and number of travels */}
         <GlobeAmericasIcon className="icon" />
-        <p>{nbTravels} voyages |</p>
+        <p>
+          {'\u00A0'}
+          {nbTravels} voyages |{'\u00A0'}
+        </p>
         {/* Display friends icon and number of friends */}
         <UserGroupIcon className="icon" />
-        <p>{nbFriends} amis</p>
+        <p>
+          {'\u00A0'}
+          {nbFriends} amis
+        </p>
       </div>
     </div>
   );

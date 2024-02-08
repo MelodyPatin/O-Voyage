@@ -8,7 +8,9 @@
   .ui.input input {
     border: 1px solid v.$mainColor;
     background-color: v.$lightColor;
-    width: 80%; /* Set width for the input within the container */
+    width: 80%; // Set width for the input within the container //TODO width & heigh?
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+      sans-serif;
   }
 
   p {
