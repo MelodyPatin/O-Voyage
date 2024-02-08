@@ -1,0 +1,64 @@
+@use '../../../styles/variables' as v;
+
+.tag {
+  display: inline-block;
+  padding: 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+
+  p {
+    font-weight: bold;
+  }
+
+  &.activité {
+    border: solid 4px v.$activity;
+    color: v.$activity;
+
+    &.selected {
+      background-color: v.$activity;
+      color: v.$lightColor;
+    }
+  }
+
+  &.visite-culturelle {
+    border: solid 4px v.$culture;
+    color: v.$culture;
+
+    &.selected {
+      background-color: v.$culture;
+      color: v.$lightColor;
+    }
+  }
+
+  &.restaurant {
+    border: solid 4px v.$restaurant;
+    color: v.$restaurant;
+
+    &.selected {
+      background-color: v.$restaurant;
+      color: v.$lightColor;
+    }
+  }
+
+  &.bar {
+    border: solid 4px v.$pub;
+    color: v.$pub;
+
+    &.selected {
+      background-color: v.$pub;
+      color: v.$lightColor;
+    }
+  }
+
+  &.day,
+  &.city,
+  &.country {
+    border: solid 4px v.$mainColor;
+    color: v.$mainColor;
+
+    &.selected {
+      background-color: rgba(v.$mainColor, 0.5);
+      color: v.$lightColor;
+    }
+  }
+}
