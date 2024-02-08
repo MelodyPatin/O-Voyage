@@ -16,7 +16,7 @@ const TravelCard = ({ title, countdown }) => {
         {/* Title of the travel */}
         <h3>{title}</h3>
         {/* Countdown of the days before the beginning of the travel */}
-        <span>{countdown}</span>
+        <span>Départ dans {countdown} jours</span>
       </div>
     </div>
   );

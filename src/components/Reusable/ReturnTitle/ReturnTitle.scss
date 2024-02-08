@@ -7,9 +7,14 @@
   align-items: center;
   padding: 1rem;
   font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Inria Serif', serif;
   border-bottom: 1px solid v.$mainColor;
   position: relative;
 
+  .arrowIcon {
+    width: 2.75rem;
+  }
   .avatar {
     position: absolute;
     right: 1rem; // Position the avatar to the right

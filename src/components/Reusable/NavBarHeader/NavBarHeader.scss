@@ -1,5 +1,7 @@
 @use '../../../styles/variables' as v;
 
+//TODO remove the padding of user?
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -19,6 +21,7 @@
     height: auto;
     padding: 0.6em;
     font-size: 0.75rem;
+    font-family: 'Inria Serif', serif;
 
     // Responsive styling
     @media (min-width: 600px) {
@@ -47,6 +50,7 @@
     gap: 0.5rem;
     height: 4.5rem;
     overflow: visible;
+    font-family: 'Montserrat', sans-serif;
 
     // Responsive styling
     @media (min-width: 600px) {
@@ -93,6 +97,7 @@
     }
 
     div.divider.text {
+      //TODO what's the point of the divider?
       margin-top: 0.5rem;
       font-size: 0.75rem;
 
@@ -145,7 +150,7 @@
 
           // Styling for the text within the dropdown trigger
           p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             text-align: center;
           }
         }
@@ -156,7 +161,7 @@
         color: v.$lightColor;
         background-color: v.$mainColor;
         width: 20rem;
-        height: 19.5rem;
+        height: 19rem;
         position: absolute;
         top: 100%;
         right: 2rem;
@@ -190,18 +195,23 @@
           width: 100%;
           margin: auto;
 
-          p {
+          .firstName{
             font-size: 1.5rem;
+                    }
+
+          p {
+            font-size: 1rem;
           }
 
           .icon {
-            width: 1.5rem;
+            margin-top: 0.5rem;
+            width: 1rem;
           }
         }
 
         .item {
           line-height: 2rem;
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           margin: 1rem 0 0;
         }
       }
