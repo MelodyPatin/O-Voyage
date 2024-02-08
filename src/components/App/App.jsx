@@ -1,11 +1,11 @@
-import TravelsMenu from '../Reusable/TravelsMenu/TravelsMenu';
+import HomePage from '../Pages/HomePage/HomePage';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TravelsMenu />
+        <HomePage />
       </header>
     </div>
   );
