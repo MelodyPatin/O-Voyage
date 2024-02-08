@@ -1,0 +1,39 @@
+@use '../../../styles/variables' as v;
+
+.NavBarMobileContainer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  border-top: 2px solid v.$mainColor;
+  overflow: visible; // Permet à .solid de sortir du conteneur
+  z-index: 10; // Définir une valeur de z-index pour l'élément parent
+}
+
+.NavBarMobile {
+  width: 100%;
+  padding: 0.5rem 0.5rem 1rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  position: relative; // Nécessaire pour positionner .solid correctement
+
+  .icon {
+    width: 3rem;
+    color: v.$mainColor;
+
+    &.user {
+      margin-right: 4.5rem;
+    }
+  }
+
+  .solid {
+    position: absolute; // Utilisation de position absolue pour sortir du flux
+    top: -25px;
+    right: 50%; // Centrer .solid horizontalement
+    transform: translateX(50%); // Centrer .solid horizontalement
+    width: 4.5rem;
+    z-index: 15; // Définir une valeur de z-index supérieure pour l'élément .solid
+  }
+}
