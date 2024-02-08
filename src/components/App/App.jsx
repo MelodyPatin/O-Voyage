@@ -1,11 +1,11 @@
-import HomePage from '../Pages/HomePage/HomePage';
+import PresentationCard from '../Reusable/PresentationCard/PresentationCard';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <HomePage />
+        <PresentationCard />
       </header>
     </div>
   );
