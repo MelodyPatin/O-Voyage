@@ -1,0 +1,23 @@
+@use '../../../styles/variables' as v;
+
+.TravelPicture {
+  img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    position: relative;
+  }
+  #photo-upload {
+    display: none;
+  }
+  .icon {
+    width: 2.5rem;
+    color: v.$lightColor;
+    background-color: v.$darkColor;
+    padding: 0.6rem;
+    border-radius: 50%;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
