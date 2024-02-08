@@ -12,12 +12,14 @@ import PropTypes from 'prop-types';
 
 const NavBarMobile = ({ textContent }) => {
   return (
-    <div className="NavBarMobile">
-      <HomeIcon className="icon" />
-      <UserGroupIcon className="icon" />
-      <PlusCircleIcon className="icon solid" />
-      <PhotoIcon className="icon" />
-      <ChatBubbleLeftRightIcon className="icon" />
+    <div className="NavBarMobileContainer">
+      <div className="NavBarMobile">
+        <HomeIcon className="icon home" />
+        <UserGroupIcon className="icon user" />
+        <PlusCircleIcon className="icon solid" />
+        <PhotoIcon className="icon picture" />
+        <ChatBubbleLeftRightIcon className="icon chat" />
+      </div>
     </div>
   );
 };
