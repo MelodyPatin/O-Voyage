@@ -10,7 +10,7 @@
     font-weight: bold;
   }
 
-  &.activité {
+  &.activity {
     border: solid 4px v.$activity;
     color: v.$activity;
 
@@ -20,7 +20,7 @@
     }
   }
 
-  &.visite-culturelle {
+  &.culture {
     border: solid 4px v.$culture;
     color: v.$culture;
 
@@ -40,7 +40,7 @@
     }
   }
 
-  &.bar {
+  &.pub {
     border: solid 4px v.$pub;
     color: v.$pub;
 
