@@ -7,10 +7,13 @@ import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 const ProfileInfo = ({ firstName, nbTravels, nbFriends }) => {
   return (
     <div className="ProfileInfo">
+      {/* Display user's first name */}
       <p>{firstName}</p>
-      <div className='TravelsFriends'>
+      <div className="TravelsFriends">
+        {/* Display travel icon and number of travels */}
         <GlobeAmericasIcon className="icon" />
         <p>{nbTravels} voyages |</p>
+        {/* Display friends icon and number of friends */}
         <UserGroupIcon className="icon" />
         <p>{nbFriends} amis</p>
       </div>

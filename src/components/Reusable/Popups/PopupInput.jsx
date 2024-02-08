@@ -2,10 +2,11 @@ import React from 'react';
 import './Popups.scss';
 import PropTypes from 'prop-types';
 import { XCircleIcon } from '@heroicons/react/24/solid';
+import { Input } from 'semantic-ui-react';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import LabelInput from '../LabelInput/LabelInput';
-import { Input } from 'semantic-ui-react';
 
+// Functional component : popup with input fields and a close button
 const PopupInput = ({ textContent, buttonContent }) => {
   return (
     <div className="container">

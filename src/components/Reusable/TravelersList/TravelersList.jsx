@@ -8,7 +8,9 @@ import IconButton from '../IconButton/IconButton';
 const TravelersList = ({}) => {
   return (
     <div className="TravelersList">
+      {/* Title for the list  // TODO mettre en h3? */}
       <p>Les voyageurs</p>
+      {/* List of users */}
       <User firstName="Toto" />
       <User firstName="Toto" />
       <User firstName="Toto" />

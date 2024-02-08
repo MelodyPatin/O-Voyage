@@ -1,5 +1,6 @@
 @use '../../../styles/variables' as v;
 
+// Card styling
 .presentationCard {
   margin: 2rem;
   width: 14rem;
@@ -14,11 +15,13 @@
   color: v.$lightColor;
   text-align: center;
 
+  // Member's avatar image styling
   .avatar.image {
     width: 6rem;
     height: 6rem;
   }
 
+  // Member's name styling
   h3 {
     padding: 1rem 0;
     font-weight: bold;

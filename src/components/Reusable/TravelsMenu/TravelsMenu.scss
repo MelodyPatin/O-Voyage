@@ -3,10 +3,10 @@
 .TravelsMenu {
   background-color: v.$mainColor;
   color: v.$lightColor;
-  width: 80%;
+  width: 80%; // set the width according to the size of its container
   border-radius: 10px;
   display: block;
-  margin: auto;
+  margin: auto; // center the component on the page
 
   .dropdown-trigger {
     display: flex;
@@ -43,6 +43,7 @@
       line-height: 1.5rem;
     }
 
+    // Hover styles for dropdown menu items
     .item:hover {
       color: v.$lightColor;
       background-color: v.$mainColor;

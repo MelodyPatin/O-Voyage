@@ -6,10 +6,12 @@ import {
 } from '@heroicons/react/24/solid';
 import User from '../User/User';
 
+// Component for displaying notifications
 const DropDownNotifications = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const newNotif = true;
 
+  // Toggle function to switch between open and closed states
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -25,21 +27,21 @@ const DropDownNotifications = () => {
           <p className="notification-title">Notifications</p>
         </div>
       </div>
+      {/* Dropdown content */}
       {isOpen && (
         <div className="dropdown-content notification">
-          {/* Contenu du menu déroulant */}
           <ul>
             <li className="item">
-              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+              <User firstName="Toto" textContent="a liké votre photo" />
             </li>
             <li className="item">
-              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+              <User firstName="Toto" textContent="a liké votre photo" />
             </li>
             <li className="item">
-              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+              <User firstName="Toto" textContent="a liké votre photo" />
             </li>
             <li className="item">
-              <User firstName={'Toto'} textContent={'a liké votre photo'} />
+              <User firstName="Toto" textContent="a liké votre photo" />
             </li>
           </ul>
         </div>

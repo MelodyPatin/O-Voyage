@@ -26,10 +26,12 @@
       padding-bottom: 2rem;
     }
 
+    // Styling to remove the ui semantic hover effect on navigation links
     a:hover {
       color: v.$lightColor;
     }
 
+    // Styling for active navigation link
     .menu-link--active {
       font-weight: bold;
       color: v.$lightColor;
@@ -41,6 +43,7 @@
     justify-content: center;
     gap: 1rem;
 
+    // Styling to remove the ui semantic hover effect on social media icons
     a:hover {
       color: v.$lightColor;
     }

@@ -1,6 +1,7 @@
 @use '../../../styles/variables' as v;
 
 .tag {
+  // General styling for tags
   display: inline-block;
   padding: 0.6rem;
   border-radius: 10px;
@@ -10,16 +11,19 @@
     font-weight: bold;
   }
 
+  // Specific styling for the 'activity' category
   &.activity {
     border: solid 4px v.$activity;
     color: v.$activity;
 
+    // Specific styling if selected
     &.selected {
       background-color: v.$activity;
       color: v.$lightColor;
     }
   }
 
+  // Specific styling for the 'culture' category
   &.culture {
     border: solid 4px v.$culture;
     color: v.$culture;
@@ -30,6 +34,7 @@
     }
   }
 
+  // Specific styling for the 'restaurant' category
   &.restaurant {
     border: solid 4px v.$restaurant;
     color: v.$restaurant;
@@ -40,6 +45,7 @@
     }
   }
 
+  // Specific styling for the 'pub' category
   &.pub {
     border: solid 4px v.$pub;
     color: v.$pub;
@@ -50,6 +56,7 @@
     }
   }
 
+  // Common styling for 'day', 'city', and 'country' categories
   &.day,
   &.city,
   &.country {

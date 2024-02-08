@@ -1,28 +1,39 @@
 import React, { useState } from 'react';
 import { PencilIcon } from '@heroicons/react/24/solid';
-import './TravelPicture.scss'; // Assurez-vous d'avoir un fichier de style pour le composant
+import './TravelPicture.scss';
 
+// Component that displays and allows the creator of the trip to upload the travel cover photo //TODO just the creator or all members?
 const TravelPicture = ({ currentPhoto }) => {
+  // State to store the new photo selected by the user
   const [newPhoto, setNewPhoto] = useState(null);
 
+  // Function to handle changes when a new photo is selected
   const handlePhotoChange = (event) => {
     const file = event.target.files[0];
+    // If a file
     if (file) {
-      // Si un fichier a été sélectionné, vous pouvez le traiter ici, par exemple l'afficher
+      // Create a new instance of FileReader
       const reader = new FileReader();
+      // Set up an event listener for when the file has been read
       reader.onload = () => {
+        // When the file is successfully read, update the state with the result
         setNewPhoto(reader.result);
       };
+      // Read the contents of the file as a data URL
       reader.readAsDataURL(file);
     }
   };
 
   return (
     <div className="TravelPicture">
-      {/* Afficher la photo (soit currentPhoto, soit newPhoto) */}
-      <img src={newPhoto || currentPhoto} alt="Photo" className="photo" />
+      {/* Display the photo (either newPhoto or currentPhoto) */}
+      <img
+        src={newPhoto || currentPhoto}
+        alt="cover for the travel"
+        className="photo"
+      />
 
-      {/* Icône pour charger une nouvelle photo */}
+      {/* Icon to trigger the file upload input */}
       <label htmlFor="photo-upload" className="upload-icon">
         <input
           type="file"
