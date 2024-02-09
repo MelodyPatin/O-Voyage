@@ -1,0 +1,19 @@
+@use '../../../styles/variables' as v;
+
+.Step {
+  width: 100%;
+  display: block;
+  margin: auto;
+  background-color: #f0f;
+  height: 100vh;
+
+  .LabelInput {
+    width: 100%;
+
+    .ui.input {
+      width: 100%;
+      display: block;
+      margin: auto;
+    }
+  }
+}

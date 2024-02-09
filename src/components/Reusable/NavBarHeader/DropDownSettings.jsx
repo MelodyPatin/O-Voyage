@@ -5,12 +5,13 @@ import {
   BellIcon,
   XCircleIcon,
 } from '@heroicons/react/24/solid';
+import PropTypes from 'prop-types';
 import User from '../User/User';
 import Avatar from '../Avatar/Avatar';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 
 // Component for displaying user settings
-const DropDownSettings = () => {
+const DropDownSettings = ({desktop}) => {
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const onMobile = false;
 
@@ -26,7 +27,7 @@ const DropDownSettings = () => {
       <div className="dropdown-trigger" onClick={toggleMenu}>
         <div className="text">
           <Avatar className="avatar" />
-          <p className="notification-title">Vous</p>
+          {desktop && <p className="notification-title">Vous</p>}
         </div>
       </div>
       {/* Dropdown content */}
@@ -52,6 +53,10 @@ const DropDownSettings = () => {
       )}
     </div>
   );
+};
+
+DropDownSettings.propTypes = {
+  desktop: PropTypes.bool,
 };
 
 export default DropDownSettings;
