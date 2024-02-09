@@ -1,12 +1,11 @@
-import ActivityResume from '../Pages/ActivityResume/ActivityResume';
-import FriendList from '../Pages/Friend/FriendList/FriendList';
+import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 import './App.scss';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <FriendList />
+        <FriendAdd />
       </header>
     </div>
   );
