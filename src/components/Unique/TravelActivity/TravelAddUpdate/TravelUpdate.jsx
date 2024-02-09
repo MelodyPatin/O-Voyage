@@ -7,9 +7,11 @@ import StepInput from '../../../Reusable/Step/StepInput';
 import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
+import StepCalendar from '../../../Reusable/Step/StepCalendar';
+import ProgressBar from '../../ProgressBar/ProgressBar';
 
-const TravelAddUpdate = ({ contentReturnTitle }) => {
-  const step = 2;
+const TravelUpdate = ({ tripTitle, tripCountries, tripCities, tripDates, tripDescription, tripTravelers, tripPicture}) => {
+  const step = 7;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -20,65 +22,75 @@ const TravelAddUpdate = ({ contentReturnTitle }) => {
   return (
     <div className="TravelAddUpdate">
       <NavBarHeader isLogged={true} onDesktop={false} />
-      <ReturnTitle textContent={contentReturnTitle} avatar={false} />
+      <ReturnTitle textContent="Modifier le voyage" avatar={false} />
+      <ProgressBar step={step} />
       {step === 1 && (
         <StepInput
           buttonContent="Continuer"
-          placeholderContent="Coucou"
-          labelContent="Donnez un titre à votre voyage*"
+          valueContent={tripTitle}
+          labelContent="Modifiez le titre de votre voyage*"
         />
       )}
       {step === 2 && (
         <StepSelect
           buttonContent="Continuer"
-          placeholderContent="Pays"
+          valueContent="France"
           labelContent="Sélectionnez un/des pays*"
           options={options}
+          tripCountries={tripCountries}
         />
       )}
       {step === 3 && (
         <StepSelect
           buttonContent="Continuer"
-          placeholderContent="Villes"
+          valueContent="Paris"
           labelContent="Sélectionnez une/des villes*"
           options={options}
+          tripCities={tripCities}
         />
       )}
       {step === 4 && (
         <StepCalendar
           buttonContent="Valider"
-          placeholderContent="Coucou"
-          labelContent="toto"
+          labelContent="Modifiez les dates *"
+          tripDates={tripDates}
         />
       )}
       {step === 5 && (
         <StepTextarea
-          textareaContent={'Description à propos du voyage'}
+          textareaContent={"Voyage surprise pour l'anniversaire de Jessie"}
           buttonContent="Continuer"
-          placeholderContent="Coucou"
-          labelContent="Ajoutez une description"
+          valueContent={tripDescription}
+          labelContent="Modifiez la description"
         />
       )}
       {step === 6 && (
         <StepSelect
           buttonContent="Continuer"
-          placeholderContent="Rechercher dans les amis"
+          valueContent="Rechercher dans les amis"
           labelContent="Ajoutez un/des voyageurs*"
           options={options}
+          tripTravelers={tripTravelers}
         />
       )}
       {step === 7 && (
         <StepFolder
-          buttonContent="Valider"
-          labelContent="Ajoutez une image de couverture"
+          buttonContent="Valider les modifications"
+          labelContent="Modifiez l'image de couverture"
+          tripPicture={tripPicture}
         />
       )}
     </div>
   );
 };
 
-TravelAddUpdate.propTypes = {
-  contentReturnTitle: PropTypes.string.isRequired,
+TravelUpdate.propTypes = {
+ // tripCountries: PropTypes.string.isRequired,
+ // tripCities: PropTypes.string.isRequired,
+ // tripDates: PropTypes.string.isRequired,
+  tripDescription: PropTypes.string.isRequired,
+ // tripTravelers: PropTypes.string.isRequired,
+ // tripPicture: PropTypes.string.isRequired,
 };
 
-export default TravelAddUpdate;
+export default TravelUpdate;

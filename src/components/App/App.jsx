@@ -1,11 +1,12 @@
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 import './App.scss';
+import HomePage from '../Pages/HomePage/HomePage';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <FriendAdd />
+        <HomePage />
       </header>
     </div>
   );

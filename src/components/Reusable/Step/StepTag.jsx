@@ -1,45 +1,38 @@
 import React from 'react';
-import './StepTextarea.scss';
-import { Form, TextArea } from 'semantic-ui-react';
+import './StepTag.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
+import Tag from '../Tag/Tag';
 
 // Functional component : popup with input fields and a close button
-const StepTextarea = ({
+const StepTag = ({
   buttonContent,
-  labelContent,
   placeholderContent,
-  textareaContent,
-  options,
+  labelContent,
   valueContent,
 }) => {
   return (
-    <div className="StepTextarea">
+    <div className="StepTag">
       <div className="LabelInput">
         <p>{labelContent}</p>
-        <Form>
-          <TextArea placeholder={textareaContent} value={valueContent} />
-        </Form>
+        <div className="tags">
+          <Tag className="tag" text="Restaurant" category="restaurant" />
+          <Tag className="tag" text="Bar" category="pub" />
+          <Tag className="tag" text="Visite culturelle" category="culture" />
+          <Tag className="tag" text="Activité" category="activity" />
+        </div>
       </div>
       <SimpleButton textContent={buttonContent} />
     </div>
   );
 };
 
-StepTextarea.propTypes = {
+StepTag.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   placeholderContent: PropTypes.string,
-  textareaContent: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      text: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
-    })
-  ).isRequired,
   valueContent: PropTypes.string,
 };
 
-export default StepTextarea;
+export default StepTag;

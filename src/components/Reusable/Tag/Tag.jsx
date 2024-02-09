@@ -10,7 +10,7 @@ const Tag = ({ text, category }) => {
   } else {
     tagClassName = category.toLowerCase();
   }
-  const isSelected = true;
+  const isSelected = false;
 
   return (
     // Render the Tag with appropriate class names based on text, category, and selection status
