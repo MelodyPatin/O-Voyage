@@ -10,7 +10,7 @@ import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 
-const TravelAddUpdate = ({ contentReturnTitle }) => {
+const TravelAdd = ({ contentReturnTitle }) => {
   const step = 7;
 
   const options = [
@@ -79,8 +79,8 @@ const TravelAddUpdate = ({ contentReturnTitle }) => {
   );
 };
 
-TravelAddUpdate.propTypes = {
+TravelAdd.propTypes = {
   contentReturnTitle: PropTypes.string.isRequired,
 };
 
-export default TravelAddUpdate;
+export default TravelAdd;

@@ -12,13 +12,14 @@ const StepTextarea = ({
   placeholderContent,
   textareaContent,
   options,
+  valueContent,
 }) => {
   return (
     <div className="StepTextarea">
       <div className="LabelInput">
         <p>{labelContent}</p>
         <Form>
-          <TextArea placeholder={textareaContent} />
+          <TextArea placeholder={textareaContent} value={valueContent} />
         </Form>
       </div>
       <SimpleButton textContent={buttonContent} />
@@ -38,6 +39,7 @@ StepTextarea.propTypes = {
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  valueContent: PropTypes.string,
 };
 
 export default StepTextarea;
