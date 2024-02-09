@@ -21,19 +21,6 @@
     p {
       font-size: 1.5rem;
     }
-
-    .ui.dropdown {
-      border: 1px solid v.$mainColor;
-      background-color: v.$lightColor;
-      height: 3.75rem;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-        sans-serif;
-
-        & .item {
-          background-color: v.$lightColor;
-          border-top: 1px solid v.$mainColor;
-        }
-    }
   }
 
   button.ui.button.SimpleButton {

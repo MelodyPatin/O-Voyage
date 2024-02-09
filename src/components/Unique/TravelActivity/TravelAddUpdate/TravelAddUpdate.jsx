@@ -9,7 +9,7 @@ import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
 
 const TravelAddUpdate = ({ contentReturnTitle }) => {
-  const step = 4;
+  const step = 2;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
