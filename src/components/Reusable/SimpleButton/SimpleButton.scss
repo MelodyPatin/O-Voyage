@@ -9,6 +9,8 @@
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-weight: normal;
   font-size: 1.25rem;
+  display: block;
+  margin: auto;
 
   &:hover {
     background-color: v.$lightColor;
