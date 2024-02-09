@@ -15,7 +15,7 @@ const ReturnTitle = ({ textContent, avatar }) => {
       <ArrowLeftIcon className="arrowIcon" />
       {/* Icon for going back to the previous page */}
       <h3>{displayText}</h3>
-      {{ avatar } && <Avatar className="avatar" />}{' '}
+      {avatar && <Avatar className="avatar" />}{' '}
       {/* Display Avatar if avatar prop is true */}
     </div>
   );

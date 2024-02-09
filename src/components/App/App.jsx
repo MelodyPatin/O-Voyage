@@ -1,12 +1,11 @@
-import ActivityResume from '../Pages/ActivityResume/ActivityResume';
-import FriendList from '../Pages/Friend/FriendList/FriendList';
 import './App.scss';
+import TravelAddUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelAddUpdate';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <FriendList />
+        <TravelAddUpdate contentReturnTitle={'Nouveau voyage'} />
       </header>
     </div>
   );
