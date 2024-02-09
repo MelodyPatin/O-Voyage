@@ -1,4 +1,3 @@
-import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 import './App.scss';
 import HomePage from '../Pages/HomePage/HomePage';
 
