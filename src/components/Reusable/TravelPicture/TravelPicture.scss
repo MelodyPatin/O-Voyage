@@ -1,11 +1,12 @@
 @use '../../../styles/variables' as v;
 
 .TravelPicture {
+  position: relative;
+
   img {
     display: block;
     margin: auto;
     width: 100%;
-    position: relative;
   }
 
   // Styling for the hidden file input to select the new photo (triggered indirectly through a label and a visible icon -> more userfriendly)
@@ -17,11 +18,11 @@
   .icon {
     width: 2.5rem;
     color: v.$lightColor;
-    background-color: v.$darkColor;
+    background-color: rgba(v.$darkColor, 0.5);
     padding: 0.6rem;
     border-radius: 50%;
     position: absolute;
     right: 0.5rem;
-    top: 0.5rem;
+    bottom: 0.5rem;
   }
 }

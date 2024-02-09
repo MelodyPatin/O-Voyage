@@ -8,7 +8,7 @@ import './HeaderConnected.scss'
 const HeaderConnected = () => {
   return (
     <header className="headerConnected">
-      <NavBarHeader />
+      <NavBarHeader isLogged />
       <div className="personnalInfos">
         <Avatar />
         <ProfileInfo firstName="Mélody"/>

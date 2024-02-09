@@ -1,11 +1,10 @@
 import './App.scss';
-import HomePage from '../Pages/HomePage/HomePage';
-import UserUpdate from '../Pages/User/UserUpdate';
+import TravelDetails from '../Pages/Travel/TravelDetails/TravelDetails';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <UserUpdate />
+        <TravelDetails />
       </header>
     </div>
   );
