@@ -38,6 +38,7 @@ const ActivityResume = ({
     <div className="ActivityResume">
       <ReturnTitle textContent={`#${number} ${activityTitle}`} />
       <div className="content">
+        <p>Activité : {activityTitle}</p>
         <p>Adresse : {address}</p>
         <p>Prix : {price}€</p>
         <p>
