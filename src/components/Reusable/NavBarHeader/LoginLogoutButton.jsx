@@ -4,7 +4,7 @@ import { Button } from 'semantic-ui-react';
 
 const LoginLogoutButton = () => {
   return (
-    <div>
+    <div className='buttonContainer'>
       <Button className="connectionButton" content="Se connecter" />
       <Button className="connectionButton" content="S'inscrire" />
     </div>
