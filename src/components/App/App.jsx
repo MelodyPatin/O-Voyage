@@ -1,5 +1,5 @@
 import './App.scss';
-import TravelAddUpdate from '../Pages/TravelActivity/TravelAddUpdate/TravelAddUpdate';
+import TravelAddUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelAddUpdate';
 
 function App() {
   return (
