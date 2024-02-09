@@ -1,5 +1,5 @@
 import React from 'react';
-import './TravelAddUpdate.scss';
+import './ActivityAddUpdate.scss';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../Reusable/Step/StepInput';
@@ -8,9 +8,10 @@ import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
+import StepTag from '../../../Reusable/Step/StepTag';
 
-const TravelAdd = () => {
-  const step = 4;
+const ActivityAdd = () => {
+  const step = 7;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -19,62 +20,60 @@ const TravelAdd = () => {
   ];
 
   return (
-    <div className="TravelAddUpdate">
+    <div className="ActivityAddUpdate">
       <NavBarHeader isLogged={true} onDesktop={false} />
-      <ReturnTitle textContent="Ajouter un voyage" avatar={false} />
+      <ReturnTitle textContent="Proposition" avatar={false} />
       <ProgressBar step={step} />
       {step === 1 && (
         <StepInput
           buttonContent="Continuer"
           placeholderContent="Week-end à Paris avec les amis"
-          labelContent="Donnez un titre à votre voyage*"
+          labelContent="Donnez un titre à votre proposition*"
         />
       )}
       {step === 2 && (
-        <StepSelect
+        <StepInput
           buttonContent="Continuer"
-          placeholderContent="France"
-          labelContent="Sélectionnez un/des pays*"
-          options={options}
+          placeholderContent="Place George Pompidou, 75004 Paris"
+          labelContent="Renseignez l'adresse"
         />
       )}
       {step === 3 && (
-        <StepSelect
+        <StepInput
           buttonContent="Continuer"
-          placeholderContent="Paris"
-          labelContent="Sélectionnez une/des villes*"
-          options={options}
+          placeholderContent="15€"
+          labelContent="Renseignez le coût moyen"
         />
       )}
       {step === 4 && (
-        <StepCalendar
-          buttonContent="Valider"
-          labelContent="Ajoutez les dates *"
+        <StepTextarea
+          textareaContent={"11h-21h / Fermé le mardi"}
+          buttonContent="Continuer"
+          labelContent="Renseignez les jours et horaires d'ouverture"
         />
       )}
       {step === 5 && (
+        <StepInput
+          buttonContent="Continuer"
+          placeholderContent="https://www.centrepompidou.fr"
+          labelContent="Renseignez le site internet"
+        />
+      )}
+      {step === 6 && (
         <StepTextarea
-          textareaContent={"Voyage surprise pour l'anniversaire de Jessie"}
+          textareaContent={"La collection permanente est impressionnante !"}
           buttonContent="Continuer"
           labelContent="Ajoutez une description"
         />
       )}
-      {step === 6 && (
-        <StepSelect
-          buttonContent="Continuer"
-          placeholderContent="Rechercher dans les amis"
-          labelContent="Ajoutez un/des voyageurs*"
-          options={options}
-        />
-      )}
       {step === 7 && (
-        <StepFolder
-          buttonContent="Créer le voyage"
-          labelContent="Ajoutez une image de couverture"
+        <StepTag
+          buttonContent="Envoyer ma proposition"
+          labelContent="Sélectionnez un tag"
         />
       )}
     </div>
   );
 };
 
-export default TravelAdd;
+export default ActivityAdd;

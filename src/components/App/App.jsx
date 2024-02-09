@@ -1,11 +1,11 @@
 import './App.scss';
-import TravelUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelUpdate';
+import HomePage from '../Pages/HomePage/HomePage';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TravelUpdate contentReturnTitle={'Modifiez le voyage'} />
+        <HomePage />
       </header>
     </div>
   );

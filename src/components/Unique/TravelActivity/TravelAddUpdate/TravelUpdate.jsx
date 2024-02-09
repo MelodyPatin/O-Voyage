@@ -10,7 +10,7 @@ import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 
-const TravelUpdate = ({ contentReturnTitle, tripTitle, tripCountries, tripCities, tripDates, tripDescription, tripTravelers, tripPicture}) => {
+const TravelUpdate = ({ tripTitle, tripCountries, tripCities, tripDates, tripDescription, tripTravelers, tripPicture}) => {
   const step = 7;
 
   const options = [
@@ -22,7 +22,7 @@ const TravelUpdate = ({ contentReturnTitle, tripTitle, tripCountries, tripCities
   return (
     <div className="TravelAddUpdate">
       <NavBarHeader isLogged={true} onDesktop={false} />
-      <ReturnTitle textContent={contentReturnTitle} avatar={false} />
+      <ReturnTitle textContent="Modifier le voyage" avatar={false} />
       <ProgressBar step={step} />
       {step === 1 && (
         <StepInput
@@ -75,7 +75,7 @@ const TravelUpdate = ({ contentReturnTitle, tripTitle, tripCountries, tripCities
       )}
       {step === 7 && (
         <StepFolder
-          buttonContent="Valider"
+          buttonContent="Valider les modifications"
           labelContent="Modifiez l'image de couverture"
           tripPicture={tripPicture}
         />
@@ -85,7 +85,12 @@ const TravelUpdate = ({ contentReturnTitle, tripTitle, tripCountries, tripCities
 };
 
 TravelUpdate.propTypes = {
-  contentReturnTitle: PropTypes.string.isRequired,
+ // tripCountries: PropTypes.string.isRequired,
+ // tripCities: PropTypes.string.isRequired,
+ // tripDates: PropTypes.string.isRequired,
+  tripDescription: PropTypes.string.isRequired,
+ // tripTravelers: PropTypes.string.isRequired,
+ // tripPicture: PropTypes.string.isRequired,
 };
 
 export default TravelUpdate;
