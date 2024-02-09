@@ -4,9 +4,11 @@
   background-color: v.$mainColor;
   color: v.$lightColor;
   width: 80%; // set the width according to the size of its container
+  max-width: 18rem;
   border-radius: 10px;
   display: block;
   margin: auto; // center the component on the page
+  box-shadow: 2px 5px 8px v.$darkColor;
 
   .dropdown-trigger {
     display: flex;

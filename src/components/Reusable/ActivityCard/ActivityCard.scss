@@ -12,8 +12,9 @@
   border-radius: 20px;
   color: v.$darkColor;
   font-size: 1.25rem;
-  margin: 0.5rem;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
   position: relative;
+  box-shadow: 2px 5px 8px v.$darkColor;
 
   .title {
     padding-top: 0.5rem;

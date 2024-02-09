@@ -1,9 +1,14 @@
 .headerConnected {
-  background: url(../../../assets/BackgroundPictureHeaderConnected.png)
+  background: url(../../../assets/BackgroundPictureHeaderConnectedMobileFading.png)
     bottom/cover no-repeat;
   min-height: 400px;
-  height: 60vh;
+  height: 70vh;
   position: relative;
+
+  @media (min-width: 600px) {
+    background: url(../../../assets/BackgroundPictureHeaderConnected.png)
+    bottom/cover no-repeat;
+  }
 
   .personnalInfos {
     position: absolute;
@@ -18,7 +23,7 @@
     .ui.avatar.image {
       width: 5.5rem;
       height: 5.5rem;
-      margin: 0 0 1rem 0;
+      margin: 0 0 0.5rem 0;
 
       @media (min-width: 600px) {
         width: 10.5rem;
