@@ -7,9 +7,10 @@ import StepInput from '../../../Reusable/Step/StepInput';
 import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
+import StepCalendar from '../../../Reusable/Step/StepCalendar';
 
 const TravelAddUpdate = ({ contentReturnTitle }) => {
-  const step = 2;
+  const step = 7;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -24,14 +25,14 @@ const TravelAddUpdate = ({ contentReturnTitle }) => {
       {step === 1 && (
         <StepInput
           buttonContent="Continuer"
-          placeholderContent="Coucou"
+          placeholderContent="Week-end à Paris avec les amis"
           labelContent="Donnez un titre à votre voyage*"
         />
       )}
       {step === 2 && (
         <StepSelect
           buttonContent="Continuer"
-          placeholderContent="Pays"
+          placeholderContent="France"
           labelContent="Sélectionnez un/des pays*"
           options={options}
         />
@@ -39,7 +40,7 @@ const TravelAddUpdate = ({ contentReturnTitle }) => {
       {step === 3 && (
         <StepSelect
           buttonContent="Continuer"
-          placeholderContent="Villes"
+          placeholderContent="Paris"
           labelContent="Sélectionnez une/des villes*"
           options={options}
         />
@@ -47,13 +48,12 @@ const TravelAddUpdate = ({ contentReturnTitle }) => {
       {step === 4 && (
         <StepCalendar
           buttonContent="Valider"
-          placeholderContent="Coucou"
-          labelContent="toto"
+          labelContent="Ajoutez les dates *"
         />
       )}
       {step === 5 && (
         <StepTextarea
-          textareaContent={'Description à propos du voyage'}
+          textareaContent={"Voyage surprise pour l'anniversaire de Jessie"}
           buttonContent="Continuer"
           placeholderContent="Coucou"
           labelContent="Ajoutez une description"
