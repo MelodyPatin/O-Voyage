@@ -11,6 +11,8 @@
 		"lint:fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
 	},
 	"dependencies": {
+		"@heroicons/react": "^2.1.1",
+		"@mobiscroll/react": "npm:@mobiscroll/react-trial@5.28.3",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.22.0",

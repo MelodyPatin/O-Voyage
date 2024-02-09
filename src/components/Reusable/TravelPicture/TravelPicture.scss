@@ -1,0 +1,27 @@
+@use '../../../styles/variables' as v;
+
+.TravelPicture {
+  img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    position: relative;
+  }
+
+  // Styling for the hidden file input to select the new photo (triggered indirectly through a label and a visible icon -> more userfriendly)
+  #photo-upload {
+    display: none;
+  }
+
+  // Styling for the pencil icon (used for triggering file upload)
+  .icon {
+    width: 2.5rem;
+    color: v.$lightColor;
+    background-color: v.$darkColor;
+    padding: 0.6rem;
+    border-radius: 50%;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}

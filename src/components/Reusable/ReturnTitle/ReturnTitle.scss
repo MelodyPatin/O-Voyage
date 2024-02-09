@@ -1,0 +1,27 @@
+@use '../../../styles/variables' as v;
+
+.ReturnTitle {
+  color: v.$mainColor;
+  display: flex;
+  height: 5rem;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: 'Inria Serif', serif;
+  border-bottom: 1px solid v.$mainColor;
+  position: relative;
+
+  .arrowIcon {
+    width: 2.75rem;
+  }
+  .avatar {
+    position: absolute;
+    right: 1rem; // Position the avatar to the right
+  }
+
+  h3 {
+    margin-left: 1rem;
+    width: 60%; // Set the width of the heading
+  }
+}

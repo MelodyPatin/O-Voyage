@@ -1,0 +1,26 @@
+import React, { useState } from 'react';
+import './StepCalendar.scss';
+import PropTypes from 'prop-types';
+import SimpleButton from '../SimpleButton/SimpleButton';
+import { Datepicker } from '@mobiscroll/react';
+import '@mobiscroll/react/dist/css/mobiscroll.min.css';
+
+// Functional component : popup with input fields and a close button
+const StepCalendar = ({ buttonContent, labelContent }) => {
+  return (
+    <div className="StepCalendar">
+      <div className="LabelInput">
+        <p>{labelContent}</p>
+        <Datepicker select="range" display="inline" />
+      </div>
+      <SimpleButton textContent={buttonContent} />
+    </div>
+  );
+};
+
+StepCalendar.propTypes = {
+  buttonContent: PropTypes.string.isRequired,
+  labelContent: PropTypes.string.isRequired,
+};
+
+export default StepCalendar;
