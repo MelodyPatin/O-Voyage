@@ -4,10 +4,11 @@ import {
   ChevronDownIcon,
   BellIcon,
 } from '@heroicons/react/24/solid';
+import PropTypes from 'prop-types';
 import User from '../User/User';
 
 // Component for displaying notifications
-const DropDownNotifications = () => {
+const DropDownNotifications = ({ desktop }) => {
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const newNotif = true;
 
@@ -24,7 +25,7 @@ const DropDownNotifications = () => {
         <div className="text">
           <BellIcon className="bell" />
           {newNotif && <div className="nb-notifs">3</div>}
-          <p className="notification-title">Notifications</p>
+          {desktop && <p className="notification-title">Notifications</p>}
         </div>
       </div>
       {/* Dropdown content */}
@@ -48,6 +49,10 @@ const DropDownNotifications = () => {
       )}
     </div>
   );
+};
+
+DropDownNotifications.propTypes = {
+  desktop: PropTypes.bool,
 };
 
 export default DropDownNotifications;
