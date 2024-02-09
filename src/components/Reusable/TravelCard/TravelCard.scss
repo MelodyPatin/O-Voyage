@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   aspect-ratio: 2/1; // Ensure the aspect ratio of 2:1
-  overflow: hidden; // Allow overflow while hiding extra content //TODO check if really usefull
+  overflow: hidden; 
   position: relative; // Positioning relative to handle absolute positioning of child elements
 
   .cardPicture {

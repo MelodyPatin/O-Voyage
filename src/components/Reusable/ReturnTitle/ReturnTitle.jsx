@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar/Avatar';
 
 const ReturnTitle = ({ textContent, avatar }) => {
-  // Check if the text exceeds 17 characters // TODO why? check if it might create problem with some other titles?
+  // Check if the text exceeds 17 characters
   const displayText =
     textContent.length > 17 ? `${textContent.slice(0, 17)}...` : textContent;
 

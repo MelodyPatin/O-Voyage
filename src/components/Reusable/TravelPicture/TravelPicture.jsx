@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { PencilIcon } from '@heroicons/react/24/solid';
 import './TravelPicture.scss';
 
-// Component that displays and allows the creator of the trip to upload the travel cover photo //TODO just the creator or all members?
+// Component that displays and allows the members of the trip to upload the travel cover photo
 const TravelPicture = ({ currentPhoto }) => {
   // State to store the new photo selected by the user
   const [newPhoto, setNewPhoto] = useState(null);

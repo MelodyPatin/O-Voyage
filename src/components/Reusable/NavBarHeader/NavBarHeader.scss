@@ -1,7 +1,5 @@
 @use '../../../styles/variables' as v;
 
-//TODO remove the padding of user?
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -96,16 +94,6 @@
       font-size: 1.375rem;
     }
 
-    div.divider.text {
-      //TODO what's the point of the divider?
-      margin-top: 0.5rem;
-      font-size: 0.75rem;
-
-      @media (min-width: 600px) {
-        font-size: 1.25rem;
-      }
-    }
-
     // Styling for the dropdown menu
     .DropDownMenu {
       border-radius: 10px;
@@ -195,9 +183,9 @@
           width: 100%;
           margin: auto;
 
-          .firstName{
+          .firstName {
             font-size: 1.5rem;
-                    }
+          }
 
           p {
             font-size: 1rem;

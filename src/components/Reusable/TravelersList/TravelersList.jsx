@@ -8,8 +8,8 @@ import IconButton from '../IconButton/IconButton';
 const TravelersList = ({}) => {
   return (
     <div className="TravelersList">
-      {/* Title for the list  // TODO mettre en h3? */}
-      <p>Les voyageurs</p>
+      {/* Title for the list  */}
+      <h3>Les voyageurs</h3>
       {/* List of users */}
       <User firstName="Toto" />
       <User firstName="Toto" />

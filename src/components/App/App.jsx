@@ -1,22 +1,15 @@
-import ActivityResume from '../Pages/ActivityResume/ActivityResume';
+import { Popup } from 'semantic-ui-react';
+import NavBarHeader from '../Reusable/NavBarHeader/NavBarHeader';
 import './App.scss';
+import PopupInput from '../Reusable/Popups/PopupInput';
+import TravelCard from '../Reusable/TravelCard/TravelCard';
+import TravelersList from '../Reusable/TravelersList/TravelersList';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ActivityResume
-          number={10}
-          activityTitle={'Parlement de Budapest'}
-          avatar={true}
-          address={'3 Rue du Blaireau'}
-          price={15}
-          openDays={'Lundi Mardi Vendredi'}
-          openTime={'8h-15h'}
-          url={'http://le-site-du-blaireau.com'}
-          description={'Super visite à faire'}
-          activityCategory={'culture'}
-        />
+        <TravelersList />
       </header>
     </div>
   );

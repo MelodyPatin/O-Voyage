@@ -2,7 +2,7 @@
 
 .ProfileInfo {
   background-color: v.$lightColor;
-  width: fit-content; // Making the width fit its content // TODO maybe best to set a width for the other use of the component or a max-width and a height
+  width: fit-content; 
   font-size: 1rem;
   display: flex;
   flex-direction: column;
