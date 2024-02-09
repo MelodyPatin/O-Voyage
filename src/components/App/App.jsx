@@ -1,6 +1,5 @@
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 import './App.scss';
-import TravelAddUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelAddUpdate';
 
 function App() {
   return (
