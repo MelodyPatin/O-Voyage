@@ -8,6 +8,7 @@ const Footer = () => {
   return (
     <footer className="Footer">
       <div className="pages">
+        {/* Navigation links section */}
         <NavLink
           className={({ isActive }) =>
             isActive ? 'menu-link menu-link--active' : 'menu-link'
@@ -33,6 +34,7 @@ const Footer = () => {
           Mentions légales
         </NavLink>
       </div>
+      {/* Social media icons section */}
       <div className="socials">
         <a href="#">
           <Icon name="facebook official" size="large" />

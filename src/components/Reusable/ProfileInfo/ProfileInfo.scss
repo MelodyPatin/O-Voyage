@@ -1,0 +1,32 @@
+@use '../../../styles/variables' as v;
+
+.ProfileInfo {
+  background-color: v.$lightColor;
+  width: fit-content; 
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 10px;
+
+  .firstName{
+    font-family: 'Inria Serif', serif;
+    font-size: 1.5rem;
+  }
+
+  .TravelsFriends {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+
+
+    .icon {
+      width: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

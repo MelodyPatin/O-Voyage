@@ -3,8 +3,17 @@
 .ui.button {
   background-color: v.$mainColor;
   color: v.$lightColor;
-  width: 15rem;
-  height: 3rem;
+  width: 14rem;
+  height: 3.75rem;
   padding: 1rem;
-  margin: 0.5rem;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: normal;
+  font-size: 1.25rem;
+  display: block;
+  margin: auto;
+
+  &:hover {
+    background-color: v.$lightColor;
+    color: v.$mainColor;
+  }
 }
