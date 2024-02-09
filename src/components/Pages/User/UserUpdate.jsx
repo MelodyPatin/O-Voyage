@@ -1,5 +1,5 @@
 import React from 'react';
-import './UpdateUser.scss'
+import './UserUpdate.scss'
 import PropTypes from 'prop-types';
 
 import { Input } from 'semantic-ui-react';
@@ -9,14 +9,14 @@ import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
 import LabelInput from '../../Reusable/LabelInput/LabelInput';
 
 
-const UpdateUser = ({ FirstName, LastName, Email }) => {
+const UserUpdate = ({ FirstName, LastName, Email }) => {
   return (
     <div>
       <NavBarHeader isLogged onDesktop={false} />
       <ReturnTitle textContent="Modifier mon profil" avatar={false} />
-      <LabelInput label="Prénom" placeholder='coucou' value={FirstName} />
-      <LabelInput label="Nom" placeholder='coucou' value={LastName}/>
-      <LabelInput label="Email" placeholder='coucou' value={Email}/>
+      <LabelInput label="Prénom" placeholder=' ' value={FirstName} />
+      <LabelInput label="Nom" placeholder=' ' value={LastName}/>
+      <LabelInput label="Email" placeholder=' ' value={Email}/>
       <LabelInput label="Mot de passe" placeholder=' ' />
       <div className="LabelInput">
         <p>Photo de profil</p>
@@ -30,10 +30,10 @@ const UpdateUser = ({ FirstName, LastName, Email }) => {
   );
 };
 
-UpdateUser.propTypes = {
+UserUpdate.propTypes = {
   FirstName: PropTypes.string.isRequired,
   LastName: PropTypes.string.isRequired,
   Email: PropTypes.string.isRequired,
 };
 
-export default UpdateUser;
+export default UserUpdate;
