@@ -1,0 +1,18 @@
+.addAFriend {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .selector {
+    flex: 1;
+    padding: 1.5rem;
+    text-align: center; // Center the content horizontally
+  }
+
+  button.ui.button.SimpleButton {
+    width: 90%; // Adjust the width as needed
+    margin: 1.5rem auto; // Center the element horizontally and add margin
+    display: block;
+    margin-top: auto;
+  }
+}
