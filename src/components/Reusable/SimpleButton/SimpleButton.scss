@@ -15,5 +15,6 @@
   &:hover {
     background-color: v.$lightColor;
     color: v.$mainColor;
+    border: 2px solid v.$mainColor;
   }
 }

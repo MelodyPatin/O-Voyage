@@ -10,13 +10,13 @@ import Footer from '../../Reusable/Footer/Footer';
 import Tag from '../../Reusable/Tag/Tag';
 
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import Avatar from '../../Reusable/Avatar/Avatar';
 
 const ActivityResume = ({
   number,
   activityTitle,
   address,
   price,
-  openDays,
   openTime,
   url,
   description,
@@ -36,13 +36,13 @@ const ActivityResume = ({
 
   return (
     <div className="ActivityResume">
-      <ReturnTitle textContent={`#${number} ${activityTitle}`} />
+      <ReturnTitle avatar textContent={`#${number} ${activityTitle}`} />
       <div className="content">
         <p>Activité : {activityTitle}</p>
         <p>Adresse : {address}</p>
         <p>Prix : {price}€</p>
         <p>
-          Horaires : {openDays} {openTime}
+          Horaires : {openTime}
         </p>
         <p>Site internet : {url} </p>
         <p>Description : {description} </p>

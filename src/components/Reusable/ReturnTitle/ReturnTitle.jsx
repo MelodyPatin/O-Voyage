@@ -6,9 +6,16 @@ import PropTypes from 'prop-types';
 import Avatar from '../Avatar/Avatar';
 
 const ReturnTitle = ({ textContent, avatar }) => {
-  // Check if the text exceeds 17 characters
-  const displayText =
-    textContent.length > 17 ? `${textContent.slice(0, 17)}...` : textContent;
+  let displayText;
+
+  // if avatar is displayed
+  if (avatar) {
+    // Check if the text exceeds 17 characters
+    displayText =
+      textContent.length > 17 ? `${textContent.slice(0, 17)}...` : textContent;
+  } else {
+    displayText = textContent;
+  }
 
   return (
     <div className="ReturnTitle">
