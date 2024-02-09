@@ -16,7 +16,7 @@ const StepSelect = ({
       <div className="LabelInput">
         <p>{labelContent}</p>
         <MultipleSelector
-          placeholder={placeholderContent}
+          placeholderContent={placeholderContent}
           options={options}
         />
       </div>

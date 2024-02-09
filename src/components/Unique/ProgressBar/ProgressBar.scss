@@ -1,0 +1,6 @@
+@use '../../../styles/variables' as v;
+
+.ProgressBar {
+  height: 0.5rem;
+  background-color: v.$mainColor;
+}
