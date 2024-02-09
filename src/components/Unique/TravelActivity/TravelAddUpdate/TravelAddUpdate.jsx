@@ -8,6 +8,7 @@ import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
+import ProgressBar from '../../ProgressBar/ProgressBar';
 
 const TravelAddUpdate = ({ contentReturnTitle }) => {
   const step = 7;
@@ -22,6 +23,7 @@ const TravelAddUpdate = ({ contentReturnTitle }) => {
     <div className="TravelAddUpdate">
       <NavBarHeader isLogged={true} onDesktop={false} />
       <ReturnTitle textContent={contentReturnTitle} avatar={false} />
+      <ProgressBar step={step} />
       {step === 1 && (
         <StepInput
           buttonContent="Continuer"
