@@ -12,10 +12,10 @@ const UserUpdate = ({ onDesktop }) => {
       {!onDesktop && (
         <>
           <NavBarHeader isLogged onDesktop={false} />
-          <FormUserUpdate />
+          <FormUserUpdate FirstName="Coucou" LastName='COCOUC' Email='COUCOU '/>
         </>
       )}
-      {onDesktop && <PopupUpdate textContent={<FormUserUpdate />} />}
+      {onDesktop && <PopupUpdate textContent={<FormUserUpdate FirstName="Coucou" LastName='COCOUC' Email='COUCOU ' />} />}
     </div>
   );
 };
