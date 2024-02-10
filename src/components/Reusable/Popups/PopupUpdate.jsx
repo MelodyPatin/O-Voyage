@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { XCircleIcon } from '@heroicons/react/24/solid';
+import "./Popups.scss"
 
 const PopupUpdate = ({ textContent }) => {
   return (
@@ -14,7 +15,7 @@ const PopupUpdate = ({ textContent }) => {
 };
 
 PopupUpdate.propTypes = {
-  textContent: PropTypes.string.isRequired,
+  textContent: PropTypes.object.isRequired,
 };
 
 export default PopupUpdate;

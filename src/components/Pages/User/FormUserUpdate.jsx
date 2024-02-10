@@ -13,7 +13,7 @@ const FormUserUpdate = ({ FirstName, LastName, Email }) => {
       <LabelInput label="Prénom" placeholder="" value={FirstName} />
       <LabelInput label="Nom" placeholder="" value={LastName} />
       <LabelInput label="Email" placeholder="" value={Email} />
-      <LabelInput label="Mot de passe" placeholder="" />
+      <LabelInput label="Mot de passe" placeholder="" value="" />
       <div className="LabelInput">
         <p>Photo de profil</p>
         <Input type="file" />
