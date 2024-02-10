@@ -9,13 +9,14 @@ import PopupUpdate from '../../Reusable/Popups/PopupUpdate';
 const UserUpdate = ({ onDesktop }) => {
   return (
     <div>
-      {!onDesktop && (
+      {onDesktop ? (
+        <PopupUpdate textContent={<FormUserUpdate />} />
+      ) : (
         <>
           <NavBarHeader isLogged onDesktop={false} />
-          <FormUserUpdate FirstName="Coucou" LastName='COCOUC' Email='COUCOU '/>
+          <FormUserUpdate />
         </>
       )}
-      {onDesktop && <PopupUpdate textContent={<FormUserUpdate FirstName="Coucou" LastName='COCOUC' Email='COUCOU ' />} />}
     </div>
   );
 };
