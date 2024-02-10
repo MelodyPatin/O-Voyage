@@ -1,19 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 
-const Activities = () => {
+const Activities = ({ onDesktop }) => {
   return (
-    <div>
-      <div className="filterButton">
-        <SimpleButton textContent="Filtrer" />
-      </div>
-      <div className="sliderContainer">
-        <div className="arrow">
-          <ChevronLeftIcon />
+    <div className="activities">
+      {onDesktop && (
+        <div className="filterButton">
+          <SimpleButton textContent="Filtrer" />
         </div>
+      )}
+      <div className="sliderContainer">
+        {onDesktop && (
+          <div className="arrow">
+            <ChevronLeftIcon />
+          </div>
+        )}
         <div className="activityList">
           <ActivityCard activityTitle="coucou" />
           <ActivityCard activityTitle="coucou" />
@@ -21,15 +26,23 @@ const Activities = () => {
           <ActivityCard activityTitle="coucou" />
           <ActivityCard activityTitle="coucou" />
         </div>
-        <div className="arrow">
-          <ChevronRightIcon />
+        {onDesktop && (
+          <div className="arrow">
+            <ChevronRightIcon />
+          </div>
+        )}
+      </div>
+      {onDesktop && (
+        <div className="suggestionButton">
+          <IconButton textContent="Faire une proposition" icon="add" />
         </div>
-      </div>
-      <div className="suggestionButton">
-        <IconButton textContent="Faire une proposition" icon="add" />
-      </div>
+      )}
     </div>
   );
+};
+
+Activities.propTypes = {
+  onDesktop: PropTypes.bool,
 };
 
 export default Activities;

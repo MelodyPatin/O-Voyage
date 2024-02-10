@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <TravelDetails onDesktop={false} />
+        <TravelDetails onDesktop />
       </header>
     </div>
   );
