@@ -3,14 +3,6 @@
 .travelDetails {
   position: relative;
 
-  .TravelsMenu {
-    position: absolute;
-    top: 53vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-  }
-
   .TravelPicture {
     margin-top: 3rem;
   }
@@ -42,16 +34,6 @@
       width: 92%;
       margin: auto;
       margin-bottom: 1.5rem;
-    }
-  }
-
-  .container {
-    width: 320px;
-    position: relative;
-
-    .TravelsMenu {
-      top: -1.5rem;
-      z-index: 60;
     }
   }
 
