@@ -1,6 +1,6 @@
 import React from 'react';
-import './SimpleButton.scss';
 import { Button } from 'semantic-ui-react';
+import './SimpleButton.scss';
 import PropTypes from 'prop-types';
 
 const SimpleButton = ({ textContent }) => (

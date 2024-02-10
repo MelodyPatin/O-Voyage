@@ -6,12 +6,10 @@ import {
   UserGroupIcon,
   PhotoIcon,
   ChatBubbleLeftRightIcon,
-  PlusIcon
+  PlusIcon,
 } from '@heroicons/react/24/outline';
-import { PlusCircleIcon } from '@heroicons/react/24/solid';
-import PropTypes from 'prop-types';
 
-const NavBarMobile = ({ textContent }) => {
+const NavBarMobile = () => {
   return (
     <div className="NavBarMobileContainer">
       {/* List of Icons present in the mobile navbar */}
@@ -26,10 +24,6 @@ const NavBarMobile = ({ textContent }) => {
       </div>
     </div>
   );
-};
-
-NavBarMobile.propTypes = {
-  textContent: PropTypes.string.isRequired,
 };
 
 export default NavBarMobile;

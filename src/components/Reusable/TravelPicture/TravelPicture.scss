@@ -2,11 +2,20 @@
 
 .TravelPicture {
   position: relative;
+  aspect-ratio: 1/1.3; 
+  overflow: hidden; 
+
+  @media (min-width: 600px) {
+    aspect-ratio: 1.5/1; 
+  }
 
   img {
     display: block;
     margin: auto;
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   // Styling for the hidden file input to select the new photo (triggered indirectly through a label and a visible icon -> more userfriendly)
