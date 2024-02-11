@@ -28,7 +28,7 @@
   }
 
   .buttons {
-    padding: 3rem 0 8.5rem 0;
+    padding: 3rem 0 3rem 0;
 
     .ui.button {
       width: 92%;
@@ -50,6 +50,27 @@
       border-right: 2px solid v.$mainColor;
       border-top-right-radius: 10px;
       position: relative;
+
+      .ActivityResume {
+        margin-top: 5rem;
+      }
+      
+      .TravelersList {
+        margin-top: 5rem;
+        min-height: calc(100vh - 232px);
+
+        .ReturnTitle {
+          background-color: v.$lightColor;
+        }
+
+        h3 {
+          color: v.$mainColor;
+        }
+
+        .arrowIcon {
+          color: v.$mainColor;
+        }
+      }
 
       .TravelPicture {
         margin-top: 0rem;
@@ -97,11 +118,11 @@
         gap: 1rem;
         position: relative;
         width: 100%;
-  
+
         .activityList {
           overflow: auto;
         }
-  
+
         .arrow {
           width: 40px;
           height: 40px;

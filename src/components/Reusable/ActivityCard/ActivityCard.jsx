@@ -1,6 +1,6 @@
 import React from 'react';
 import './ActivityCard.scss';
-import { Button, Icon } from 'semantic-ui-react';
+import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
