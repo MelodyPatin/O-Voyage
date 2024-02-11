@@ -4,18 +4,31 @@ import './TravelersList.scss';
 import PropTypes from 'prop-types';
 import User from '../User/User';
 import IconButton from '../IconButton/IconButton';
+import ReturnTitle from '../ReturnTitle/ReturnTitle';
 
 const TravelersList = ({}) => {
   return (
     <div className="TravelersList">
       {/* Title for the list  */}
-      <h3>Les voyageurs</h3>
+      <ReturnTitle textContent="Les voyageurs" />
       {/* List of users */}
-      <User firstName="Toto" />
-      <User firstName="Toto" />
-      <User firstName="Toto" />
-      <User firstName="Toto" />
-      <User firstName="Toto" />
+      <ul>
+        <li>
+          <User firstName="Toto" />
+        </li>
+        <li>
+          <User firstName="Toto" />
+        </li>
+        <li>
+          <User firstName="Toto" />
+        </li>
+        <li>
+          <User firstName="Toto" />
+        </li>
+        <li>
+          <User firstName="Toto" />
+        </li>
+      </ul>
       <IconButton icon="plus" textContent="Ajouter un voyageur" />
     </div>
   );

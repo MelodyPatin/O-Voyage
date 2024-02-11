@@ -3,14 +3,6 @@
 .travelDetails {
   position: relative;
 
-  .TravelsMenu {
-    position: absolute;
-    top: 53vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 20;
-  }
-
   .TravelPicture {
     margin-top: 3rem;
   }
@@ -36,22 +28,12 @@
   }
 
   .buttons {
-    padding: 3rem 0 8.5rem 0;
+    padding: 3rem 0 3rem 0;
 
     .ui.button {
       width: 92%;
       margin: auto;
       margin-bottom: 1.5rem;
-    }
-  }
-
-  .container {
-    width: 320px;
-    position: relative;
-
-    .TravelsMenu {
-      top: -1.5rem;
-      z-index: 60;
     }
   }
 
@@ -68,6 +50,27 @@
       border-right: 2px solid v.$mainColor;
       border-top-right-radius: 10px;
       position: relative;
+
+      .ActivityResume {
+        margin-top: 5rem;
+      }
+      
+      .TravelersList {
+        margin-top: 5rem;
+        min-height: calc(100vh - 232px);
+
+        .ReturnTitle {
+          background-color: v.$lightColor;
+        }
+
+        h3 {
+          color: v.$mainColor;
+        }
+
+        .arrowIcon {
+          color: v.$mainColor;
+        }
+      }
 
       .TravelPicture {
         margin-top: 0rem;
@@ -115,11 +118,11 @@
         gap: 1rem;
         position: relative;
         width: 100%;
-  
+
         .activityList {
           overflow: auto;
         }
-  
+
         .arrow {
           width: 40px;
           height: 40px;
