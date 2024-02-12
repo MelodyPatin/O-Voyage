@@ -21,7 +21,7 @@ const LogIn = ({ emailValue, passwordValue, changeField, handleLogin, isLogged }
   };
 
   return (
-    <div className="container" onClick={handleClosePopup}>
+    <div className="containerPopup" onClick={handleClosePopup}>
       <div className="Popup" onClick={(e) => e.stopPropagation()}>
         <XCircleIcon className="icon" onClick={handleClosePopup} />
         <p>Se connecter</p>

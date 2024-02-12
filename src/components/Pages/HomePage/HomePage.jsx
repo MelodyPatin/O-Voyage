@@ -1,5 +1,6 @@
-// Importez les composants nécessaires
-import React from 'react';
+// HomePage.jsx
+
+import { React, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { changeLoginField, submitLogin } from '../../../actions/user';
@@ -10,6 +11,7 @@ import LastPart from './LastPart/LastPart';
 import Footer from '../../Reusable/Footer/Footer';
 import LogIn from './Popup/LogIn';
 import SignIn from './Popup/SignIn';
+import './HomePage.scss';
 
 const HomePage = () => {
   // Initialisez les variables nécessaires pour la gestion de l'authentification
