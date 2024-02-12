@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './StepCalendar.scss';
+import './Steps.scss';
 import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import { Datepicker } from '@mobiscroll/react';

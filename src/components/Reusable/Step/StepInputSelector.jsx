@@ -1,9 +1,9 @@
 import React from 'react';
-import './StepInputSelector.scss';
+import './Steps.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
-import MultipleSelector from '../MultipleSelector/MultipleSelector';
+import { Select } from 'semantic-ui-react';
 
 // Functional component : popup with input fields and a close button
 const StepInputSelector = ({
@@ -23,7 +23,7 @@ const StepInputSelector = ({
         value={valueInputContent}
         className="label-input"
       />
-      <MultipleSelector
+      <Select
         placeholderContent={placeholderSelectorContent}
         options={options}
         className="selector"

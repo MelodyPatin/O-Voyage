@@ -1,5 +1,5 @@
 import React from 'react';
-import './StepTextarea.scss';
+import './Steps.scss';
 import { Form, TextArea } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
