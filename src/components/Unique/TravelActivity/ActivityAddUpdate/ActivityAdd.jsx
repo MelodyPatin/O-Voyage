@@ -9,9 +9,10 @@ import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
+import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 
 const ActivityAdd = () => {
-  const step = 7;
+  const step = 2;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -32,10 +33,12 @@ const ActivityAdd = () => {
         />
       )}
       {step === 2 && (
-        <StepInput
+        <StepInputSelector
           buttonContent="Continuer"
-          placeholderContent="Place George Pompidou, 75004 Paris"
+          placeholderInputContent="Place George Pompidou, 75004 Paris"
+          placeholderSelectorContent="Sélectionnez la ville"
           labelContent="Renseignez l'adresse"
+          options={options}
         />
       )}
       {step === 3 && (

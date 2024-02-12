@@ -10,9 +10,10 @@ import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
+import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 
 const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activityDates, activityUrl, activityDescription, activityTag}) => {
-  const step = 7;
+  const step = 2;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -33,10 +34,11 @@ const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activity
         />
       )}
       {step === 2 && (
-        <StepInput
+        <StepInputSelector
           buttonContent="Continuer"
           valueContent={activityAddress}
           labelContent="Modifiez l'adresse"
+          options={options}
         />
       )}
       {step === 3 && (
@@ -79,13 +81,13 @@ const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activity
 };
 
 ActivityUpdate.propTypes = {
- // activityTitle: PropTypes.string.isRequired,
- // activityAddress: PropTypes.string.isRequired,
- // activityCost: PropTypes.string.isRequired,
- // activityDates: PropTypes.string.isRequired,
- activityUrl: PropTypes.string.isRequired,
- // activityDescription: PropTypes.string.isRequired,
- // activityTag: PropTypes.string.isRequired,
+ activityTitle: PropTypes.string,
+ activityAddress: PropTypes.string,
+ activityCost: PropTypes.string,
+ activityDates: PropTypes.string,
+ activityUrl: PropTypes.string,
+ activityDescription: PropTypes.string,
+ activityTag: PropTypes.string,
 };
 
 export default ActivityUpdate;
