@@ -10,9 +10,11 @@ import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
+import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
+import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 
-const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activityDates, activityUrl, activityDescription, activityTag}) => {
-  const step = 7;
+const ActivityUpdate = ({ onDesktop, activityTitle, activityAddress, activityCost, activityDates, activityUrl, activityDescription, activityTag}) => {
+  const step = 2;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -20,7 +22,74 @@ const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activity
     { key: 'option3', text: 'Option 3', value: 'Option 3' },
   ];
 
-  return (
+  return onDesktop ? (
+    <>
+      {step === 1 && (
+        <PopupUpdate textContent={
+          <StepInput
+            buttonContent="Continuer"
+            valueContent={activityTitle}
+            labelContent="Modifiez le titre de votre proposition*"
+          />
+        } />
+      )}
+      {step === 2 && (
+        <PopupUpdate textContent={
+          <StepInputSelector
+            buttonContent="Continuer"
+            valueContent={activityAddress}
+            labelContent="Modifiez l'adresse"
+            options={options}
+          />
+        } />
+      )}
+      {step === 3 && (
+        <PopupUpdate textContent={
+          <StepInput
+            buttonContent="Continuer"
+            valueContent={activityCost}
+            labelContent="Renseignez le coût moyen"
+          />
+        } />
+      )}
+      {step === 4 && (
+        <PopupUpdate textContent={
+          <StepTextarea
+            valueContent={activityDates}
+            buttonContent="Continuer"
+            labelContent="Renseignez les jours et horaires d'ouverture"
+          />
+        } />
+      )}
+      {step === 5 && (
+        <PopupUpdate textContent={
+          <StepInput
+            buttonContent="Continuer"
+            valueContent={activityUrl}
+            labelContent="Renseignez le site internet"
+          />
+        } />
+      )}
+      {step === 6 && (
+        <PopupUpdate textContent={
+          <StepTextarea
+            valueContent={activityDescription}
+            buttonContent="Continuer"
+            labelContent="Ajoutez une description"
+          />
+        } />
+      )}
+      {step === 7 && (
+        <PopupUpdate textContent={
+          <StepTag
+            buttonContent="Envoyer ma proposition"
+            labelContent="Sélectionnez un tag"
+            activityTag={activityTag}
+          />
+        } />
+      )}
+    </>
+  ) : (
     <div className="ActivityAddUpdate">
       <NavBarHeader isLogged={true} onDesktop={false} />
       <ReturnTitle textContent="Modifier la proposition" avatar={false} />
@@ -33,10 +102,11 @@ const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activity
         />
       )}
       {step === 2 && (
-        <StepInput
+        <StepInputSelector
           buttonContent="Continuer"
           valueContent={activityAddress}
           labelContent="Modifiez l'adresse"
+          options={options}
         />
       )}
       {step === 3 && (
@@ -79,13 +149,14 @@ const ActivityUpdate = ({ activityTitle, activityAddress, activityCost, activity
 };
 
 ActivityUpdate.propTypes = {
- // activityTitle: PropTypes.string.isRequired,
- // activityAddress: PropTypes.string.isRequired,
- // activityCost: PropTypes.string.isRequired,
- // activityDates: PropTypes.string.isRequired,
- activityUrl: PropTypes.string.isRequired,
- // activityDescription: PropTypes.string.isRequired,
- // activityTag: PropTypes.string.isRequired,
+  onDesktop: PropTypes.bool.isRequired,
+  activityTitle: PropTypes.string,
+  activityAddress: PropTypes.string,
+  activityCost: PropTypes.string,
+  activityDates: PropTypes.string,
+  activityUrl: PropTypes.string,
+  activityDescription: PropTypes.string,
+  activityTag: PropTypes.string,
 };
 
 export default ActivityUpdate;

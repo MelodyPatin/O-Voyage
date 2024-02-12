@@ -1,5 +1,5 @@
 import React from 'react';
-import './StepSelect.scss';
+import './Steps.scss';
 import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';

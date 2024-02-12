@@ -1,5 +1,5 @@
 import React from 'react';
-import './StepTag.scss';
+import './Steps.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';

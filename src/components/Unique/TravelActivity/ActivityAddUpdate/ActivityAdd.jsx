@@ -9,9 +9,12 @@ import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
+import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
+import PropTypes from 'prop-types';
+import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 
-const ActivityAdd = () => {
-  const step = 7;
+const ActivityAdd = ({ onDesktop }) => {
+  const step = 4; 
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -19,7 +22,74 @@ const ActivityAdd = () => {
     { key: 'option3', text: 'Option 3', value: 'Option 3' },
   ];
 
-  return (
+  return onDesktop ? (
+    <>
+      {step === 1 && (
+        <PopupUpdate textContent={
+          <StepInput
+            buttonContent="Continuer"
+            placeholderContent="Week-end à Paris avec les amis"
+            labelContent="Donnez un titre à votre proposition*"
+          />
+        } />
+      )}
+      {step === 2 && (
+        <PopupUpdate textContent={
+          <StepInputSelector
+            buttonContent="Continuer"
+            placeholderInputContent="Place George Pompidou, 75004 Paris"
+            placeholderSelectorContent="Sélectionnez la ville"
+            labelContent="Renseignez l'adresse"
+            options={options}
+          />
+        } />
+      )}
+      {step === 3 && (
+        <PopupUpdate textContent={
+          <StepInput
+            buttonContent="Continuer"
+            placeholderContent="15€"
+            labelContent="Renseignez le coût moyen"
+          />
+        } />
+      )}
+      {step === 4 && (
+        <PopupUpdate textContent={
+          <StepTextarea
+            textareaContent={"11h-21h / Fermé le mardi"}
+            buttonContent="Continuer"
+            labelContent="Renseignez les jours et horaires d'ouverture"
+          />
+        } />
+      )}
+      {step === 5 && (
+        <PopupUpdate textContent={
+          <StepInput
+            buttonContent="Continuer"
+            placeholderContent="https://www.centrepompidou.fr"
+            labelContent="Renseignez le site internet"
+          />
+        } />
+      )}
+      {step === 6 && (
+        <PopupUpdate textContent={
+          <StepTextarea
+            textareaContent={"La collection permanente est impressionnante !"}
+            buttonContent="Continuer"
+            labelContent="Ajoutez une description"
+          />
+        } />
+      )}
+      {step === 7 && (
+        <PopupUpdate textContent={
+          <StepTag
+            buttonContent="Envoyer ma proposition"
+            labelContent="Sélectionnez un tag"
+          />
+        } />
+      )}
+    </>
+  ) : (
     <div className="ActivityAddUpdate">
       <NavBarHeader isLogged={true} onDesktop={false} />
       <ReturnTitle textContent="Proposition" avatar={false} />
@@ -32,10 +102,12 @@ const ActivityAdd = () => {
         />
       )}
       {step === 2 && (
-        <StepInput
+        <StepInputSelector
           buttonContent="Continuer"
-          placeholderContent="Place George Pompidou, 75004 Paris"
+          placeholderInputContent="Place George Pompidou, 75004 Paris"
+          placeholderSelectorContent="Sélectionnez la ville"
           labelContent="Renseignez l'adresse"
+          options={options}
         />
       )}
       {step === 3 && (
@@ -74,6 +146,10 @@ const ActivityAdd = () => {
       )}
     </div>
   );
+};
+
+ActivityAdd.propTypes = {
+  onDesktop: PropTypes.bool.isRequired,
 };
 
 export default ActivityAdd;

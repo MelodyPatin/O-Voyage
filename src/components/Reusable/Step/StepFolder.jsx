@@ -1,5 +1,5 @@
 import React from 'react';
-import './StepFolder.scss';
+import './Steps.scss';
 import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
