@@ -1,0 +1,59 @@
+@use '../../../../styles/variables' as v;
+
+.activities {
+  position: relative;
+  overflow: visible;
+  white-space: nowrap;
+  padding-bottom: 2rem;
+
+  @media (min-width: 1024px) {
+    width: calc(100vw - 22rem);
+    border: 2px solid v.$mainColor;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-right: none;
+    padding: 4rem 1rem;
+  }
+
+  div {
+    display: flex;
+
+    .ActivityCard {
+      flex: 0 0 auto;
+      flex-direction: column;
+    }
+  }
+
+  .sliderContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    width: 100%;
+
+    .activityList {
+      overflow: auto;
+    }
+
+    .arrow {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  button.ui.button {
+    width: 17.25rem;
+  }
+  .filterButton {
+    button.ui.button.SimpleButton {
+      position: absolute;
+      top: -1.5rem;
+      left: 2rem;
+    }
+  }
+  .suggestionButton .button {
+    position: absolute;
+    bottom: -1.5rem;
+    right: 2rem;
+  }
+}

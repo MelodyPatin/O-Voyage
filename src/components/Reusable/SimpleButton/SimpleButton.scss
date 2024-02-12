@@ -1,20 +1,23 @@
 @use '../../../styles/variables' as v;
 
-.ui.button {
+button.ui.button {
   background-color: v.$mainColor;
   color: v.$lightColor;
-  width: 14rem;
-  height: 3.75rem;
+  width: 100%;
+  //max-width: 15rem;
+  min-width: fit-content;
+  height: 3rem;
   padding: 1rem;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-weight: normal;
   font-size: 1.25rem;
   display: block;
   margin: auto;
+  box-shadow: 0px 02px 2px rgba(v.$darkColor, 0.5);
 
   &:hover {
     background-color: v.$lightColor;
     color: v.$mainColor;
-    border: 2px solid v.$mainColor;
+    box-shadow: 0px 02px 2px rgba(v.$darkColor, 0.5);
   }
 }

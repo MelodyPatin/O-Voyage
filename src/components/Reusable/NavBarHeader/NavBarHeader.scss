@@ -11,7 +11,7 @@
   }
   .buttonContainer {
     display: flex;
-    gap: 1rem;
+    gap: 0.5rem;
     // Styling for the login/logout buttons
     .ui.button.connectionButton {
       background-color: v.$lightColor;
@@ -37,7 +37,7 @@
 
   // Logo styling
   img {
-    width: 8rem;
+    width: 6rem;
     height: fit-content;
 
     @media (min-width: 600px) {

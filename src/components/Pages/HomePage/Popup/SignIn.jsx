@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'; // Importer useHistory depuis re
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { Input } from 'semantic-ui-react';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
+import Field from './Field/Field';
 
 // Functional component : popup with input fields and a close button
 const SignIn = () => {
@@ -15,14 +16,14 @@ const SignIn = () => {
   };
 
   return (
-    <div className="container" onClick={handleClosePopup}>
+    <div className="containerPopup" onClick={handleClosePopup}>
       <div className="Popup" onClick={(e) => e.stopPropagation()}>
         <XCircleIcon className="icon" onClick={handleClosePopup} />
         <p>Nouveau compte</p>
-        <Input placeholder="Prénom" />
-        <Input placeholder="Nom" />
-        <Input placeholder="Email" />
-        <Input placeholder="Mot de passe" />
+        <Field placeholder="Prénom" />
+        <Field placeholder="Nom" />
+        <Field placeholder="Email" />
+        <Field placeholder="Mot de passe" />
         <SimpleButton textContent="S'inscrire" />
       </div>
     </div>
