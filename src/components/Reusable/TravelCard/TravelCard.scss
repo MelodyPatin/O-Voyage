@@ -1,15 +1,14 @@
 @use '../../../styles/variables' as v;
 
 .cardContainer {
-  // Set minimum and maximum width for the card container
-  min-width: 20rem;
+  // Set maximum width for the card container
   max-width: 31.75rem;
   // Center the content horizontally and vertically
   display: flex;
   justify-content: center;
   align-items: center;
   aspect-ratio: 2/1; // Ensure the aspect ratio of 2:1
-  overflow: hidden; 
+  overflow: hidden;
   position: relative; // Positioning relative to handle absolute positioning of child elements
 
   .cardPicture {
@@ -23,7 +22,7 @@
     position: absolute; // Position the title absolute within the container
     left: 0;
     width: 100%;
-    padding: 1.5rem;
+    padding: 1rem;
     background-color: rgba(
       v.$darkColor,
       0.75
