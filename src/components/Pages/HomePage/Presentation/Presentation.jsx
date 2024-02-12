@@ -4,7 +4,7 @@ import './Presentation.scss';
 const Presentation = () => {
   return (
     <div className="presentation">
-      <img src="src/assets/View1.png" alt="" />
+      <img src="../src/assets/View1.png" alt="" />
       <div>
         <h2 className="title">
           Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi.

@@ -11,7 +11,7 @@ const Header = () => {
         </h1>
         <img
           className="mockup"
-          src="src/assets/MainMockupMobile.png"
+          src="../src/assets/MainMockupMobile.png"
           alt="mockup"
         />
       </div>
