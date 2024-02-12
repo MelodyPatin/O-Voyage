@@ -1,0 +1,59 @@
+.dashboard {
+  h2 {
+    font-family: 'Inria Serif', serif;
+    font-size: 2.25rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0 3rem 0;
+
+    .arrow {
+      width: 2.25rem;
+    }
+  }
+
+  .ui.button {
+    max-width: 17.625rem;
+    width: 90%;
+
+    @media (min-width: 600px) {
+      margin-bottom: 2rem;
+    }
+
+    @media (min-width: 900px) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  .list {
+
+    @media (min-width: 900px) {
+      margin: 0 8rem;
+    }
+
+    .when {
+      padding: 2rem 0 1rem 1rem;
+    }
+
+    .future,
+    .passed {
+      .cardList {
+        display: flex;
+        overflow: auto; // Enable horizontal scrolling
+        gap: 1rem;
+        width: 100%;
+        flex-wrap: nowrap;
+
+        .cardContainer {
+          flex: 0 0 auto;
+          width: 80%;
+          aspect-ratio: 1.6/1;
+        }
+      }
+    }
+  }
+
+  .Footer {
+    margin-top: 3rem;
+  }
+}
