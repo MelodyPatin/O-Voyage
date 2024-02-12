@@ -10,17 +10,19 @@ import Footer from '../../Reusable/Footer/Footer';
 import Tag from '../../Reusable/Tag/Tag';
 
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import Avatar from '../../Reusable/Avatar/Avatar';
+import NavBarMobile from '../../Reusable/NavBarMobile/NavBarMobile';
 
 const ActivityResume = ({
   number,
   activityTitle,
   address,
   price,
-  openDays,
   openTime,
   url,
   description,
   activityCategory,
+  onDesktop,
 }) => {
   let categoryText;
 
@@ -36,27 +38,23 @@ const ActivityResume = ({
 
   return (
     <div className="ActivityResume">
-      <ReturnTitle textContent={`#${number} ${activityTitle}`} />
+      {!onDesktop && <NavBarHeader isLogged />}
+      <ReturnTitle avatar textContent={`#${number} ${activityTitle}`} />
       <div className="content">
         <p>Activité : {activityTitle}</p>
         <p>Adresse : {address}</p>
         <p>Prix : {price}€</p>
-        <p>
-          Horaires : {openDays} {openTime}
-        </p>
+        <p>Horaires : {openTime}</p>
         <p>Site internet : {url} </p>
         <p>Description : {description} </p>
-        <Tag
-          category={activityCategory}
-          text={categoryText}
-          className={'tag'}
-        />
+        <Tag category={activityCategory} text={categoryText} className="tag" />
         <div className="icons">
           <PencilIcon className="icon" />
           <TrashIcon className="icon" />
         </div>
-        <SimpleButton textContent={'Fermer'} className="button" />
+        <SimpleButton textContent="Fermer" className="button" />
       </div>
+      {!onDesktop && <NavBarMobile />}
     </div>
   );
 };
@@ -71,6 +69,7 @@ ActivityResume.propTypes = {
   url: PropTypes.string,
   description: PropTypes.string,
   activityCategory: PropTypes.string,
+  onDesktop: PropTypes.bool,
 };
 
 export default ActivityResume;

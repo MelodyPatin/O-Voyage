@@ -1,39 +1,50 @@
 @use '../../../styles/variables' as v;
 
 .NavBarMobileContainer {
-  position: fixed;
+  position: sticky;
   bottom: 0;
   width: 100%;
   display: flex;
   justify-content: space-around;
   border-top: 2px solid v.$mainColor;
+  background-color: v.$lightColor;
   overflow: visible; // Allows .solid to extend beyond the container
   z-index: 10; // Set a z-index value for the parent element
 }
 
 .NavBarMobile {
   width: 100%;
-  padding: 0.5rem 0.5rem 1rem;
+  padding: 0.5rem 0.5rem 2rem;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  position: relative; // Necessary for positioning .solid correctly
 
   .icon {
     width: 3rem;
     color: v.$mainColor;
-
-    &.user {
-      margin-right: 4.5rem; // Adjust margin for the user icon
-    }
   }
 
   .solid {
-    position: absolute; // Using absolute positioning to break out of the flow
-    top: -25px;
-    right: 50%; // Center .solid horizontally
-    transform: translateX(50%); // Center .solid horizontally
-    width: 4.5rem;
+    width: 5rem;
+    margin-top: -2rem;
     z-index: 15; // Set a higher z-index for the .solid element
+  }
+
+  .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.2rem;
+    height: 4.2rem;
+    background: linear-gradient(to right, v.$mainColor, #a5bbca);
+    border-radius: 50%;
+    border: 3px solid v.$lightColor;
+    margin-top: -2rem;
+    z-index: 15;
+
+    .plus {
+      color: v.$lightColor;
+      width: 3rem;
+    }
   }
 }

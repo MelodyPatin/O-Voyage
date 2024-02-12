@@ -1,12 +1,11 @@
-import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 import './App.scss';
-import HomePage from '../Pages/HomePage/HomePage';
-
+import TravelDetails from '../Pages/Travel/TravelDetails/TravelDetails';
+import ActivityResume from '../Pages/ActivityResume/ActivityResume';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <HomePage />
+        <TravelDetails onDesktop Activity />
       </header>
     </div>
   );
