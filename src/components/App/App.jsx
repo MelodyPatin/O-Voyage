@@ -10,6 +10,7 @@ import { updateLoggedOut } from '../../actions/user';
 function App() {
   const dispatch = useDispatch();
 
+  const logged = useSelector((state) => state.user.logged);
   const loggedOut = useSelector((state) => state.user.loggedOut);
 
   const [redirectHome, setRedirectHome] = useState(false);
@@ -40,7 +41,7 @@ function App() {
 
         <Routes>
           <Route path="/home/*" element={<HomePage />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          {logged && <Route path="/dashboard" element={<Dashboard />} />}
           <Route path="*" element={<Error />} />
         </Routes>
       </header>
