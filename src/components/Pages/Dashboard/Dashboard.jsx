@@ -11,7 +11,6 @@ const Dashboard = () => {
     <div className="dashboard">
       <HeaderConnected />
       <h2>
-        <ArrowLeftIcon className="arrow" />
         MES VOYAGES
       </h2>
       <IconButton textContent="Créer un voyage" icon="add" />

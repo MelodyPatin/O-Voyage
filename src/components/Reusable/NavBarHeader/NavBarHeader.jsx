@@ -9,7 +9,11 @@ const NavBarHeader = ({ isLogged, onDesktop }) => {
   return (
     <div className="header">
       <Link to="/home">
-        <img src="/src/assets/MainLogo.png" alt="Logo O'Voyage" />
+        <img
+          className="logo"
+          src="/src/assets/MainLogo.png"
+          alt="Logo O'Voyage"
+        />
       </Link>
       {isLogged && <Menu desktop={onDesktop} />}
       {!isLogged && <LoginLogoutButton />}

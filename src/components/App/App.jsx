@@ -9,6 +9,7 @@ import { updateLoggedOut } from '../../actions/user';
 import UserUpdate from '../Pages/User/UserUpdate';
 import FriendList from '../Pages/Friend/FriendList/FriendList';
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
+import Travel from '../Pages/Travel/Travel';
 
 function App() {
   const dispatch = useDispatch();
@@ -45,10 +46,11 @@ function App() {
 
         <Routes>
           <Route path="/home/*" element={<HomePage />} />
-          {logged && <Route path="/dashboard" element={<Dashboard />} />}
+          {logged && <Route path="/dashboard" element={<Dashboard onDesktop={false} />} />}
           {logged && <Route path={`/${firstName}`} element={<UserUpdate />} />}
           {logged && <Route path="/friends/*" element={<FriendList />} />}
           {logged && <Route path="/friends/add" element={<FriendAdd />} />}
+          <Route path="/travel" element={<Travel onDesktop />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </header>

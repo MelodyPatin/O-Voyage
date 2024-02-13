@@ -5,7 +5,7 @@ import "./Popups.scss"
 
 const PopupUpdate = ({ textContent }) => {
   return (
-    <div className="container">
+    <div className="containerBackground">
       <div className="Popup Popup--update">
         <XCircleIcon className="icon" />
         <div>{textContent}</div>

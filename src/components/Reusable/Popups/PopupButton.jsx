@@ -7,7 +7,7 @@ import SimpleButton from '../SimpleButton/SimpleButton';
 // Functional component : popup with a close button, a text message and a button
 const PopupButton = ({ textContent, buttonContent }) => {
   return (
-    <div className="container">
+    <div className="containerBackground">
       <div className="Popup">
         <XCircleIcon className="icon" />
         <p>{textContent}</p>
