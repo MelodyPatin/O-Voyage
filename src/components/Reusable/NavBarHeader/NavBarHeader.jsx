@@ -1,4 +1,4 @@
-import React from 'react';
+import { React } from 'react';
 import './NavBarHeader.scss';
 import PropTypes from 'prop-types';
 import Menu from './Menu';

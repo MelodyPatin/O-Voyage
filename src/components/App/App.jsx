@@ -1,17 +1,43 @@
-import { Route, Routes } from 'react-router-dom';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './App.scss';
 import HomePage from '../Pages/HomePage/HomePage';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import Error from '../Pages/Error/Error';
+import { updateLoggedOut } from '../../actions/user';
 
 function App() {
+  const dispatch = useDispatch();
+
+  const loggedOut = useSelector((state) => state.user.loggedOut);
+
+  const [redirectHome, setRedirectHome] = useState(false);
+
+  useEffect(() => {
+    // Redirigez vers le tableau de bord après la connexion réussie
+    if (loggedOut && !redirectHome) {
+      setRedirectHome(true);
+    }
+  }, [loggedOut, redirectHome]);
+
+  useEffect(() => {
+    // Mettez à jour l'état loggedOut après la redirection vers la page d'accueil
+    if (redirectHome) {
+      // Mettez loggedOut à false après la redirection
+      // Vous pouvez utiliser une autre action ou un moyen pour mettre à jour loggedOut dans le state Redux
+      // Par exemple, dispatchez une action pour mettre loggedOut à false dans votre reducer
+      dispatch(updateLoggedOut(false));
+      setRedirectHome(false);
+    }
+  }, [redirectHome]);
 
   return (
     <div className="App">
       <header className="App-header">
         {/* HomePage */}
+        {redirectHome && <Navigate to="/home" replace />}
+
         <Routes>
           <Route path="/home/*" element={<HomePage />} />
           <Route path="/dashboard" element={<Dashboard />} />

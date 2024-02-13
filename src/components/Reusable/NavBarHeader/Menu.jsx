@@ -1,10 +1,14 @@
+import { useDispatch } from 'react-redux';
 import DropDownSettings from './DropDownSettings';
 import DropDownNotifications from './DropDownNotifications';
 import PropTypes from 'prop-types';
 import Avatar from '../Avatar/Avatar';
 import DesktopItems from './DesktopItems';
+import { clickLogout } from '../../../actions/user';
 
 const Menu = ({ desktop }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="menu">
       {/* Render desktop items if in desktop view */}
@@ -15,7 +19,14 @@ const Menu = ({ desktop }) => {
       </div>
       {/* Render dropdown for user settings */}
       <div className="icon_label">
-        <DropDownSettings desktop={desktop} />
+        <DropDownSettings
+          handleLogout={() => {
+            // TODO effacer le pseudo et le token dans le state, et passer logged
+            // à false => dispatch action, traitée par le reducer user
+            dispatch(clickLogout())
+          }}
+          desktop={desktop}
+        />
       </div>
     </div>
   );

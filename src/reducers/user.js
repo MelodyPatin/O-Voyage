@@ -1,15 +1,20 @@
+import { FaceSmileIcon } from '@heroicons/react/24/solid';
 import {
   CHANGE_LOGIN_FIELD,
   HANDLE_SUCCESSFUL_LOGIN,
   HANDLE_SUCCESSFUL_SIGN_UP,
   SAVE_USER_DATA,
+  CLICK_LOGOUT,
+  UPDATE_LOGGED_OUT,
 } from '../actions/user';
 
 export const initialState = {
   // indique si l'utilisateur est authentifié
   logged: false,
+  // indique si l'utilisateur est déconnecté
+  loggedOut: false,
   // indique si l'utilisateur a créé son compte
-  signedIn: false,
+  signedUp: false,
   // contenu du champ email du formulaire de login
   email: '',
   // contenu du champ password du formulaire de login
@@ -57,7 +62,7 @@ const reducer = (state = initialState, action = {}) => {
       case HANDLE_SUCCESSFUL_SIGN_UP:
         return {
           ...state,
-          signedIn: true,
+          signedUp: true,
           signUpEmail: '',
           signUpPassword: '',
           firstname: '',
@@ -69,6 +74,23 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         firstname: action.firstName,
         lastname: action.lastName,
+      };
+
+    case CLICK_LOGOUT:
+      return {
+        ...state,
+        logged: false,
+        loggedOut: true,
+        signedUp: false,
+        token: '',
+        firstname: '',
+        lastname: '',
+      };
+
+    case UPDATE_LOGGED_OUT:
+      return {
+        ...state,
+        loggedOut: false,
       };
 
     default:
