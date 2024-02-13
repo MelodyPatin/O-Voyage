@@ -21,7 +21,7 @@ const Activities = ({ onDesktop }) => {
           </div>
         )}
         <div className="activityList">
-          <ActivityCard activityTitle="coucou" />
+          <ActivityCard activityTitle="Parlement de Budapest" />
           <ActivityCard activityTitle="coucou" />
           <ActivityCard activityTitle="coucou" />
           <ActivityCard activityTitle="coucou" />
