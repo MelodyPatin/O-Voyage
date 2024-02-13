@@ -6,6 +6,8 @@ export const HANDLE_SUCCESSFUL_LOGIN = 'HANDLE_SUCCESSFUL_LOGIN';
 export const HANDLE_SUCCESSFUL_SIGN_UP = 'HANDLE_SUCCESSFUL_SIGN_UP';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const SAVE_USER_DATA = 'SAVE_USER_DATA';
+export const CLICK_LOGOUT = 'CLICK_LOGOUT';
+export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -39,4 +41,12 @@ export const saveUserData = (firstName, lastName) => ({
   type: SAVE_USER_DATA,
   firstName,
   lastName,
+});
+
+export const clickLogout = () => ({
+  type: CLICK_LOGOUT,
+});
+
+export const updateLoggedOut = () => ({
+  type: UPDATE_LOGGED_OUT,
 });

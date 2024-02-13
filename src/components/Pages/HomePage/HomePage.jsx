@@ -23,7 +23,7 @@ const HomePage = () => {
   const signUpEmailValue = useSelector((state) => state.user.signUpEmail);
   const signUpPasswordValue = useSelector((state) => state.user.signUpPassword);
   const logged = useSelector((state) => state.user.logged);
-  const signedIn = useSelector((state) => state.user.signedIn);
+  const signedUp = useSelector((state) => state.user.signedUp);
 
   // Ajoutez un état local pour gérer la redirection
   const [redirectDashboard, setRedirectDashboard] = useState(false);
@@ -38,10 +38,10 @@ const HomePage = () => {
 
   useEffect(() => {
     // Redirigez vers le tableau de bord après la connexion réussie
-    if (signedIn) {
+    if (signedUp) {
       setRedirectLogIn(true);
     }
-  }, [signedIn]);
+  }, [signedUp]);
 
   return (
     <div className="homePage">

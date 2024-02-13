@@ -11,7 +11,7 @@ import Avatar from '../Avatar/Avatar';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 
 // Component for displaying user settings
-const DropDownSettings = ({desktop}) => {
+const DropDownSettings = ({desktop, handleLogout}) => {
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const onMobile = false;
 
@@ -47,7 +47,7 @@ const DropDownSettings = ({desktop}) => {
             <li className="item">Modifier mon profil</li>
             <li className="item">Mes amis</li>
             <li className="item">Ajouter un ami</li>
-            <li className="item">Se déconnecter</li>
+            <li className="item" onClick={handleLogout}>Se déconnecter</li>
           </ul>
         </div>
       )}
@@ -57,6 +57,7 @@ const DropDownSettings = ({desktop}) => {
 
 DropDownSettings.propTypes = {
   desktop: PropTypes.bool,
+  handleLogout: PropTypes.func.isRequired,
 };
 
 export default DropDownSettings;

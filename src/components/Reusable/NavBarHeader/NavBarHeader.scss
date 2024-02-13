@@ -171,6 +171,10 @@
         &.settings {
           height: fit-content;
 
+          .item {
+            cursor: pointer;
+          }
+
           .cross-icon {
             width: 3rem;
             position: absolute;
