@@ -14,7 +14,7 @@ const LoginLogoutButton = () => {
       <Button
         className="connectionButton"
         as={Link}
-        to="/home/signin"
+        to="/home/signup"
         content="S'inscrire"
       />
     </div>
