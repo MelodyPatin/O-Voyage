@@ -1,16 +1,31 @@
-import { CHANGE_LOGIN_FIELD, HANDLE_SUCCESSFUL_LOGIN } from '../actions/user';
+import {
+  CHANGE_LOGIN_FIELD,
+  HANDLE_SUCCESSFUL_LOGIN,
+  HANDLE_SUCCESSFUL_SIGN_UP,
+  SAVE_USER_DATA,
+} from '../actions/user';
 
 export const initialState = {
   // indique si l'utilisateur est authentifié
   logged: false,
+  // indique si l'utilisateur a créé son compte
+  signedIn: false,
   // contenu du champ email du formulaire de login
   email: '',
   // contenu du champ password du formulaire de login
   password: '',
+  // contenu du champ email du formulaire de signup
+  signUpEmail: '',
+  // contenu du champ password du formulaire de signup
+  signUpPassword: '',
   // pseudo de l'utilisateur (quand il est authentifié)
   firstname: '',
+  // nom de l'utilisateur (quand il est authentifié)
+  lastname: '',
   // token JWT
   token: '',
+  // redirection
+  redirectTo: null,
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -33,11 +48,27 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         logged: true,
-        firstname: action.firstname,
         token: action.token,
         // sécurité : on efface les identifiants du state dès qu'on a plus besoin
         email: '',
         password: '',
+      };
+
+      case HANDLE_SUCCESSFUL_SIGN_UP:
+        return {
+          ...state,
+          signedIn: true,
+          signUpEmail: '',
+          signUpPassword: '',
+          firstname: '',
+          lastname: '',
+        };
+
+    case SAVE_USER_DATA:
+      return {
+        ...state,
+        firstname: action.firstName,
+        lastname: action.lastName,
       };
 
     default:

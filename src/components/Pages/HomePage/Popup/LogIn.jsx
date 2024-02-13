@@ -7,7 +7,7 @@ import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import Field from './Field/Field';
 
 // Functional component : popup with input fields and a close button
-const LogIn = ({ emailValue, passwordValue, changeField, handleLogin, isLogged }) => {
+const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
   const navigate = useNavigate(); // Utiliser useNavigate pour la navigation
 
   const handleClosePopup = () => {
@@ -52,11 +52,6 @@ LogIn.propTypes = {
   passwordValue: PropTypes.string.isRequired,
   changeField: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,
-  isLogged: PropTypes.bool,
-};
-
-LogIn.defaultProps = {
-  isLogged: false,
 };
 
 export default LogIn;

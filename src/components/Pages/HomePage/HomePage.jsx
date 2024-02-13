@@ -1,24 +1,47 @@
 // HomePage.jsx
 
-import { React, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { React, useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeLoginField, submitLogin } from '../../../actions/user';
+import { changeLoginField, submitLogin, submitSignUp } from '../../../actions/user';
 import NavBar from '../../Reusable/NavBarHeader/NavBarHeader';
 import Header from './Header/Header';
 import Presentation from './Presentation/Presentation';
 import LastPart from './LastPart/LastPart';
 import Footer from '../../Reusable/Footer/Footer';
 import LogIn from './Popup/LogIn';
-import SignIn from './Popup/SignIn';
+import SignUp from './Popup/SignUp';
+import Dashboard from '../Dashboard/Dashboard';  // Import Dashboard component
 import './HomePage.scss';
 
 const HomePage = () => {
-  // Initialisez les variables nécessaires pour la gestion de l'authentification
   const dispatch = useDispatch();
+  const firstnameValue = useSelector((state) => state.user.firstname);
+  const lastnameValue = useSelector((state) => state.user.lastname);
   const emailValue = useSelector((state) => state.user.email);
   const passwordValue = useSelector((state) => state.user.password);
+  const signUpEmailValue = useSelector((state) => state.user.signUpEmail);
+  const signUpPasswordValue = useSelector((state) => state.user.signUpPassword);
   const logged = useSelector((state) => state.user.logged);
+  const signedIn = useSelector((state) => state.user.signedIn);
+
+  // Ajoutez un état local pour gérer la redirection
+  const [redirectDashboard, setRedirectDashboard] = useState(false);
+  const [redirectLogIn, setRedirectLogIn] = useState(false);
+
+  useEffect(() => {
+    // Redirigez vers le tableau de bord après la connexion réussie
+    if (logged) {
+      setRedirectDashboard(true);
+    }
+  }, [logged]);
+
+  useEffect(() => {
+    // Redirigez vers le tableau de bord après la connexion réussie
+    if (signedIn) {
+      setRedirectLogIn(true);
+    }
+  }, [signedIn]);
 
   return (
     <div className="homePage">
@@ -27,6 +50,9 @@ const HomePage = () => {
       <Presentation />
       <LastPart />
       <Footer />
+
+      {redirectDashboard && <Navigate to="/dashboard" replace />}
+      {redirectLogIn && <Navigate to="/home/login" replace />}
 
       <Routes>
         <Route
@@ -51,7 +77,26 @@ const HomePage = () => {
             />
           }
         />
-        <Route path="/signin" element={<SignIn />} />
+        <Route 
+          path="/signup" 
+          element={
+            <SignUp 
+              firstnameValue={firstnameValue}
+              lastnameValue={lastnameValue}
+              signUpEmailValue={signUpEmailValue}
+              signUpPasswordValue={signUpPasswordValue}
+              changeField={(newValue, identifier) => {
+                const action = changeLoginField(newValue, identifier);
+                dispatch(action);
+              }}
+              handleSignUp={() => {
+                dispatch(submitSignUp());
+              }}
+            />
+          } 
+        />
+        <Route path="/dashboard" element={<Dashboard />} />
+        
       </Routes>
     </div>
   );
