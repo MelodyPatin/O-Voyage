@@ -6,9 +6,11 @@ import {
 
 import { NavLink } from 'react-router-dom';
 // Import NavLink from react-router-dom
+import './desktopItems.scss';
+
 const DesktopItems = () => {
   return (
-    <>
+    <div className="desktopItems">
       {/* NavLinks with icon */}
       <NavLink className="icon_label" to="/accueil">
         <HomeIcon className="icon" />
@@ -20,9 +22,9 @@ const DesktopItems = () => {
       </NavLink>
       <NavLink className="icon_label" to="/messagerie">
         <ChatBubbleLeftRightIcon className="icon" />
-        <p>Message</p>
+        <p>Messages</p>
       </NavLink>
-    </>
+    </div>
   );
 };
 

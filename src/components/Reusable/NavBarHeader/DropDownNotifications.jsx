@@ -6,6 +6,7 @@ import {
 } from '@heroicons/react/24/solid';
 import PropTypes from 'prop-types';
 import User from '../User/User';
+import './dropDrownNotifications.scss';
 
 // Component for displaying notifications
 const DropDownNotifications = ({ desktop }) => {
@@ -17,7 +18,7 @@ const DropDownNotifications = ({ desktop }) => {
     setIsOpen(!isOpen);
   };
 
-  //console.log(isOpen);
+  // console.log(isOpen);
 
   return (
     <div className="DropDownMenu">

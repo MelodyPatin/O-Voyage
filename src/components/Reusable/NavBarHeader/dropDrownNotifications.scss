@@ -1,0 +1,65 @@
+@use '../../../styles/variables' as v;
+
+.DropDownMenu {
+  border-radius: 10px;
+  display: inline-block;
+  margin: auto;
+  position: relative;
+
+  .bell {
+    width: 2.75rem;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+  }
+
+  .nb-notifs {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: v.$secondaryColor;
+    text-align: center;
+    color: v.$lightColor;
+    line-height: 18px; // Assurez-vous que la hauteur de ligne est égale à la hauteur de l'élément
+    vertical-align: middle; // Centre le contenu verticalement
+
+    @media (min-width: 900px) {
+      right: 2.5rem;
+    }
+  }
+
+  .notification-title {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-top: 0.5rem;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    color: v.$lightColor;
+    background-color: v.$mainColor;
+    width: 20rem;
+    max-height: 18.5rem;
+    position: absolute;
+    top: 100%;
+    right: 0rem;
+    z-index: 100;
+    border-radius: 10px 0 10px 10px;
+    margin-top: 0.5rem;
+    padding: 1rem;
+
+    // Styling for notification dropdown content
+    &.notification {
+      overflow-y: scroll;
+      right: 0;
+    }
+    .item {
+      line-height: 2rem;
+      font-size: 1.25rem;
+      margin: 1rem 0 0;
+    }
+  }
+}

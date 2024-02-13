@@ -7,10 +7,10 @@ import {
   XCircleIcon,
 } from '@heroicons/react/24/solid';
 import PropTypes from 'prop-types';
-import User from '../User/User';
+import { Link } from 'react-router-dom';
 import Avatar from '../Avatar/Avatar';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
-import { Link } from 'react-router-dom';
+import './dropDownSettings.scss';
 
 // Component for displaying user settings
 const DropDownSettings = ({ desktop, handleLogout }) => {
@@ -23,8 +23,6 @@ const DropDownSettings = ({ desktop, handleLogout }) => {
     setIsOpen(!isOpen);
   };
 
-  //console.log(isOpen);
-
   return (
     <div className="DropDownMenu">
       <div className="dropdown-trigger" onClick={toggleMenu}>
@@ -36,15 +34,12 @@ const DropDownSettings = ({ desktop, handleLogout }) => {
       {/* Dropdown content */}
       {isOpen && (
         <div className="dropdown-content settings">
-          {onMobile && <XCircleIcon className="cross-icon" />}
-          {!onMobile && (
-            <ProfileInfo
-              firstName="Mélody"
-              nbTravels={5}
-              nbFriends={10}
-              id="info"
-            />
-          )}
+          <ProfileInfo
+            firstName="Mélody"
+            nbTravels={5}
+            nbFriends={10}
+            id="info"
+          />
           <ul>
             {/* Settings items */}
             <Link to={`/${firstName}`}>

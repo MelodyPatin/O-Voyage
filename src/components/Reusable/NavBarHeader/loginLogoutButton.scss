@@ -1,0 +1,27 @@
+@use '../../../styles/variables' as v;
+
+.buttonContainer {
+  display: flex;
+  gap: 0.5rem;
+  // Styling for the login/logout buttons
+  .ui.button.connectionButton {
+    background-color: v.$lightColor;
+    color: v.$darkColor;
+    box-shadow: 2px 2px 5px v.$darkColor;
+    width: auto;
+    height: auto;
+    padding: 0.6em;
+    font-size: 0.75rem;
+    font-family: 'Inria Serif', serif;
+
+    // Responsive styling
+    @media (min-width: 600px) {
+      font-size: 1rem;
+    }
+
+    @media (min-width: 900px) {
+      font-size: 1.5rem;
+      gap: 1rem;
+    }
+  }
+}

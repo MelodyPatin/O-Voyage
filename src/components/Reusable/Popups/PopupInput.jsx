@@ -9,7 +9,7 @@ import LabelInput from '../LabelInput/LabelInput';
 // Functional component : popup with input fields and a close button
 const PopupInput = ({ textContent, buttonContent }) => {
   return (
-    <div className="container">
+    <div className="containerBackground">
       <div className="Popup">
         <XCircleIcon className="icon" />
         <p>{textContent}</p>

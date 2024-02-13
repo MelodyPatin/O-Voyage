@@ -6,7 +6,7 @@ import { XCircleIcon } from '@heroicons/react/24/solid';
 // Functional component : popup with a close buttona and a text message
 const PopupMessage = ({ textContent }) => {
   return (
-    <div className="container">
+    <div className="containerBackground">
       <div className="Popup">
         <XCircleIcon className="icon" />
         <p>{textContent}</p>

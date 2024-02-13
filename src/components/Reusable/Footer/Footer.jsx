@@ -36,13 +36,13 @@ const Footer = () => {
       </div>
       {/* Social media icons section */}
       <div className="socials">
-        <a href="#">
+        <a href="#" target="_blank">
           <Icon name="facebook official" size="large" />
         </a>
-        <a href="#">
+        <a href="#" target="_blank">
           <Icon name="instagram" size="large" />
         </a>
-        <a href="#">
+        <a href="#" target="_blank">
           <Icon name="twitter" size="large" />
         </a>
       </div>

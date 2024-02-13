@@ -1,0 +1,26 @@
+@use '../../../styles/variables' as v;
+
+.desktopItems {
+  display: flex; 
+  gap: 1rem;
+
+  .icon_label {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+
+    &:hover {
+      color: v.$darkColor;
+    }
+
+    .icon {
+      width: 2.75rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-top: 0.5rem;
+    }
+  }
+}

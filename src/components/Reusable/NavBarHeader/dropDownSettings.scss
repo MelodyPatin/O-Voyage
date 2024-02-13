@@ -1,0 +1,29 @@
+@use '../../../styles/variables' as v;
+
+.DropDownMenu {
+  .ui.avatar.image {
+    width: 2.75rem;
+    height: 2.75rem;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    &.settings {
+      height: fit-content;
+
+      .item {
+        cursor: pointer;
+
+        &:hover {
+          color: v.$lightColor;
+        }
+      }
+      .ProfileInfo {
+        color: v.$mainColor;
+        width: 100%;
+      }
+    }
+  }
+}
