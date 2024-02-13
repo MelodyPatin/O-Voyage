@@ -24,14 +24,18 @@ const FriendAdd = () => {
     <div className="addAFriend">
       <NavBarHeader isLogged onDesktop={false} />
       <ReturnTitle textContent="Ajouter des amis" avatar={false} />
-      <div className="selector">
-        <MultipleSelector
-          placeholderContent="Rechercher des utlisateurs"
-          options={users}
-        />
-      </div>
-      <SimpleButton textContent="Valider" />
-      <SimpleButton textContent="Retour" onClick={handleGoBack} />
+      <form action="">
+        <div className="selector">
+          <MultipleSelector
+            placeholderContent="Rechercher des utlisateurs"
+            options={users}
+          />
+        </div>
+        <div className="buttonsAddFriend">
+          <SimpleButton textContent="Valider" />
+          <SimpleButton textContent="Retour" onClick={handleGoBack} />
+        </div>
+      </form>
     </div>
   );
 };

@@ -3,16 +3,24 @@
   flex-direction: column;
   min-height: 100vh;
 
-  .selector {
-    flex: 1;
-    padding: 1.5rem;
-    text-align: center; // Center the content horizontally
-  }
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 
-  button.ui.button.SimpleButton {
-    width: 90%; // Adjust the width as needed
-    margin: 1.5rem auto; // Center the element horizontally and add margin
-    display: block;
-    margin-top: auto;
+    margin: 1.5rem;
+    .selector {
+      flex: 1;
+      text-align: center; // Center the content horizontally
+    }
+
+    & .buttonsAddFriend {
+      button.ui.button.SimpleButton {
+        width: 100%; // Adjust the width as needed
+        max-width: 500rem;
+        display: block;
+        margin-top: 1rem;
+      }
+    }
   }
 }
