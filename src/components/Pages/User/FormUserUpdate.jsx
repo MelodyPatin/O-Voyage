@@ -1,12 +1,19 @@
 import React from 'react';
 import './UserUpdate.scss';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { Input } from 'semantic-ui-react';
 import LabelInput from '../../Reusable/LabelInput/LabelInput';
 import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 
 const FormUserUpdate = ({ FirstName, LastName, Email }) => {
+  const navigate = useNavigate();
+
+  const handleGoBack = () => {
+    navigate(-1); // Navigates back to the previous page
+  };
+
   return (
     <div>
       <ReturnTitle textContent="Modifier mon profil" avatar={false} />
@@ -20,7 +27,7 @@ const FormUserUpdate = ({ FirstName, LastName, Email }) => {
       </div>
       <div className="buttons">
         <SimpleButton textContent="Valider" />
-        <SimpleButton textContent="Retour" />
+        <SimpleButton textContent="Retour" onClick={handleGoBack} />
       </div>
       <span className="deleteAccount">Supprimer mon compte</span>
     </div>

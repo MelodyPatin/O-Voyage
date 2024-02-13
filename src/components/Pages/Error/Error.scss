@@ -3,6 +3,12 @@
   flex-direction: column;
   min-height: 100vh;
 
+  .ReturnTitle {
+    svg{
+      display: none;
+    }
+  }
+
   .errorContainer {
     flex: 1;
     text-align: center;

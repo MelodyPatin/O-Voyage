@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   ChevronUpIcon,
   ChevronDownIcon,
@@ -9,9 +10,11 @@ import PropTypes from 'prop-types';
 import User from '../User/User';
 import Avatar from '../Avatar/Avatar';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
+import { Link } from 'react-router-dom';
 
 // Component for displaying user settings
-const DropDownSettings = ({desktop, handleLogout}) => {
+const DropDownSettings = ({ desktop, handleLogout }) => {
+  const firstName = useSelector((state) => state.user.firstname);
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const onMobile = false;
 
@@ -20,7 +23,7 @@ const DropDownSettings = ({desktop, handleLogout}) => {
     setIsOpen(!isOpen);
   };
 
-  console.log(isOpen);
+  //console.log(isOpen);
 
   return (
     <div className="DropDownMenu">
@@ -44,10 +47,18 @@ const DropDownSettings = ({desktop, handleLogout}) => {
           )}
           <ul>
             {/* Settings items */}
-            <li className="item">Modifier mon profil</li>
-            <li className="item">Mes amis</li>
-            <li className="item">Ajouter un ami</li>
-            <li className="item" onClick={handleLogout}>Se déconnecter</li>
+            <Link to={`/${firstName}`}>
+              <li className="item">Modifier mon profil</li>
+            </Link>
+            <Link to="/friends">
+              <li className="item">Mes amis</li>
+            </Link>
+            <Link to="/friends/add">
+              <li className="item">Ajouter un ami</li>
+            </Link>
+            <li className="item" onClick={handleLogout}>
+              Se déconnecter
+            </li>
           </ul>
         </div>
       )}

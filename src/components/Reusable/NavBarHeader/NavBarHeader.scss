@@ -173,6 +173,10 @@
 
           .item {
             cursor: pointer;
+
+            &:hover{
+              color: v.$lightColor;
+            }
           }
 
           .cross-icon {
