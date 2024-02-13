@@ -1,29 +1,32 @@
 import React from 'react';
 import './ReturnTitle.scss';
 import { Icon } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import PropTypes from 'prop-types';
 import Avatar from '../Avatar/Avatar';
 
 const ReturnTitle = ({ textContent, avatar }) => {
-  let displayText;
+  const navigate = useNavigate();
 
-  // if avatar is displayed
-  if (avatar) {
-    // Check if the text exceeds 17 characters
-    displayText =
-      textContent.length > 17 ? `${textContent.slice(0, 17)}...` : textContent;
-  } else {
-    displayText = textContent;
+  let displayText = textContent; // Initial value is the provided textContent
+
+  // If an avatar is displayed and the text exceeds 17 characters, truncate it
+  if (avatar && textContent.length > 17) {
+    displayText = `${textContent.slice(0, 17)}...`;
   }
+
+  const handleGoBack = () => {
+    navigate(-1); // Navigates back to the previous page
+  };
 
   return (
     <div className="ReturnTitle">
-      <ArrowLeftIcon className="arrowIcon" />
-      {/* Icon for going back to the previous page */}
+      <ArrowLeftIcon className="arrowIcon" onClick={handleGoBack} />
+      {/* Icone pour revenir à la page précédente */}
       <h3>{displayText}</h3>
       {avatar && <Avatar className="avatar" />}{' '}
-      {/* Display Avatar if avatar prop is true */}
+      {/* Afficher l'Avatar si la propriété avatar est vraie */}
     </div>
   );
 };

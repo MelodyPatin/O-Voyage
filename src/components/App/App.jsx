@@ -6,12 +6,16 @@ import HomePage from '../Pages/HomePage/HomePage';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import Error from '../Pages/Error/Error';
 import { updateLoggedOut } from '../../actions/user';
+import UserUpdate from '../Pages/User/UserUpdate';
+import FriendList from '../Pages/Friend/FriendList/FriendList';
+import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 
 function App() {
   const dispatch = useDispatch();
 
   const logged = useSelector((state) => state.user.logged);
   const loggedOut = useSelector((state) => state.user.loggedOut);
+  const firstName = useSelector((state) => state.user.firstname);
 
   const [redirectHome, setRedirectHome] = useState(false);
 
@@ -42,6 +46,9 @@ function App() {
         <Routes>
           <Route path="/home/*" element={<HomePage />} />
           {logged && <Route path="/dashboard" element={<Dashboard />} />}
+          {logged && <Route path={`/${firstName}`} element={<UserUpdate />} />}
+          {logged && <Route path="/friends/*" element={<FriendList />} />}
+          {logged && <Route path="/friends/add" element={<FriendAdd />} />}
           <Route path="*" element={<Error />} />
         </Routes>
       </header>

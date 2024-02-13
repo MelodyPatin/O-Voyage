@@ -17,7 +17,7 @@ const DropDownNotifications = ({ desktop }) => {
     setIsOpen(!isOpen);
   };
 
-  console.log(isOpen);
+  //console.log(isOpen);
 
   return (
     <div className="DropDownMenu">

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
@@ -15,7 +16,9 @@ const Error = ({ number, textContent }) => {
       <ReturnTitle textContent={number} />
       <div className="errorContainer">
         <p className="textContent">{textContent}</p>
-        <SimpleButton textContent="Retour à l'accueil" />
+        <Link to="/home">
+          <SimpleButton textContent="Retour à l'accueil" />
+        </Link>
       </div>
       <Footer className="footer" />
     </div>
