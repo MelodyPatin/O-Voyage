@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Dashboard.scss'
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
@@ -13,7 +14,9 @@ const Dashboard = () => {
     <div className="dashboard">
       <HeaderConnected />
       <h2>MES VOYAGES</h2>
-      <IconButton textContent="Créer un voyage" icon="add" />
+      <Link to="/createtrip">
+        <IconButton textContent="Créer un voyage" icon="add" />
+      </Link>
       <div className="list">
         <div className="now">
           <p className="when">J'y suis actuellement</p>
