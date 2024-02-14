@@ -10,6 +10,7 @@ import UserUpdate from '../Pages/User/UserUpdate';
 import FriendList from '../Pages/Friend/FriendList/FriendList';
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
 import Travel from '../Pages/Travel/Travel';
+import TravelAdd from '../Unique/TravelActivity/TravelAddUpdate/TravelAdd';
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +62,9 @@ function App() {
           )}
           {logged === 'true' && (
             <Route path="/friends/add" element={<FriendAdd />} />
+          )}
+          {logged === 'true' && (
+            <Route path="/createtrip" element={<TravelAdd />} />
           )}
           <Route path="/travel" element={<Travel onDesktop />} />
           <Route path="*" element={<Error />} />
