@@ -9,11 +9,13 @@ import SimpleButton from '../SimpleButton/SimpleButton';
 const StepFolder = ({ buttonContent, labelContent }) => {
   return (
     <div className="StepFolder">
-      <div className="LabelInput">
-        <p>{labelContent}</p>
-        <Input type="file" />
-      </div>
-      <SimpleButton textContent={buttonContent} />
+      <form action="">
+        <div className="LabelInput">
+          <p>{labelContent}</p>
+          <Input type="file" />
+        </div>
+        <SimpleButton textContent={buttonContent} />
+      </form>
     </div>
   );
 };

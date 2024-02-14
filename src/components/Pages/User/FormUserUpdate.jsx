@@ -17,18 +17,20 @@ const FormUserUpdate = ({ FirstName, LastName, Email }) => {
   return (
     <div>
       <ReturnTitle textContent="Modifier mon profil" avatar={false} />
-      <LabelInput label="Prénom" placeholder="" value={FirstName} />
-      <LabelInput label="Nom" placeholder="" value={LastName} />
-      <LabelInput label="Email" placeholder="" value={Email} />
-      <LabelInput label="Mot de passe" placeholder="" value="" />
-      <div className="LabelInput">
-        <p>Photo de profil</p>
-        <Input type="file" />
-      </div>
-      <div className="buttons">
-        <SimpleButton textContent="Valider" />
-        <SimpleButton textContent="Retour" onClick={handleGoBack} />
-      </div>
+      <form className="FormUpdateProfile" action="">
+        <LabelInput label="Prénom" placeholder="" value={FirstName} />
+        <LabelInput label="Nom" placeholder="" value={LastName} />
+        <LabelInput label="Email" placeholder="" value={Email} />
+        <LabelInput label="Mot de passe" placeholder="" value="" />
+        <div className="LabelInput">
+          <p>Photo de profil</p>
+          <Input type="file" />
+        </div>
+        <div className="buttonsUpdateProfile">
+          <SimpleButton textContent="Valider" />
+          <SimpleButton textContent="Retour" onClick={handleGoBack} />
+        </div>
+      </form>
       <span className="deleteAccount">Supprimer mon compte</span>
     </div>
   );

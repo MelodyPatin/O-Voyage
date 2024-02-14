@@ -1,20 +1,26 @@
-div.LabelInput {
-  width: 100%;
+.FormUpdateProfile {
+  padding: 1rem;
 
-  .input {
+  div.LabelInput {
     width: 100%;
-    margin-bottom: 0;
-    font-size: 1.25rem;
+    padding-top: 1rem;
+
+    .input {
+      width: 100%;
+      margin-bottom: 0;
+      font-size: 1rem;
+      padding-top: 0.5rem;
+    }
   }
-}
 
-.buttons {
-  padding: 1rem 0;
+  .buttonsUpdateProfile {
+    padding: 1rem 0;
 
-  button.ui.button.SimpleButton {
-    width: 100%;
-    max-width: 500rem;
-    margin: 1rem 0;
+    button.ui.button.SimpleButton {
+      width: 100%;
+      max-width: 500rem;
+      margin: 1rem 0;
+    }
   }
 }
 

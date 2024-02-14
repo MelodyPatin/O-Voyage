@@ -1,12 +1,14 @@
 @use '../../../styles/variables' as v;
 
-#MultipleSelector  {
+#MultipleSelector {
   border: 1px solid v.$mainColor;
   background-color: v.$lightColor;
-  height: 3.75rem;
+  height: 3rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
 
-    & .item {
-      background-color: v.$lightColor;
-      border-top: 1px solid v.$mainColor;
-    }
+  & .item {
+    background-color: v.$lightColor;
+    border-top: 1px solid v.$mainColor;
+  }
 }

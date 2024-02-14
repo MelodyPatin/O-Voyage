@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
-import SimpleButton from '../SimpleButton/SimpleButton';
 import { Datepicker } from '@mobiscroll/react';
+import SimpleButton from '../SimpleButton/SimpleButton';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 
 // Functional component : popup with input fields and a close button

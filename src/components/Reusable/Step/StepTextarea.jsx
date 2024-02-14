@@ -2,7 +2,6 @@ import React from 'react';
 import './Steps.scss';
 import { Form, TextArea } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
 
 // Functional component : popup with input fields and a close button
@@ -16,13 +15,19 @@ const StepTextarea = ({
 }) => {
   return (
     <div className="StepTextarea">
-      <div className="LabelInput">
-        <p>{labelContent}</p>
-        <Form>
-          <TextArea placeholder={textareaContent} value={valueContent} />
-        </Form>
-      </div>
-      <SimpleButton textContent={buttonContent} />
+      <form action="">
+        <div className="LabelInput">
+          <p>{labelContent}</p>
+          <Form>
+            <TextArea
+              className="textarea"
+              placeholder={textareaContent}
+              value={valueContent}
+            />
+          </Form>
+        </div>
+        <SimpleButton textContent={buttonContent} />
+      </form>
     </div>
   );
 };
