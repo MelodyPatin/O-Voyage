@@ -1,11 +1,11 @@
 import { React } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBarHeader.scss';
-import PropTypes from 'prop-types';
 import Menu from './Menu';
 import LoginLogoutButton from './LoginLogoutButton';
 
-const NavBarHeader = ({ isLogged, onDesktop }) => {
+const NavBarHeader = () => {
+  const logged = localStorage.getItem('logged');
   return (
     <div className="header">
       <Link to="/home">
@@ -15,13 +15,10 @@ const NavBarHeader = ({ isLogged, onDesktop }) => {
           alt="Logo O'Voyage"
         />
       </Link>
-      {isLogged && <Menu desktop={onDesktop} />}
-      {!isLogged && <LoginLogoutButton />}
+      {logged === "true" && <Menu />}
+      {logged != "true" && <LoginLogoutButton />}
     </div>
   );
 };
-NavBarHeader.propTypes = {
-  isLogged: PropTypes.bool,
-  onDesktop: PropTypes.bool,
-};
+
 export default NavBarHeader;

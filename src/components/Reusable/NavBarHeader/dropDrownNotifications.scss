@@ -26,7 +26,7 @@
     line-height: 18px; // Assurez-vous que la hauteur de ligne est égale à la hauteur de l'élément
     vertical-align: middle; // Centre le contenu verticalement
 
-    @media (min-width: 900px) {
+    @media (min-width: 767px) {
       right: 2.5rem;
     }
   }
