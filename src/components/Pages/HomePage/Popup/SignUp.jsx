@@ -27,8 +27,8 @@ const SignUp = ({ firstnameValue, lastnameValue, signUpEmailValue, signUpPasswor
         <XCircleIcon className="icon" onClick={handleClosePopup} />
         <p>Nouveau compte</p>
         <form autoComplete="off" onSubmit={handleSignUpSubmit}>
-          <Field placeholder="Prénom" name="firstname" type="text" onChange={changeField} value={firstnameValue} />
-          <Field placeholder="Nom" name="lastname" type="text" onChange={changeField} value={lastnameValue} />
+          <Field placeholder="Prénom" name="firstnameValue" type="text" onChange={changeField} value={firstnameValue} />
+          <Field placeholder="Nom" name="lastnameValue" type="text" onChange={changeField} value={lastnameValue} />
           <Field placeholder="Email" name="signUpEmail" type="text" onChange={changeField} value={signUpEmailValue} />
           <Field placeholder="Mot de passe" name="signUpPassword" type="password" onChange={changeField} value={signUpPasswordValue} />
           <SimpleButton textContent="S'inscrire" />

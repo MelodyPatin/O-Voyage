@@ -14,7 +14,7 @@ import './dropDownSettings.scss';
 
 // Component for displaying user settings
 const DropDownSettings = ({ desktop, handleLogout }) => {
-  const firstName = useSelector((state) => state.user.firstname);
+  const firstName = localStorage.getItem('firstname');
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
   const onMobile = false;
 

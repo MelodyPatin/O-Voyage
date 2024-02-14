@@ -1,4 +1,3 @@
-import { FaceSmileIcon } from '@heroicons/react/24/solid';
 import {
   CHANGE_LOGIN_FIELD,
   HANDLE_SUCCESSFUL_LOGIN,
@@ -9,8 +8,6 @@ import {
 } from '../actions/user';
 
 export const initialState = {
-  // indique si l'utilisateur est authentifié
-  logged: false,
   // indique si l'utilisateur est déconnecté
   loggedOut: false,
   // indique si l'utilisateur a créé son compte
@@ -23,12 +20,9 @@ export const initialState = {
   signUpEmail: '',
   // contenu du champ password du formulaire de signup
   signUpPassword: '',
-  // pseudo de l'utilisateur (quand il est authentifié)
-  firstname: '',
-  // nom de l'utilisateur (quand il est authentifié)
-  lastname: '',
-  // token JWT
-  token: '',
+  firstnameValue: '',
+  lastnameValue: '',
+  loggedState: false,
   // redirection
   redirectTo: null,
 };
@@ -50,41 +44,44 @@ const reducer = (state = initialState, action = {}) => {
     */
 
     case HANDLE_SUCCESSFUL_LOGIN:
+      localStorage.setItem('token', action.token);
+      localStorage.setItem('logged', 'true'); // Stocker l'état d'authentification
+
       return {
         ...state,
-        logged: true,
-        token: action.token,
         // sécurité : on efface les identifiants du state dès qu'on a plus besoin
         email: '',
         password: '',
+        loggedState: true,
       };
 
-      case HANDLE_SUCCESSFUL_SIGN_UP:
-        return {
-          ...state,
-          signedUp: true,
-          signUpEmail: '',
-          signUpPassword: '',
-          firstname: '',
-          lastname: '',
-        };
-
-    case SAVE_USER_DATA:
+    case HANDLE_SUCCESSFUL_SIGN_UP:
       return {
         ...state,
-        firstname: action.firstName,
-        lastname: action.lastName,
-      };
-
-    case CLICK_LOGOUT:
-      return {
-        ...state,
-        logged: false,
-        loggedOut: true,
-        signedUp: false,
-        token: '',
+        signedUp: true,
+        signUpEmail: '',
+        signUpPassword: '',
         firstname: '',
         lastname: '',
+      };
+
+    case SAVE_USER_DATA:
+      localStorage.setItem('firstname', action.firstName);
+      localStorage.setItem('lastname', action.lastName);
+
+      return state;
+
+    case CLICK_LOGOUT:
+      localStorage.removeItem('token');
+      localStorage.removeItem('firstname');
+      localStorage.removeItem('lastname');
+      localStorage.removeItem('logged'); // Supprimer l'état d'authentification du localStorage
+
+      return {
+        ...state,
+        loggedOut: true,
+        signedUp: false,
+        loggedState: false,
       };
 
     case UPDATE_LOGGED_OUT:

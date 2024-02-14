@@ -14,9 +14,10 @@ import Travel from '../Pages/Travel/Travel';
 function App() {
   const dispatch = useDispatch();
 
-  const logged = useSelector((state) => state.user.logged);
+  const logged = localStorage.getItem('logged');
   const loggedOut = useSelector((state) => state.user.loggedOut);
-  const firstName = useSelector((state) => state.user.firstname);
+  const firstName = localStorage.getItem('firstname');
+  const loggedState = useSelector((state) => state.user.loggedState);
 
   const [redirectHome, setRedirectHome] = useState(false);
 
@@ -36,7 +37,7 @@ function App() {
       dispatch(updateLoggedOut(false));
       setRedirectHome(false);
     }
-  }, [redirectHome]);
+  }, [redirectHome, dispatch]);
 
   return (
     <div className="App">
@@ -46,10 +47,21 @@ function App() {
 
         <Routes>
           <Route path="/home/*" element={<HomePage />} />
-          {logged && <Route path="/dashboard" element={<Dashboard onDesktop={false} />} />}
-          {logged && <Route path={`/${firstName}`} element={<UserUpdate />} />}
-          {logged && <Route path="/friends/*" element={<FriendList />} />}
-          {logged && <Route path="/friends/add" element={<FriendAdd />} />}
+          {(logged === "true" || loggedState) && (
+            <Route
+              path="/dashboard"
+              element={<Dashboard onDesktop={false} />}
+            />
+          )}
+          {logged === 'true' && (
+            <Route path={`/${firstName}`} element={<UserUpdate />} />
+          )}
+          {logged === 'true' && (
+            <Route path="/friends/*" element={<FriendList />} />
+          )}
+          {logged === 'true' && (
+            <Route path="/friends/add" element={<FriendAdd />} />
+          )}
           <Route path="/travel" element={<Travel onDesktop />} />
           <Route path="*" element={<Error />} />
         </Routes>
