@@ -1,15 +1,16 @@
 import React from 'react';
 import './UserUpdate.scss';
-import PropTypes from 'prop-types';
+import { useMediaQuery } from '@mui/material';
 
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import FormUserUpdate from './FormUserUpdate';
 import PopupUpdate from '../../Reusable/Popups/PopupUpdate';
 
-const UserUpdate = ({ onDesktop }) => {
+const UserUpdate = () => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
   return (
     <div>
-      {onDesktop ? (
+      {!isMobile ? (
         <PopupUpdate textContent={<FormUserUpdate />} />
       ) : (
         <>
@@ -19,10 +20,6 @@ const UserUpdate = ({ onDesktop }) => {
       )}
     </div>
   );
-};
-
-UserUpdate.propTypes = {
-  onDesktop: PropTypes.bool,
 };
 
 export default UserUpdate;

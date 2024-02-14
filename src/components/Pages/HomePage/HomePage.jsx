@@ -16,13 +16,13 @@ import './HomePage.scss';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const firstnameValue = useSelector((state) => state.user.firstname);
-  const lastnameValue = useSelector((state) => state.user.lastname);
+  const firstnameValue = useSelector((state) => state.user.firstnameValue);
+  const lastnameValue = useSelector((state) => state.user.lastnameValue);
   const emailValue = useSelector((state) => state.user.email);
   const passwordValue = useSelector((state) => state.user.password);
   const signUpEmailValue = useSelector((state) => state.user.signUpEmail);
   const signUpPasswordValue = useSelector((state) => state.user.signUpPassword);
-  const logged = useSelector((state) => state.user.logged);
+  const logged = localStorage.getItem('logged');
   const signedUp = useSelector((state) => state.user.signedUp);
 
   // Ajoutez un état local pour gérer la redirection
@@ -77,10 +77,10 @@ const HomePage = () => {
             />
           }
         />
-        <Route 
-          path="/signup" 
+        <Route
+          path="/signup"
           element={
-            <SignUp 
+            <SignUp
               firstnameValue={firstnameValue}
               lastnameValue={lastnameValue}
               signUpEmailValue={signUpEmailValue}
@@ -96,7 +96,6 @@ const HomePage = () => {
           } 
         />
         <Route path="/dashboard" element={<Dashboard />} />
-        
       </Routes>
     </div>
   );
