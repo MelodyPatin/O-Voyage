@@ -1,6 +1,5 @@
 import React from 'react';
 import './ReturnTitle.scss';
-import { Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import PropTypes from 'prop-types';

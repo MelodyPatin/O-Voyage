@@ -3,20 +3,19 @@
 .LabelInput {
   background-color: v.$lightColor;
   width: 15rem;
-  padding: 1rem;
 
   .ui.input input {
     border: 1px solid v.$mainColor;
     border-radius: 0.3rem;
     background-color: v.$lightColor;
-    width: 80%; // Set width for the input within the container
+    //width: 80%; // Set width for the input within the container
     height: 3rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
-      sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
   }
 
   p {
-    margin: 1rem 0;
+    margin: 0;
     font-weight: bold;
     font-family: 'Inria Serif', serif;
     font-size: 1.5rem;

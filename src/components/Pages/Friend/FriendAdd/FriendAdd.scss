@@ -1,14 +1,18 @@
 .addAFriend {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 
-  form {
+  @media (min-width: 767px) {
+    height: 400px;
+  }
+
+  .formAddFriend {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 1rem;
 
-    margin: 1.5rem;
     .selector {
       flex: 1;
       text-align: center; // Center the content horizontally

@@ -1,40 +1,49 @@
 @use '../../../styles/variables' as v;
 
-.ReturnTitle h3 {
-  width: fit-content;
-  font-size: 1.5rem;
-}
-
-.StepContainer {
-  padding: 0.5rem;
+.addtrip {
   display: flex;
   flex-direction: column;
+  height: 100vh;
 
-  .LabelInput {
-    width: 100%;
+  @media (min-width: 767px) {
+    height: 400px;
+  }
+
+  .StepContainer {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    padding: 1rem;
+    flex-grow: 1;
 
-    p {
-      font-size: 1.5rem;
-    }
-
-    .ui.input {
+    .LabelInput {
       width: 100%;
-      display: block;
-      margin: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
 
-      input {
+      .ui.input {
         width: 100%;
+        display: block;
+        margin: auto;
+
+        input {
+          width: 100%;
+        }
       }
     }
 
-    textarea {
+    .textarea {
       border: 1px solid v.$mainColor;
       background-color: v.$lightColor;
+      border-radius: 0.3rem;
       height: 10rem;
-      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      font-family: 'Montserrat', sans-serif;
+
+      &:focus {
+        border: 1px solid v.$mainColor;
+        background-color: v.$lightColor;
+      }
     }
 
     .tags {
@@ -48,12 +57,29 @@
         }
       }
     }
-  }
 
-  button.ui.button.SimpleButton {
-    margin: 0 auto;
-    display: block;
-    width: 90%;
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center; // Alignez les éléments au centre horizontalement
+      flex-grow: 1;
+
+      .LabelInput {
+        width: 100%;
+        margin-bottom: 1rem;
+
+        .ui.input {
+          width: 100%;
+          flex: 1;
+        }
+      }
+
+      .SimpleButton {
+        width: 100%;
+        max-width: 800px;
+        display: block;
+      }
+    }
   }
 
   .ui.selector {
@@ -70,13 +96,19 @@
   }
 }
 
-.StepCalendar, .StepFolder, .StepInput, .StepInputSelector, .StepSelect, .StepTag, .StepTextarea {
+.StepCalendar,
+.StepFolder,
+.StepInput,
+.StepInputSelector,
+.StepSelect,
+.StepTag,
+.StepTextarea {
   @extend .StepContainer;
 
   height: fit-content;
   gap: 1rem;
 
-  button.ui.button.SimpleButton {
+  .SimpleButton {
     margin-bottom: 2rem;
   }
 }

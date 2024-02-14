@@ -8,8 +8,10 @@ import SimpleButton from '../SimpleButton/SimpleButton';
 const StepInput = ({ buttonContent, placeholderContent, labelContent, valueContent }) => {
   return (
     <div className="StepInput">
-      <LabelInput placeholder={placeholderContent} label={labelContent} value={valueContent} className="label-input" />
-      <SimpleButton textContent={buttonContent} />
+      <form action="">
+        <LabelInput placeholder={placeholderContent} label={labelContent} value={valueContent} className="label-input" />
+        <SimpleButton textContent={buttonContent} />
+      </form>
     </div>
   );
 };

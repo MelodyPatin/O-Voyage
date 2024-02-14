@@ -13,14 +13,16 @@ const StepSelect = ({
 }) => {
   return (
     <div className="StepSelect">
-      <div className="LabelInput">
-        <p>{labelContent}</p>
-        <MultipleSelector
-          placeholderContent={placeholderContent}
-          options={options}
-        />
-      </div>
-      <SimpleButton textContent={buttonContent} />
+      <form action="">
+        <div className="LabelInput">
+          <p>{labelContent}</p>
+          <MultipleSelector
+            placeholderContent={placeholderContent}
+            options={options}
+          />
+        </div>
+        <SimpleButton textContent={buttonContent} />
+      </form>
     </div>
   );
 };

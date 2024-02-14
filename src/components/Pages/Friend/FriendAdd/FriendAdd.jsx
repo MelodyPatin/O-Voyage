@@ -1,42 +1,29 @@
 import React from 'react';
 import './FriendAdd.scss';
-import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
-import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
-import MultipleSelector from '../../../Reusable/MultipleSelector/MultipleSelector';
+import PopupUpdate from '../../../Reusable/Popups/PopupUpdate'; // Ajout de l'import PopupUpdate
+import Form from './Form';
 
 const FriendAdd = () => {
-  const navigate = useNavigate();
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const handleGoBack = (event) => {
-    event.preventDefault(); // Empêche le comportement par défaut du formulaire
-    navigate(-1); // Navigue vers la page précédente
-  };
-
-  const users = [
-    { key: 'option1', text: 'Option 1', value: 'Option 1' },
-    { key: 'option2', text: 'Option 2', value: 'Option 2' },
-    { key: 'option3', text: 'Option 3', value: 'Option 3' },
-  ];
-
-  return (
+  return isMobile ? (
     <div className="addAFriend">
       <NavBarHeader />
-      <ReturnTitle textContent="Ajouter des amis" avatar={false} />
-      <form action="">
-        <div className="selector">
-          <MultipleSelector
-            placeholderContent="Rechercher des utlisateurs"
-            options={users}
-          />
-        </div>
-        <div className="buttonsAddFriend">
-          <SimpleButton textContent="Valider" />
-          <SimpleButton textContent="Retour" onClick={handleGoBack} />
-        </div>
-      </form>
+      <ReturnTitle textContent="Ajouter des amis" />
+      <Form />
     </div>
+  ) : (
+    <PopupUpdate
+      textContent={
+        <div className="addAFriend">
+          <ReturnTitle textContent="Ajouter des amis" />
+          <Form />
+        </div>
+      }
+    />
   );
 };
 
