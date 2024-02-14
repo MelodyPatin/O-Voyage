@@ -1,18 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './Dashboard.scss'
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
 import TravelCard from '../../Reusable/TravelCard/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
 
 const Dashboard = () => {
+  const trips = useSelector((state) => state.trip.myTrips);
+
   return (
     <div className="dashboard">
       <HeaderConnected />
-      <h2>
-        MES VOYAGES
-      </h2>
+      <h2>MES VOYAGES</h2>
       <IconButton textContent="Créer un voyage" icon="add" />
       <div className="list">
         <div className="now">
@@ -32,10 +32,12 @@ const Dashboard = () => {
         <div className="passed">
           <p className="when">J'y suis allé.e</p>
           <div className="cardList">
-            <TravelCard title='Thailande' />
-            <TravelCard title='Vietnam' />
+            {trips.map((trip) => (
+              <TravelCard key={trip.id} trip={trip} title={trip.name} />
+            ))}
+            {/* // TODO gérer la division entre passé future et current + trier par date de début : plus proche en premier */}
           </div>
-      </div>
+        </div>
       </div>
       <Footer />
     </div>

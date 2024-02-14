@@ -7,11 +7,11 @@ import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import MultipleSelector from '../../../Reusable/MultipleSelector/MultipleSelector';
 
 const FriendAdd = () => {
-
   const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(-1); // Navigates back to the previous page
+  const handleGoBack = (event) => {
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
+    navigate(-1); // Navigue vers la page précédente
   };
 
   const users = [

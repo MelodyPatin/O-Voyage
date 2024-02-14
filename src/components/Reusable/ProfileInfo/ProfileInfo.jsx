@@ -1,11 +1,12 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './ProfileInfo.scss';
-import { Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 
-const ProfileInfo = ({ nbTravels, nbFriends }) => {
+const ProfileInfo = ({ nbFriends }) => {
   const firstname = localStorage.getItem('firstname');
+  const trips = useSelector((state) => state.trip.myTrips);
 
   return (
     <div className="ProfileInfo">
@@ -16,7 +17,7 @@ const ProfileInfo = ({ nbTravels, nbFriends }) => {
         <GlobeAmericasIcon className="icon" />
         <p>
           {'\u00A0'}
-          {nbTravels} voyages |{'\u00A0'}
+          {trips.length} voyages |{'\u00A0'}
         </p>
         {/* Display friends icon and number of friends */}
         <UserGroupIcon className="icon" />
@@ -30,7 +31,6 @@ const ProfileInfo = ({ nbTravels, nbFriends }) => {
 };
 
 ProfileInfo.propTypes = {
-  nbTravels: PropTypes.number.isRequired,
   nbFriends: PropTypes.number.isRequired,
 };
 
