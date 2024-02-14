@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
 import DropDownSettings from './DropDownSettings';
 import DropDownNotifications from './DropDownNotifications';
@@ -7,15 +8,16 @@ import { clickLogout } from '../../../actions/user';
 import './menu.scss';
 
 const Menu = ({ desktop }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
   const dispatch = useDispatch();
 
   return (
     <div className="menu">
       {/* Render desktop items if in desktop view */}
-      {desktop && <DesktopItems />}
+      {!isMobile && <DesktopItems />}
       {/* Render dropdown for notifications */}
       <div className="icon_label">
-        <DropDownNotifications desktop={desktop} />
+        <DropDownNotifications />
       </div>
       {/* Render dropdown for user settings */}
       <div className="icon_label">
@@ -23,7 +25,6 @@ const Menu = ({ desktop }) => {
           handleLogout={() => {
             dispatch(clickLogout());
           }}
-          desktop={desktop}
         />
       </div>
     </div>

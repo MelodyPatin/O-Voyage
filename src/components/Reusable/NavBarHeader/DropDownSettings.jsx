@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useMediaQuery } from '@mui/material';
 import {
   ChevronUpIcon,
   ChevronDownIcon,
@@ -13,10 +13,11 @@ import ProfileInfo from '../ProfileInfo/ProfileInfo';
 import './dropDownSettings.scss';
 
 // Component for displaying user settings
-const DropDownSettings = ({ desktop, handleLogout }) => {
+const DropDownSettings = ({ handleLogout }) => {
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
   const firstName = localStorage.getItem('firstname');
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
-  const onMobile = false;
 
   // Toggle function to switch between open and closed states
   const toggleMenu = () => {
@@ -28,7 +29,7 @@ const DropDownSettings = ({ desktop, handleLogout }) => {
       <div className="dropdown-trigger" onClick={toggleMenu}>
         <div className="text">
           <Avatar className="avatar" />
-          {desktop && <p className="notification-title">Vous</p>}
+          {!isMobile && <p className="notification-title">Vous</p>}
         </div>
       </div>
       {/* Dropdown content */}
@@ -62,7 +63,6 @@ const DropDownSettings = ({ desktop, handleLogout }) => {
 };
 
 DropDownSettings.propTypes = {
-  desktop: PropTypes.bool,
   handleLogout: PropTypes.func.isRequired,
 };
 

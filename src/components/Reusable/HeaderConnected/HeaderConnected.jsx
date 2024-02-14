@@ -1,25 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import NavBarHeader from '../NavBarHeader/NavBarHeader';
 import Avatar from '../Avatar/Avatar';
 import ProfileInfo from '../ProfileInfo/ProfileInfo';
 
 import './HeaderConnected.scss';
 
-const HeaderConnected = ({ onDesktop }) => {
+const HeaderConnected = () => {
   return (
     <header className="headerConnected">
-      <NavBarHeader isLogged onDesktop={onDesktop} />
+      <NavBarHeader isLogged />
       <div className="personnalInfos">
         <Avatar />
-        <ProfileInfo firstName="Mélody" />
+        <ProfileInfo />
       </div>
     </header>
   );
-};
-
-HeaderConnected.propTypes = {
-  onDesktop: PropTypes.bool,
 };
 
 export default HeaderConnected;

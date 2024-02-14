@@ -22,7 +22,7 @@ const FriendAdd = () => {
 
   return (
     <div className="addAFriend">
-      <NavBarHeader isLogged onDesktop={false} />
+      <NavBarHeader />
       <ReturnTitle textContent="Ajouter des amis" avatar={false} />
       <form action="">
         <div className="selector">

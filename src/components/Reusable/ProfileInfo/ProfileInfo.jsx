@@ -4,11 +4,13 @@ import { Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 
-const ProfileInfo = ({ firstName, nbTravels, nbFriends }) => {
+const ProfileInfo = ({ nbTravels, nbFriends }) => {
+  const firstname = localStorage.getItem('firstname');
+
   return (
     <div className="ProfileInfo">
       {/* Display user's first name */}
-      <p className="firstName">{firstName}</p>
+      <p className="firstName">{firstname}</p>
       <div className="TravelsFriends">
         {/* Display travel icon and number of travels */}
         <GlobeAmericasIcon className="icon" />
@@ -28,7 +30,6 @@ const ProfileInfo = ({ firstName, nbTravels, nbFriends }) => {
 };
 
 ProfileInfo.propTypes = {
-  firstName: PropTypes.string.isRequired,
   nbTravels: PropTypes.number.isRequired,
   nbFriends: PropTypes.number.isRequired,
 };
