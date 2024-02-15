@@ -25,7 +25,6 @@ export const initialState = {
   loggedState: false,
   // redirection
   redirectTo: null,
-  myTrips: [],
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */

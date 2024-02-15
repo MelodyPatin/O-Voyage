@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import moment from 'moment'; // Import the moment library
 import './Dashboard.scss';
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
@@ -10,7 +9,6 @@ import Footer from '../../Reusable/Footer/Footer';
 
 const Dashboard = () => {
   const trips = useSelector((state) => state.trip.myTrips);
-
   const tripsWithStatus = trips.map((trip) => {
     const startDate = new Date(trip.startDate).getTime();
     const endDate = new Date(trip.endDate).getTime();
@@ -32,6 +30,7 @@ const Dashboard = () => {
   const currentTrips = sortedTrips.filter((trip) => trip.status === 'current');
   const futureTrips = sortedTrips.filter((trip) => trip.status === 'future');
   const passedTrips = sortedTrips.filter((trip) => trip.status === 'passed');
+
   return (
     <div className="dashboard">
       <HeaderConnected />
@@ -44,7 +43,7 @@ const Dashboard = () => {
           <p className="when">J'y suis actuellement</p>
           <div className="cardList">
             {currentTrips.map((trip) => (
-              <TravelCard key={trip.id} trip={trip} title={trip.name} />
+              <TravelCard key={trip.id} trip={trip} />
             ))}
           </div>
         </div>
@@ -52,7 +51,7 @@ const Dashboard = () => {
           <p className="when">C'est pour bientôt</p>
           <div className="cardList">
             {futureTrips.map((trip) => (
-              <TravelCard key={trip.id} trip={trip} title={trip.name} />
+              <TravelCard key={trip.id} trip={trip} />
             ))}
           </div>
         </div>
@@ -60,7 +59,7 @@ const Dashboard = () => {
           <p className="when">J'y suis allé.e</p>
           <div className="cardList">
             {passedTrips.map((trip) => (
-              <TravelCard key={trip.id} trip={trip} title={trip.name} />
+              <TravelCard key={trip.id} trip={trip} />
             ))}
           </div>
         </div>
