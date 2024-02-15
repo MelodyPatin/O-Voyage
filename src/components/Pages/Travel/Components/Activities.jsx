@@ -1,21 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useMediaQuery } from '@mui/material';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Activities.scss';
 
-const Activities = ({ onDesktop }) => {
+const Activities = () => {
+  const isMobile = useMediaQuery('(max-width: 1024px)');
+
   return (
     <div className="activities">
-      {onDesktop && (
+      {!isMobile && (
         <div className="filterButton">
           <SimpleButton textContent="Filtrer" />
         </div>
       )}
       <div className="sliderContainer">
-        {onDesktop && (
+        {!isMobile && (
           <div className="arrow">
             <ChevronLeftIcon />
           </div>
@@ -27,23 +29,19 @@ const Activities = ({ onDesktop }) => {
           <ActivityCard activityTitle="coucou" />
           <ActivityCard activityTitle="coucou" />
         </div>
-        {onDesktop && (
+        {!isMobile && (
           <div className="arrow">
             <ChevronRightIcon />
           </div>
         )}
       </div>
-      {onDesktop && (
+      {!isMobile && (
         <div className="suggestionButton">
           <IconButton textContent="Faire une proposition" icon="add" />
         </div>
       )}
     </div>
   );
-};
-
-Activities.propTypes = {
-  onDesktop: PropTypes.bool,
 };
 
 export default Activities;

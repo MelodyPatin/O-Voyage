@@ -2,23 +2,28 @@ import React from 'react';
 import './TravelCard.scss';
 
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const TravelCard = ({ trip, countdown }) => {
   if (!trip) {
     return null;
   }
-  const { name, startDate, backgroundPicture } = trip;
+  const { name, startDate, backgroundPictureURL, id } = trip;
 
   return (
     <div className="cardContainer">
-      {/* Background image for the travel card */}
-      <img className="cardPicture" src={backgroundPicture} alt="Travel" />
-      <div className="cardTitle">
-        {/* Title of the travel */}
-        <h3>{name}</h3>
-        {/* Countdown of the days before the beginning of the travel */}
-        {countdown && <span>Départ dans {countdown} jours</span>}
-      </div>
+      <Link to={`/travel/${id}`}>
+        {/* Background image for the travel card */}
+        <img className="cardPicture" src={backgroundPictureURL} alt="Travel" />
+      </Link>
+      <Link to={`/travel/${id}`}>
+        <div className="cardTitle">
+          {/* Title of the travel */}
+          <h3>{name}</h3>
+          {/* Countdown of the days before the beginning of the travel */}
+          {countdown && <span>Départ dans {countdown} jours</span>}
+        </div>
+      </Link>
     </div>
   );
 };
@@ -28,7 +33,7 @@ TravelCard.propTypes = {
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     startDate: PropTypes.string,
-    backgroundPicture: PropTypes.string.isRequired,
+    backgroundPictureURL: PropTypes.string.isRequired,
   }).isRequired,
   countdown: PropTypes.string, // Countdown is an optional string prop (no countdown for passed or current travels)
 };

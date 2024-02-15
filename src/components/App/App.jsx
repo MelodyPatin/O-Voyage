@@ -9,8 +9,10 @@ import { updateLoggedOut } from '../../actions/user';
 import UserUpdate from '../Pages/User/UserUpdate';
 import FriendList from '../Pages/Friend/FriendList/FriendList';
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
-import Travel from '../Pages/Travel/Travel';
 import TravelAdd from '../Unique/TravelActivity/TravelAddUpdate/TravelAdd';
+import TravelDetails from '../Pages/Travel/TravelDetails';
+import Travelers from '../Pages/Travel/Travelers';
+import ActivityDetails from '../Pages/Travel/ActivityDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,7 +69,10 @@ function App() {
             <Route path="/createtrip" element={<TravelAdd />} />
           )}
           {(logged === 'true' || loggedState) && (
-            <Route path="/travel" element={<Travel onDesktop />} />
+            <Route path="/travel/:id" element={<TravelDetails />} />
+          )}
+          {(logged === 'true' || loggedState) && (
+            <Route path="/travel/:id/travelers" element={<Travelers />} />
           )}
           <Route path="*" element={<Error />} />
         </Routes>

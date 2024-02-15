@@ -3,6 +3,7 @@
 .ProfileInfo {
   background-color: v.$lightColor;
   width: fit-content; 
+  min-width: 14rem;
   font-size: 1rem;
   display: flex;
   flex-direction: column;

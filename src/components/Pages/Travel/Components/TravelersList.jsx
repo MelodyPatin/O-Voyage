@@ -1,12 +1,10 @@
 import React from 'react';
 import './TravelersList.scss';
-// import { Button, Icon } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
-import User from '../User/User';
-import IconButton from '../IconButton/IconButton';
-import ReturnTitle from '../ReturnTitle/ReturnTitle';
+import User from '../../../Reusable/User/User';
+import IconButton from '../../../Reusable/IconButton/IconButton';
+import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 
-const TravelersList = ({}) => {
+const TravelersList = () => {
   return (
     <div className="TravelersList">
       {/* Title for the list  */}
@@ -33,7 +31,5 @@ const TravelersList = ({}) => {
     </div>
   );
 };
-
-TravelersList.propTypes = {};
 
 export default TravelersList;
