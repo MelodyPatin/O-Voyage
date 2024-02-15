@@ -17,7 +17,7 @@ const FormUserUpdate = ({ FirstName, LastName, Email }) => {
 
   return (
     <div>
-      <ReturnTitle textContent="Modifier mon profil"/>
+      <ReturnTitle textContent="Modifier mon profil" />
       <form className="FormUpdateProfile" action="">
         <LabelInput label="Prénom" placeholder="" value={FirstName} />
         <LabelInput label="Nom" placeholder="" value={LastName} />
