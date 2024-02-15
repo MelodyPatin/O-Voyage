@@ -1,8 +1,8 @@
-@use '../../../styles/variables' as v;
+@use '../../../../styles/variables' as v;
 
 // Card styling
 .presentationCard {
-  margin: 2rem;
+  margin: 1rem 0;
   width: 14rem;
   height: 19.5rem;
   padding: 1rem;
@@ -17,7 +17,7 @@
   font-family: 'Montserrat', sans-serif;
 
   // Member's avatar image styling
-  .avatar.image {
+  .ui.avatar.image {
     width: 6rem;
     height: 6rem;
   }

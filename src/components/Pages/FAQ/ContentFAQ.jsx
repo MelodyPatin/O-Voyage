@@ -1,0 +1,40 @@
+/* eslint-disable react/no-unescaped-entities */
+import React from 'react';
+
+const ContentFAQ = () => {
+  return (
+    <ul className="faq">
+      <li>
+        <p className="question">
+          Comment puis-je créer un voyage sur la plateforme ?
+        </p>
+        <p className="answer">
+          Pour créer un voyage, connectez-vous à votre compte, accédez à votre
+          tableau de bord et cliquez sur "Créer un voyage". Remplissez les
+          détails requis, invitez vos amis et commencez à planifier ensemble !
+        </p>
+      </li>
+      <li>
+        <p className="question">Comment ajouter des activités à un voyage ?</p>
+        <p className="answer">
+          Une fois dans le voyage, utilisez le bouton "Faire une proposition"
+          pour proposer des activités, visites, restaurants ou bars. Les autres
+          participants pourront voter pour leurs préférences, et les activités
+          les plus populaires seront intégrées à l'itinéraire.
+        </p>
+      </li>
+      <li>
+        <p className="question">
+          Comment fonctionne le système de vote pour les activités ?{' '}
+        </p>
+        <p className="answer">
+          Chaque participant peut voter pour les activités proposées. Les
+          activités sont classées en fonction du nombre de likes reçus. Cela
+          permet d'organiser un itinéraire basé sur les préférences collectives.
+        </p>
+      </li>
+    </ul>
+  );
+};
+
+export default ContentFAQ;

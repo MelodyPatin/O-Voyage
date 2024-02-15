@@ -15,6 +15,9 @@ import Travelers from '../Pages/Travel/Travelers';
 import ActivityDetails from '../Pages/Travel/ActivityDetails';
 import TravelUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelUpdate';
 import ActivityAdd from '../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
+import FAQ from '../Pages/FAQ/FAQ';
+import LegalNotice from '../Pages/LegalNotice/LegalNotice';
+import History from '../Pages/History/History';
 
 function App() {
   const dispatch = useDispatch();
@@ -82,6 +85,9 @@ function App() {
           {(logged === 'true' || loggedState) && (
             <Route path="/travel/:id/travelers" element={<Travelers />} />
           )}
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/legal-notice" element={<LegalNotice />} />
+          <Route path="/our-history" element={<History />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </header>

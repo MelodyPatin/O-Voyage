@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './TravelCard.scss';
 
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const TravelCard = ({ trip, countdown }) => {
+const TravelCard = ({ trip }) => {
   if (!trip) {
     return null;
   }
   const { name, startDate, backgroundPictureURL, id } = trip;
+
+  const [countdown, setCountdown] = useState(null);
+
+  useEffect(() => {
+    // Calculate the countdown when the component mounts
+    const calculateCountdown = () => {
+      const currentDate = new Date();
+      const travelStartDate = new Date(startDate);
+
+      // Calculate the difference in milliseconds
+      const difference = travelStartDate - currentDate;
+
+      // Calculate days, hours, minutes, seconds from milliseconds
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+
+      // Update the state with the countdown value
+      setCountdown(days >= 0 ? days : null);
+    };
+
+    // Call the function to calculate the countdown
+    calculateCountdown();
+  }, [startDate]);
 
   return (
     <div className="cardContainer">
@@ -35,11 +57,6 @@ TravelCard.propTypes = {
     startDate: PropTypes.string,
     backgroundPictureURL: PropTypes.string.isRequired,
   }).isRequired,
-  countdown: PropTypes.string, // Countdown is an optional string prop (no countdown for passed or current travels)
-};
-
-TravelCard.defaultProps = {
-  countdown: '', // Default value for countdown is an empty string
 };
 
 export default TravelCard;
