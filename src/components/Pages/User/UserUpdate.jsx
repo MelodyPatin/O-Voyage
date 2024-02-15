@@ -11,7 +11,7 @@ const UserUpdate = () => {
   const logged = localStorage.getItem('logged');
   const loggedState = useSelector((state) => state.user.loggedState);
   const isMobile = useMediaQuery('(max-width: 767px)');
-  
+
   console.log(logged);
   console.log(loggedState);
   return (

@@ -43,7 +43,7 @@ const DropDownSettings = ({ handleLogout }) => {
           />
           <ul>
             {/* Settings items */}
-            <Link to={`/${firstName}`}>
+            <Link to="/me">
               <li className="item">Modifier mon profil</li>
             </Link>
             <Link to="/friends">

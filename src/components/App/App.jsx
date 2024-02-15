@@ -55,7 +55,7 @@ function App() {
             />
           )}
           {(logged === 'true' || loggedState) && (
-            <Route path={`/${firstName}`} element={<UserUpdate />} />
+            <Route path="/me" element={<UserUpdate />} />
           )}
           {(logged === 'true' || loggedState) && (
             <Route path="/friends/*" element={<FriendList />} />
