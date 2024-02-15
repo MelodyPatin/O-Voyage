@@ -14,6 +14,7 @@ const tripReducer = (state = initialState, action = {}) => {
         ...state,
         myTrips: action.myTrips,
       };
+
     default:
       return state;
   }
