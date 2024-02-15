@@ -20,10 +20,14 @@ const Actions = () => {
           </div>
         ) : (
           <div className="simpleButton">
-            <IconButton textContent="Faire une proposition" icon="add" />
+            <Link to="/createactivity">
+              <IconButton textContent="Faire une proposition" icon="add" />
+            </Link>
           </div>
         )}
-        <IconButton textContent="Modifier le voyage" icon="edit" />
+        <Link to="/updatetrip">
+          <IconButton textContent="Modifier le voyage" icon="edit" />
+        </Link>
         <IconButton textContent="Supprimer le voyage" icon="trash" />
         <IconButton textContent="Quitter le voyage" icon="close" />
       </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
+import { Select } from 'semantic-ui-react';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
-import { Select } from 'semantic-ui-react';
 
 // Functional component : popup with input fields and a close button
 const StepInputSelector = ({
@@ -16,20 +16,25 @@ const StepInputSelector = ({
   city,
 }) => {
   return (
-    <div className="StepInputSelector">
-      <LabelInput
-        placeholder={placeholderInputContent}
-        label={labelContent}
-        value={valueInputContent}
-        className="label-input"
-      />
-      <Select
-        placeholderContent={placeholderSelectorContent}
-        options={options}
-        className="selector"
-        city={city}
-      />
-      <SimpleButton textContent={buttonContent} />
+    <div className="stepInputSelector">
+      <form action="">
+        <LabelInput
+          placeholder={placeholderInputContent}
+          label={labelContent}
+          value={valueInputContent}
+          className="label-input"
+        />
+        <div className="LabelInput">
+          <p className="label">Renseignez le pays</p>
+          <Select
+            placeholderContent={placeholderSelectorContent}
+            options={options}
+            className="selector"
+            city={city}
+          />
+        </div>
+        <SimpleButton textContent={buttonContent} />
+      </form>
     </div>
   );
 };
