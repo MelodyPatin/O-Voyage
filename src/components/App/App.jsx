@@ -48,25 +48,27 @@ function App() {
 
         <Routes>
           <Route path="/home/*" element={<HomePage />} />
-          {(logged === "true" || loggedState) && (
+          {(logged === 'true' || loggedState) && (
             <Route
               path="/dashboard"
               element={<Dashboard onDesktop={false} />}
             />
           )}
-          {logged === 'true' && (
+          {(logged === 'true' || loggedState) && (
             <Route path={`/${firstName}`} element={<UserUpdate />} />
           )}
-          {logged === 'true' && (
+          {(logged === 'true' || loggedState) && (
             <Route path="/friends/*" element={<FriendList />} />
           )}
-          {logged === 'true' && (
+          {(logged === 'true' || loggedState) && (
             <Route path="/friends/add" element={<FriendAdd />} />
           )}
-          {logged === 'true' && (
+          {(logged === 'true' || loggedState) && (
             <Route path="/createtrip" element={<TravelAdd />} />
           )}
-          <Route path="/travel" element={<Travel onDesktop />} />
+          {(logged === 'true' || loggedState) && (
+            <Route path="/travel" element={<Travel onDesktop />} />
+          )}
           <Route path="*" element={<Error />} />
         </Routes>
       </header>

@@ -10,8 +10,9 @@ import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 const FormUserUpdate = ({ FirstName, LastName, Email }) => {
   const navigate = useNavigate();
 
-  const handleGoBack = () => {
-    navigate(-1); // Navigates back to the previous page
+  const handleGoBack = (event) => {
+    event.preventDefault(); // Empêche le comportement par défaut du formulaire
+    navigate(-1); // Navigue vers la page précédente
   };
 
   return (
