@@ -21,7 +21,7 @@ const Footer = () => {
           className={({ isActive }) =>
             isActive ? 'menu-link menu-link--active' : 'menu-link'
           }
-          to="/histoire"
+          to="/our-history"
         >
           Notre Histoire
         </NavLink>
@@ -29,7 +29,7 @@ const Footer = () => {
           className={({ isActive }) =>
             isActive ? 'menu-link menu-link--active' : 'menu-link'
           }
-          to="/mentions-legales"
+          to="/legal-notice"
         >
           Mentions légales
         </NavLink>

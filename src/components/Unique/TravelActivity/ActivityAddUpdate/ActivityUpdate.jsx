@@ -4,16 +4,22 @@ import PropTypes from 'prop-types';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../Reusable/Step/StepInput';
-import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
-import StepFolder from '../../../Reusable/Step/StepFolder';
-import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 
-const ActivityUpdate = ({ onDesktop, activityTitle, activityAddress, activityCost, activityDates, activityUrl, activityDescription, activityTag}) => {
+const ActivityUpdate = ({
+  onDesktop,
+  activityTitle,
+  activityAddress,
+  activityCost,
+  activityDates,
+  activityUrl,
+  activityDescription,
+  activityTag,
+}) => {
   const step = 2;
 
   const options = [
@@ -25,73 +31,87 @@ const ActivityUpdate = ({ onDesktop, activityTitle, activityAddress, activityCos
   return onDesktop ? (
     <>
       {step === 1 && (
-        <PopupUpdate textContent={
-          <StepInput
-            buttonContent="Continuer"
-            valueContent={activityTitle}
-            labelContent="Modifiez le titre de votre proposition*"
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepInput
+              buttonContent="Continuer"
+              valueContent={activityTitle}
+              labelContent="Modifiez le titre de votre proposition*"
+            />
+          }
+        />
       )}
       {step === 2 && (
-        <PopupUpdate textContent={
-          <StepInputSelector
-            buttonContent="Continuer"
-            valueContent={activityAddress}
-            labelContent="Modifiez l'adresse"
-            options={options}
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepInputSelector
+              buttonContent="Continuer"
+              valueContent={activityAddress}
+              labelContent="Modifiez l'adresse"
+              options={options}
+            />
+          }
+        />
       )}
       {step === 3 && (
-        <PopupUpdate textContent={
-          <StepInput
-            buttonContent="Continuer"
-            valueContent={activityCost}
-            labelContent="Renseignez le coût moyen"
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepInput
+              buttonContent="Continuer"
+              valueContent={activityCost}
+              labelContent="Renseignez le coût moyen"
+            />
+          }
+        />
       )}
       {step === 4 && (
-        <PopupUpdate textContent={
-          <StepTextarea
-            valueContent={activityDates}
-            buttonContent="Continuer"
-            labelContent="Renseignez les jours et horaires d'ouverture"
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepTextarea
+              valueContent={activityDates}
+              buttonContent="Continuer"
+              labelContent="Renseignez les jours et horaires d'ouverture"
+            />
+          }
+        />
       )}
       {step === 5 && (
-        <PopupUpdate textContent={
-          <StepInput
-            buttonContent="Continuer"
-            valueContent={activityUrl}
-            labelContent="Renseignez le site internet"
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepInput
+              buttonContent="Continuer"
+              valueContent={activityUrl}
+              labelContent="Renseignez le site internet"
+            />
+          }
+        />
       )}
       {step === 6 && (
-        <PopupUpdate textContent={
-          <StepTextarea
-            valueContent={activityDescription}
-            buttonContent="Continuer"
-            labelContent="Ajoutez une description"
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepTextarea
+              valueContent={activityDescription}
+              buttonContent="Continuer"
+              labelContent="Ajoutez une description"
+            />
+          }
+        />
       )}
       {step === 7 && (
-        <PopupUpdate textContent={
-          <StepTag
-            buttonContent="Envoyer ma proposition"
-            labelContent="Sélectionnez un tag"
-            activityTag={activityTag}
-          />
-        } />
+        <PopupUpdate
+          textContent={
+            <StepTag
+              buttonContent="Envoyer ma proposition"
+              labelContent="Sélectionnez un tag"
+              activityTag={activityTag}
+            />
+          }
+        />
       )}
     </>
   ) : (
     <div className="ActivityAddUpdate">
-      <NavBarHeader isLogged={true} onDesktop={false} />
+      <NavBarHeader isLogged onDesktop={false} />
       <ReturnTitle textContent="Modifier la proposition" avatar={false} />
       <ProgressBar step={step} />
       {step === 1 && (
