@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-import { fetchMyTrips, saveMyTrips } from '../actions/trip';
+import { FETCH_MY_TRIPS, saveMyTrips } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
-    case 'FETCH_MY_TRIPS':
+    case FETCH_MY_TRIPS:
       axios
         .get('http://localhost:8001/api/mytrips', {
           headers: {
