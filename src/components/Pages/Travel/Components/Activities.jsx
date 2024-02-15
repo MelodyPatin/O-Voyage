@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
@@ -37,7 +38,9 @@ const Activities = () => {
       </div>
       {!isMobile && (
         <div className="suggestionButton">
-          <IconButton textContent="Faire une proposition" icon="add" />
+          <Link to="/createactivity">
+            <IconButton textContent="Faire une proposition" icon="add" />
+          </Link>
         </div>
       )}
     </div>

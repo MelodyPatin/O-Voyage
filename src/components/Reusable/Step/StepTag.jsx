@@ -18,9 +18,9 @@ const StepTag = ({
         <p>{labelContent}</p>
         <div className="tags">
           <Tag className="tag" text="Restaurant" category="restaurant" />
+          <Tag className="tag" text="Activité" category="activity" />
           <Tag className="tag" text="Bar" category="pub" />
           <Tag className="tag" text="Visite culturelle" category="culture" />
-          <Tag className="tag" text="Activité" category="activity" />
         </div>
       </div>
       <SimpleButton textContent={buttonContent} />

@@ -13,6 +13,8 @@ import TravelAdd from '../Unique/TravelActivity/TravelAddUpdate/TravelAdd';
 import TravelDetails from '../Pages/Travel/TravelDetails';
 import Travelers from '../Pages/Travel/Travelers';
 import ActivityDetails from '../Pages/Travel/ActivityDetails';
+import TravelUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelUpdate';
+import ActivityAdd from '../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
 
 function App() {
   const dispatch = useDispatch();
@@ -67,6 +69,12 @@ function App() {
           )}
           {(logged === 'true' || loggedState) && (
             <Route path="/createtrip" element={<TravelAdd />} />
+          )}
+          {(logged === 'true' || loggedState) && (
+            <Route path="/updatetrip" element={<TravelUpdate />} />
+          )}
+          {(logged === 'true' || loggedState) && (
+            <Route path="/createactivity" element={<ActivityAdd />} />
           )}
           {(logged === 'true' || loggedState) && (
             <Route path="/travel/:id" element={<TravelDetails />} />
