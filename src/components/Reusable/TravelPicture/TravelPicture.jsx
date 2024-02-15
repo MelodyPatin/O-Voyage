@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { PencilIcon } from '@heroicons/react/24/solid';
 import './TravelPicture.scss';
 
 // Component that displays and allows the members of the trip to upload the travel cover photo
-const TravelPicture = ({ currentPhoto }) => {
+const TravelPicture = () => {
+  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const trips = useSelector((state) => state.trip.myTrips);
+  const currentTrip = trips.find((trip) => trip.id === parseInt(id, 10));
+
   // State to store the new photo selected by the user
   const [newPhoto, setNewPhoto] = useState(null);
 
@@ -28,7 +34,7 @@ const TravelPicture = ({ currentPhoto }) => {
     <div className="TravelPicture">
       {/* Display the photo (either newPhoto or currentPhoto) */}
       <img
-        src={newPhoto || currentPhoto}
+        src={newPhoto || currentTrip?.backgroundPictureURL}
         alt="cover for the travel"
         className="photo"
       />

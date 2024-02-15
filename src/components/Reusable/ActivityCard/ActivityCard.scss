@@ -19,6 +19,14 @@
     text-overflow: ellipsis;
   }
 
+  .ui.selection.dropdown {
+    background-color: v.$lightColor;
+
+    .visible.menu.transition {
+      background-color: v.$lightColor;
+    }
+  }
+
   // Different styles based on the class of the ActivityCard
   &.restaurant {
     background-color: rgba(v.$restaurant, 0.5);

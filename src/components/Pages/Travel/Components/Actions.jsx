@@ -1,16 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useMediaQuery } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Actions.scss';
 
-const Actions = ({ onDesktop }) => {
+const Actions = () => {
+  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const isMobile = useMediaQuery('(max-width: 1024px)');
+
   return (
     <div>
       <div className="buttons">
-        {onDesktop ? (
+        {!isMobile ? (
           <div className="simpleButton">
-            <SimpleButton textContent="Voir les voyageurs" />
+            <Link to={`/travel/${id}/travelers`}>
+              <SimpleButton textContent="Voir les voyageurs" />
+            </Link>
           </div>
         ) : (
           <div className="simpleButton">
@@ -23,10 +29,6 @@ const Actions = ({ onDesktop }) => {
       </div>
     </div>
   );
-};
-
-Actions.propTypes = {
-  onDesktop: PropTypes.bool,
 };
 
 export default Actions;
