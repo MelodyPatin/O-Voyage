@@ -6,9 +6,7 @@ import './TravelPicture.scss';
 
 // Component that displays and allows the members of the trip to upload the travel cover photo
 const TravelPicture = () => {
-  const { id } = useParams(); // Get the 'id' parameter from the URL
-  const trips = useSelector((state) => state.trip.myTrips);
-  const currentTrip = trips.find((trip) => trip.id === parseInt(id, 10));
+  const currentTrip = useSelector((state) => state.trip.trip);
 
   // State to store the new photo selected by the user
   const [newPhoto, setNewPhoto] = useState(null);

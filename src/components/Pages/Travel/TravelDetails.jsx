@@ -13,12 +13,12 @@ import Actions from './Components/Actions';
 import { fetchATrip } from '../../../actions/trip';
 
 const TravelDetails = () => {
-  const { tripId } = useParams(); // Use useParams to get the tripId
+  const { id } = useParams(); // Use useParams to get the tripId
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchATrip(tripId));
-  }, [dispatch, tripId]);
+    dispatch(fetchATrip(id));
+  }, [dispatch, id]);
 
   const isMobile = useMediaQuery('(max-width: 1024px)');
 

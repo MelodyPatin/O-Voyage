@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import PropTypes from 'prop-types';
 
 const TravelDates = () => {
   const currentTrip = useSelector((state) => state.trip.trip);
