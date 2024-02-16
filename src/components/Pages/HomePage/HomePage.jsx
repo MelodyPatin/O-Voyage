@@ -26,7 +26,7 @@ const HomePage = () => {
   const passwordValue = useSelector((state) => state.user.password);
   const signUpEmailValue = useSelector((state) => state.user.signUpEmail);
   const signUpPasswordValue = useSelector((state) => state.user.signUpPassword);
-  const logged = localStorage.getItem('logged');
+  const logged = useSelector((state) => state.user.logged);
   const signedUp = useSelector((state) => state.user.signedUp);
 
   // Ajoutez un état local pour gérer la redirection

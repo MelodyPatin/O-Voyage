@@ -1,14 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Dashboard.scss';
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
 import TravelCard from './Components/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
+//import { fetchUserData } from '../../../actions/user';
 
 const Dashboard = () => {
+  //const dispatch = useDispatch();
+
+
+
   const trips = useSelector((state) => state.trip.myTrips);
   const tripsWithStatus = trips.map((trip) => {
     const startDate = new Date(trip.startDate).getTime();

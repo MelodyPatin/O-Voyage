@@ -1,11 +1,13 @@
 import { React } from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './NavBarHeader.scss';
 import Menu from './Menu';
 import LoginLogoutButton from './LoginLogoutButton';
 
 const NavBarHeader = () => {
-  const logged = localStorage.getItem('logged');
+  const logged = useSelector((state) => state.user.logged);
+
   return (
     <div className="header">
       <Link to="/home">
@@ -15,8 +17,8 @@ const NavBarHeader = () => {
           alt="Logo O'Voyage"
         />
       </Link>
-      {logged === "true" && <Menu />}
-      {logged != "true" && <LoginLogoutButton />}
+      {logged && <Menu />}
+      {!logged && <LoginLogoutButton />}
     </div>
   );
 };

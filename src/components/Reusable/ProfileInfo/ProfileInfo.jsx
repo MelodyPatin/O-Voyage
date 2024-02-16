@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 
 const ProfileInfo = ({ nbFriends }) => {
-  const firstname = localStorage.getItem('firstname');
+  const firstname = useSelector((state) => state.user.firstnameValue);
   const trips = useSelector((state) => state.trip.myTrips);
 
   return (
