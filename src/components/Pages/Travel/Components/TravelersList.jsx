@@ -7,7 +7,6 @@ import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 
 const TravelersList = () => {
   const travelers = useSelector((state) => state.trip.travelers);
-  console.log(travelers);
 
   return (
     <div className="TravelersList">

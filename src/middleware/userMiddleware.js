@@ -71,7 +71,6 @@ const userMiddleware = (store) => (next) => (action) => {
       api
         .get('/user/me')
         .then((response) => {
-          console.log(response.data);
           store.dispatch(
             saveUserData(
               response.data.firstname,
@@ -90,7 +89,6 @@ const userMiddleware = (store) => (next) => (action) => {
       api
         .get(`/friend`)
         .then((response) => {
-          console.log('API Response:', response.data);
           store.dispatch(saveFriends(response.data));
         })
         .catch((error) => {

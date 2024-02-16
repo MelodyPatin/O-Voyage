@@ -8,6 +8,7 @@ import {
 export const initialState = {
   activities: [],
   activity: [],
+  selectedDay: '',
 };
 
 const activityReducer = (state = initialState, action = {}) => {

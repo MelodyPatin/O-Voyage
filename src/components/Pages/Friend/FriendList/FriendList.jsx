@@ -23,7 +23,6 @@ const FriendList = () => {
   }, []);
 
   const friends = useSelector((state) => state.user.friends);
-  console.log('frends', friends);
 
   return (
     <div className="friends">
