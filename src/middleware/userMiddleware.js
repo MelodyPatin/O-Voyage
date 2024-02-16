@@ -29,7 +29,6 @@ const userMiddleware = (store) => (next) => (action) => {
           // Traitement de la réponse
           store.dispatch(handleSuccessfulLogin(response.data.token));
           store.dispatch(fetchUserData());
-          store.dispatch(fetchMyTrips());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);

@@ -7,7 +7,6 @@ import Dashboard from '../Pages/Dashboard/Dashboard';
 import Error from '../Pages/Error/Error';
 import {
   updateLoggedOut,
-  submitLogin,
   fetchUserData,
   handleSuccessfulLogin,
 } from '../../actions/user';
@@ -27,7 +26,6 @@ function App() {
   const dispatch = useDispatch();
 
   const loggedOut = useSelector((state) => state.user.loggedOut);
-  const firstName = localStorage.getItem('firstname');
   const logged = useSelector((state) => state.user.logged);
 
   const [redirectHome, setRedirectHome] = useState(false);
@@ -78,7 +76,7 @@ function App() {
           {logged && <Route path="/createtrip" element={<TravelAdd />} />}
           {logged && <Route path="/updatetrip" element={<TravelUpdate />} />}
           {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
-          {logged && <Route path="/travel/:id" element={<TravelDetails />} />}
+          {logged && <Route path="/trip/:id" element={<TravelDetails />} />}
           {logged && (
             <Route path="/travel/:id/travelers" element={<Travelers />} />
           )}
