@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import { useDispatch } from 'react-redux';
 import { handleStepNext } from '../../../actions/trip';
+import { fetchFriends } from '../../../actions/user';
 
 // Functional component : popup with input fields and a close button
 const StepTextarea = ({
@@ -15,13 +16,17 @@ const StepTextarea = ({
   labelContent,
 }) => {
   const dispatch = useDispatch();
-  const name = "tripDescription";
+  const name = 'tripDescription';
 
   const inputId = `field-${name}`;
 
   const handleClick = () => {
     dispatch(handleStepNext());
   };
+
+  const handleFetchFriends = () => {
+    dispatch(fetchFriends());
+  }
 
   const handleChange = (evt) => {
     changeField(evt.target.value, name);
@@ -44,7 +49,13 @@ const StepTextarea = ({
             />
           </Form>
         </div>
-        <SimpleButton textContent={buttonContent} onClick={handleClick} />
+        <SimpleButton
+          textContent={buttonContent}
+          onClick={() => {
+            handleClick();
+            handleFetchFriends();
+          }}
+        />
       </form>
     </div>
   );

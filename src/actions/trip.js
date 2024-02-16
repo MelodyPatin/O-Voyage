@@ -11,6 +11,9 @@ export const SAVE_COUNTRIES = 'SAVE_COUNTRIES';
 export const SAVE_CITIES = 'SAVE_CITIES';
 export const UPDATE_SELECTED_COUNTRIES = 'UPDATE_SELECTED_COUNTRIES';
 export const UPDATE_SELECTED_CITIES = 'UPDATE_SELECTED_CITIES';
+export const SET_START_DATE = 'SET_START_DATE';
+export const SET_END_DATE = 'SET_END_DATE';
+export const UPDATE_SELECTED_TRAVELERS = 'UPDATE_SELECTED_TRAVELERS';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -71,4 +74,19 @@ export const updateSelectedCountries = (selectedCountries) => ({
 export const updateSelectedCities = (selectedCities) => ({
   type: UPDATE_SELECTED_CITIES,
   selectedCities,
+});
+
+export const updateSelectedTravelers = (selectedTravelers) => ({
+  type: UPDATE_SELECTED_TRAVELERS,
+  selectedTravelers,
+});
+
+export const setStartDate = (startDate) => ({
+  type: SET_START_DATE,
+  startDate,
+});
+
+export const setEndDate = (endDate) => ({
+  type: SET_END_DATE,
+  endDate,
 });

@@ -6,7 +6,10 @@ import {
   SAVE_COUNTRIES,
   SAVE_CITIES,
   UPDATE_SELECTED_COUNTRIES,
-  UPDATE_SELECTED_CITIES, // Ajout
+  UPDATE_SELECTED_CITIES,
+  SET_START_DATE,
+  SET_END_DATE,
+  UPDATE_SELECTED_TRAVELERS,
 } from '../actions/trip';
 
 export const initialState = {
@@ -14,10 +17,13 @@ export const initialState = {
   countries: [],
   cities: [],
   selectedCountries: [],
-  selectedCities: [], // Ajout
+  selectedCities: [],
+  selectedTravelers: [],
   step: 1,
   tripTitle: '',
   tripDescription: '',
+  startDate: '',
+  endDate: '',
 };
 
 const tripReducer = (state = initialState, action = {}) => {
@@ -68,6 +74,24 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         selectedCities: action.selectedCities,
+      };
+
+    case UPDATE_SELECTED_TRAVELERS: // Ajout
+      return {
+        ...state,
+        selectedTravelers: action.selectedTravelers,
+      };
+
+    case SET_START_DATE: // Ajout
+      return {
+        ...state,
+        startDate: action.startDate,
+      };
+
+    case SET_END_DATE: // Ajout
+      return {
+        ...state,
+        endDate: action.endDate,
       };
 
     default:

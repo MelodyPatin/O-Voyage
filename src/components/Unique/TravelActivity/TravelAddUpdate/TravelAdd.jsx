@@ -21,6 +21,7 @@ import {
 } from '../../../../actions/trip';
 import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
 import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
+import StepSelectTravelers from '../../../Reusable/Step/StepSelectTravelers';
 
 const TravelAdd = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const TravelAdd = () => {
   const tripDescription = useSelector((state) => state.trip.tripDescription);
   const countries = useSelector((state) => state.trip.countries);
   const cities = useSelector((state) => state.trip.cities);
+  const friends = useSelector((state) => state.user.friends);
 
   const countriesOptions = countries.map((country) => ({
     key: country.id,
@@ -43,6 +45,12 @@ const TravelAdd = () => {
     key: city.id,
     text: city.name,
     value: city.name,
+  }));
+
+  const friendsOptions = friends.map((friend) => ({
+    key: friend.id,
+    text: `${friend.user2.firstname} ${friend.user2.lastname}`,
+    value: `${friend.user2.firstname} ${friend.user2.lastname}`,
   }));
 
   const handleNextStep = () => {
@@ -151,12 +159,12 @@ const TravelAdd = () => {
             <div className="addtrip">
               <ReturnTitleStep textContent="Ajouter un voyage" />
               <ProgressBarTravel step={step} />
-              <StepSelect
+              <StepSelectTravelers
                 buttonContent="Créer le voyage"
                 placeholderContent="Rechercher dans les amis"
-                labelContent="Ajoutez un/des voyageurs*"
-                options={options}
-                handleClick={submitCreateTravel}
+                labelContent="Sélectionnez un/des voyageurs*"
+                options={friendsOptions} // Utilisez les options des villes
+                handleClick={handleClick}
               />
             </div>
           }

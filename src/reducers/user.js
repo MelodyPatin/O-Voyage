@@ -5,6 +5,7 @@ import {
   SAVE_USER_DATA,
   CLICK_LOGOUT,
   UPDATE_LOGGED_OUT,
+  SAVE_FRIENDS,
 } from '../actions/user';
 
 export const initialState = {
@@ -26,6 +27,7 @@ export const initialState = {
   // redirection
   redirectTo: null,
   myTrips: [],
+  friends: [],
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -89,6 +91,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         loggedOut: false,
+      };
+
+    case SAVE_FRIENDS:
+      return {
+        ...state,
+        friends: action.friends,
       };
 
     default:

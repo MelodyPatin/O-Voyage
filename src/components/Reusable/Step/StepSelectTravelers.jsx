@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSelectedCities } from '../../../actions/trip';
+import { updateSelectedTravelers } from '../../../actions/trip';
 
-const StepSelectCities = ({
+const StepSelectTravelers = ({
   buttonContent,
   placeholderContent,
   labelContent,
@@ -14,24 +14,23 @@ const StepSelectCities = ({
   handleClick,
 }) => {
   const dispatch = useDispatch();
-
   const handleSelectionChange = (selected) => {
     // Convertir chaque élément de selected en un objet { key, value }
     const newSelected = selected
-      .map((selectedCityName) => {
+      .map((selectedTravelerName) => {
         // Trouver l'objet dans options qui correspond à ce nom de pays
-        const selectedCity = options.find(
-          (city) => city.value === selectedCityName
+        const selectedTraveler = options.find(
+          (traveler) => traveler.value === selectedTravelerName
         );
 
         // Vérifier si un pays correspondant a été trouvé
-        if (selectedCity) {
+        if (selectedTraveler) {
           // Retourner un objet avec les clés et valeurs appropriées
-          return { key: selectedCity.key, value: selectedCity.value };
+          return { key: selectedTraveler.key, value: selectedTraveler.value };
         } else {
           // Gérer le cas où aucun pays correspondant n'a été trouvé
           console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCityName}`
+            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
           );
           // Retourner null pour indiquer un problème
           return null;
@@ -40,10 +39,10 @@ const StepSelectCities = ({
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 
     // Dispatch de l'action pour mettre à jour les villes sélectionnées
-    dispatch(updateSelectedCities(newSelected));
+    dispatch(updateSelectedTravelers(newSelected));
   };
-
-  const selected = useSelector((state) => state.trip.selectedCities);
+  
+  const selected = useSelector((state) => state.trip.selectedTravelers);
 
   return (
     <div className="StepSelect">
@@ -57,13 +56,16 @@ const StepSelectCities = ({
             onChange={handleSelectionChange}
           />
         </div>
-        <SimpleButton textContent={buttonContent} onClick={handleClick} />
+        <SimpleButton
+          textContent={buttonContent}
+          onClick={handleClick}
+        />
       </form>
     </div>
   );
 };
 
-StepSelectCities.propTypes = {
+StepSelectTravelers.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   placeholderContent: PropTypes.string,
@@ -77,4 +79,4 @@ StepSelectCities.propTypes = {
   ).isRequired,
 };
 
-export default StepSelectCities;
+export default StepSelectTravelers;
