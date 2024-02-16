@@ -19,6 +19,8 @@ import {
   updateSelectedCountries, // Importez updateSelectedCountries
   fetchCities,
 } from '../../../../actions/trip';
+import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
+import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
 
 const TravelAdd = () => {
   const dispatch = useDispatch();
@@ -79,7 +81,7 @@ const TravelAdd = () => {
             <div className="addtrip">
               <ReturnTitleStep textContent="Ajouter un voyage" />
               <ProgressBarTravel step={step} />
-              <StepSelect
+              <StepSelectCountries
                 buttonContent="Continuer"
                 placeholderContent="France"
                 labelContent="Sélectionnez un/des pays*"
@@ -96,7 +98,7 @@ const TravelAdd = () => {
             <div className="addtrip">
               <ReturnTitleStep textContent="Ajouter un voyage" />
               <ProgressBarTravel step={step} />
-              <StepSelect
+              <StepSelectCities
                 buttonContent="Continuer"
                 placeholderContent="Paris"
                 labelContent="Sélectionnez une/des villes*"
