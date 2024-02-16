@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://localhost:8001/api',
+  baseURL: 'http://localhost:8001/api',
 });
 // intercepteur de request avec axios
-axios.interceptors.request.use(
+api.interceptors.request.use(
   function (config) {
     // Do something before request is sent
 

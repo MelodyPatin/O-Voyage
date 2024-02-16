@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useMediaQuery } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Actions.scss';
+import ActivityAdd from '../../../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
 
 const Actions = () => {
   const { id } = useParams(); // Get the 'id' parameter from the URL

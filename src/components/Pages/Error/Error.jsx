@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
@@ -11,12 +10,6 @@ import './Error.scss';
 import Footer from '../../Reusable/Footer/Footer';
 
 const Error = ({ number, textContent }) => {
-
-  const logged = localStorage.getItem('logged');
-  const loggedState = useSelector((state) => state.user.loggedState);
-
-  console.log(logged);
-  console.log(loggedState);
   return (
     <div className="error">
       <NavBarHeader />

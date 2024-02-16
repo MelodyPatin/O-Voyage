@@ -13,7 +13,7 @@ import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 const ActivityAdd = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const step = 7;
+  const step = 4;
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
