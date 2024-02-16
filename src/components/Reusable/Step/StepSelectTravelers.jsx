@@ -4,16 +4,23 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateSelectedTravelers } from '../../../actions/trip';
+import { addCityToTravel, addTravelerToTravel, submitCreateTravel, updateSelectedTravelers } from '../../../actions/trip';
 
 const StepSelectTravelers = ({
   buttonContent,
   placeholderContent,
   labelContent,
   options,
-  handleClick,
 }) => {
   const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(submitCreateTravel());
+/*     dispatch(addCityToTravel());
+    dispatch(addTravelerToTravel()); */
+  };
+
   const handleSelectionChange = (selected) => {
     // Convertir chaque élément de selected en un objet { key, value }
     const newSelected = selected
@@ -41,12 +48,12 @@ const StepSelectTravelers = ({
     // Dispatch de l'action pour mettre à jour les villes sélectionnées
     dispatch(updateSelectedTravelers(newSelected));
   };
-  
+
   const selected = useSelector((state) => state.trip.selectedTravelers);
 
   return (
     <div className="StepSelect">
-      <form action="">
+      <form autoComplete="off" onSubmit={handleClick}>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
@@ -59,6 +66,7 @@ const StepSelectTravelers = ({
         <SimpleButton
           textContent={buttonContent}
           onClick={handleClick}
+          type="button"
         />
       </form>
     </div>
@@ -69,7 +77,6 @@ StepSelectTravelers.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   placeholderContent: PropTypes.string,
-  handleClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string.isRequired,

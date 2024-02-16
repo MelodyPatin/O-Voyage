@@ -26,9 +26,9 @@ const StepSelect = ({
         dispatch(fetchCities(country.key));
       });
     } else {
-      console.log("Aucun pays sélectionné");
+      console.log('Aucun pays sélectionné');
     }
-  };  
+  };
 
   const handleSelectionChange = (selected) => {
     // Convertir chaque élément de selected en un objet { key, value }
@@ -63,7 +63,7 @@ const StepSelect = ({
 
   return (
     <div className="StepSelect">
-      <form action="">
+      <form autoComplete="off" onSubmit={handleClick}>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector

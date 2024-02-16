@@ -34,7 +34,7 @@ const StepTextarea = ({
 
   return (
     <div className="StepTextarea">
-      <form action="">
+      <form>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <Form>

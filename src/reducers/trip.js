@@ -10,6 +10,7 @@ import {
   SET_START_DATE,
   SET_END_DATE,
   UPDATE_SELECTED_TRAVELERS,
+  HANDLE_SUCCESSFUL_CREATE_TRAVEL,
 } from '../actions/trip';
 
 export const initialState = {
@@ -24,6 +25,7 @@ export const initialState = {
   tripDescription: '',
   startDate: '',
   endDate: '',
+  tripId: null,
 };
 
 const tripReducer = (state = initialState, action = {}) => {
@@ -92,6 +94,12 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         endDate: action.endDate,
+      };
+
+    case HANDLE_SUCCESSFUL_CREATE_TRAVEL:
+      return {
+        ...state,
+        tripId: action.tripId,
       };
 
     default:

@@ -7,6 +7,8 @@ export const FETCH_COUNTRIES = 'FETCH_COUNTRIES';
 export const FETCH_CITIES = 'FETCH_CITIES';
 export const FETCH_CITIES_SUCCESS = 'FETCH_CITIES_SUCCESS';
 export const SUBMIT_CREATE_TRAVEL = 'SUBMIT_CREATE_TRAVEL';
+export const ADD_CITY_TO_TRAVEL = 'ADD_CITY_TO_TRAVEL';
+export const ADD_TRAVELER_TO_TRAVEL = 'ADD_TRAVELER_TO_TRAVEL';
 export const SAVE_COUNTRIES = 'SAVE_COUNTRIES';
 export const SAVE_CITIES = 'SAVE_CITIES';
 export const UPDATE_SELECTED_COUNTRIES = 'UPDATE_SELECTED_COUNTRIES';
@@ -14,6 +16,7 @@ export const UPDATE_SELECTED_CITIES = 'UPDATE_SELECTED_CITIES';
 export const SET_START_DATE = 'SET_START_DATE';
 export const SET_END_DATE = 'SET_END_DATE';
 export const UPDATE_SELECTED_TRAVELERS = 'UPDATE_SELECTED_TRAVELERS';
+export const HANDLE_SUCCESSFUL_CREATE_TRAVEL = 'HANDLE_SUCCESSFUL_CREATE_TRAVEL';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -56,6 +59,14 @@ export const submitCreateTravel = () => ({
   type: SUBMIT_CREATE_TRAVEL,
 });
 
+export const addCityToTravel = () => ({
+  type: ADD_CITY_TO_TRAVEL,
+});
+
+export const addTravelerToTravel = () => ({
+  type: ADD_TRAVELER_TO_TRAVEL,
+});
+
 export const saveCountries = (countries) => ({
   type: SAVE_COUNTRIES,
   countries,
@@ -90,3 +101,9 @@ export const setEndDate = (endDate) => ({
   type: SET_END_DATE,
   endDate,
 });
+
+export const handleSuccessfulCreateTravel = (tripId) => ({
+  type: HANDLE_SUCCESSFUL_CREATE_TRAVEL,
+  tripId,
+});
+

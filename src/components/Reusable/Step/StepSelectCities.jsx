@@ -47,7 +47,7 @@ const StepSelectCities = ({
 
   return (
     <div className="StepSelect">
-      <form action="">
+      <form autoComplete="off" onSubmit={handleClick}>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
