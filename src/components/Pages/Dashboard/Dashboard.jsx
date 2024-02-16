@@ -1,21 +1,28 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Dashboard.scss'
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
 import TravelCard from '../../Reusable/TravelCard/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
+import { fetchCities, fetchCountries } from '../../../actions/trip';
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
   const trips = useSelector((state) => state.trip.myTrips);
+
+  const handleCreateTrip = () => {
+    dispatch(fetchCountries());
+    dispatch(fetchCities());
+  }
 
   return (
     <div className="dashboard">
       <HeaderConnected />
       <h2>MES VOYAGES</h2>
       <Link to="/createtrip">
-        <IconButton textContent="Créer un voyage" icon="add" />
+        <IconButton textContent="Créer un voyage" icon="add" onClick={handleCreateTrip} />
       </Link>
       <div className="list">
         <div className="now">

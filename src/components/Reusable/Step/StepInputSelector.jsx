@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import { Select } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
+import { handleStepNext } from '../../../actions/trip';
 
 // Functional component : popup with input fields and a close button
 const StepInputSelector = ({
@@ -15,6 +17,11 @@ const StepInputSelector = ({
   options,
   city,
 }) => {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(handleStepNext());
+  };
   return (
     <div className="StepInputSelector">
       <LabelInput
@@ -29,7 +36,7 @@ const StepInputSelector = ({
         className="selector"
         city={city}
       />
-      <SimpleButton textContent={buttonContent} />
+      <SimpleButton textContent={buttonContent} onClick={handleClick} />
     </div>
   );
 };

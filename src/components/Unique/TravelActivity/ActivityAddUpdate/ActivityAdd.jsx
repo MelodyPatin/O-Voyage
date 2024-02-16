@@ -1,5 +1,6 @@
 import React from 'react';
 import './ActivityAddUpdate.scss';
+import { useMediaQuery } from '@mui/material';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../Reusable/Step/StepInput';
@@ -12,9 +13,12 @@ import StepTag from '../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 import PropTypes from 'prop-types';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
+import { useSelector } from 'react-redux';
 
 const ActivityAdd = ({ onDesktop }) => {
-  const step = 4; 
+  const isMobile = useMediaQuery('(max-width: 767px)');
+
+  const step = useSelector((state) => state.trip.step);
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },
@@ -22,7 +26,7 @@ const ActivityAdd = ({ onDesktop }) => {
     { key: 'option3', text: 'Option 3', value: 'Option 3' },
   ];
 
-  return onDesktop ? (
+  return !isMobile ? (
     <>
       {step === 1 && (
         <PopupUpdate textContent={
