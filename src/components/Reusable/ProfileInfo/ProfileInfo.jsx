@@ -1,12 +1,23 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './ProfileInfo.scss';
 import PropTypes from 'prop-types';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
+import { fetchMyTrips } from '../../../actions/trip';
+import { fetchFriends } from '../../../actions/user';
 
-const ProfileInfo = ({ nbFriends }) => {
+const ProfileInfo = () => {
   const firstname = useSelector((state) => state.user.firstnameValue);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMyTrips());
+    dispatch(fetchFriends());
+  }, []);
+
   const trips = useSelector((state) => state.trip.myTrips);
+  const friends = useSelector((state) => state.user.friends);
 
   return (
     <div className="ProfileInfo">
@@ -23,15 +34,11 @@ const ProfileInfo = ({ nbFriends }) => {
         <UserGroupIcon className="icon" />
         <p>
           {'\u00A0'}
-          {nbFriends} amis
+          {friends.length} amis
         </p>
       </div>
     </div>
   );
-};
-
-ProfileInfo.propTypes = {
-  nbFriends: PropTypes.number.isRequired,
 };
 
 export default ProfileInfo;

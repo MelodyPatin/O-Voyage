@@ -1,12 +1,13 @@
-import React from 'react';
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import './FriendList.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeftIcon } from '@heroicons/react/24/solid';
-import { XMarkIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import User from '../../../Reusable/User/User';
 import Footer from '../../../Reusable/Footer/Footer';
+import { fetchFriends } from '../../../../actions/user';
 
 const FriendList = () => {
   const navigate = useNavigate();
@@ -14,6 +15,15 @@ const FriendList = () => {
   const handleGoBack = () => {
     navigate(-1); // Navigates back to the previous page
   };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFriends());
+  }, []);
+
+  const friends = useSelector((state) => state.user.friends);
+  console.log('frends', friends);
 
   return (
     <div className="friends">
@@ -26,34 +36,13 @@ const FriendList = () => {
         <IconButton textContent="Ajouter un ami" icon="add" />
       </Link>
       <ul className="friendList">
-        <li className="friend">
-          <User
-            firstName="Nicolas"
-            lastName="Guillotte Pourroy de L'Auberivière de Quinsonas-Oudinot de Reggio "
-          />
-          {/* XMarkIcon for indicating friend deletion */}
-          <XMarkIcon className="icon" />
-        </li>
-        <li className="friend">
-          <User firstName="Nicolas" lastName="Guillotte" />
-          {/* XMarkIcon for indicating friend deletion */}
-          <XMarkIcon className="icon" />
-        </li>
-        <li className="friend">
-          <User firstName="Nicolas" lastName="Guillotte" />
-          {/* XMarkIcon for indicating friend deletion */}
-          <XMarkIcon className="icon" />
-        </li>
-        <li className="friend">
-          <User firstName="Nicolas" lastName="Guillotte" />
-          {/* XMarkIcon for indicating friend deletion */}
-          <XMarkIcon className="icon" />
-        </li>
-        <li className="friend">
-          <User firstName="Nicolas" lastName="Guillotte" />
-          {/* XMarkIcon for indicating friend deletion */}
-          <XMarkIcon className="icon" />
-        </li>
+        {friends.map((friend) => (
+          <li className="friend" key={friend.id}>
+            <User user={friend.user2} />
+            {/* XMarkIcon for indicating friend deletion */}
+            <XMarkIcon className="icon" />
+          </li>
+        ))}
       </ul>
       <Footer />
     </div>

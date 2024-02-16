@@ -7,6 +7,7 @@ import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 
 const TravelersList = () => {
   const travelers = useSelector((state) => state.trip.travelers);
+  console.log(travelers);
 
   return (
     <div className="TravelersList">
@@ -16,7 +17,7 @@ const TravelersList = () => {
       <ul>
         {travelers.map((traveler) => (
           <li key={traveler.id}>
-            <User firstName={traveler.firstname} />
+            <User user={traveler} />
           </li>
         ))}
       </ul>

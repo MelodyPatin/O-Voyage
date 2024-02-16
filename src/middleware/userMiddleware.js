@@ -71,8 +71,14 @@ const userMiddleware = (store) => (next) => (action) => {
       api
         .get('/user/me')
         .then((response) => {
+          console.log(response.data);
           store.dispatch(
-            saveUserData(response.data.firstname, response.data.lastname)
+            saveUserData(
+              response.data.firstname,
+              response.data.lastname,
+              response.data.email,
+              response.data.avatarURL
+            )
           );
         })
         .catch((error) => {
@@ -81,13 +87,10 @@ const userMiddleware = (store) => (next) => (action) => {
       break;
 
     case FETCH_FRIENDS:
-      axios
-        .get(`http://localhost:8001/api/friend`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
+      api
+        .get(`/friend`)
         .then((response) => {
+          console.log('API Response:', response.data);
           store.dispatch(saveFriends(response.data));
         })
         .catch((error) => {

@@ -3,9 +3,9 @@ import './ActivityCard.scss';
 import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import Avatar from '../Avatar/Avatar';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
+import AvatarFriend from '../Avatar/AvatarFriends';
 
 const ActivityCard = ({ activityTitle, activity }) => {
   // Check if the activity is liked; assuming a constant value for the example.
@@ -22,7 +22,7 @@ const ActivityCard = ({ activityTitle, activity }) => {
       <div className="FlexGap">
         {/* Display rank and Avatar in a flex container */}
         <p>{activity.score}</p>
-        <Avatar />
+        <AvatarFriend />
       </div>
       {/* Display the shortened activity title */}
       <div className="title">
@@ -53,6 +53,7 @@ ActivityCard.propTypes = {
     score: PropTypes.number.isRequired,
     city: PropTypes.shape.isRequired,
     // ... autres propriétés ...
-  }).isRequired,};
+  }).isRequired,
+};
 
 export default ActivityCard;

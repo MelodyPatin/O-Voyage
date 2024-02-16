@@ -1,22 +1,29 @@
 import React from 'react';
 import './User.scss';
 import PropTypes from 'prop-types';
-import Avatar from '../Avatar/Avatar';
+import AvatarFriend from '../Avatar/AvatarFriends';
 
 // Component representing a user
-const User = ({ firstName, lastName, textContent }) => (
-  <div className="User">
-    <Avatar /> {/* Render the Avatar component for user's profile image */}
-    <span>
-      {firstName} {lastName} {textContent}
-    </span>
-  </div>
-);
+const User = ({ user }) => {
+  console.log(user.firstname); // Move the console.log outside JSX
+
+  return (
+    <div className="User">
+      <AvatarFriend userAvatar={user.avatarURL} />
+      {/* Render the Avatar component for user's profile image */}
+      <span>
+        {user.firstname} {user.lastname}
+      </span>
+    </div>
+  );
+};
 
 User.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
-  textContent: PropTypes.string,
+  user: PropTypes.shape({
+    firstname: PropTypes.string,
+    lastname: PropTypes.string,
+    avatarURL: PropTypes.string,
+  }).isRequired,
 };
 
 export default User;

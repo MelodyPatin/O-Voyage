@@ -6,9 +6,11 @@ import {
   CLICK_LOGOUT,
   UPDATE_LOGGED_OUT,
   SAVE_FRIENDS,
+  FETCH_FRIENDS,
 } from '../actions/user';
 
 export const initialState = {
+  logged: false,
   // indique si l'utilisateur est déconnecté
   loggedOut: false,
   // indique si l'utilisateur a créé son compte
@@ -23,7 +25,7 @@ export const initialState = {
   signUpPassword: '',
   firstnameValue: '',
   lastnameValue: '',
-  logged: false,
+  avatar: '',
   // redirection
   redirectTo: null,
   myTrips: [],
@@ -73,6 +75,8 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         firstnameValue: action.firstName,
         lastnameValue: action.lastName,
+        avatar: action.avatarURL,
+        email: action.email,
       };
 
     case CLICK_LOGOUT:
