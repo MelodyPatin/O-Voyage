@@ -21,6 +21,7 @@ import ActivityAdd from '../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd'
 import FAQ from '../Pages/FAQ/FAQ';
 import LegalNotice from '../Pages/LegalNotice/LegalNotice';
 import History from '../Pages/History/History';
+import ActivityDetails from '../Pages/Travel/ActivityDetails';
 
 function App() {
   const dispatch = useDispatch();
@@ -78,7 +79,7 @@ function App() {
           {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
           {logged && <Route path="/trip/:id" element={<TravelDetails />} />}
           {logged && (
-            <Route path="/travel/:id/travelers" element={<Travelers />} />
+            <Route path="/trip/:id/travelers" element={<Travelers />} />
           )}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />

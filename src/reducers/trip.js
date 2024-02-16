@@ -1,13 +1,16 @@
 import {
   FETCH_A_TRIP,
   FETCH_MY_TRIPS,
+  FETCH_TRAVELERS,
   SAVE_MY_TRIPS,
+  SHOW_TRAVELERS,
   SHOW_TRIP,
 } from '../actions/trip';
 
 export const initialState = {
   myTrips: [],
   trip: [],
+  travelers: [],
 };
 
 const tripReducer = (state = initialState, action = {}) => {
@@ -28,6 +31,15 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         trip: action.trip,
+      };
+
+    case FETCH_TRAVELERS:
+      return state;
+
+    case SHOW_TRAVELERS:
+      return {
+        ...state,
+        travelers: action.travelers,
       };
 
     default:

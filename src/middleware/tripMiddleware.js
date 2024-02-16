@@ -4,6 +4,7 @@ import {
   FETCH_MY_TRIPS,
   FETCH_TRAVELERS,
   saveMyTrips,
+  showTravelers,
   showTrip,
 } from '../actions/trip';
 

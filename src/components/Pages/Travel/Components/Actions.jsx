@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useMediaQuery } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Actions.scss';
-import ActivityAdd from '../../../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
 
 const Actions = () => {
   const { id } = useParams(); // Get the 'id' parameter from the URL
@@ -15,7 +14,7 @@ const Actions = () => {
       <div className="buttons">
         {!isMobile ? (
           <div className="simpleButton">
-            <Link to={`/travel/${id}/travelers`}>
+            <Link to={`/trip/${id}/travelers`}>
               <SimpleButton textContent="Voir les voyageurs" />
             </Link>
           </div>
