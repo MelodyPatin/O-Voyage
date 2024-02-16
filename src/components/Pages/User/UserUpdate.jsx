@@ -8,6 +8,7 @@ import PopupUpdate from '../../Reusable/Popups/PopupUpdate';
 
 const UserUpdate = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
+
   return (
     <div>
       {!isMobile ? (

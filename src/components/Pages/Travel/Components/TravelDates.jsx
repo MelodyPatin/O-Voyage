@@ -1,17 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
-const TravelDates = ({ DepartureDate, ReturnDate }) => {
+const TravelDates = () => {
+  const currentTrip = useSelector((state) => state.trip.trip);
+
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = new Date(dateString).toLocaleDateString(
+      'fr-FR',
+      options
+    );
+    return formattedDate;
+  };
+
   return (
     <div className="travelDates">
-      {DepartureDate} - {ReturnDate}
+      {formatDate(currentTrip.startDate)} - {formatDate(currentTrip.endDate)}
     </div>
   );
-};
-
-TravelDates.propTypes = {
-  DepartureDate: PropTypes.string.isRequired,
-  ReturnDate: PropTypes.string.isRequired,
 };
 
 export default TravelDates;

@@ -1,6 +1,7 @@
 import React from 'react';
 import './FriendAdd.scss';
 import { useMediaQuery } from '@mui/material';
+
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate'; // Ajout de l'import PopupUpdate

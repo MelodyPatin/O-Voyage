@@ -16,7 +16,6 @@ import './dropDownSettings.scss';
 const DropDownSettings = ({ handleLogout }) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const firstName = localStorage.getItem('firstname');
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
 
   // Toggle function to switch between open and closed states
@@ -35,15 +34,10 @@ const DropDownSettings = ({ handleLogout }) => {
       {/* Dropdown content */}
       {isOpen && (
         <div className="dropdown-content settings">
-          <ProfileInfo
-            firstName="Mélody"
-            nbTravels={5}
-            nbFriends={10}
-            id="info"
-          />
+          <ProfileInfo id="info" />
           <ul>
             {/* Settings items */}
-            <Link to={`/${firstName}`}>
+            <Link to="/me">
               <li className="item">Modifier mon profil</li>
             </Link>
             <Link to="/friends">

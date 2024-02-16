@@ -23,7 +23,7 @@ export const initialState = {
   signUpPassword: '',
   firstnameValue: '',
   lastnameValue: '',
-  loggedState: false,
+  logged: false,
   // redirection
   redirectTo: null,
   myTrips: [],
@@ -48,7 +48,6 @@ const reducer = (state = initialState, action = {}) => {
 
     case HANDLE_SUCCESSFUL_LOGIN:
       localStorage.setItem('token', action.token);
-      localStorage.setItem('logged', 'true'); // Stocker l'état d'authentification
 
       return {
         ...state,
@@ -56,6 +55,7 @@ const reducer = (state = initialState, action = {}) => {
         email: '',
         password: '',
         loggedState: true,
+        logged: true,
       };
 
     case HANDLE_SUCCESSFUL_SIGN_UP:
@@ -69,22 +69,22 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case SAVE_USER_DATA:
-      localStorage.setItem('firstname', action.firstName);
-      localStorage.setItem('lastname', action.lastName);
-
-      return state;
+      return {
+        ...state,
+        firstnameValue: action.firstName,
+        lastnameValue: action.lastName,
+      };
 
     case CLICK_LOGOUT:
       localStorage.removeItem('token');
-      localStorage.removeItem('firstname');
-      localStorage.removeItem('lastname');
-      localStorage.removeItem('logged'); // Supprimer l'état d'authentification du localStorage
 
       return {
         ...state,
+        firstnameValue: '',
+        lastname: '',
+        logged: false,
         loggedOut: true,
         signedUp: false,
-        loggedState: false,
       };
 
     case UPDATE_LOGGED_OUT:

@@ -3,7 +3,11 @@
 import { React, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { changeLoginField, submitLogin, submitSignUp } from '../../../actions/user';
+import {
+  changeLoginField,
+  submitLogin,
+  submitSignUp,
+} from '../../../actions/user';
 import NavBar from '../../Reusable/NavBarHeader/NavBarHeader';
 import Header from './Header/Header';
 import Presentation from './Presentation/Presentation';
@@ -11,7 +15,7 @@ import LastPart from './LastPart/LastPart';
 import Footer from '../../Reusable/Footer/Footer';
 import LogIn from './Popup/LogIn';
 import SignUp from './Popup/SignUp';
-import Dashboard from '../Dashboard/Dashboard';  // Import Dashboard component
+import Dashboard from '../Dashboard/Dashboard'; // Import Dashboard component
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -22,7 +26,7 @@ const HomePage = () => {
   const passwordValue = useSelector((state) => state.user.password);
   const signUpEmailValue = useSelector((state) => state.user.signUpEmail);
   const signUpPasswordValue = useSelector((state) => state.user.signUpPassword);
-  const logged = localStorage.getItem('logged');
+  const logged = useSelector((state) => state.user.logged);
   const signedUp = useSelector((state) => state.user.signedUp);
 
   // Ajoutez un état local pour gérer la redirection
@@ -93,7 +97,7 @@ const HomePage = () => {
                 dispatch(submitSignUp());
               }}
             />
-          } 
+          }
         />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>

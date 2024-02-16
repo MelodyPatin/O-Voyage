@@ -1,49 +1,60 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
+import { useMediaQuery } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Activities.scss';
+import ActivityAdd from '../../../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
 
-const Activities = ({ onDesktop }) => {
+const Activities = () => {
+  const isMobile = useMediaQuery('(max-width: 1024px)');
+
+  const activities = useSelector((state) => state.activity.activities);
+
+  const [popupOpened, setPopupOpened] = useState(false);
+
+  const openPopup = () => {
+    setPopupOpened(true);
+  };
+
   return (
     <div className="activities">
-      {onDesktop && (
+      {!isMobile && (
         <div className="filterButton">
           <SimpleButton textContent="Filtrer" />
         </div>
       )}
       <div className="sliderContainer">
-        {onDesktop && (
+        {!isMobile && (
           <div className="arrow">
             <ChevronLeftIcon />
           </div>
         )}
         <div className="activityList">
-          <ActivityCard activityTitle="Parlement de Budapest" />
-          <ActivityCard activityTitle="coucou" />
-          <ActivityCard activityTitle="coucou" />
-          <ActivityCard activityTitle="coucou" />
-          <ActivityCard activityTitle="coucou" />
+          {activities.map((activity) => (
+            <div className="activity" key={activity.id}>
+              <ActivityCard activityTitle={activity.name} activity={activity} />
+            </div>
+          ))}
         </div>
-        {onDesktop && (
+        {!isMobile && (
           <div className="arrow">
             <ChevronRightIcon />
           </div>
         )}
       </div>
-      {onDesktop && (
+      {!isMobile && (
         <div className="suggestionButton">
-          <IconButton textContent="Faire une proposition" icon="add" />
+          <button onClick={openPopup} type="button">
+            <IconButton textContent="Faire une proposition" icon="add" />
+          </button>
         </div>
       )}
+      {popupOpened && <ActivityAdd />}
     </div>
   );
-};
-
-Activities.propTypes = {
-  onDesktop: PropTypes.bool,
 };
 
 export default Activities;

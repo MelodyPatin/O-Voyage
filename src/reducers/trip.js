@@ -1,7 +1,6 @@
 import {
   HANDLE_STEP_BACK,
   HANDLE_STEP_NEXT,
-  SAVE_MY_TRIPS,
   CHANGE_TRIP_FIELD,
   SAVE_COUNTRIES,
   SAVE_CITIES,
@@ -11,6 +10,12 @@ import {
   SET_END_DATE,
   UPDATE_SELECTED_TRAVELERS,
   HANDLE_SUCCESSFUL_CREATE_TRAVEL,
+  FETCH_A_TRIP,
+  FETCH_MY_TRIPS,
+  FETCH_TRAVELERS,
+  SAVE_MY_TRIPS,
+  SHOW_TRAVELERS,
+  SHOW_TRIP,
 } from '../actions/trip';
 
 export const initialState = {
@@ -26,6 +31,8 @@ export const initialState = {
   startDate: '',
   endDate: '',
   tripId: null,
+  trip: [],
+  travelers: [],
 };
 
 const tripReducer = (state = initialState, action = {}) => {
@@ -100,6 +107,22 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tripId: action.tripId,
+    case FETCH_A_TRIP:
+      return state;
+
+    case SHOW_TRIP:
+      return {
+        ...state,
+        trip: action.trip,
+      };
+
+    case FETCH_TRAVELERS:
+      return state;
+
+    case SHOW_TRAVELERS:
+      return {
+        ...state,
+        travelers: action.travelers,
       };
 
     default:

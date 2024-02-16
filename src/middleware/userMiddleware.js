@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   SUBMIT_LOGIN,
   SUBMIT_SIGN_UP,
@@ -12,6 +11,7 @@ import {
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
+import api from '../api';
 
 const userMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -24,24 +24,13 @@ const userMiddleware = (store) => (next) => (action) => {
         password,
       };
 
-      // Configuration de la requête Axios
-      // eslint-disable-next-line no-case-declarations
-      const logInRequestOptions = {
-        method: 'POST',
-        url: 'http://localhost:8001/api/login_check',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: logInJsonData,
-      };
-
       // Exécution de la requête
-      axios(logInRequestOptions)
+      api
+        .post('/login_check', logInJsonData)
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleSuccessfulLogin(response.data.token));
           store.dispatch(fetchUserData());
-          store.dispatch(fetchMyTrips());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -62,19 +51,9 @@ const userMiddleware = (store) => (next) => (action) => {
         password: signUpPassword,
       };
 
-      // Configuration de la requête Axios
-      // eslint-disable-next-line no-case-declarations
-      const signUpRequestOptions = {
-        method: 'POST',
-        url: 'http://localhost:8001/api/user/add',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        data: signUpJsonData,
-      };
-
       // Exécution de la requête
-      axios(signUpRequestOptions)
+      api
+        .post('/user/add', signUpJsonData)
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleSuccessfulSignUp());
@@ -89,20 +68,8 @@ const userMiddleware = (store) => (next) => (action) => {
     case FETCH_USER_DATA:
       // on doit envoyer le JWT dans le header Authorization de la requête, pour
       // que le serveur nous fournisse NOS recettes préférées
-      axios
-        .get(
-          // URL
-          'http://localhost:8001/api/user/me',
-          // options (notamment les headers)
-          {
-            headers: {
-              // nom: contenu
-              // on fournit le token JWT dans le header Authorization, en faisant
-              // précéder par le mot Bearer
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-          }
-        )
+      api
+        .get('/user/me')
         .then((response) => {
           store.dispatch(
             saveUserData(response.data.firstname, response.data.lastname)

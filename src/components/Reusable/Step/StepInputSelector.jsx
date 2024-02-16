@@ -1,9 +1,9 @@
 import React from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
+import { Select } from 'semantic-ui-react';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
-import { Select } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import { handleStepNext } from '../../../actions/trip';
 

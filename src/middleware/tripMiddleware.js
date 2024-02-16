@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../api';
 
 import {
   FETCH_MY_TRIPS,
@@ -13,17 +13,18 @@ import {
   handleSuccessfulCreateTravel,
   addCityToTravel,
   addTravelerToTravel,
+  FETCH_A_TRIP,
+  FETCH_TRAVELERS,
+  saveMyTrips,
+  showTravelers,
+  showTrip,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_MY_TRIPS:
-      axios
-        .get('http://localhost:8001/api/mytrips', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
+      api
+        .get('/mytrips')
         .then((response) => {
           console.log(response.data);
           store.dispatch(saveMyTrips(response.data));
@@ -35,12 +36,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case FETCH_COUNTRIES:
-      axios
-        .get('http://localhost:8001/api/country', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
+      api
+        .get('/country')
         .then((response) => {
           console.log(response.data);
           store.dispatch(saveCountries(response.data));
@@ -66,12 +63,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       console.log(tripJsonData);
 
       // Exécution de la requête
-      axios
-        .post('http://localhost:8001/api/trip/add', tripJsonData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
+      api
+        .post('/trip/add', tripJsonData)
         .then((response) => {
           // Traitement de la réponse
           console.log(response.data);
@@ -99,8 +92,8 @@ const tripMiddleware = (store) => (next) => (action) => {
       };
 
       // Exécution de la requête
-      axios
-        .post(`http://localhost:8001/api/trip/${tripId}/addcity`, cityJsonData)
+      api
+        .post(`/trip/${tripId}/addcity`, cityJsonData)
         .then((response) => {
           // Traitement de la réponse
           console.log(response);
@@ -109,6 +102,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          
+    case FETCH_A_TRIP:
+      api
+        .get(`/trip/${action.id}`)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(showTrip(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
         });
 
       break;
@@ -141,12 +144,8 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case FETCH_CITIES:
       const countryId = action.countryId;
-      axios
-        .get(`http://localhost:8001/api/country/${countryId}/cities`, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        })
+      api
+        .get(`/country/${countryId}/cities`)
         .then((response) => {
           store.dispatch(saveCities(response.data.cities));
         })
@@ -154,6 +153,18 @@ const tripMiddleware = (store) => (next) => (action) => {
           console.error(error);
           // Gestion de l'erreur
         });
+  
+    case FETCH_TRAVELERS:
+      api
+        .get(`/trip/${action.id}/showTravelers`)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(showTravelers(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
       break;
 
     default:

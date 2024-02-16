@@ -1,16 +1,44 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+/* eslint-disable react/no-unescaped-entities */
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './Dashboard.scss'
+import './Dashboard.scss';
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
-import TravelCard from '../../Reusable/TravelCard/TravelCard';
+import TravelCard from './Components/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
 import { fetchCities, fetchCountries } from '../../../actions/trip';
+import { fetchMyTrips } from '../../../actions/trip';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMyTrips());
+  }, []);
+
   const trips = useSelector((state) => state.trip.myTrips);
+  const tripsWithStatus = trips.map((trip) => {
+    const startDate = new Date(trip.startDate).getTime();
+    const endDate = new Date(trip.endDate).getTime();
+    const currentDate = new Date().getTime();
+
+    if (currentDate >= startDate && currentDate <= endDate) {
+      return { ...trip, status: 'current' };
+    }
+    if (startDate > currentDate) {
+      return { ...trip, status: 'future' };
+    }
+    return { ...trip, status: 'passed' };
+  });
+
+  const sortedTrips = tripsWithStatus.sort(
+    (a, b) => new Date(a.startDate) - new Date(b.startDate)
+  );
+
+  const currentTrips = sortedTrips.filter((trip) => trip.status === 'current');
+  const futureTrips = sortedTrips.filter((trip) => trip.status === 'future');
+  const passedTrips = sortedTrips.filter((trip) => trip.status === 'passed');
 
   const handleCreateTrip = () => {
     dispatch(fetchCountries());
@@ -27,25 +55,26 @@ const Dashboard = () => {
       <div className="list">
         <div className="now">
           <p className="when">J'y suis actuellement</p>
-          <TravelCard title='Paris'/>
+          <div className="cardList">
+            {currentTrips.map((trip) => (
+              <TravelCard key={trip.id} trip={trip} />
+            ))}
+          </div>
         </div>
         <div className="future">
           <p className="when">C'est pour bientôt</p>
           <div className="cardList">
-            <TravelCard title='Bordeaux' countdown={2} />
-            <TravelCard title='Bordeaux' countdown={2} />
-            <TravelCard title='Bordeaux' countdown={2} />
-            <TravelCard title='Bordeaux' countdown={2} />
-            <TravelCard title='Bordeaux' countdown={2} />
+            {futureTrips.map((trip) => (
+              <TravelCard key={trip.id} trip={trip} />
+            ))}
           </div>
         </div>
         <div className="passed">
           <p className="when">J'y suis allé.e</p>
           <div className="cardList">
-            {trips.map((trip) => (
-              <TravelCard key={trip.id} trip={trip} title={trip.name} />
+            {passedTrips.map((trip) => (
+              <TravelCard key={trip.id} trip={trip} />
             ))}
-            {/* // TODO gérer la division entre passé future et current + trier par date de début : plus proche en premier */}
           </div>
         </div>
       </div>
