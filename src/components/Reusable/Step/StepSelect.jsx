@@ -16,9 +16,28 @@ const StepSelect = ({
   const dispatch = useDispatch();
 
   const handleSelectionChange = (selected) => {
+    // Convertir chaque élément de selected en un objet { key, value }
+    const newSelected = selected.map(selectedCountryName => {
+      // Trouver l'objet dans options qui correspond à ce nom de pays
+      const selectedCountry = options.find(country => country.value === selectedCountryName);
+      
+      // Vérifier si un pays correspondant a été trouvé
+      if (selectedCountry) {
+        // Retourner un objet avec les clés et valeurs appropriées
+        return { key: selectedCountry.key, value: selectedCountry.value };
+      } else {
+        // Gérer le cas où aucun pays correspondant n'a été trouvé
+        console.error(`Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCountryName}`);
+        // Retourner null pour indiquer un problème
+        return null;
+      }
+    }).filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
+    
+    console.log(newSelected);
     // Dispatch de l'action pour mettre à jour les pays sélectionnés
-    dispatch(updateSelectedCountries(selected));
+    dispatch(updateSelectedCountries(newSelected));
   };
+  
 
   const selected = useSelector((state) => state.trip.selectedCountries);
 
@@ -30,7 +49,7 @@ const StepSelect = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected}
+            selected={selected.value}
             onChange={handleSelectionChange}
           />
         </div>
