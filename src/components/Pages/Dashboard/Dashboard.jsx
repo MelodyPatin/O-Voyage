@@ -7,12 +7,14 @@ import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
 import TravelCard from './Components/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
-//import { fetchUserData } from '../../../actions/user';
+import { fetchMyTrips } from '../../../actions/trip';
 
 const Dashboard = () => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-
+  useEffect(() => {
+    dispatch(fetchMyTrips());
+  }, []);
 
   const trips = useSelector((state) => state.trip.myTrips);
   const tripsWithStatus = trips.map((trip) => {

@@ -7,7 +7,6 @@ import Dashboard from '../Pages/Dashboard/Dashboard';
 import Error from '../Pages/Error/Error';
 import {
   updateLoggedOut,
-  submitLogin,
   fetchUserData,
   handleSuccessfulLogin,
 } from '../../actions/user';
@@ -22,12 +21,12 @@ import ActivityAdd from '../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd'
 import FAQ from '../Pages/FAQ/FAQ';
 import LegalNotice from '../Pages/LegalNotice/LegalNotice';
 import History from '../Pages/History/History';
+import ActivityDetails from '../Pages/Travel/ActivityDetails';
 
 function App() {
   const dispatch = useDispatch();
 
   const loggedOut = useSelector((state) => state.user.loggedOut);
-  const firstName = localStorage.getItem('firstname');
   const logged = useSelector((state) => state.user.logged);
 
   const [redirectHome, setRedirectHome] = useState(false);
@@ -78,9 +77,9 @@ function App() {
           {logged && <Route path="/createtrip" element={<TravelAdd />} />}
           {logged && <Route path="/updatetrip" element={<TravelUpdate />} />}
           {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
-          {logged && <Route path="/travel/:id" element={<TravelDetails />} />}
+          {logged && <Route path="/trip/:id" element={<TravelDetails />} />}
           {logged && (
-            <Route path="/travel/:id/travelers" element={<Travelers />} />
+            <Route path="/trip/:id/travelers" element={<Travelers />} />
           )}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />

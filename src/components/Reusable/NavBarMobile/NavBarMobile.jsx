@@ -15,10 +15,10 @@ const NavBarMobile = () => {
     <div className="NavBarMobileContainer">
       {/* List of Icons present in the mobile navbar */}
       <div className="NavBarMobile">
-        <Link to={`/travel/${id}`}>
+        <Link to={`/trip/${id}`}>
           <HomeIcon className="icon home" />
         </Link>
-        <Link to={`/travel/${id}/travelers`}>
+        <Link to={`/trip/${id}/travelers`}>
           <UserGroupIcon className="icon user" />
         </Link>
         <div className="circle">

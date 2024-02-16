@@ -1,6 +1,12 @@
-
-import { FETCH_MY_TRIPS, saveMyTrips } from '../actions/trip';
 import api from '../api';
+import {
+  FETCH_A_TRIP,
+  FETCH_MY_TRIPS,
+  FETCH_TRAVELERS,
+  saveMyTrips,
+  showTravelers,
+  showTrip,
+} from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,6 +20,32 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.error(error);
           // Gestion de l'erreur
+        });
+
+      break;
+
+    case FETCH_A_TRIP:
+      api
+        .get(`/trip/${action.id}`)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(showTrip(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      break;
+
+    case FETCH_TRAVELERS:
+      api
+        .get(`/trip/${action.id}/showTravelers`)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(showTravelers(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
         });
 
       break;

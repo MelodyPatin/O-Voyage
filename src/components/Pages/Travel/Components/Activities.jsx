@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
+import { useSelector } from 'react-redux';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
@@ -10,6 +10,8 @@ import ActivityAdd from '../../../Unique/TravelActivity/ActivityAddUpdate/Activi
 
 const Activities = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
+
+  const activities = useSelector((state) => state.activity.activities);
 
   const [popupOpened, setPopupOpened] = useState(false);
 
@@ -31,11 +33,11 @@ const Activities = () => {
           </div>
         )}
         <div className="activityList">
-          <ActivityCard activityTitle="Parlement de Budapest" />
-          <ActivityCard activityTitle="coucou" />
-          <ActivityCard activityTitle="coucou" />
-          <ActivityCard activityTitle="coucou" />
-          <ActivityCard activityTitle="coucou" />
+          {activities.map((activity) => (
+            <div className="activity" key={activity.id}>
+              <ActivityCard activityTitle={activity.name} activity={activity} />
+            </div>
+          ))}
         </div>
         {!isMobile && (
           <div className="arrow">

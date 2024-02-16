@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './TravelCard.scss';
 
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
 const TravelCard = ({ trip }) => {
   if (!trip) {
     return null;
   }
-  const { name, startDate, backgroundPictureURL, id } = trip;
+  const { name, startDate, backgroundPictureURL } = trip;
 
   const [countdown, setCountdown] = useState(null);
 
@@ -34,11 +34,11 @@ const TravelCard = ({ trip }) => {
 
   return (
     <div className="cardContainer">
-      <Link to={`/travel/${id}`}>
+      <Link to={`/trip/${trip.id}`}>
         {/* Background image for the travel card */}
         <img className="cardPicture" src={backgroundPictureURL} alt="Travel" />
       </Link>
-      <Link to={`/travel/${id}`}>
+      <Link to={`/trip/${trip.id}`}>
         <div className="cardTitle">
           {/* Title of the travel */}
           <h3>{name}</h3>

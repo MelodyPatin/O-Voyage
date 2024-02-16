@@ -7,7 +7,7 @@ import Avatar from '../Avatar/Avatar';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
 
-const ActivityCard = ({ activityTitle }) => {
+const ActivityCard = ({ activityTitle, activity }) => {
   // Check if the activity is liked; assuming a constant value for the example.
   const isLiked = true;
   let shortenedTitle = activityTitle.substring(0, 35);
@@ -21,7 +21,7 @@ const ActivityCard = ({ activityTitle }) => {
     <div className="ActivityCard culture">
       <div className="FlexGap">
         {/* Display rank and Avatar in a flex container */}
-        <p>#1</p>
+        <p>{activity.score}</p>
         <Avatar />
       </div>
       {/* Display the shortened activity title */}
@@ -45,6 +45,14 @@ const ActivityCard = ({ activityTitle }) => {
 
 ActivityCard.propTypes = {
   activityTitle: PropTypes.string.isRequired,
-};
+  activity: PropTypes.shape({
+    // Définissez les propriétés attendues de l'objet activity
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string,
+    score: PropTypes.number.isRequired,
+    city: PropTypes.shape.isRequired,
+    // ... autres propriétés ...
+  }).isRequired,};
 
 export default ActivityCard;
