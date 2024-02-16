@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCities, updateSelectedCountries } from '../../../actions/trip';
+import { updateSelectedCities } from '../../../actions/trip';
 
-const StepSelect = ({
+const StepSelectCities = ({
   buttonContent,
   placeholderContent,
   labelContent,
@@ -15,38 +15,23 @@ const StepSelect = ({
 }) => {
   const dispatch = useDispatch();
 
-  const selectedCountries = useSelector(
-    (state) => state.trip.selectedCountries
-  );
-  console.log(selectedCountries);
-
-  const handleFetchCities = () => {
-    if (selectedCountries && selectedCountries.length > 0) {
-      selectedCountries.map((country) => {
-        dispatch(fetchCities(country.key));
-      });
-    } else {
-      console.log('Aucun pays sélectionné');
-    }
-  };
-
   const handleSelectionChange = (selected) => {
     // Convertir chaque élément de selected en un objet { key, value }
     const newSelected = selected
-      .map((selectedCountryName) => {
+      .map((selectedCityName) => {
         // Trouver l'objet dans options qui correspond à ce nom de pays
-        const selectedCountry = options.find(
-          (country) => country.value === selectedCountryName
+        const selectedCity = options.find(
+          (city) => city.value === selectedCityName
         );
 
         // Vérifier si un pays correspondant a été trouvé
-        if (selectedCountry) {
+        if (selectedCity) {
           // Retourner un objet avec les clés et valeurs appropriées
-          return { key: selectedCountry.key, value: selectedCountry.value };
+          return { key: selectedCity.key, value: selectedCity.value };
         } else {
           // Gérer le cas où aucun pays correspondant n'a été trouvé
           console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCountryName}`
+            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCityName}`
           );
           // Retourner null pour indiquer un problème
           return null;
@@ -54,12 +39,11 @@ const StepSelect = ({
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 
-    console.log(newSelected);
-    // Dispatch de l'action pour mettre à jour les pays sélectionnés
-    dispatch(updateSelectedCountries(newSelected));
+    // Dispatch de l'action pour mettre à jour les villes sélectionnées
+    dispatch(updateSelectedCities(newSelected));
   };
 
-  const selected = useSelector((state) => state.trip.selectedCountries);
+  const selected = useSelector((state) => state.trip.selectedCities);
 
   return (
     <div className="StepSelect">
@@ -73,19 +57,13 @@ const StepSelect = ({
             onChange={handleSelectionChange}
           />
         </div>
-        <SimpleButton
-          textContent={buttonContent}
-          onClick={() => {
-            handleClick();
-            handleFetchCities();
-          }}
-        />
+        <SimpleButton textContent={buttonContent} onClick={handleClick} />
       </form>
     </div>
   );
 };
 
-StepSelect.propTypes = {
+StepSelectCities.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   placeholderContent: PropTypes.string,
@@ -99,4 +77,4 @@ StepSelect.propTypes = {
   ).isRequired,
 };
 
-export default StepSelect;
+export default StepSelectCities;

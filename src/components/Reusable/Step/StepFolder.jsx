@@ -9,7 +9,7 @@ import SimpleButton from '../SimpleButton/SimpleButton';
 const StepFolder = ({ buttonContent, labelContent }) => {
   return (
     <div className="StepFolder">
-      <form action="">
+      <form>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <Input type="file" />

@@ -8,6 +8,8 @@ export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const SAVE_USER_DATA = 'SAVE_USER_DATA';
 export const CLICK_LOGOUT = 'CLICK_LOGOUT';
 export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
+export const FETCH_FRIENDS = 'FETCH_FRIENDS';
+export const SAVE_FRIENDS = 'SAVE_FRIENDS';
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -49,4 +51,13 @@ export const clickLogout = () => ({
 
 export const updateLoggedOut = () => ({
   type: UPDATE_LOGGED_OUT,
+});
+
+export const fetchFriends = () => ({
+  type: FETCH_FRIENDS,
+});
+
+export const saveFriends = (friends) => ({
+  type: SAVE_FRIENDS,
+  friends,
 });

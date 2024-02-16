@@ -6,6 +6,8 @@ import {
   FETCH_USER_DATA,
   saveUserData,
   handleSuccessfulSignUp,
+  FETCH_FRIENDS,
+  saveFriends,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
@@ -75,6 +77,22 @@ const userMiddleware = (store) => (next) => (action) => {
         })
         .catch((error) => {
           console.log(error);
+        });
+      break;
+
+    case FETCH_FRIENDS:
+      axios
+        .get(`http://localhost:8001/api/friend`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        })
+        .then((response) => {
+          store.dispatch(saveFriends(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+          // Gestion de l'erreur
         });
       break;
 

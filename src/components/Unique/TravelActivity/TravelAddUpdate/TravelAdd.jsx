@@ -3,24 +3,63 @@ import { useMediaQuery } from '@mui/material';
 import './TravelAddUpdate.scss';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
+import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 import StepInput from '../../../Reusable/Step/StepInput';
 import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
-import ProgressBar from '../../ProgressBar/ProgressBar';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
+import ProgressBarTravel from '../../ProgressBar/ProgressBarTravel';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  changeTripField,
+  handleStepNext,
+  submitCreateTravel,
+  updateSelectedCountries, // Importez updateSelectedCountries
+  fetchCities,
+} from '../../../../actions/trip';
+import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
+import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
+import StepSelectTravelers from '../../../Reusable/Step/StepSelectTravelers';
 
 const TravelAdd = () => {
+  const dispatch = useDispatch();
+
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const step = 5;
+  const step = useSelector((state) => state.trip.step);
+  const tripTitle = useSelector((state) => state.trip.tripTitle);
+  const tripDescription = useSelector((state) => state.trip.tripDescription);
+  const countries = useSelector((state) => state.trip.countries);
+  const cities = useSelector((state) => state.trip.cities);
+  const friends = useSelector((state) => state.user.friends);
 
-  const options = [
-    { key: 'option1', text: 'Option 1', value: 'Option 1' },
-    { key: 'option2', text: 'Option 2', value: 'Option 2' },
-    { key: 'option3', text: 'Option 3', value: 'Option 3' },
-  ];
+  const countriesOptions = countries.map((country) => ({
+    key: country.id,
+    text: country.name,
+    value: country.name,
+  }));
+
+  const citiesOptions = cities.map((city) => ({
+    key: city.id,
+    text: city.name,
+    value: city.name,
+  }));
+
+  const friendsOptions = friends.map((friend) => ({
+    key: friend.id,
+    text: `${friend.user2.firstname} ${friend.user2.lastname}`,
+    value: `${friend.user2.firstname} ${friend.user2.lastname}`,
+  }));
+
+  const handleNextStep = () => {
+    dispatch(handleStepNext());
+  };
+
+  const handleClick = () => {
+    handleNextStep();
+  };
 
   return !isMobile ? (
     <>
@@ -29,8 +68,13 @@ const TravelAdd = () => {
           textContent={
             <div className="addtrip">
               <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
+              <ProgressBarTravel step={step} />
               <StepInput
+                inputValue={tripTitle}
+                changeField={(newValue, identifier) => {
+                  const action = changeTripField(newValue, identifier);
+                  dispatch(action);
+                }}
                 buttonContent="Continuer"
                 placeholderContent="Week-end à Paris avec les amis"
                 labelContent="Donnez un titre à votre voyage*"
@@ -43,13 +87,14 @@ const TravelAdd = () => {
         <PopupUpdate
           textContent={
             <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
-              <StepSelect
+              <ReturnTitleStep textContent="Ajouter un voyage" />
+              <ProgressBarTravel step={step} />
+              <StepSelectCountries
                 buttonContent="Continuer"
                 placeholderContent="France"
                 labelContent="Sélectionnez un/des pays*"
-                options={options}
+                options={countriesOptions}
+                handleClick={handleClick}
               />
             </div>
           }
@@ -59,13 +104,14 @@ const TravelAdd = () => {
         <PopupUpdate
           textContent={
             <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
-              <StepSelect
+              <ReturnTitleStep textContent="Ajouter un voyage" />
+              <ProgressBarTravel step={step} />
+              <StepSelectCities
                 buttonContent="Continuer"
                 placeholderContent="Paris"
                 labelContent="Sélectionnez une/des villes*"
-                options={options}
+                options={citiesOptions} // Utilisez les options des villes
+                handleClick={handleClick}
               />
             </div>
           }
@@ -75,10 +121,10 @@ const TravelAdd = () => {
         <PopupUpdate
           textContent={
             <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
+              <ReturnTitleStep textContent="Ajouter un voyage" />
+              <ProgressBarTravel step={step} />
               <StepCalendar
-                buttonContent="Valider"
+                buttonContent="Continuer"
                 labelContent="Ajoutez les dates *"
               />
             </div>
@@ -89,10 +135,17 @@ const TravelAdd = () => {
         <PopupUpdate
           textContent={
             <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
+              <ReturnTitleStep textContent="Ajouter un voyage" />
+              <ProgressBarTravel step={step} />
               <StepTextarea
-                textareaContent={"Voyage surprise pour l'anniversaire de Jessie"}
+                inputValue={tripDescription}
+                changeField={(newValue, identifier) => {
+                  const action = changeTripField(newValue, identifier);
+                  dispatch(action);
+                }}
+                placeholderContent={
+                  "Voyage surprise pour l'anniversaire de Jessie"
+                }
                 buttonContent="Continuer"
                 labelContent="Ajoutez une description"
               />
@@ -104,27 +157,14 @@ const TravelAdd = () => {
         <PopupUpdate
           textContent={
             <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
-              <StepSelect
-                buttonContent="Continuer"
-                placeholderContent="Rechercher dans les amis"
-                labelContent="Ajoutez un/des voyageurs*"
-                options={options}
-              />
-            </div>
-          }
-        />
-      )}
-      {step === 7 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBar step={step} />
-              <StepFolder
+              <ReturnTitleStep textContent="Ajouter un voyage" />
+              <ProgressBarTravel step={step} />
+              <StepSelectTravelers
                 buttonContent="Créer le voyage"
-                labelContent="Ajoutez une image de couverture"
+                placeholderContent="Rechercher dans les amis"
+                labelContent="Sélectionnez un/des voyageurs*"
+                options={friendsOptions} // Utilisez les options des villes
+                handleClick={handleClick}
               />
             </div>
           }
@@ -149,7 +189,9 @@ const TravelAdd = () => {
             buttonContent="Continuer"
             placeholderContent="France"
             labelContent="Sélectionnez un/des pays*"
-            options={options}
+            options={options.countriesOptions}
+            handleClick={handleClick}
+            handleSelect={handleSelectCountries}
           />
         )}
         {step === 3 && (
@@ -157,12 +199,14 @@ const TravelAdd = () => {
             buttonContent="Continuer"
             placeholderContent="Paris"
             labelContent="Sélectionnez une/des villes*"
-            options={options}
+            options={options.citiesOptions}
+            handleClick={handleClick}
+            handleSelect={handleSelectCities}
           />
         )}
         {step === 4 && (
           <StepCalendar
-            buttonContent="Valider"
+            buttonContent="Continuer"
             labelContent="Ajoutez les dates *"
           />
         )}
@@ -175,16 +219,11 @@ const TravelAdd = () => {
         )}
         {step === 6 && (
           <StepSelect
-            buttonContent="Continuer"
+            buttonContent="Créer le voyage"
             placeholderContent="Rechercher dans les amis"
             labelContent="Ajoutez un/des voyageurs*"
             options={options}
-          />
-        )}
-        {step === 7 && (
-          <StepFolder
-            buttonContent="Créer le voyage"
-            labelContent="Ajoutez une image de couverture"
+            handleClick={submitCreateTravel}
           />
         )}
       </div>

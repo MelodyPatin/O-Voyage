@@ -9,11 +9,12 @@ import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
+import { useSelector } from 'react-redux';
 
 const ActivityAdd = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
-  const step = 4;
+  const step = useSelector((state) => state.trip.step);
 
   const options = [
     { key: 'option1', text: 'Option 1', value: 'Option 1' },

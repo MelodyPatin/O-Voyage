@@ -6,7 +6,7 @@ import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCities, updateSelectedCountries } from '../../../actions/trip';
 
-const StepSelect = ({
+const StepSelectCountries = ({
   buttonContent,
   placeholderContent,
   labelContent,
@@ -63,7 +63,7 @@ const StepSelect = ({
 
   return (
     <div className="StepSelect">
-      <form autoComplete="off" onSubmit={handleClick}>
+      <form>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
@@ -85,7 +85,7 @@ const StepSelect = ({
   );
 };
 
-StepSelect.propTypes = {
+StepSelectCountries.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   placeholderContent: PropTypes.string,
@@ -99,4 +99,4 @@ StepSelect.propTypes = {
   ).isRequired,
 };
 
-export default StepSelect;
+export default StepSelectCountries;
