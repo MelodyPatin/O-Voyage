@@ -107,8 +107,10 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tripId: action.tripId,
+      }; // Ajout du point-virgule
+
     case FETCH_A_TRIP:
-      return state;
+      return state; // Retourne l'état sans modification
 
     case SHOW_TRIP:
       return {
@@ -117,7 +119,7 @@ const tripReducer = (state = initialState, action = {}) => {
       };
 
     case FETCH_TRAVELERS:
-      return state;
+      return state; // Retourne l'état sans modification
 
     case SHOW_TRAVELERS:
       return {

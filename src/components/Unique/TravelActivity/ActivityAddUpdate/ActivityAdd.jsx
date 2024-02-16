@@ -1,7 +1,6 @@
 import React from 'react';
 import { useMediaQuery } from '@mui/material';
 import './ActivityAddUpdate.scss';
-import { useMediaQuery } from '@mui/material';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../Reusable/Step/StepInput';

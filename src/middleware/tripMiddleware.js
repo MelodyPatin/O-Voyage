@@ -15,7 +15,6 @@ import {
   addTravelerToTravel,
   FETCH_A_TRIP,
   FETCH_TRAVELERS,
-  saveMyTrips,
   showTravelers,
   showTrip,
 } from '../actions/trip';
@@ -102,7 +101,9 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
-          
+        });
+      break;
+
     case FETCH_A_TRIP:
       api
         .get(`/trip/${action.id}`)
@@ -113,34 +114,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.error(error);
         });
-
       break;
-
-    /*     case ADD_TRAVELER_TO_TRAVEL:
-      const { tripTitle, startDate, endDate, tripDescription } =
-        store.getState().trip;
-
-      // Données à envoyer au format JSON
-      const tripJsonData = {
-        name: tripTitle,
-        startDate,
-        endDate,
-        description: tripDescription,
-      };
-
-      // Exécution de la requête
-      axios
-        .post('http://localhost:8001/api/trip/add', tripJsonData)
-        .then((response) => {
-          // Traitement de la réponse
-          // store.dispatch(handleSuccessfulLogin(response.data.token));
-        })
-        .catch((error) => {
-          console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
-        });
-
-      break; */
 
     case FETCH_CITIES:
       const countryId = action.countryId;
@@ -153,7 +127,8 @@ const tripMiddleware = (store) => (next) => (action) => {
           console.error(error);
           // Gestion de l'erreur
         });
-  
+      break;
+      
     case FETCH_TRAVELERS:
       api
         .get(`/trip/${action.id}/showTravelers`)
@@ -164,7 +139,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.error(error);
         });
-
       break;
 
     default:
