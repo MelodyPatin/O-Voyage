@@ -1,20 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './TravelCard.scss';
 
 import PropTypes from 'prop-types';
-import { fetchATrip } from '../../../../actions/trip';
 
 const TravelCard = ({ trip }) => {
-  const dispatch = useDispatch();
-  const history = useNavigate();
-
-  const handleClick = () => {
-    dispatch(fetchATrip(trip.id));
-    history.push(`/trip/${trip.id}`);
-  };
-
   if (!trip) {
     return null;
   }
@@ -44,11 +34,11 @@ const TravelCard = ({ trip }) => {
 
   return (
     <div className="cardContainer">
-      <Link to={`/trip/${trip.id}`} onClick={() => handleClick()}>
+      <Link to={`/trip/${trip.id}`}>
         {/* Background image for the travel card */}
         <img className="cardPicture" src={backgroundPictureURL} alt="Travel" />
       </Link>
-      <Link to={`/trip/${trip.id}`} onClick={() => handleClick()}>
+      <Link to={`/trip/${trip.id}`}>
         <div className="cardTitle">
           {/* Title of the travel */}
           <h3>{name}</h3>
