@@ -26,13 +26,13 @@ const Travelers = () => {
     <div className="travelDetails">
       {!isMobile ? (
         <>
-          <NavBarHeader isLogged onDesktop />
+          <NavBarHeader />
           <TravelsMenu />
           <div className="containerFlex">
             <aside className="aside">
               <TravelersList />
             </aside>
-            <Activities onDesktop />
+            <Activities />
           </div>
         </>
       ) : (

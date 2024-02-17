@@ -115,7 +115,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case FETCH_CITIES:
-      const countryId = action.countryId;
+      const { countryId } = action;
       api
         .get(`/country/${countryId}/cities`)
         .then((response) => {
@@ -126,7 +126,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           // Gestion de l'erreur
         });
       break;
-      
+
     case FETCH_TRAVELERS:
       api
         .get(`/trip/${action.id}/showTravelers`)

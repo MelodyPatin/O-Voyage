@@ -1,7 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './ActivityCard.scss';
 import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Link, NavLink, useParams } from 'react-router-dom';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
 import AvatarFriend from '../Avatar/AvatarFriends';
@@ -17,7 +19,7 @@ const ActivityCard = ({ activity }) => {
     shortenedTitle += '...';
   }
 
-  console.log(activity)
+  console.log(activity);
 
   let tag;
 
@@ -41,6 +43,8 @@ const ActivityCard = ({ activity }) => {
       break;
   }
 
+  const { id } = useParams();
+
   return (
     <div className={`ActivityCard ${tag}`}>
       <div className="FlexGap">
@@ -50,12 +54,14 @@ const ActivityCard = ({ activity }) => {
       </div>
       {/* Display the shortened activity title */}
       <div className="title">
-        <p>{shortenedTitle}</p>{' '}
+        <p>{shortenedTitle}</p>
       </div>
       {/* Display Selector and a button in a flex column */}
       <div className="FlexColumn">
         <Selector date={activity.date} />
-        <SimpleButton textContent="En savoir plus" />
+        <NavLink to={`/trip/${id}/activity/${activity.id}`}>
+          <SimpleButton textContent="En savoir plus" />
+        </NavLink>
       </div>
       {/* Display hearts based on whether the activity is liked, and to which amount */}
       <div className="hearth">
