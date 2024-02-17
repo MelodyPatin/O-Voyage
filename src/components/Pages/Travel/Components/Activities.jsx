@@ -7,6 +7,7 @@ import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Activities.scss';
 import ActivityAdd from '../../../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
+import { Link } from 'react-router-dom';
 
 const Activities = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
@@ -47,9 +48,9 @@ const Activities = () => {
       </div>
       {!isMobile && (
         <div className="suggestionButton">
-          <button onClick={openPopup} type="button">
+          <Link to="/createactivity">
             <IconButton textContent="Faire une proposition" icon="add" />
-          </button>
+          </Link>
         </div>
       )}
       {popupOpened && <ActivityAdd />}

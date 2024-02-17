@@ -1,32 +1,46 @@
-.FormUpdateProfile {
-  padding: 1rem;
+.userUpdate {
+  @media (min-width: 767px) {
+    padding: 0rem 5rem;
+  }
 
-  div.LabelInput {
-    width: 100%;
-    padding-top: 1rem;
+  @media (min-width: 1024px) {
+    padding: 0rem 10rem;
+  }
 
-    .input {
+  @media (min-width: 1280px) {
+    padding: 0rem 15rem;
+  }
+
+  .FormUpdateProfile {
+    padding: 1rem;
+
+    div.LabelInput {
       width: 100%;
-      margin-bottom: 0;
-      font-size: 1rem;
-      padding-top: 0.5rem;
+      padding-top: 1rem;
+
+      .input {
+        width: 100%;
+        margin-bottom: 0;
+        font-size: 1rem;
+        padding-top: 0.5rem;
+      }
+    }
+
+    .buttonsUpdateProfile {
+      padding: 1rem 0;
+
+      button.ui.button.SimpleButton {
+        width: 100%;
+        max-width: 500rem;
+        margin: 1rem 0;
+      }
     }
   }
 
-  .buttonsUpdateProfile {
-    padding: 1rem 0;
-
-    button.ui.button.SimpleButton {
-      width: 100%;
-      max-width: 500rem;
-      margin: 1rem 0;
-    }
+  .deleteAccount {
+    padding: 0 1rem 2rem 0;
+    font-family: 'Inria serif', serif;
+    text-align: end;
+    display: block;
   }
-}
-
-.deleteAccount {
-  padding: 0 1rem 2rem 0;
-  font-family: 'Inria serif', serif;
-  text-align: end;
-  display: block;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useMediaQuery } from '@mui/material';
 import './TravelAddUpdate.scss';
+import { useSelector, useDispatch } from 'react-redux';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
@@ -9,9 +9,7 @@ import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
-import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 import ProgressBarTravel from '../../ProgressBar/ProgressBarTravel';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   changeTripField,
   handleStepNext,
@@ -25,8 +23,6 @@ import StepSelectTravelers from '../../../Reusable/Step/StepSelectTravelers';
 
 const TravelAdd = () => {
   const dispatch = useDispatch();
-
-  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const step = useSelector((state) => state.trip.step);
   const tripTitle = useSelector((state) => state.trip.tripTitle);
@@ -61,172 +57,90 @@ const TravelAdd = () => {
     handleNextStep();
   };
 
-  return !isMobile ? (
-    <>
+  return (
+    <div className="addTrip">
+      <NavBarHeader />
       {step === 1 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitle textContent="Ajouter un voyage" />
-              <ProgressBarTravel step={step} />
-              <StepInput
-                inputValue={tripTitle}
-                changeField={(newValue, identifier) => {
-                  const action = changeTripField(newValue, identifier);
-                  dispatch(action);
-                }}
-                buttonContent="Continuer"
-                placeholderContent="Week-end à Paris avec les amis"
-                labelContent="Donnez un titre à votre voyage*"
-              />
-            </div>
-          }
-        />
-      )}
-      {step === 2 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitleStep textContent="Ajouter un voyage" />
-              <ProgressBarTravel step={step} />
-              <StepSelectCountries
-                buttonContent="Continuer"
-                placeholderContent="France"
-                labelContent="Sélectionnez un/des pays*"
-                options={countriesOptions}
-                handleClick={handleClick}
-              />
-            </div>
-          }
-        />
-      )}
-      {step === 3 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitleStep textContent="Ajouter un voyage" />
-              <ProgressBarTravel step={step} />
-              <StepSelectCities
-                buttonContent="Continuer"
-                placeholderContent="Paris"
-                labelContent="Sélectionnez une/des villes*"
-                options={citiesOptions} // Utilisez les options des villes
-                handleClick={handleClick}
-              />
-            </div>
-          }
-        />
-      )}
-      {step === 4 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitleStep textContent="Ajouter un voyage" />
-              <ProgressBarTravel step={step} />
-              <StepCalendar
-                buttonContent="Continuer"
-                labelContent="Ajoutez les dates *"
-              />
-            </div>
-          }
-        />
-      )}
-      {step === 5 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitleStep textContent="Ajouter un voyage" />
-              <ProgressBarTravel step={step} />
-              <StepTextarea
-                inputValue={tripDescription}
-                changeField={(newValue, identifier) => {
-                  const action = changeTripField(newValue, identifier);
-                  dispatch(action);
-                }}
-                placeholderContent={
-                  "Voyage surprise pour l'anniversaire de Jessie"
-                }
-                buttonContent="Continuer"
-                labelContent="Ajoutez une description"
-              />
-            </div>
-          }
-        />
-      )}
-      {step === 6 && (
-        <PopupUpdate
-          textContent={
-            <div className="addtrip">
-              <ReturnTitleStep textContent="Ajouter un voyage" />
-              <ProgressBarTravel step={step} />
-              <StepSelectTravelers
-                buttonContent="Créer le voyage"
-                placeholderContent="Rechercher dans les amis"
-                labelContent="Sélectionnez un/des voyageurs*"
-                options={friendsOptions} // Utilisez les options des villes
-                handleClick={handleClick}
-              />
-            </div>
-          }
-        />
-      )}
-    </>
-  ) : (
-    <div className="TravelAddUpdate">
-      <div className="addtrip">
-        <NavBarHeader />
-        <ReturnTitle textContent="Ajouter un voyage" avatar={false} />
-        <ProgressBar step={step} />
-        {step === 1 && (
+        <div className="addTrip">
+          <ReturnTitle textContent="Ajouter un voyage" />
+          <ProgressBarTravel step={step} />
           <StepInput
+            inputValue={tripTitle}
+            changeField={(newValue, identifier) => {
+              const action = changeTripField(newValue, identifier);
+              dispatch(action);
+            }}
             buttonContent="Continuer"
             placeholderContent="Week-end à Paris avec les amis"
             labelContent="Donnez un titre à votre voyage*"
           />
-        )}
-        {step === 2 && (
-          <StepSelect
+        </div>
+      )}
+      {step === 2 && (
+        <div className="addTrip">
+          <ReturnTitleStep textContent="Ajouter un voyage" />
+          <ProgressBarTravel step={step} />
+          <StepSelectCountries
             buttonContent="Continuer"
             placeholderContent="France"
             labelContent="Sélectionnez un/des pays*"
-            options={options.countriesOptions}
+            options={countriesOptions}
             handleClick={handleClick}
-            handleSelect={handleSelectCountries}
           />
-        )}
-        {step === 3 && (
-          <StepSelect
+        </div>
+      )}
+      {step === 3 && (
+        <div className="addTrip">
+          <ReturnTitleStep textContent="Ajouter un voyage" />
+          <ProgressBarTravel step={step} />
+          <StepSelectCities
             buttonContent="Continuer"
             placeholderContent="Paris"
             labelContent="Sélectionnez une/des villes*"
-            options={options.citiesOptions}
+            options={citiesOptions}
             handleClick={handleClick}
-            handleSelect={handleSelectCities}
           />
-        )}
-        {step === 4 && (
+        </div>
+      )}
+      {step === 4 && (
+        <div className="addTrip">
+          <ReturnTitleStep textContent="Ajouter un voyage" />
+          <ProgressBarTravel step={step} />
           <StepCalendar
             buttonContent="Continuer"
             labelContent="Ajoutez les dates *"
           />
-        )}
-        {step === 5 && (
+        </div>
+      )}
+      {step === 5 && (
+        <div className="addTrip">
+          <ReturnTitleStep textContent="Ajouter un voyage" />
+          <ProgressBarTravel step={step} />
           <StepTextarea
-            textareaContent={"Voyage surprise pour l'anniversaire de Jessie"}
+            inputValue={tripDescription}
+            changeField={(newValue, identifier) => {
+              const action = changeTripField(newValue, identifier);
+              dispatch(action);
+            }}
+            placeholderContent={"Voyage surprise pour l'anniversaire de Jessie"}
             buttonContent="Continuer"
             labelContent="Ajoutez une description"
           />
-        )}
-        {step === 6 && (
-          <StepSelect
+        </div>
+      )}
+      {step === 6 && (
+        <div className="addTrip">
+          <ReturnTitleStep textContent="Ajouter un voyage" />
+          <ProgressBarTravel step={step} />
+          <StepSelectTravelers
             buttonContent="Créer le voyage"
             placeholderContent="Rechercher dans les amis"
-            labelContent="Ajoutez un/des voyageurs*"
-            options={options}
-            handleClick={submitCreateTravel}
+            labelContent="Sélectionnez un/des voyageurs*"
+            options={friendsOptions}
+            handleClick={handleClick}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };
