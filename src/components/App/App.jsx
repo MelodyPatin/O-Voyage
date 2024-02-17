@@ -75,7 +75,9 @@ function App() {
           {logged && <Route path="/friends" element={<FriendList />} />}
           {logged && <Route path="/friends/add" element={<FriendAdd />} />}
           {logged && <Route path="/createtrip" element={<TravelAdd />} />}
-          {logged && <Route path="/updatetrip" element={<TravelUpdate />} />}
+          {logged && (
+            <Route path="/updatetrip/:id" element={<TravelUpdate />} />
+          )}
           {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
           {logged && <Route path="/trip/:id" element={<TravelDetails />} />}
           {logged && (

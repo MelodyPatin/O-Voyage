@@ -12,6 +12,16 @@
   border-bottom: 1px solid v.$mainColor;
   position: relative;
 
+  @media (min-width: 767px) {
+    padding: 0 5rem;
+  }
+  @media (min-width: 1024px) {
+    padding: 0 10rem;
+  }
+  @media (min-width: 1280px) {
+    padding: 0 15rem;
+  }
+
   .arrowIcon {
     width: 2.75rem;
     cursor: pointer;

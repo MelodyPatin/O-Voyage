@@ -25,7 +25,7 @@ const Actions = () => {
             </Link>
           </div>
         )}
-        <Link to="/updatetrip">
+        <Link to={`/updatetrip/${id}`}>
           <IconButton textContent="Modifier le voyage" icon="edit" />
         </Link>
         <IconButton textContent="Supprimer le voyage" icon="trash" />

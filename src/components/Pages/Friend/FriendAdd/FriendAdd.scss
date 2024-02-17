@@ -3,15 +3,23 @@
   flex-direction: column;
   height: 100vh;
 
-  @media (min-width: 767px) {
-    height: 400px;
-  }
-
   .formAddFriend {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
     padding: 1rem;
+
+    @media (min-width: 767px) {
+      padding: 4rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 4rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 4rem 15rem;
+    }
 
     .selector {
       flex: 1;
