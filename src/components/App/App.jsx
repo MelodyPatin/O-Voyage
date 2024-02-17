@@ -72,7 +72,7 @@ function App() {
             />
           )}
           {logged && <Route path="/me" element={<UserUpdate />} />}
-          {logged && <Route path="/friends/*" element={<FriendList />} />}
+          {logged && <Route path="/friends" element={<FriendList />} />}
           {logged && <Route path="/friends/add" element={<FriendAdd />} />}
           {logged && <Route path="/createtrip" element={<TravelAdd />} />}
           {logged && <Route path="/updatetrip" element={<TravelUpdate />} />}

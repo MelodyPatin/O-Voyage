@@ -12,7 +12,7 @@ const Activities = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   const activities = useSelector((state) => state.activity.activities);
-
+  console.log(activities);
   const [popupOpened, setPopupOpened] = useState(false);
 
   const openPopup = () => {
@@ -35,7 +35,7 @@ const Activities = () => {
         <div className="activityList">
           {activities.map((activity) => (
             <div className="activity" key={activity.id}>
-              <ActivityCard activityTitle={activity.name} activity={activity} />
+              <ActivityCard activity={activity} />
             </div>
           ))}
         </div>

@@ -16,7 +16,7 @@ const TravelersList = () => {
       <ul>
         {travelers.map((traveler) => (
           <li key={traveler.id}>
-            <User firstName={traveler.firstname} />
+            <User user={traveler} />
           </li>
         ))}
       </ul>

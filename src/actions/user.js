@@ -39,10 +39,12 @@ export const fetchUserData = () => ({
   type: FETCH_USER_DATA,
 });
 
-export const saveUserData = (firstName, lastName) => ({
+export const saveUserData = (firstName, lastName, email, avatarURL) => ({
   type: SAVE_USER_DATA,
   firstName,
   lastName,
+  email,
+  avatarURL,
 });
 
 export const clickLogout = () => ({

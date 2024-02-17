@@ -12,7 +12,6 @@ const activityMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.id}/activities`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveTripActivities(response.data));
         })
         .catch((error) => {

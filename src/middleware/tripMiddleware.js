@@ -25,7 +25,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get('/mytrips')
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveMyTrips(response.data));
         })
         .catch((error) => {
@@ -108,7 +107,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.id}`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(showTrip(response.data));
         })
         .catch((error) => {
@@ -133,7 +131,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.id}/showTravelers`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(showTravelers(response.data));
         })
         .catch((error) => {

@@ -19,8 +19,6 @@ const DropDownNotifications = () => {
     setIsOpen(!isOpen);
   };
 
-  // console.log(isOpen);
-
   return (
     <div className="DropDownMenu">
       <div className="dropdown-trigger" onClick={toggleMenu}>

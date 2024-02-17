@@ -7,8 +7,11 @@ import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../Reusable/IconButton/IconButton';
 import TravelCard from './Components/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
-import { fetchCities, fetchCountries } from '../../../actions/trip';
-import { fetchMyTrips } from '../../../actions/trip';
+import {
+  fetchCities,
+  fetchCountries,
+  fetchMyTrips,
+} from '../../../actions/trip';
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -43,14 +46,18 @@ const Dashboard = () => {
   const handleCreateTrip = () => {
     dispatch(fetchCountries());
     dispatch(fetchCities());
-  }
+  };
 
   return (
     <div className="dashboard">
       <HeaderConnected />
       <h2>MES VOYAGES</h2>
       <Link to="/createtrip">
-        <IconButton textContent="Créer un voyage" icon="add" onClick={handleCreateTrip} />
+        <IconButton
+          textContent="Créer un voyage"
+          icon="add"
+          onClick={handleCreateTrip}
+        />
       </Link>
       <div className="list">
         <div className="now">
