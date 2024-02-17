@@ -2,7 +2,8 @@
 
 .addTrip,
 .updateTrip,
-.addActivity {
+.addActivity,
+.updateActivity {
   display: flex;
   flex-direction: column;
   height: 100vh;

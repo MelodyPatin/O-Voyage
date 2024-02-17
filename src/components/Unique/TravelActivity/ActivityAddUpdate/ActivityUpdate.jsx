@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import './ActivityAddUpdate.scss';
 import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -10,9 +11,18 @@ import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
-import { useSelector } from 'react-redux';
+import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 
-const ActivityUpdate = ({ onDesktop, activityTitle, activityAddress, activityCost, activityDates, activityUrl, activityDescription, activityTag}) => {
+const ActivityUpdate = ({
+  onDesktop,
+  activityTitle,
+  activityAddress,
+  activityCost,
+  activityDates,
+  activityUrl,
+  activityDescription,
+  activityTag,
+}) => {
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   const step = useSelector((state) => state.trip.step);
@@ -23,141 +33,86 @@ const ActivityUpdate = ({ onDesktop, activityTitle, activityAddress, activityCos
     { key: 'option3', text: 'Option 3', value: 'Option 3' },
   ];
 
-  return !isMobile ? (
-    <>
+  return (
+    <div className="updateActivity">
+      <NavBarHeader />
       {step === 1 && (
-        <PopupUpdate
-          textContent={
-            <StepInput
-              buttonContent="Continuer"
-              valueContent={activityTitle}
-              labelContent="Modifiez le titre de votre proposition*"
-            />
-          }
-        />
+        <div className="updateActivity">
+          <ReturnTitle textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepInput
+            buttonContent="Continuer"
+            valueContent={activityTitle}
+            labelContent="Modifiez le titre de votre proposition*"
+          />
+        </div>
       )}
       {step === 2 && (
-        <PopupUpdate
-          textContent={
-            <StepInputSelector
-              buttonContent="Continuer"
-              valueContent={activityAddress}
-              labelContent="Modifiez l'adresse"
-              options={options}
-            />
-          }
-        />
+        <div className="updateActivity">
+          <ReturnTitleStep textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepInputSelector
+            buttonContent="Continuer"
+            valueContent={activityAddress}
+            labelContent="Modifiez l'adresse"
+            options={options}
+          />
+        </div>
       )}
       {step === 3 && (
-        <PopupUpdate
-          textContent={
-            <StepInput
-              buttonContent="Continuer"
-              valueContent={activityCost}
-              labelContent="Renseignez le coût moyen"
-            />
-          }
-        />
+        <div className="updateActivity">
+          <ReturnTitleStep textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepInput
+            buttonContent="Continuer"
+            valueContent={activityCost}
+            labelContent="Renseignez le coût moyen"
+          />
+        </div>
       )}
       {step === 4 && (
-        <PopupUpdate
-          textContent={
-            <StepTextarea
-              valueContent={activityDates}
-              buttonContent="Continuer"
-              labelContent="Renseignez les jours et horaires d'ouverture"
-            />
-          }
-        />
+        <div className="updateActivity">
+          <ReturnTitleStep textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepTextarea
+            valueContent={activityDates}
+            buttonContent="Continuer"
+            labelContent="Renseignez les jours et horaires d'ouverture"
+          />
+        </div>
       )}
       {step === 5 && (
-        <PopupUpdate
-          textContent={
-            <StepInput
-              buttonContent="Continuer"
-              valueContent={activityUrl}
-              labelContent="Renseignez le site internet"
-            />
-          }
-        />
+        <div className="updateActivity">
+          <ReturnTitleStep textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepInput
+            buttonContent="Continuer"
+            valueContent={activityUrl}
+            labelContent="Renseignez le site internet"
+          />
+        </div>
       )}
       {step === 6 && (
-        <PopupUpdate
-          textContent={
-            <StepTextarea
-              valueContent={activityDescription}
-              buttonContent="Continuer"
-              labelContent="Ajoutez une description"
-            />
-          }
-        />
+        <div className="updateActivity">
+          <ReturnTitleStep textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepTextarea
+            valueContent={activityDescription}
+            buttonContent="Continuer"
+            labelContent="Ajoutez une description"
+          />
+        </div>
       )}
       {step === 7 && (
-        <PopupUpdate
-          textContent={
-            <StepTag
-              buttonContent="Envoyer ma proposition"
-              labelContent="Sélectionnez un tag"
-              activityTag={activityTag}
-            />
-          }
-        />
-      )}
-    </>
-  ) : (
-    <div className="ActivityAddUpdate">
-      <NavBarHeader isLogged onDesktop={false} />
-      <ReturnTitle textContent="Modifier la proposition" avatar={false} />
-      <ProgressBar step={step} />
-      {step === 1 && (
-        <StepInput
-          buttonContent="Continuer"
-          valueContent={activityTitle}
-          labelContent="Modifiez le titre de votre proposition*"
-        />
-      )}
-      {step === 2 && (
-        <StepInputSelector
-          buttonContent="Continuer"
-          valueContent={activityAddress}
-          labelContent="Modifiez l'adresse"
-          options={options}
-        />
-      )}
-      {step === 3 && (
-        <StepInput
-          buttonContent="Continuer"
-          valueContent={activityCost}
-          labelContent="Renseignez le coût moyen"
-        />
-      )}
-      {step === 4 && (
-        <StepTextarea
-          valueContent={activityDates}
-          buttonContent="Continuer"
-          labelContent="Renseignez les jours et horaires d'ouverture"
-        />
-      )}
-      {step === 5 && (
-        <StepInput
-          buttonContent="Continuer"
-          valueContent={activityUrl}
-          labelContent="Renseignez le site internet"
-        />
-      )}
-      {step === 6 && (
-        <StepTextarea
-          valueContent={activityDescription}
-          buttonContent="Continuer"
-          labelContent="Ajoutez une description"
-        />
-      )}
-      {step === 7 && (
-        <StepTag
-          buttonContent="Envoyer ma proposition"
-          labelContent="Sélectionnez un tag"
-          activityTag={activityTag}
-        />
+        <div className="updateActivity">
+          <ReturnTitleStep textContent="Modifier la proposition" />
+          <ProgressBar step={step} />
+          <StepTag
+            buttonContent="Envoyer ma proposition"
+            labelContent="Sélectionnez un tag"
+            activityTag={activityTag}
+          />
+        </div>
       )}
     </div>
   );

@@ -22,6 +22,7 @@ import FAQ from '../Pages/FAQ/FAQ';
 import LegalNotice from '../Pages/LegalNotice/LegalNotice';
 import History from '../Pages/History/History';
 import ActivityDetails from '../Pages/Travel/ActivityDetails';
+import ActivityUpdate from '../Unique/TravelActivity/ActivityAddUpdate/ActivityUpdate';
 
 function App() {
   const dispatch = useDispatch();
@@ -79,6 +80,18 @@ function App() {
             <Route path="/updatetrip/:id" element={<TravelUpdate />} />
           )}
           {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
+          {logged && (
+            <Route
+              path="/trip/:id/activity/:id"
+              element={<ActivityDetails />}
+            />
+          )}
+          {logged && (
+            <Route
+              path="/trip/:id/updateactivity/:id"
+              element={<ActivityUpdate />}
+            />
+          )}
           {logged && <Route path="/trip/:id" element={<TravelDetails />} />}
           {logged && (
             <Route path="/trip/:id/travelers" element={<Travelers />} />

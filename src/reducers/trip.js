@@ -117,20 +117,7 @@ const tripReducer = (state = initialState, action = {}) => {
         ...state,
         trip: action.trip,
       };
-
-    
-ProfileInfo.propTypes = {
-  nbFriends: PropTypes.number.isRequired,
-};
-
-ProfileInfo.propTypes = {
-  nbFriends: PropTypes.number.isRequired,
-};
-
-ProfileInfo.propTypes = {
-  nbFriends: PropTypes.number.isRequired,
-};
- // Retourne l'état sans modification
+    // Retourne l'état sans modification
 
     case SHOW_TRAVELERS:
       return {

@@ -10,6 +10,10 @@
   background-color: v.$lightColor;
   overflow: visible; // Allows .solid to extend beyond the container
   z-index: 10; // Set a z-index value for the parent element
+
+  @media (min-width: 767px) {
+    display: none;
+  }
 }
 
 .NavBarMobile {
