@@ -1,6 +1,16 @@
 @use '../../../../styles/variables' as v;
 
-.TravelAddUpdate {
-  font-family: 'Inria Serif', serif;
-  overflow: hidden;
+.addTrip,
+.updateTrip {
+  .ReturnTitle {
+    @media (min-width: 767px) {
+      padding: 0 5rem;
+    }
+    @media (min-width: 1024px) {
+      padding: 0 10rem;
+    }
+    @media (min-width: 1280px) {
+      padding: 0 15rem;
+    }
+  }
 }
