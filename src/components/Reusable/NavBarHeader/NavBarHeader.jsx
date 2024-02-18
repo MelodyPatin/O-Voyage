@@ -10,7 +10,7 @@ const NavBarHeader = () => {
 
   return (
     <div className="header">
-      <Link to="/home">
+      <Link to="/dashboard">
         <img
           className="logo"
           src="/src/assets/MainLogo.png"

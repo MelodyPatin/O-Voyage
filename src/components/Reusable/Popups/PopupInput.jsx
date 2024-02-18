@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { Input } from 'semantic-ui-react';
 import SimpleButton from '../SimpleButton/SimpleButton';
-import LabelInput from '../LabelInput/LabelInput';
 
 // Functional component : popup with input fields and a close button
 const PopupInput = ({ textContent, buttonContent }) => {

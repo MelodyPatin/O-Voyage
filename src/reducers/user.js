@@ -12,6 +12,9 @@ import {
   USER_UPDATE_FAILURE,
   UPDATE_USER_INPUT,
   CHANGE_USER_INPUT,
+  DELETE_USER,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAILURE,
 } from '../actions/user';
 
 export const initialState = {
@@ -35,6 +38,7 @@ export const initialState = {
   redirectTo: null,
   myTrips: [],
   friends: [],
+  deletionStatus: null, // Peut être 'success' ou 'failure'
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -135,6 +139,23 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
+      };
+
+    case DELETE_USER:
+      return {
+        ...state,
+      };
+
+    case USER_DELETE_SUCCESS:
+      return {
+        ...state,
+        deletionStatus: 'success',
+      };
+
+    case USER_DELETE_FAILURE:
+      return {
+        ...state,
+        deletionStatus: 'failure',
       };
 
     default:

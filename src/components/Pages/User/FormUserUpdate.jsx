@@ -6,10 +6,16 @@ import './UserUpdate.scss';
 import { Input } from 'semantic-ui-react';
 import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
-import { updateUserInput, userUpdateRequest } from '../../../actions/user';
+import {
+  clickLogout,
+  deleteUser,
+  updateUserInput,
+  userUpdateRequest,
+} from '../../../actions/user';
 import LabelInputUpdate from '../../Reusable/LabelInput/LabelInputUpdate';
 import LabelInput from '../../Reusable/LabelInput/LabelInput';
 import PopupMessage from '../../Reusable/Popups/PopupMessage';
+import PopupButton from '../../Reusable/Popups/PopupButton';
 
 const FormUserUpdate = ({ changeField }) => {
   const user = useSelector((state) => state.user);
@@ -21,6 +27,7 @@ const FormUserUpdate = ({ changeField }) => {
     lastnameValue: user.lastnameValue,
     email: user.email,
     password: '',
+    avatar: user.avatar,
   });
 
   // Effet pour mettre à jour les champs édités lorsque l'état Redux change
@@ -29,12 +36,26 @@ const FormUserUpdate = ({ changeField }) => {
       firstnameValue: user.firstnameValue,
       lastnameValue: user.lastnameValue,
       email: user.email,
+      avatar: user.avatar,
       password: '',
     });
   }, [user]);
 
   const handleChange = (event, fieldName) => {
     dispatch(updateUserInput(fieldName, event.target.value));
+  };
+
+  const handleAvatarChange = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        dispatch(updateUserInput('avatar', reader.result)); // Mettez à jour le champ 'avatar' dans l'état Redux
+        setEditedValues({ ...editedValues, avatar: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const [popupVisible, setPopupVisible] = useState(false);
@@ -53,13 +74,35 @@ const FormUserUpdate = ({ changeField }) => {
     event.preventDefault();
     try {
       // Effectuer la requête axios pour mettre à jour les données
-      await dispatch(userUpdateRequest());
+      const { firstResponse, secondResponse } = await dispatch(
+        userUpdateRequest()
+      );
+
+      console.log('First Response:', firstResponse);
+      console.log('Second Response:', secondResponse);
 
       // Mise à jour du statut de la modification (succès)
       setModificationStatus('success');
       user.password = '';
     } catch (error) {
       // Mise à jour du statut de la modification (échec)
+      setModificationStatus('failure');
+    }
+  };
+
+  const handleDeletePopup = (event) => {
+    event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
+    setPopupVisible(true);
+    setModificationStatus('confirmation');
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    await dispatch(deleteUser());
+    if (user.deletionStatus === 'success') {
+      // Naviguer vers /home
+      navigate('/home');
+    } else {
       setModificationStatus('failure');
     }
   };
@@ -87,21 +130,21 @@ const FormUserUpdate = ({ changeField }) => {
             label="Prénom"
             placeholder=""
             value={editedValues.firstnameValue}
-            onChange={(event) => handleChange(event, 'firstnameValue')}
+            onChange={(evt) => handleChange(evt, 'firstnameValue')}
           />
           <LabelInputUpdate
             name="name"
             label="Nom"
             placeholder=""
             value={editedValues.lastnameValue}
-            onChange={(event) => handleChange(event, 'lastnameValue')}
+            onChange={(evt) => handleChange(evt, 'lastnameValue')}
           />
           <LabelInputUpdate
             name="email"
             label="Email"
             placeholder=""
             value={editedValues.email}
-            onChange={(event) => handleChange(event, 'email')}
+            onChange={(evt) => handleChange(evt, 'email')}
           />
           <LabelInput
             type="password"
@@ -113,7 +156,7 @@ const FormUserUpdate = ({ changeField }) => {
           />
           <div className="LabelInput">
             <p>Photo de profil</p>
-            <Input name="avatar" type="file" />
+            <Input name="avatar" type="file" onChange={handleAvatarChange} />
           </div>
           <div className="buttonValidate">
             <SimpleButton textContent="Valider" />
@@ -122,8 +165,9 @@ const FormUserUpdate = ({ changeField }) => {
         <div className="buttonDelete">
           <SimpleButton textContent="Retour" onClick={handleGoBack} />
         </div>
-
-        <span className="deleteAccount">Supprimer mon compte</span>
+        <a href="" onClick={handleDeletePopup} className="deleteAccount">
+          Supprimer mon compte
+        </a>
       </div>
       {/* Popup de succès ou d'échec */}
       {popupVisible && (
@@ -133,6 +177,14 @@ const FormUserUpdate = ({ changeField }) => {
               ? 'Modification réussie !'
               : 'Échec de la modification.'
           }
+          onClose={handlePopupClose}
+        />
+      )}
+      {modificationStatus === 'confirmation' && popupVisible && (
+        <PopupButton
+          textContent="Merci de confirmer la suppression de votre compte"
+          buttonContent="Confirmer"
+          onConfirmation={handleDelete}
           onClose={handlePopupClose}
         />
       )}

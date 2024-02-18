@@ -15,6 +15,9 @@ export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
 export const USER_UPDATE_FAILURE = 'USER_UPDATE_FAILURE';
 export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
 export const CHANGE_USER_INPUT = 'CHANGE_USER_INPUT';
+export const DELETE_USER = 'DELETE_USER';
+export const USER_DELETE_SUCCESS = 'USER_DELETE_SUCCESS';
+export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -90,4 +93,18 @@ export const changeUserInput = (value, identifier) => ({
   type: CHANGE_USER_INPUT,
   value,
   identifier,
+});
+
+export const deleteUser = () => ({
+  type: DELETE_USER,
+});
+
+export const userDeleteSuccess = (deletionStatus) => ({
+  type: USER_DELETE_SUCCESS,
+  deletionStatus,
+});
+
+export const userDeleteFailure = (deletionStatus) => ({
+  type: USER_DELETE_FAILURE,
+  deletionStatus,
 });
