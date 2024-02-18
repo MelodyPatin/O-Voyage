@@ -8,12 +8,15 @@ import {
   handleSuccessfulSignUp,
   FETCH_FRIENDS,
   saveFriends,
+  userUpdateSuccess,
+  userUpdateFailure,
+  USER_UPDATE_REQUEST,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
 import api from '../api';
 
-const userMiddleware = (store) => (next) => (action) => {
+const userMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case SUBMIT_LOGIN:
       const { email, password } = store.getState().user;
@@ -96,6 +99,37 @@ const userMiddleware = (store) => (next) => (action) => {
           // Gestion de l'erreur
         });
       break;
+
+    case USER_UPDATE_REQUEST: {
+      const userState = store.getState().user; // Obtenez l'état utilisateur une seule fois
+
+      const updateUserData = {
+        firstname: userState.firstnameValue,
+        lastname: userState.lastnameValue,
+        email: userState.email,
+        password: userState.password,
+        // Ajoutez d'autres champs si nécessaire
+      };
+
+      // Exécution de la requête
+      try {
+        // Effectuer la requête axios pour mettre à jour les données
+        const response = await api.put('/user/me/update', updateUserData);
+
+        // Mise à jour réussie
+        store.dispatch(userUpdateSuccess());
+
+        // Recharge les données utilisateur après la mise à jour
+        store.dispatch({ type: FETCH_USER_DATA });
+
+        return response; // Retourner la réponse pour la récupérer dans la fonction handleSubmit
+      } catch (error) {
+        // Gestion des erreurs
+        console.error('Erreur lors de la requête API :', error);
+        store.dispatch(userUpdateFailure(error));
+        throw error; // Propager l'erreur pour qu'elle soit capturée dans le catch de handleSubmit
+      }
+    }
 
     default:
   }

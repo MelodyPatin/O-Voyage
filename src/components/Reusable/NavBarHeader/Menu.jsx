@@ -1,13 +1,12 @@
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
-import PropTypes from 'prop-types';
 import DropDownSettings from './DropDownSettings';
 import DropDownNotifications from './DropDownNotifications';
 import DesktopItems from './DesktopItems';
 import { clickLogout } from '../../../actions/user';
 import './menu.scss';
 
-const Menu = ({ desktop }) => {
+const Menu = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const dispatch = useDispatch();
 
@@ -29,10 +28,6 @@ const Menu = ({ desktop }) => {
       </div>
     </div>
   );
-};
-
-Menu.propTypes = {
-  desktop: PropTypes.bool,
 };
 
 export default Menu;

@@ -3,10 +3,16 @@ import './LabelInput.scss';
 import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-const LabelInput = ({ placeholder, value, label, name, type, onChange }) => {
+const LabelInputUpdate = ({
+  placeholder,
+  value,
+  label,
+  name,
+  type,
+  onChange,
+}) => {
   const handleChange = (evt) => {
-    console.log('Field name:', name);
-    onChange(evt.target.value, name);
+    onChange(evt, name);
   };
 
   const inputId = `field-${name}`;
@@ -26,7 +32,7 @@ const LabelInput = ({ placeholder, value, label, name, type, onChange }) => {
   );
 };
 
-LabelInput.propTypes = {
+LabelInputUpdate.propTypes = {
   value: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string.isRequired,
@@ -36,12 +42,12 @@ LabelInput.propTypes = {
 };
 
 // Valeurs par défaut pour les props
-LabelInput.defaultProps = {
+LabelInputUpdate.defaultProps = {
   value: '',
   type: 'text',
 };
 
-export default LabelInput;
+export default LabelInputUpdate;
 
 /* 
 onChange={changeField} 

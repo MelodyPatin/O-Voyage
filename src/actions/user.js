@@ -10,6 +10,11 @@ export const CLICK_LOGOUT = 'CLICK_LOGOUT';
 export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
 export const FETCH_FRIENDS = 'FETCH_FRIENDS';
 export const SAVE_FRIENDS = 'SAVE_FRIENDS';
+export const USER_UPDATE_REQUEST = 'USER_UPDATE_REQUEST';
+export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
+export const USER_UPDATE_FAILURE = 'USER_UPDATE_FAILURE';
+export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
+export const CHANGE_USER_INPUT = 'CHANGE_USER_INPUT';
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -62,4 +67,27 @@ export const fetchFriends = () => ({
 export const saveFriends = (friends) => ({
   type: SAVE_FRIENDS,
   friends,
+});
+
+export const userUpdateRequest = () => ({
+  type: USER_UPDATE_REQUEST,
+});
+
+export const userUpdateSuccess = () => ({
+  type: USER_UPDATE_SUCCESS,
+});
+export const userUpdateFailure = (error) => ({
+  type: USER_UPDATE_FAILURE,
+  error,
+});
+
+export const updateUserInput = (fieldName, value) => ({
+  type: UPDATE_USER_INPUT,
+  payload: { fieldName, value },
+});
+
+export const changeUserInput = (value, identifier) => ({
+  type: CHANGE_USER_INPUT,
+  value,
+  identifier,
 });

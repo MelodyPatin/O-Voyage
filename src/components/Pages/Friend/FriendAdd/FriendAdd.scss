@@ -1,4 +1,26 @@
 .addAFriend {
+  .header {
+    .menu {
+      .desktopItems {
+        display: none;
+      }
+    }
+  }
+
+  .ReturnTitle {
+    @media (min-width: 767px) {
+      padding: 0rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 0rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 0rem 15rem;
+    }
+  }
+
   display: flex;
   flex-direction: column;
   height: 100vh;

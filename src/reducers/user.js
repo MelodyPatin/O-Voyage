@@ -7,6 +7,11 @@ import {
   UPDATE_LOGGED_OUT,
   SAVE_FRIENDS,
   FETCH_FRIENDS,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_SUCCESS,
+  USER_UPDATE_FAILURE,
+  UPDATE_USER_INPUT,
+  CHANGE_USER_INPUT,
 } from '../actions/user';
 
 export const initialState = {
@@ -101,6 +106,35 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         friends: action.friends,
+      };
+
+    case USER_UPDATE_REQUEST:
+      return {
+        ...state,
+      };
+
+    case USER_UPDATE_SUCCESS:
+      return {
+        ...state,
+        password: '',
+      };
+
+    case USER_UPDATE_FAILURE:
+      return {
+        ...state,
+        password: '',
+      };
+
+    case UPDATE_USER_INPUT:
+      return {
+        ...state,
+        [action.payload.fieldName]: action.payload.value,
+      };
+
+    case CHANGE_USER_INPUT:
+      return {
+        ...state,
+        [action.identifier]: action.value,
       };
 
     default:
