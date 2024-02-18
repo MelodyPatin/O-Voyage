@@ -22,6 +22,8 @@
   }
 
   .formUserUpdate {
+    padding: 0rem 1rem;
+
     @media (min-width: 767px) {
       padding: 0rem 5rem;
     }
@@ -34,7 +36,7 @@
       padding: 0rem 15rem;
     }
 
-    .FormUpdateProfile {
+    .formUpdateProfile {
       padding-top: 1rem;
 
       div.LabelInput {

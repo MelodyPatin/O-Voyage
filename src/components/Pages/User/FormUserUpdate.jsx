@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import './UserUpdate.scss';
 import { Input } from 'semantic-ui-react';
 import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
-import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 import {
-  clickLogout,
   deleteUser,
   updateUserInput,
   userUpdateRequest,
@@ -122,9 +120,8 @@ const FormUserUpdate = ({ changeField }) => {
 
   return (
     <div>
-      <ReturnTitle textContent="Modifier mon profil" />
       <div className="formUserUpdate">
-        <form className="FormUpdateProfile" onSubmit={handleSubmit}>
+        <form className="formUpdateProfile" onSubmit={handleSubmit}>
           <LabelInputUpdate
             name="firstname"
             label="Prénom"

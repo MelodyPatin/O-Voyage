@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import FormUserUpdate from './FormUserUpdate';
 import { changeUserInput } from '../../../actions/user';
+import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 
 const UserUpdate = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const UserUpdate = () => {
   return (
     <div className="userUpdate">
       <NavBarHeader />
+      <ReturnTitle textContent="Modifier mon profil" />
       <FormUserUpdate
         changeField={(newValue, identifier) => {
           const action = changeUserInput(newValue, identifier);

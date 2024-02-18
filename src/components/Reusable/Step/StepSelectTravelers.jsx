@@ -1,10 +1,15 @@
 import React from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCityToTravel, addTravelerToTravel, submitCreateTravel, updateSelectedTravelers } from '../../../actions/trip';
+import {
+  addCityToTravel,
+  addTravelerToTravel,
+  submitCreateTravel,
+  updateSelectedTravelers,
+} from '../../../actions/trip';
 
 const StepSelectTravelers = ({
   buttonContent,
@@ -17,7 +22,7 @@ const StepSelectTravelers = ({
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
-/*     dispatch(addCityToTravel());
+    /*     dispatch(addCityToTravel());
     dispatch(addTravelerToTravel()); */
   };
 
@@ -34,14 +39,13 @@ const StepSelectTravelers = ({
         if (selectedTraveler) {
           // Retourner un objet avec les clés et valeurs appropriées
           return { key: selectedTraveler.key, value: selectedTraveler.value };
-        } else {
-          // Gérer le cas où aucun pays correspondant n'a été trouvé
-          console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
-          );
-          // Retourner null pour indiquer un problème
-          return null;
         }
+        // Gérer le cas où aucun pays correspondant n'a été trouvé
+        console.error(
+          `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
+        );
+        // Retourner null pour indiquer un problème
+        return null;
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 

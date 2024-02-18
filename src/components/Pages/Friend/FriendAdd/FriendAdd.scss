@@ -43,17 +43,23 @@
       padding: 4rem 15rem;
     }
 
-    .selector {
+    .formAdd {
       flex: 1;
-      text-align: center; // Center the content horizontally
-    }
+      display: flex;
+      flex-direction: column;
 
-    & .buttonsAddFriend {
-      button.ui.button.SimpleButton {
-        width: 100%; // Adjust the width as needed
-        max-width: 500rem;
-        display: block;
-        margin-top: 1rem;
+      .selector {
+        flex: 1;
+        text-align: center; // Center the content horizontally
+      }
+
+      .buttonValidate,
+      .buttonBack {
+        button.ui.button.SimpleButton {
+          width: 100%; // Adjust the width as needed
+          display: block;
+          margin-bottom: 2rem;
+        }
       }
     }
   }
