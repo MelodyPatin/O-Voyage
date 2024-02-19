@@ -1,5 +1,4 @@
-import { React, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { React, useEffect, useState } from 'react';
 import { Rating } from 'semantic-ui-react';
 
 import './ActivityCard.scss';
@@ -8,27 +7,12 @@ import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
 import AvatarFriend from '../Avatar/AvatarFriends';
-import { fetchActivityLikes } from '../../../actions/activity';
+import api from '../../../api';
+import { useActivityRating } from '../../../hooks/activity';
 
 const ActivityCard = ({ activity }) => {
-  const dispatch = useDispatch();
   const { tripId } = useParams();
-
-  // Utilisez le sélecteur pour obtenir les likes par activité à partir du state
-  const likesByActivity = useSelector(
-    (state) => state.activity.likesByActivity
-  );
-
-  // Vérifiez si l'activité a un like dans le state
-  const userVote =
-    likesByActivity[activity.id] !== undefined
-      ? likesByActivity[activity.id]
-      : 0;
-
-  useEffect(() => {
-    // Dispatch l'action pour récupérer les likes de l'activité
-    dispatch(fetchActivityLikes(activity.id));
-  }, [dispatch, activity.id, tripId]);
+  const [rating, isLoading] = useActivityRating(activity.id);
 
   // Raccourcir le titre de l'activité
   const activityTitle = activity.name;
@@ -81,12 +65,9 @@ const ActivityCard = ({ activity }) => {
       </div>
       {/* Display hearts based on whether the activity is liked, and to which amount */}
       <div className="hearth">
-        <Rating
-          icon="heart"
-          defaultRating={userVote}
-          maxRating={3}
-          size="massive"
-        />
+        {!isLoading && (
+          <Rating icon="heart" rating={rating} maxRating={3} size="massive" />
+        )}
       </div>
     </div>
   );

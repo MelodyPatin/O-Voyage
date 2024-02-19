@@ -4,8 +4,6 @@ import {
   FETCH_AN_ACTIVITY,
   saveTripActivities,
   showActivity,
-  FETCH_ACTIVITY_LIKES,
-  showActivityLikes,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -33,18 +31,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
           console.error('Error in FETCH_ACTIVITY_LIKES:', error);
         });
 
-      break;
-
-    case FETCH_ACTIVITY_LIKES:
-      api
-        .get(`/vote/${action.activityId}/`)
-        .then((response) => {
-          const likes = response.data;
-          store.dispatch(showActivityLikes(action.activityId, likes));
-        })
-        .catch((error) => {
-          console.error(error);
-        });
       break;
 
     default:

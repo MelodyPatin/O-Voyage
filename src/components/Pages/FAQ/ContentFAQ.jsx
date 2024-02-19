@@ -1,7 +1,15 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchFaqContent } from '../../../actions/content';
 
 const ContentFAQ = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFaqContent());
+  }, [dispatch]);
+
   return (
     <ul className="faqContent">
       <li>
