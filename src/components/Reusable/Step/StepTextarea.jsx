@@ -14,9 +14,9 @@ const StepTextarea = ({
   placeholderContent,
   buttonContent,
   labelContent,
+  name,
 }) => {
   const dispatch = useDispatch();
-  const name = 'tripDescription';
 
   const inputId = `field-${name}`;
 
@@ -67,6 +67,7 @@ StepTextarea.propTypes = {
   placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default StepTextarea;

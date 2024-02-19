@@ -3,12 +3,28 @@ import {
   SAVE_TRIP_ACTIVITIES,
   FETCH_AN_ACTIVITY,
   SHOW_ACTIVITY,
+  CHANGE_ACTIVITY_FIELD,
+  TOGGLE_TAG_SELECTED,
+  UPDATE_ACTIVITY_CITIES,
+  UPDATE_SELECTED_TAG,
 } from '../actions/activity';
 
 export const initialState = {
   activities: [],
   activity: [],
   selectedDay: '',
+  activityTitle: '',
+  activityPrice: '',
+  activityUrl: '',
+  activityDates: '',
+  activityDescription: '',
+  activityAddress: '',
+  restaurantTag: false,
+  activityTag: false,
+  pubTag: false,
+  cultureTag: false,
+  selectedCities: [],
+  selectedTag: [],
 };
 
 const activityReducer = (state = initialState, action = {}) => {
@@ -29,6 +45,38 @@ const activityReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         activity: action.activity,
+      };
+
+    case CHANGE_ACTIVITY_FIELD:
+      return {
+        ...state,
+        [action.identifier]: action.value,
+      };
+
+    case TOGGLE_TAG_SELECTED:
+      // Réinitialise tous les autres tags à false et inverse la valeur du tag sélectionné
+      const updatedTags = {
+        restaurantTag: false,
+        activityTag: false,
+        pubTag: false,
+        cultureTag: false,
+        [action.category]: !state[action.category], // Inverse la valeur du tag sélectionné
+      };
+      return {
+        ...state,
+        ...updatedTags,
+      };
+
+    case UPDATE_ACTIVITY_CITIES: // Ajout
+      return {
+        ...state,
+        selectedCities: action.selectedCities,
+      };
+
+    case UPDATE_SELECTED_TAG:
+      return {
+        ...state,
+        selectedTag: [action.tag], // Écrase le tag précédemment sélectionné avec le nouveau tag
       };
 
     default:

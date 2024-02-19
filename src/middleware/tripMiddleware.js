@@ -60,8 +60,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         description: tripDescription,
       };
 
-      console.log(tripJsonData);
-
       // Exécution de la requête
       api
         .post('/trip/add', tripJsonData)
@@ -108,14 +106,12 @@ const tripMiddleware = (store) => (next) => (action) => {
       const { selectedTravelers } = store.getState().trip;
 
       // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
-      const travelersKeys = selectedTravelers.map((city) => city.key);
-      console.log(travelersKeys[0]);
+      const travelersIds = selectedTravelers.map((traveler) => traveler.key);
 
       // Données à envoyer au format JSON
       const travelerJsonData = {
-        id: travelersKeys[0],
+        travelersIds,
       };
-
       // Exécution de la requête
       api
         .put(`/trip/${tripId}/addTraveler`, travelerJsonData)
