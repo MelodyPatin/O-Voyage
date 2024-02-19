@@ -9,7 +9,6 @@ export const initialState = {
   activities: [],
   activity: [],
   selectedDay: '',
-  likesByActivity: {},
 };
 
 const activityReducer = (state = initialState, action = {}) => {

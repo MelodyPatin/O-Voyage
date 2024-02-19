@@ -30,11 +30,6 @@ const Activities = () => {
         </Link>
       )}
       <div className="sliderContainer">
-        {!isMobile && (
-          <div className="arrow">
-            <ChevronLeftIcon />
-          </div>
-        )}
         <div className="activityList">
           {activities.map((activity) => (
             <div className="activity" key={activity.id}>
@@ -42,11 +37,6 @@ const Activities = () => {
             </div>
           ))}
         </div>
-        {!isMobile && (
-          <div className="arrow">
-            <ChevronRightIcon />
-          </div>
-        )}
       </div>
       {!isMobile && (
         <div className="suggestionButton">
