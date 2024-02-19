@@ -6,7 +6,7 @@ import {
   CHANGE_ACTIVITY_FIELD,
   TOGGLE_TAG_SELECTED,
   UPDATE_ACTIVITY_CITIES,
-  ADD_SELECTED_TAG,
+  UPDATE_SELECTED_TAG,
 } from '../actions/activity';
 
 export const initialState = {
@@ -24,7 +24,7 @@ export const initialState = {
   pubTag: false,
   cultureTag: false,
   selectedCities: [],
-  selectedTags: [],
+  selectedTag: [],
 };
 
 const activityReducer = (state = initialState, action = {}) => {
@@ -54,10 +54,17 @@ const activityReducer = (state = initialState, action = {}) => {
       };
 
     case TOGGLE_TAG_SELECTED:
-      // Inverse simplement la valeur de tagIsSelected
+      // Réinitialise tous les autres tags à false et inverse la valeur du tag sélectionné
+      const updatedTags = {
+        restaurantTag: false,
+        activityTag: false,
+        pubTag: false,
+        cultureTag: false,
+        [action.category]: !state[action.category], // Inverse la valeur du tag sélectionné
+      };
       return {
         ...state,
-        [action.category]: !state[action.category],
+        ...updatedTags,
       };
 
     case UPDATE_ACTIVITY_CITIES: // Ajout
@@ -66,10 +73,10 @@ const activityReducer = (state = initialState, action = {}) => {
         selectedCities: action.selectedCities,
       };
 
-    case ADD_SELECTED_TAG:
+    case UPDATE_SELECTED_TAG:
       return {
         ...state,
-        selectedTags: action.selectedTags,
+        selectedTag: [action.tag], // Écrase le tag précédemment sélectionné avec le nouveau tag
       };
 
     default:

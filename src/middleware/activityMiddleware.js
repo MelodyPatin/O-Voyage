@@ -5,9 +5,13 @@ import {
   saveTripActivities,
   showActivity,
   SUBMIT_CREATE_ACTIVITY,
+  handleAddTag,
+  HANDLE_ADD_TAG,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => (action) => {
+  const { id } = store.getState().trip.trip;
+
   switch (action.type) {
     case FETCH_TRIP_ACTIVITIES:
       api
@@ -36,9 +40,6 @@ const activityMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_CREATE_ACTIVITY:
-      const { id } = store.getState().trip.trip;
-
-      console.log(id);
 
       const {
         activityTitle,
@@ -61,7 +62,7 @@ const activityMiddleware = (store) => (next) => (action) => {
         openingTimeAndDays: activityDates,
         city: cityKeys[0],
         url: activityUrl,
-        description: activityDescription
+        description: activityDescription,
       };
 
       console.log(activityJsonData);
@@ -72,6 +73,39 @@ const activityMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // Traitement de la réponse
           console.log(response.data);
+          store.dispatch(handleAddTag(response.data.id));
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+
+      break;
+
+    case HANDLE_ADD_TAG:
+
+      const {
+        selectedTag,
+      } = store.getState().activity;
+
+      console.log(selectedTag);
+      const tagId = selectedTag[0].key;
+      console.log(tagId);
+
+      // Données à envoyer au format JSON
+      const tagJsonData = {
+        tag: tagId,
+      };
+
+      console.log(tagJsonData);
+
+      // Exécution de la requête
+      api
+        .put(`/activity/${action.activityId}/addtag`, tagJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+          console.log(response.data);
+          window.location.href = `/trip/${id}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);

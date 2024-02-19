@@ -26,10 +26,10 @@ const StepTag = ({
       <div className="LabelInput">
         <p>{labelContent}</p>
         <div className="tags">
-          <Tag className="tag" text="Restaurant" category="restaurant" />
-          <Tag className="tag" text="Activité" category="activity" />
-          <Tag className="tag" text="Bar" category="pub" />
-          <Tag className="tag" text="Visite culturelle" category="culture" />
+          <Tag className="tag" text="Restaurant" category="restaurant" id={1} />
+          <Tag className="tag" text="Activité" category="activity" id={4} />
+          <Tag className="tag" text="Bar" category="pub" id={2} />
+          <Tag className="tag" text="Visite culturelle" category="culture" id={3} />
         </div>
       </div>
       <SimpleButton

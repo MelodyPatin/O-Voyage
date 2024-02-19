@@ -5,13 +5,9 @@ export const SHOW_ACTIVITY = 'SHOW_ACTIVITY';
 export const CHANGE_ACTIVITY_FIELD = 'CHANGE_ACTIVITY_FIELD';
 export const TOGGLE_TAG_SELECTED = 'TOGGLE_TAG_SELECTED';
 export const UPDATE_ACTIVITY_CITIES = 'UPDATE_ACTIVITY_CITIES';
-export const ADD_SELECTED_TAG = 'ADD_SELECTED_TAG';
 export const SUBMIT_CREATE_ACTIVITY = 'SUBMIT_CREATE_ACTIVITY';
-
-export const addSelectedTag = (selectedTags) => ({
-  type: ADD_SELECTED_TAG,
-  selectedTags,
-});
+export const UPDATE_SELECTED_TAG = 'UPDATE_SELECTED_TAG';
+export const HANDLE_ADD_TAG = 'HANDLE_ADD_TAG';
 
 export const fetchTripActivities = (id) => ({
   type: FETCH_TRIP_ACTIVITIES,
@@ -51,4 +47,14 @@ export const updateActivityCities = (selectedCities) => ({
 
 export const submitCreateActivity = () => ({
   type: SUBMIT_CREATE_ACTIVITY,
+});
+
+export const updateSelectedTag = (tag) => ({
+  type: UPDATE_SELECTED_TAG,
+  tag,
+});
+
+export const handleAddTag = (activityId) => ({
+  type: HANDLE_ADD_TAG,
+  activityId,
 });
