@@ -3,12 +3,15 @@ import {
   SAVE_TRIP_ACTIVITIES,
   FETCH_AN_ACTIVITY,
   SHOW_ACTIVITY,
+  FETCH_ACTIVITY_LIKES,
+  SHOW_ACTIVITY_LIKES,
 } from '../actions/activity';
 
 export const initialState = {
   activities: [],
   activity: [],
   selectedDay: '',
+  likesByActivity: {},
 };
 
 const activityReducer = (state = initialState, action = {}) => {
@@ -31,6 +34,21 @@ const activityReducer = (state = initialState, action = {}) => {
         activity: action.activity,
       };
 
+    case FETCH_ACTIVITY_LIKES:
+      return state;
+
+    case SHOW_ACTIVITY_LIKES:
+      const updatedLikesByActivity = {
+        ...state.likesByActivity,
+        [action.activityId]: action.likes.rating,
+      };
+
+      const newStateWithLikes = {
+        ...state,
+        likesByActivity: updatedLikesByActivity,
+      };
+
+      return newStateWithLikes;
     default:
       return state;
   }

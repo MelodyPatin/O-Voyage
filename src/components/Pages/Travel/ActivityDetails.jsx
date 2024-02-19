@@ -14,12 +14,12 @@ import { fetchAnActivity } from '../../../actions/activity';
 const ActivityDetails = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
-  const { id } = useParams();
+  const { activityId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAnActivity(id));
-  }, [dispatch, id]);
+    dispatch(fetchAnActivity(activityId));
+  }, [dispatch, activityId]);
 
   return (
     <div className="travelDetails">

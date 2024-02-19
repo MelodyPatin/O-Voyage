@@ -2,10 +2,12 @@ export const FETCH_TRIP_ACTIVITIES = 'FETCH_TRIP_ACTIVITIES';
 export const SAVE_TRIP_ACTIVITIES = 'SAVE_TRIP_ACTIVITIES';
 export const FETCH_AN_ACTIVITY = 'FETCH_AN_ACTIVITY';
 export const SHOW_ACTIVITY = 'SHOW_ACTIVITY';
+export const FETCH_ACTIVITY_LIKES = 'FETCH_ACTIVITY_LIKES';
+export const SHOW_ACTIVITY_LIKES = 'SHOW_ACTIVITY_LIKES';
 
-export const fetchTripActivities = (id) => ({
+export const fetchTripActivities = (tripId) => ({
   type: FETCH_TRIP_ACTIVITIES,
-  id,
+  tripId,
 });
 
 export const saveTripActivities = (activities) => ({
@@ -21,4 +23,15 @@ export const fetchAnActivity = (id) => ({
 export const showActivity = (activity) => ({
   type: SHOW_ACTIVITY,
   activity,
+});
+
+export const fetchActivityLikes = (activityId) => ({
+  type: FETCH_ACTIVITY_LIKES,
+  activityId,
+});
+
+export const showActivityLikes = (activityId, likes) => ({
+  type: SHOW_ACTIVITY_LIKES,
+  activityId,
+  likes,
 });

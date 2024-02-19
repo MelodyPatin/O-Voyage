@@ -1,16 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import { React, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Rating } from 'semantic-ui-react';
+
 import './ActivityCard.scss';
-import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
 import AvatarFriend from '../Avatar/AvatarFriends';
+import {
+  fetchActivityLikes,
+  fetchTripActivities,
+} from '../../../actions/activity';
 
 const ActivityCard = ({ activity }) => {
-  // Check if the activity is liked; assuming a constant value for the example.
-  const isLiked = true;
+  const dispatch = useDispatch();
+  const { tripId } = useParams();
+
+  // Utilisez le sélecteur pour obtenir les likes par activité à partir du state
+  const likesByActivity = useSelector(
+    (state) => state.activity.likesByActivity
+  );
+
+  // Vérifiez si l'activité a un like dans le state
+  const userVote =
+    likesByActivity[activity.id] !== undefined
+      ? likesByActivity[activity.id]
+      : 0;
+
+  useEffect(() => {
+    // Dispatch l'action pour récupérer les likes de l'activité
+    dispatch(fetchActivityLikes(activity.id));
+  }, [dispatch, activity.id, tripId]);
+
+  // Raccourcir le titre de l'activité
   const activityTitle = activity.name;
   let shortenedTitle = activityTitle.substring(0, 35);
 
@@ -18,8 +41,6 @@ const ActivityCard = ({ activity }) => {
   if (activityTitle.length > 35) {
     shortenedTitle += '...';
   }
-
-  console.log(activity);
 
   let tag;
 
@@ -43,8 +64,6 @@ const ActivityCard = ({ activity }) => {
       break;
   }
 
-  const { id } = useParams();
-
   return (
     <div className={`ActivityCard ${tag}`}>
       <div className="FlexGap">
@@ -59,15 +78,18 @@ const ActivityCard = ({ activity }) => {
       {/* Display Selector and a button in a flex column */}
       <div className="FlexColumn">
         <Selector date={activity.date} />
-        <NavLink to={`/trip/${id}/activity/${activity.id}`}>
+        <Link to={`/trip/${tripId}/activity/${activity.id}`}>
           <SimpleButton textContent="En savoir plus" />
-        </NavLink>
+        </Link>
       </div>
       {/* Display hearts based on whether the activity is liked, and to which amount */}
       <div className="hearth">
-        <Icon name={isLiked ? 'heart' : 'heart outline'} />
-        <Icon name={isLiked ? 'heart' : 'heart outline'} />
-        <Icon name={isLiked ? 'heart' : 'heart outline'} />
+        <Rating
+          icon="heart"
+          defaultRating={userVote}
+          maxRating={3}
+          size="massive"
+        />
       </div>
     </div>
   );

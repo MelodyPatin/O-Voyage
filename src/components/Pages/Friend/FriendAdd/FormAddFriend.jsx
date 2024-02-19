@@ -18,9 +18,13 @@ const FormAddFriend = () => {
   const loadResults = () => {
     // console.log(`il faut faire appel à l API pour rechercher "${search}"`);
 
+    const signUpJsonData = {
+      email: '',
+    };
+
     // on envoie une requête à l'API et traiter la réponse
     api
-      .get(`/user/${search}`)
+      .get('/user/search', signUpJsonData)
       .then((response) => {
         console.log('success', response);
 
