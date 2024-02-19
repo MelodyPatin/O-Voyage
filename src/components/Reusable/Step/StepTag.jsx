@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Tag from '../Tag/Tag';
+import { useDispatch } from 'react-redux';
+import { submitCreateActivity } from '../../../actions/activity';
 
 // Functional component : popup with input fields and a close button
 const StepTag = ({
@@ -12,6 +14,13 @@ const StepTag = ({
   labelContent,
   valueContent,
 }) => {
+
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(submitCreateActivity());
+  };
+
   return (
     <div className="StepTag">
       <div className="LabelInput">
@@ -23,7 +32,11 @@ const StepTag = ({
           <Tag className="tag" text="Visite culturelle" category="culture" />
         </div>
       </div>
-      <SimpleButton textContent={buttonContent} />
+      <SimpleButton
+        textContent={buttonContent}
+        onClick={handleClick}
+        type="button"
+      />
     </div>
   );
 };
