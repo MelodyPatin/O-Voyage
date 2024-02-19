@@ -48,18 +48,13 @@
 // export default ContentFAQ;
 
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFaqContent } from '../../../actions/content';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
 const ContentFAQ = () => {
-  const dispatch = useDispatch();
+
   const content = useSelector((state) => state.content.contentFaq);
   console.log(`faq : ${content}`);
-
-  useEffect(() => {
-    dispatch(fetchFaqContent());
-  }, [dispatch]);
 
   return <div className="faqContent">{content.content}</div>;
 };

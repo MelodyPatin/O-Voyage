@@ -1,21 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import PresentationCard from './PresentationCard';
-import { fetchHistoryContent } from '../../../../actions/content';
 
 const ContentHistory = () => {
-  const dispatch = useDispatch();
-  const contentAventure = useSelector(
-    (state) => state.content.contentHistory.notre_aventure.content
-  );
-  const contentContact = useSelector(
-    (state) => state.content.contentHistory.contact.content
-  );
-
-  useEffect(() => {
-    dispatch(fetchHistoryContent());
-  }, [dispatch]);
+  const content = useSelector((state) => state.content.contentHistory);
+  const aventureContent =
+    content && content.notre_aventure ? content.notre_aventure.content : '';
+  const contactContent =
+    content && content.contact ? content.contact.content : '';
 
   return (
     <div className="historyContent">
@@ -26,8 +19,8 @@ const ContentHistory = () => {
         <PresentationCard firstname="Nicolas" />
         <PresentationCard firstname="Théophile" />
       </div>
-      <div>{contentAventure}🌍✨</div>
-      <div>{contentContact}</div>
+      <div>{aventureContent}🌍✨</div>
+      <div>{contactContent}</div>
     </div>
   );
 };

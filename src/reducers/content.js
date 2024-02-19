@@ -7,7 +7,7 @@ import {
 
 export const initialState = {
   contentFaq: '',
-  contentHistory: {},
+  contentHistory: [],
 };
 
 const contentReducer = (state = initialState, action = {}) => {
