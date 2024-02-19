@@ -7,7 +7,7 @@ import ContentHistory from './components/ContentHistory';
 
 const History = () => {
   return (
-    <div>
+    <div className="history">
       <NavBarHeader />
       <ReturnTitle textContent="Notre Histoire" />
       <ContentHistory />

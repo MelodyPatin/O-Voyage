@@ -7,7 +7,7 @@ import ContentFAQ from './ContentFAQ';
 
 const FAQ = () => {
   return (
-    <div>
+    <div className="faq">
       <NavBarHeader />
       <ReturnTitle textContent="FAQ" />
       <ContentFAQ />

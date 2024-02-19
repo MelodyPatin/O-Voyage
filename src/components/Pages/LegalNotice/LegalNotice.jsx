@@ -8,7 +8,7 @@ import ContentLegalNotice from './ContentLegalNotice';
 
 const LegalNotice = () => {
   return (
-    <div>
+    <div className="legalNotice">
       <NavBarHeader />
       <ReturnTitle textContent="Mentions légales" />
       <ContentLegalNotice />

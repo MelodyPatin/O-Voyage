@@ -4,7 +4,7 @@ import PresentationCard from './PresentationCard';
 
 const ContentHistory = () => {
   return (
-    <div className="history">
+    <div className="historyContent">
       <h2>La Dream Team</h2>
       <div className="cards">
         <PresentationCard firstname="Aurélien" />

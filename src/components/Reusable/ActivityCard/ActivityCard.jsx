@@ -8,10 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
 import AvatarFriend from '../Avatar/AvatarFriends';
-import {
-  fetchActivityLikes,
-  fetchTripActivities,
-} from '../../../actions/activity';
+import { fetchActivityLikes } from '../../../actions/activity';
 
 const ActivityCard = ({ activity }) => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import React from 'react';
 
 const ContentFAQ = () => {
   return (
-    <ul className="faq">
+    <ul className="faqContent">
       <li>
         <p className="question">
           Comment puis-je créer un voyage sur la plateforme ?
