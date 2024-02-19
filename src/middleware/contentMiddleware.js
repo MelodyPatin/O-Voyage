@@ -1,4 +1,9 @@
-import { FETCH_FAQ_CONTENT, saveFaqContent } from '../actions/content';
+import {
+  FETCH_FAQ_CONTENT,
+  FETCH_HISTORY_CONTENT,
+  saveFaqContent,
+  saveHistoryContent,
+} from '../actions/content';
 import api from '../api';
 
 const contentMiddleware = (store) => (next) => async (action) => {
@@ -7,8 +12,21 @@ const contentMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/faq`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveFaqContent(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+          // Gestion de l'erreur
+        });
+
+      break;
+
+    case FETCH_HISTORY_CONTENT:
+      api
+        .get(`/our_history`)
+        .then((response) => {
+          console.log("Réponse de l'API :", response.data);
+          store.dispatch(saveHistoryContent(response.data));
         })
         .catch((error) => {
           console.error(error);
