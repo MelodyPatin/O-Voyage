@@ -70,6 +70,7 @@ const TravelAdd = () => {
               const action = changeTripField(newValue, identifier);
               dispatch(action);
             }}
+            name="tripTitle"
             buttonContent="Continuer"
             placeholderContent="Week-end à Paris avec les amis"
             labelContent="Donnez un titre à votre voyage*"
@@ -125,6 +126,7 @@ const TravelAdd = () => {
             placeholderContent={"Voyage surprise pour l'anniversaire de Jessie"}
             buttonContent="Continuer"
             labelContent="Ajoutez une description"
+            name="tripDescription"
           />
         </div>
       )}

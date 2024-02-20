@@ -1,20 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Tag.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTagSelected, updateSelectedTag } from '../../../actions/activity';
 
-const Tag = ({ text, category }) => {
+const Tag = ({ text, category, id }) => {
   let tagClassName;
-  // Convert text to a valid class name, replacing spaces with dashes
   if (category === 'tag') {
     tagClassName = text.toLowerCase().replace(/\s/g, '-');
   } else {
     tagClassName = category.toLowerCase();
   }
-  const isSelected = false;
+  const tagIsSelected = useSelector((state) => state.activity[`${category}Tag`]);
+  const dispatch = useDispatch();
+
+  const handleTagClick = (tag) => {
+    const categoryTag = category + 'Tag';
+    // Dispatch de l'action toggleTagIsSelected avec le texte du tag comme paramètre
+    dispatch(toggleTagSelected(categoryTag));
+    dispatch(updateSelectedTag(tag)); // Met à jour le tag sélectionné
+  };
 
   return (
-    // Render the Tag with appropriate class names based on text, category, and selection status
-    <div className={`tag ${tagClassName} ${isSelected ? 'selected' : ''}`}>
+    <div className={`tag ${tagClassName} ${tagIsSelected ? 'selected' : ''}`} onClick={() => handleTagClick({key: id, name: category})}>
       <p>{text}</p>
     </div>
   );
@@ -23,6 +31,7 @@ const Tag = ({ text, category }) => {
 Tag.propTypes = {
   text: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 };
 
 export default Tag;

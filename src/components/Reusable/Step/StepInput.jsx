@@ -13,6 +13,7 @@ const StepInput = ({
   placeholderContent,
   buttonContent,
   labelContent,
+  name,
 }) => {
   const dispatch = useDispatch();
 
@@ -28,7 +29,7 @@ const StepInput = ({
           className="label-input"
           placeholder={placeholderContent}
           value={inputValue}
-          name="tripTitle"
+          name={name}
           type="text"
           onChange={changeField}
         />
@@ -44,6 +45,7 @@ StepInput.propTypes = {
   placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default StepInput;

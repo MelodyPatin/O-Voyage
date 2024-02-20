@@ -22,8 +22,6 @@ const StepSelectTravelers = ({
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
-    /*     dispatch(addCityToTravel());
-    dispatch(addTravelerToTravel()); */
   };
 
   const handleSelectionChange = (selected) => {

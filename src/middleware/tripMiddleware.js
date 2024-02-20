@@ -21,6 +21,8 @@ import {
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
+  const { tripId } = store.getState().trip;
+
   switch (action.type) {
     case FETCH_MY_TRIPS:
       api
@@ -59,8 +61,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         description: tripDescription,
       };
 
-      console.log(tripJsonData);
-
       // Exécution de la requête
       api
         .post('/trip/add', tripJsonData)
@@ -79,7 +79,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case ADD_CITY_TO_TRAVEL:
-      const { selectedCities, tripId } = store.getState().trip;
+      const { selectedCities } = store.getState().trip;
 
       // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
       const cityKeys = selectedCities.map((city) => city.key);
@@ -87,16 +87,39 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       // Données à envoyer au format JSON
       const cityJsonData = {
-        cities: cityKeys[0],
+        id: cityKeys[0],
       };
 
       // Exécution de la requête
       api
-        .post(`/trip/${tripId}/addcity`, cityJsonData)
+        .put(`/trip/${tripId}/addcity`, cityJsonData)
         .then((response) => {
           // Traitement de la réponse
           console.log(response);
-          // store.dispatch(handleSuccessfulLogin(response.data.token));
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+      break;
+
+    case ADD_TRAVELER_TO_TRAVEL:
+      const { selectedTravelers } = store.getState().trip;
+
+      // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
+      const travelersIds = selectedTravelers.map((traveler) => traveler.key);
+
+      // Données à envoyer au format JSON
+      const travelerJsonData = {
+        travelersIds,
+      };
+      // Exécution de la requête
+      api
+        .put(`/trip/${tripId}/addTraveler`, travelerJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+          // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
+          window.location.href = `/trip/${tripId}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
