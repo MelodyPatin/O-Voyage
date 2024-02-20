@@ -28,6 +28,9 @@ export const FETCH_TRAVELERS_TO_UPDATE = 'FETCH_TRAVELERS_TO_UPDATE';
 export const SHOW_TRAVELERS = 'SHOW_TRAVELERS';
 export const SAVE_TRIP_TRAVELERS = 'SAVE_TRIP_TRAVELERS';
 export const UPDATE_TRIP_COVER = 'UPDATE_TRIP_COVER';
+export const SET_NEW_PICTURE = 'SET_NEW_PICTURE';
+export const HANDLE_REMOVE_TRAVEL_PICTURE = 'HANDLE_REMOVE_TRAVEL_PICTURE';
+export const HANDLE_ADD_TRAVEL_PICTURE = 'HANDLE_ADD_TRAVEL_PICTURE';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -171,4 +174,19 @@ export const saveTripTravelers = (travelers) => ({
 export const updateTripCover = (tripId) => ({
   type: UPDATE_TRIP_COVER,
   tripId,
+});
+
+export const setNewPicture = (pictureURL) => ({
+  type: SET_NEW_PICTURE,
+  pictureURL,
+});
+
+export const handleRemoveTravelPicture = (travelId) => ({
+  type: HANDLE_REMOVE_TRAVEL_PICTURE,
+  travelId,
+});
+
+export const handleAddTravelPicture = (travelId) => ({
+  type: HANDLE_ADD_TRAVEL_PICTURE,
+  travelId,
 });
