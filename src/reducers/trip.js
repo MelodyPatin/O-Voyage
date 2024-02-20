@@ -16,6 +16,7 @@ import {
   SAVE_TRIP_INFO,
   SAVE_TRIP_TRAVELERS,
   UPDATE_TRIP_COVER,
+  SET_NEW_PICTURE,
 } from '../actions/trip';
 
 export const initialState = {
@@ -143,6 +144,15 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
       };
+
+      case SET_NEW_PICTURE:
+        return {
+          ...state,
+          trip: {
+            ...state.trip,
+            backgroundPictureURL: action.pictureURL,
+          },
+        };
 
     default:
       return state;

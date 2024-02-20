@@ -1,48 +1,38 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import { PencilIcon } from '@heroicons/react/24/solid';
-import './TravelPicture.scss';
-import { useParams } from 'react-router-dom';
-import { updateTripCover } from '../../../actions/trip';
+import './TravelPicture.scss'; // Assurez-vous d'avoir un fichier de style pour le composant
+import { useDispatch, useSelector } from 'react-redux';
+import { handleRemoveTravelPicture, setNewPicture } from '../../../actions/trip';
 
-// Component that displays and allows the members of the trip to upload the travel cover photo
-const TravelPicture = () => {
-  const currentTrip = useSelector((state) => state.trip.trip);
+const TravelPicture = ({ currentPhoto }) => {
+
   const dispatch = useDispatch();
-  const { tripId } = useParams();
 
-  // State to store the new photo selected by the user
-  const [newPhoto, setNewPhoto] = useState(null);
+  const currentPicture = useSelector((state) => state.trip.trip.backgroundPictureURL);
+  console.log(currentPicture);
+  const tripId = useSelector((state) => state.trip.trip.id);
+  console.log(tripId);
 
-  // Function to handle changes when a new photo is selected
   const handlePhotoChange = (event) => {
-    console.log(event);
+    console.log("toto");
     const file = event.target.files[0];
-    // If a file
     if (file) {
-      // Create a new instance of FileReader
+      // Si un fichier a été sélectionné, vous pouvez le traiter ici, par exemple l'afficher
       const reader = new FileReader();
-      // Set up an event listener for when the file has been read
       reader.onload = () => {
-        dispatch(updateTripCover(tripId));
-        // When the file is successfully read, update the state with the result
-        setNewPhoto(reader.result);
+        dispatch(setNewPicture(reader.result));
+        dispatch(handleRemoveTravelPicture(tripId));
       };
-      // Read the contents of the file as a data URL
       reader.readAsDataURL(file);
     }
   };
 
   return (
     <div className="TravelPicture">
-      {/* Display the photo (either newPhoto or currentPhoto) */}
-      <img
-        src={newPhoto || currentTrip?.backgroundPictureURL}
-        alt="cover for the travel"
-        className="photo"
-      />
+      {/* Afficher la photo (soit currentPhoto, soit newPhoto) */}
+      <img src={currentPicture} alt="Photo" className="photo" />
 
-      {/* Icon to trigger the file upload input */}
+      {/* Icône pour charger une nouvelle photo */}
       <label htmlFor="photo-upload" className="upload-icon">
         <input
           type="file"

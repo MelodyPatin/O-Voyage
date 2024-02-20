@@ -24,6 +24,9 @@ import {
   saveTripTravelers,
   SUBMIT_UPDATE_TRAVEL,
   UPDATE_TRIP_COVER,
+  HANDLE_REMOVE_TRAVEL_PICTURE,
+  HANDLE_ADD_TRAVEL_PICTURE,
+  handleAddTravelPicture,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
@@ -248,6 +251,39 @@ const tripMiddleware = (store) => (next) => (action) => {
         });
       break;
 
+    case HANDLE_REMOVE_TRAVEL_PICTURE:
+      api
+        .post(`/trip/${action.travelId}/delete_picture`)
+        .then((response) => {
+          console.log(response.data);
+          console.log('yoyoyoyo');
+          store.dispatch(handleAddTravelPicture(action.travelId));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+
+    case HANDLE_ADD_TRAVEL_PICTURE:
+      const { backgroundPictureURL } = store.getState().trip.trip;
+      console.log(backgroundPictureURL);
+
+      // Données à envoyer au format JSON
+      const urlJsonData = {
+        picture: backgroundPictureURL,
+      };
+
+      api
+        .post(`/trip/${action.travelId}/add_picture`, urlJsonData)
+        .then((response) => {
+          console.log(response.data);
+          console.log('bloublou');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+
     case UPDATE_TRIP_COVER:
       if (
         action &&
@@ -258,6 +294,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         event.target.files.length > 0
       ) {
         const fileInput = event.target.files[0];
+        console.log(fileInput);
 
         if (fileInput) {
           const reader = new FileReader();
