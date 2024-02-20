@@ -187,14 +187,9 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           console.log(response.data);
         })
-        // Réinitialiser l'état de l'utilisateur
-        // store.dispatch(userDeleteSuccess('success'));
-        // store.dispatch(saveUserData('', '', '', ''));
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
-          // Dispatchez une action d'échec si nécessaire
-          // store.dispatch(userDeleteFailure(error));
         });
       break;
 

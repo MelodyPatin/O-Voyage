@@ -31,6 +31,7 @@ export const UPDATE_TRIP_COVER = 'UPDATE_TRIP_COVER';
 export const SET_NEW_PICTURE = 'SET_NEW_PICTURE';
 export const HANDLE_REMOVE_TRAVEL_PICTURE = 'HANDLE_REMOVE_TRAVEL_PICTURE';
 export const HANDLE_ADD_TRAVEL_PICTURE = 'HANDLE_ADD_TRAVEL_PICTURE';
+export const DELETE_TRIP = 'DELETE_TRIP';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -189,4 +190,9 @@ export const handleRemoveTravelPicture = (travelId) => ({
 export const handleAddTravelPicture = (travelId) => ({
   type: HANDLE_ADD_TRAVEL_PICTURE,
   travelId,
+});
+
+export const deleteTrip = (tripId) => ({
+  type: DELETE_TRIP,
+  tripId,
 });
