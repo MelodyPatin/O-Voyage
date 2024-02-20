@@ -5,12 +5,14 @@ import reducer from '../reducers';
 import userMiddleware from '../middleware/userMiddleware';
 import tripMiddleware from '../middleware/tripMiddleware';
 import activityMiddleware from '../middleware/activityMiddleware';
+import contentMiddleware from '../middleware/contentMiddleware';
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
     userMiddleware,
     tripMiddleware,
     activityMiddleware,
+    contentMiddleware,
     // ... d'autres middlewares
   )
 );

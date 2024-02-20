@@ -23,11 +23,12 @@ import {
   fetchTravelersToUpdate,
   saveTripTravelers,
   SUBMIT_UPDATE_TRAVEL,
+  UPDATE_TRIP_COVER,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
   const { tripId, tripTitle, startDate, endDate, tripDescription } =
-  store.getState().trip;
+    store.getState().trip;
 
   switch (action.type) {
     case FETCH_MY_TRIPS:
@@ -56,7 +57,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_CREATE_TRAVEL:
-
       // Données à envoyer au format JSON
       const tripJsonData = {
         name: tripTitle,
@@ -83,7 +83,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_UPDATE_TRAVEL:
-
       // Données à envoyer au format JSON
       const tripUpdateJsonData = {
         name: tripTitle,
@@ -184,12 +183,22 @@ const tripMiddleware = (store) => (next) => (action) => {
             value: city.name,
           }));
           const country = response.data.cities[0].country;
-          const formattedCountry = [{
-            key: country.id,
-            value: country.name
-          }];
+          const formattedCountry = [
+            {
+              key: country.id,
+              value: country.name,
+            },
+          ];
           store.dispatch(
-            saveTripInfo(id, name, startDate, endDate, description, cities, formattedCountry)
+            saveTripInfo(
+              id,
+              name,
+              startDate,
+              endDate,
+              description,
+              cities,
+              formattedCountry
+            )
           );
           store.dispatch(fetchTravelersToUpdate(id));
         })
@@ -237,6 +246,39 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           console.error(error);
         });
+      break;
+
+    case UPDATE_TRIP_COVER:
+      if (
+        action &&
+        action.tripId &&
+        event &&
+        event.target &&
+        event.target.files &&
+        event.target.files.length > 0
+      ) {
+        const fileInput = event.target.files[0];
+
+        if (fileInput) {
+          const reader = new FileReader();
+          reader.onload = (fileReaderEvent) => {
+            const base64File = fileReaderEvent.target.result.split(',')[1];
+
+            api
+              .post(`/trip/${action.tripId}/add_picture`, {
+                picture: base64File,
+              })
+              .then((response) => {
+                store.dispatch(showTrip(response.data));
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          };
+
+          reader.readAsDataURL(fileInput);
+        }
+      }
       break;
 
     default:

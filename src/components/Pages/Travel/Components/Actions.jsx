@@ -6,7 +6,7 @@ import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Actions.scss';
 
 const Actions = () => {
-  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const { tripId } = useParams(); // Get the 'id' parameter from the URL
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   return (
@@ -14,7 +14,7 @@ const Actions = () => {
       <div className="buttons">
         {!isMobile ? (
           <div className="simpleButton">
-            <Link to={`/trip/${id}/travelers`}>
+            <Link to={`/trip/${tripId}/travelers`}>
               <SimpleButton textContent="Voir les voyageurs" />
             </Link>
           </div>
@@ -25,7 +25,7 @@ const Actions = () => {
             </Link>
           </div>
         )}
-        <Link to={`/updatetrip/${id}`}>
+        <Link to={`/updatetrip/${tripId}`}>
           <IconButton textContent="Modifier le voyage" icon="edit" />
         </Link>
         <IconButton textContent="Supprimer le voyage" icon="trash" />

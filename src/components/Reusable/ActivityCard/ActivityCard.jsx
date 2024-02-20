@@ -1,28 +1,37 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { Rating } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
 import './ActivityCard.scss';
-import { Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import Selector from './Selector';
 import AvatarFriend from '../Avatar/AvatarFriends';
+import {
+  useActivityRating,
+  useSetActivityRating,
+} from '../../../hooks/activity';
+import { fetchTripActivities } from '../../../actions/activity';
 
 const ActivityCard = ({ activity }) => {
-  // Check if the activity is liked; assuming a constant value for the example.
-  const isLiked = true;
-  const activityTitle = activity.name;
-  let shortenedTitle = activityTitle.substring(0, 35);
+  const dispatch = useDispatch();
+  const { tripId } = useParams();
+  const [rating, isLoading] = useActivityRating(activity.id);
+  const [newRating, setNewRating] = useSetActivityRating(activity.id);
 
-  // Shorten the activity title to 35 characters adding '...' if necessary.
-  if (activityTitle.length > 35) {
-    shortenedTitle += '...';
-  }
-
+  const handleLike = async (e, { rating: clickedRating }) => {
+    await setNewRating(clickedRating);
+    dispatch(fetchTripActivities(tripId));
+  };
   console.log(activity);
 
-  let tag;
+  const activityTitle = activity.name;
+  const shortenedTitle =
+    activityTitle.length > 35
+      ? `${activityTitle.substring(0, 35)}...`
+      : activityTitle;
 
+  let tag = '';
   switch (activity.tags[0].id) {
     case 1:
       tag = 'restaurant';
@@ -36,38 +45,35 @@ const ActivityCard = ({ activity }) => {
     case 4:
       tag = 'activity';
       break;
-    // Add more cases if needed
     default:
-      // Default case if none of the above conditions match
-      tag = '';
       break;
   }
-
-  const { id } = useParams();
 
   return (
     <div className={`ActivityCard ${tag}`}>
       <div className="FlexGap">
-        {/* Display rank and Avatar in a flex container */}
         <p>{activity.score}</p>
         <AvatarFriend userAvatar={activity.creator.avatarURL} />
       </div>
-      {/* Display the shortened activity title */}
       <div className="title">
         <p>{shortenedTitle}</p>
       </div>
-      {/* Display Selector and a button in a flex column */}
       <div className="FlexColumn">
         <Selector date={activity.date} />
-        <NavLink to={`/trip/${id}/activity/${activity.id}`}>
+        <Link to={`/trip/${tripId}/activity/${activity.id}`}>
           <SimpleButton textContent="En savoir plus" />
-        </NavLink>
+        </Link>
       </div>
-      {/* Display hearts based on whether the activity is liked, and to which amount */}
       <div className="hearth">
-        <Icon name={isLiked ? 'heart' : 'heart outline'} />
-        <Icon name={isLiked ? 'heart' : 'heart outline'} />
-        <Icon name={isLiked ? 'heart' : 'heart outline'} />
+        {!isLoading && (
+          <Rating
+            onRate={handleLike}
+            icon="heart"
+            rating={newRating !== null ? newRating : rating}
+            maxRating={3}
+            size="massive"
+          />
+        )}
       </div>
     </div>
   );
@@ -75,7 +81,6 @@ const ActivityCard = ({ activity }) => {
 
 ActivityCard.propTypes = {
   activity: PropTypes.shape({
-    // Définissez les propriétés attendues de l'objet activity
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     date: PropTypes.string,
@@ -89,7 +94,6 @@ ActivityCard.propTypes = {
         id: PropTypes.number.isRequired,
       })
     ).isRequired,
-    // ... autres propriétés ...
   }).isRequired,
 };
 

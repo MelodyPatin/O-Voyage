@@ -33,16 +33,16 @@ const DropDownNotifications = () => {
         <div className="dropdown-content notification">
           <ul>
             <li className="item">
-              <User firstName="Toto" textContent="a liké votre photo" />
+              <User firstName="Toto" textContent="a liké votre photo" user="" />
             </li>
             <li className="item">
-              <User firstName="Toto" textContent="a liké votre photo" />
+              <User firstName="Toto" textContent="a liké votre photo" user="" />
             </li>
             <li className="item">
-              <User firstName="Toto" textContent="a liké votre photo" />
+              <User firstName="Toto" textContent="a liké votre photo" user="" />
             </li>
             <li className="item">
-              <User firstName="Toto" textContent="a liké votre photo" />
+              <User firstName="Toto" textContent="a liké votre photo" user="" />
             </li>
           </ul>
         </div>

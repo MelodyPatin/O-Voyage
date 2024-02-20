@@ -27,6 +27,7 @@ export const FETCH_TRAVELERS = 'FETCH_TRAVELERS';
 export const FETCH_TRAVELERS_TO_UPDATE = 'FETCH_TRAVELERS_TO_UPDATE';
 export const SHOW_TRAVELERS = 'SHOW_TRAVELERS';
 export const SAVE_TRIP_TRAVELERS = 'SAVE_TRIP_TRAVELERS';
+export const UPDATE_TRIP_COVER = 'UPDATE_TRIP_COVER';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -165,4 +166,9 @@ export const showTravelers = (travelers) => ({
 export const saveTripTravelers = (travelers) => ({
   type: SAVE_TRIP_TRAVELERS,
   travelers,
+});
+
+export const updateTripCover = (tripId) => ({
+  type: UPDATE_TRIP_COVER,
+  tripId,
 });

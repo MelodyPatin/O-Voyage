@@ -12,9 +12,9 @@ export const UPDATE_SELECTED_TAG = 'UPDATE_SELECTED_TAG';
 export const HANDLE_ADD_TAG = 'HANDLE_ADD_TAG';
 export const SAVE_ACTIVITY_INFO = 'SAVE_ACTIVITY_INFO';
 
-export const fetchTripActivities = (id) => ({
+export const fetchTripActivities = (tripId) => ({
   type: FETCH_TRIP_ACTIVITIES,
-  id,
+  tripId,
 });
 
 export const saveTripActivities = (activities) => ({

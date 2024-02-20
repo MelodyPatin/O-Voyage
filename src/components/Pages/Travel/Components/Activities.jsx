@@ -1,50 +1,43 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
-import { useSelector } from 'react-redux';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { useSelector, useDispatch } from 'react-redux';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Activities.scss';
-import ActivityAdd from '../../../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
-import { Link } from 'react-router-dom';
+import { fetchTripActivities } from '../../../../actions/activity';
 
 const Activities = () => {
+  const { tripId } = useParams();
+  const dispatch = useDispatch();
+  const activities = useSelector((state) => state.activity.activities);
+
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
-  const activities = useSelector((state) => state.activity.activities);
-  console.log(activities);
-  const [popupOpened, setPopupOpened] = useState(false);
+  useEffect(() => {
+    dispatch(fetchTripActivities(tripId));
+  }, [dispatch, tripId]);
 
-  const openPopup = () => {
-    setPopupOpened(true);
-  };
+  const sortedActivities = activities.slice().sort((a, b) => b.score - a.score);
 
   return (
     <div className="activities">
       {!isMobile && (
-        <div className="filterButton">
-          <SimpleButton textContent="Filtrer" />
-        </div>
+        <Link to={`/trip/${tripId}/filters`}>
+          <div className="filterButton">
+            <SimpleButton textContent="Filtrer" />
+          </div>
+        </Link>
       )}
       <div className="sliderContainer">
-        {!isMobile && (
-          <div className="arrow">
-            <ChevronLeftIcon />
-          </div>
-        )}
         <div className="activityList">
-          {activities.map((activity) => (
+          {sortedActivities.map((activity) => (
             <div className="activity" key={activity.id}>
               <ActivityCard activity={activity} />
             </div>
           ))}
         </div>
-        {!isMobile && (
-          <div className="arrow">
-            <ChevronRightIcon />
-          </div>
-        )}
       </div>
       {!isMobile && (
         <div className="suggestionButton">
@@ -53,7 +46,6 @@ const Activities = () => {
           </Link>
         </div>
       )}
-      {popupOpened && <ActivityAdd />}
     </div>
   );
 };

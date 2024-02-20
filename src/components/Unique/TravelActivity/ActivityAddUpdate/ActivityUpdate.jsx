@@ -9,7 +9,6 @@ import StepInput from '../../../Reusable/Step/StepInput';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
-import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 import { useParams } from 'react-router-dom';
 import {

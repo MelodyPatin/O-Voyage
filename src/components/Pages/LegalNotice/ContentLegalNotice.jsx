@@ -3,7 +3,7 @@ import React from 'react';
 
 const ContentLegalNotice = () => {
   return (
-    <ul className="legalNotice">
+    <ul className="legalNoticeContent">
       <li>
         <p className="question">1. Éditeur du Site :</p>
         <p className="answer">

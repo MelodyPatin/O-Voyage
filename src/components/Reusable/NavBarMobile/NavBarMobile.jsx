@@ -10,15 +10,15 @@ import {
 } from '@heroicons/react/24/outline';
 
 const NavBarMobile = () => {
-  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const { tripId } = useParams(); // Get the 'id' parameter from the URL
   return (
     <div className="NavBarMobileContainer">
       {/* List of Icons present in the mobile navbar */}
       <div className="NavBarMobile">
-        <Link to={`/trip/${id}`}>
+        <Link to={`/trip/${tripId}`}>
           <HomeIcon className="icon home" />
         </Link>
-        <Link to={`/trip/${id}/travelers`}>
+        <Link to={`/trip/${tripId}/travelers`}>
           <UserGroupIcon className="icon user" />
         </Link>
         <div className="circle">

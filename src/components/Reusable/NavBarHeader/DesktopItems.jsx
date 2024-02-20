@@ -9,12 +9,12 @@ import { NavLink, useParams } from 'react-router-dom';
 import './desktopItems.scss';
 
 const DesktopItems = () => {
-  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const { tripId } = useParams(); // Get the 'id' parameter from the URL
 
   return (
     <div className="desktopItems">
       {/* NavLinks with icon */}
-      <NavLink className="icon_label" to={`/trip/${id}`}>
+      <NavLink className="icon_label" to={`/trip/${tripId}`}>
         <HomeIcon className="icon" />
         <p>Accueil</p>
       </NavLink>

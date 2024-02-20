@@ -1,21 +1,43 @@
 .faq {
-  padding: 1rem;
-
-  @media (min-width: 767px) {
-    padding: 1rem 8rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+  .header {
+    .menu {
+      .desktopItems {
+        display: none;
+      }
+    }
   }
 
-  li {
-    font-family: 'Montserrat', sans-serif;
-    padding-bottom: 1rem;
+  .ReturnTitle {
+    @media (min-width: 767px) {
+      padding: 0rem 8rem;
+    }
+  }
+  .faqContent {
+    padding: 1rem;
 
-    p {
+    @media (min-width: 767px) {
+      padding: 1rem 8rem;
+    }
+
+    li {
+      font-family: 'Montserrat', sans-serif;
       padding-bottom: 1rem;
 
-      
+      p {
+        padding-bottom: 1rem;
+      }
+      .question {
+        font-weight: bold;
+      }
     }
-    .question{
-      font-weight: bold;
-    }
+  }
+
+  .Footer {
+    margin-top: auto;
   }
 }
