@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 const LabelInput = ({ placeholder, value, label, name, type, onChange }) => {
   const handleChange = (evt) => {
-    console.log('Field name:', name);
     onChange(evt.target.value, name);
   };
 

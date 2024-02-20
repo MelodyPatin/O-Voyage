@@ -37,7 +37,7 @@ const FriendList = () => {
       <ul className="friendList">
         {friends.map((friend) => (
           <li className="friend" key={friend.id}>
-            <User user={friend.user2} />
+            <User user={friend} />
             {/* XMarkIcon for indicating friend deletion */}
             <XMarkIcon className="icon" />
           </li>

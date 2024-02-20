@@ -6,10 +6,12 @@ export const HANDLE_SUCCESSFUL_LOGIN = 'HANDLE_SUCCESSFUL_LOGIN';
 export const HANDLE_SUCCESSFUL_SIGN_UP = 'HANDLE_SUCCESSFUL_SIGN_UP';
 export const FETCH_USER_DATA = 'FETCH_USER_DATA';
 export const SAVE_USER_DATA = 'SAVE_USER_DATA';
+export const SAVE_USER_RESULT_DATA = 'SAVE_USER_RESULT_DATA';
 export const CLICK_LOGOUT = 'CLICK_LOGOUT';
 export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
 export const FETCH_FRIENDS = 'FETCH_FRIENDS';
 export const SAVE_FRIENDS = 'SAVE_FRIENDS';
+export const ADD_FRIEND = 'ADD_FRIEND';
 export const USER_UPDATE_REQUEST = 'USER_UPDATE_REQUEST';
 export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
 export const USER_UPDATE_FAILURE = 'USER_UPDATE_FAILURE';
@@ -18,6 +20,9 @@ export const CHANGE_USER_INPUT = 'CHANGE_USER_INPUT';
 export const DELETE_USER = 'DELETE_USER';
 export const USER_DELETE_SUCCESS = 'USER_DELETE_SUCCESS';
 export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
+export const FETCH_USERS = 'FETCH_USERS';
+export const CHANGE_SEARCH_USERS_FIELD = 'CHANGE_SEARCH_USERS_FIELD';
+export const FETCH_USER_BY_MAIL = 'FETCH_USER_BY_MAIL';
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -55,6 +60,16 @@ export const saveUserData = (firstName, lastName, email, avatarURL) => ({
   avatarURL,
 });
 
+export const saveUserResultData = (firstName, lastName, email, avatarURL, userId) => ({
+  type: SAVE_USER_RESULT_DATA,
+  firstName,
+  lastName,
+  email,
+  avatarURL,
+  userId,
+});
+
+
 export const clickLogout = () => ({
   type: CLICK_LOGOUT,
 });
@@ -70,6 +85,11 @@ export const fetchFriends = () => ({
 export const saveFriends = (friends) => ({
   type: SAVE_FRIENDS,
   friends,
+});
+
+export const addFriend = (friendId) => ({
+  type: ADD_FRIEND,
+  friendId,
 });
 
 export const userUpdateRequest = () => ({
@@ -107,4 +127,18 @@ export const userDeleteSuccess = (deletionStatus) => ({
 export const userDeleteFailure = (deletionStatus) => ({
   type: USER_DELETE_FAILURE,
   deletionStatus,
+});
+
+export const fetchUsers = () => ({
+  type: FETCH_USERS,
+});
+
+export const changeSearchUsersField = (value, identifier) => ({
+  type: CHANGE_SEARCH_USERS_FIELD,
+  value,
+  identifier,
+});
+
+export const fetchUserByMail = () => ({
+  type: FETCH_USER_BY_MAIL,
 });
