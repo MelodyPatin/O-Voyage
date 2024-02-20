@@ -43,6 +43,10 @@
       padding: 4rem 15rem;
     }
 
+    .result {
+      margin-top: 2rem;
+    }
+
     .formAdd {
       flex: 1;
       display: flex;
@@ -52,15 +56,21 @@
         flex: 1;
         text-align: center; // Center the content horizontally
       }
-
-      .buttonValidate,
-      .buttonBack {
-        button.ui.button.SimpleButton {
-          width: 100%; // Adjust the width as needed
-          display: block;
-          margin-bottom: 2rem;
-        }
-      }
     }
+  }
+}
+
+button.ui.button.SimpleButton {
+  width: 100%; // Adjust the width as needed
+  display: block;
+  margin-top: 2rem;
+}
+
+.LabelInput {
+  width: 100%;
+
+  .ui.input {
+    margin-top: 2rem;
+    width: 100%;
   }
 }

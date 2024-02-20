@@ -15,6 +15,8 @@ import {
   DELETE_USER,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
+  CHANGE_SEARCH_USERS_FIELD,
+  SAVE_USER_RESULT_DATA,
 } from '../actions/user';
 
 export const initialState = {
@@ -39,6 +41,12 @@ export const initialState = {
   myTrips: [],
   friends: [],
   deletionStatus: null, // Peut être 'success' ou 'failure'
+  searchUsersValue: '',
+  firstNameSearch: '',
+  lastNameSearch: '',
+  avatarSearch: '',
+  emailSearch: '',
+  userIdSearch: 0,
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -86,6 +94,17 @@ const reducer = (state = initialState, action = {}) => {
         lastnameValue: action.lastName,
         avatar: action.avatarURL,
         email: action.email,
+        userId: action.userId,
+      };
+
+    case SAVE_USER_RESULT_DATA:
+      return {
+        ...state,
+        firstNameSearch: action.firstName,
+        lastNameSearch: action.lastName,
+        avatarSearch: action.avatarURL,
+        emailSearch: action.email,
+        userIdSearch: action.userId,
       };
 
     case CLICK_LOGOUT:
@@ -156,6 +175,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         deletionStatus: 'failure',
+      };
+
+    case CHANGE_SEARCH_USERS_FIELD:
+      return {
+        ...state,
+        [action.identifier]: action.value,
       };
 
     default:

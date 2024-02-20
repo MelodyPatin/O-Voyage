@@ -5,41 +5,42 @@ import { useNavigate } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import User from '../../../Reusable/User/User';
 import api from '../../../../api';
+import LabelInput from '../../../Reusable/LabelInput/LabelInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFriend, fetchUserByMail } from '../../../../actions/user';
+import AvatarFriend from '../../../Reusable/Avatar/AvatarFriends';
 
-const FormAddFriend = () => {
+const FormAddFriend = ({
+  inputValue,
+  changeField,
+  placeholderContent,
+  buttonContent,
+  labelContent,
+  name,
+}) => {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  const [users, setUsers] = useState([]);
-
-  // contenu du champ de recherche
-  const [search, setSearch] = useState('');
+  const userAvatar = useSelector((state) => state.user.emailSearch);
+  const userFirstName = useSelector((state) => state.user.firstNameSearch);
+  const userLastName = useSelector((state) => state.user.lastNameSearch);
+  const friendId = useSelector((state) => state.user.userIdSearch);
 
   // récupérer les résultats dans l'API
   const loadResults = () => {
-    // console.log(`il faut faire appel à l API pour rechercher "${search}"`);
-
-    const signUpJsonData = {
-      email: '',
-    };
-
-    // on envoie une requête à l'API et traiter la réponse
-    api
-      .get('/user/search', signUpJsonData)
-      .then((response) => {
-        console.log('success', response);
-
-        setUsers(response.data.items);
-      })
-      .catch((error) => {
-        // ici le traitement à appliquer quand la réponse arrive et qu'il y eu
-        // une erreur (4xx ou 5xx)
-        console.log('error', error);
-      });
+    dispatch(fetchUserByMail());
   };
 
   const handleGoBack = (event) => {
     event.preventDefault(); // Empêche le comportement par défaut du formulaire
     navigate(-1); // Navigue vers la page précédente
+  };
+
+  const handleAddFriend = () => {
+    console.log(friendId);
+    console.log("coucou les gars");
+    dispatch(addFriend(friendId));
   };
 
   return (
@@ -48,26 +49,28 @@ const FormAddFriend = () => {
         className="formAdd"
         onSubmit={(event) => {
           event.preventDefault();
-          // console.log('submit');
-
           loadResults();
         }}
       >
-        <Input
-          icon="search"
-          iconPosition="left"
-          placeholder="Rechercher..."
-          fluid
-          value={search}
-          onChange={(event) => {
-            setSearch(event.target.value);
-          }}
+        <LabelInput
+          label={labelContent}
+          className="label-input"
+          placeholder={placeholderContent}
+          value={inputValue}
+          name={name}
+          type="text"
+          onChange={changeField}
         />
+        <div className="result">
+          <AvatarFriend userAvatar={userAvatar} />
+          {userFirstName} {userLastName}
+        </div>
       </form>
-      <div className="users">
-        <User user="" />
-      </div>
-      <SimpleButton type="button" textContent="Ajouter" />
+      <SimpleButton
+        type="button"
+        textContent="Ajouter"
+        onClick={handleAddFriend}
+      />
       <div className="buttonBack">
         <SimpleButton
           type="button"

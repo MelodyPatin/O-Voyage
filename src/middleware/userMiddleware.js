@@ -15,6 +15,9 @@ import {
   userDeleteSuccess,
   userDeleteFailure,
   clickLogout,
+  FETCH_USER_BY_MAIL,
+  saveUserResultData,
+  ADD_FRIEND,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
@@ -92,6 +95,49 @@ const userMiddleware = (store) => (next) => async (action) => {
         });
       break;
 
+    case FETCH_USER_BY_MAIL:
+      const { searchUsersValue } = store.getState().user;
+      const fetchUserByMailData = {
+        email: searchUsersValue,
+      };
+      // on doit envoyer le JWT dans le header Authorization de la requête, pour
+      // que le serveur nous fournisse NOS recettes préférées
+      api
+        .post('/user/search', fetchUserByMailData)
+        .then((response) => {
+          console.log(response.data);
+          const firstName = response.data[0].firstname;
+          const lastName = response.data[0].lastname;
+          const avatarURL = response.data[0].avatarURL;
+          const email = response.data[0].email;
+          const userId = response.data[0].id;
+          store.dispatch(
+            saveUserResultData(firstName, lastName, avatarURL, email, userId)
+          );
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
+    case ADD_FRIEND:
+      const friendId = action.friendId;
+      const addFriendData = {
+        id: friendId,
+      };
+      // on doit envoyer le JWT dans le header Authorization de la requête, pour
+      // que le serveur nous fournisse NOS recettes préférées
+      api
+        .post('/friend/add', addFriendData)
+        .then((response) => {
+          console.log(response.data);
+          window.location.href = `/dashboard`;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
     case FETCH_FRIENDS:
       api
         .get(`/friend`)
@@ -104,81 +150,88 @@ const userMiddleware = (store) => (next) => async (action) => {
         });
       break;
 
-    case USER_UPDATE_REQUEST: {
-      const userState = store.getState().user; // Get user state only once
+    case USER_UPDATE_REQUEST:
+      {
+        const userState = store.getState().user; // Get user state only once
 
-      const updateUserData = {
-        firstname: userState.firstnameValue,
-        lastname: userState.lastnameValue,
-        email: userState.email,
-        password: userState.password,
-      };
-
-      try {
-        // Log the data you're sending in the update request
-        console.log('Update Request Data:', updateUserData);
-
-        // Perform the axios request to update the data
-        const firstResponse = await api.put('/user/me/update', updateUserData);
-
-        // Log the first response
-        console.log('First Response:', firstResponse);
-
-        const avatarData = {
-          avatar: userState.avatar,
+        const updateUserData = {
+          firstname: userState.firstnameValue,
+          lastname: userState.lastnameValue,
+          email: userState.email,
+          password: userState.password,
         };
 
-        // Log the data you're sending in the add_avatar request
-        console.log('Add Avatar Request Data:', avatarData);
+        try {
+          // Log the data you're sending in the update request
+          console.log('Update Request Data:', updateUserData);
 
-        // Perform the axios request to add the avatar
-        const secondResponse = await api.post(
-          '/user/me/add_avatar',
-          avatarData
-        );
+          // Perform the axios request to update the data
+          const firstResponse = await api.put(
+            '/user/me/update',
+            updateUserData
+          );
 
-        // Log the second response
-        console.log('Second Response:', secondResponse);
+          // Log the first response
+          console.log('First Response:', firstResponse);
 
-        // Successful update
-        store.dispatch(userUpdateSuccess());
+          const avatarData = {
+            avatar: userState.avatar,
+          };
 
-        // Reload user data after the update
-        store.dispatch({ type: FETCH_USER_DATA });
+          // Log the data you're sending in the add_avatar request
+          console.log('Add Avatar Request Data:', avatarData);
 
-        return {
-          firstResponse,
-          secondResponse,
-        };
-      } catch (error) {
-        // Log any errors that occur
-        console.error('Error during API request:', error);
+          // Perform the axios request to add the avatar
+          const secondResponse = await api.post(
+            '/user/me/add_avatar',
+            avatarData
+          );
 
-        // Dispatch a failure action
-        store.dispatch(userUpdateFailure(error));
+          // Log the second response
+          console.log('Second Response:', secondResponse);
 
-        // Propagate the error to be caught in the handleSubmit catch block
-        throw error;
+          // Successful update
+          store.dispatch(userUpdateSuccess());
+
+          // Reload user data after the update
+          store.dispatch({ type: FETCH_USER_DATA });
+
+          return {
+            firstResponse,
+            secondResponse,
+          };
+        } catch (error) {
+          // Log any errors that occur
+          console.error('Error during API request:', error);
+
+          // Dispatch a failure action
+          store.dispatch(userUpdateFailure(error));
+
+          // Propagate the error to be caught in the handleSubmit catch block
+          throw error;
+        }
       }
-    }
 
-    case DELETE_USER: {
-      try {
-        // Effectuer la requête axios pour supprimer le compte utilisateur
-        await api.delete('/user/deletea');
+      break;
 
-        // Réinitialiser l'état de l'utilisateur
-        store.dispatch(userDeleteSuccess('success'));
-        store.dispatch(saveUserData('', '', '', ''));
-        store.dispatch(clickLogout());
-      } catch (error) {
-        // Gestion des erreurs
-        console.error('Erreur lors de la suppression du compte :', error);
-        // Dispatchez une action d'échec si nécessaire
-        store.dispatch(userDeleteFailure(error));
+    case DELETE_USER:
+      {
+        try {
+          // Effectuer la requête axios pour supprimer le compte utilisateur
+          await api.delete('/user/deletea');
+
+          // Réinitialiser l'état de l'utilisateur
+          store.dispatch(userDeleteSuccess('success'));
+          store.dispatch(saveUserData('', '', '', ''));
+          store.dispatch(clickLogout());
+        } catch (error) {
+          // Gestion des erreurs
+          console.error('Erreur lors de la suppression du compte :', error);
+          // Dispatchez une action d'échec si nécessaire
+          store.dispatch(userDeleteFailure(error));
+        }
       }
       break;
-    }
     default:
   }
 
