@@ -11,15 +11,9 @@ import GeneralInfos from './Components/GeneralInfos';
 import Activities from './Components/Activities';
 import TravelersList from './Components/TravelersList';
 import { fetchTravelers } from '../../../actions/trip';
+import FilterList from './Components/FilterList';
 
-const Travelers = () => {
-  const { tripId } = useParams();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchTravelers(tripId));
-  }, [dispatch, tripId]);
-
+const Filters = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   return (
@@ -30,7 +24,7 @@ const Travelers = () => {
           <TravelsMenu />
           <div className="containerFlex">
             <aside className="aside">
-              <TravelersList />
+              <FilterList />
             </aside>
             <Activities />
           </div>
@@ -38,14 +32,11 @@ const Travelers = () => {
       ) : (
         <>
           <HeaderConnected />
-          <TravelsMenu />
-          <GeneralInfos />
-          <TravelersList />
-          <NavBarMobile />
+          <FilterList />
         </>
       )}
     </div>
   );
 };
 
-export default Travelers;
+export default Filters;

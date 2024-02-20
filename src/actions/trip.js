@@ -22,6 +22,7 @@ export const FETCH_A_TRIP = 'FETCH_A_TRIP';
 export const SHOW_TRIP = 'SHOW_TRIP';
 export const FETCH_TRAVELERS = 'FETCH_TRAVELERS';
 export const SHOW_TRAVELERS = 'SHOW_TRAVELERS';
+export const UPDATE_TRIP_COVER = 'UPDATE_TRIP_COVER';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -130,4 +131,9 @@ export const fetchTravelers = (id) => ({
 export const showTravelers = (travelers) => ({
   type: SHOW_TRAVELERS,
   travelers,
+});
+
+export const updateTripCover = (tripId) => ({
+  type: UPDATE_TRIP_COVER,
+  tripId,
 });

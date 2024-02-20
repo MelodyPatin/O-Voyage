@@ -10,11 +10,9 @@ import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import ProgressBar from '../../ProgressBar/ProgressBar';
 import StepTag from '../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
-import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 
 const ActivityUpdate = ({
-  onDesktop,
   activityTitle,
   activityAddress,
   activityCost,
@@ -119,7 +117,6 @@ const ActivityUpdate = ({
 };
 
 ActivityUpdate.propTypes = {
-  onDesktop: PropTypes.bool.isRequired,
   activityTitle: PropTypes.string,
   activityAddress: PropTypes.string,
   activityCost: PropTypes.string,

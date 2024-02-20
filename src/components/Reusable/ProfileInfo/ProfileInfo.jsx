@@ -1,7 +1,6 @@
 import { React, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './ProfileInfo.scss';
-import PropTypes from 'prop-types';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 import { fetchMyTrips } from '../../../actions/trip';
 import { fetchFriends } from '../../../actions/user';
@@ -11,13 +10,15 @@ const ProfileInfo = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchMyTrips());
-    dispatch(fetchFriends());
-  }, []);
-
   const trips = useSelector((state) => state.trip.myTrips);
   const friends = useSelector((state) => state.user.friends);
+
+  useEffect(() => {
+    if (!trips.length && !friends.length) {
+      dispatch(fetchMyTrips());
+      dispatch(fetchFriends());
+    }
+  }, []);
 
   return (
     <div className="ProfileInfo">

@@ -62,7 +62,7 @@
 
     .button.ui.button.SimpleButton {
       position: absolute;
-      transform: translateX(-50%);      
+      transform: translateX(-50%);
       bottom: 75px;
       text-decoration: underline;
       width: 12.5rem;
@@ -101,5 +101,7 @@
     right: 10px;
     font-size: 2rem;
     text-align: end;
+    cursor: pointer;
+    transition: color 0.3s ease;
   }
 }

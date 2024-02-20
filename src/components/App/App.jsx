@@ -23,6 +23,7 @@ import LegalNotice from '../Pages/LegalNotice/LegalNotice';
 import History from '../Pages/History/History';
 import ActivityDetails from '../Pages/Travel/ActivityDetails';
 import ActivityUpdate from '../Unique/TravelActivity/ActivityAddUpdate/ActivityUpdate';
+import Filters from '../Pages/Travel/Filters';
 
 function App() {
   const dispatch = useDispatch();
@@ -77,24 +78,27 @@ function App() {
           {logged && <Route path="/friends/add" element={<FriendAdd />} />}
           {logged && <Route path="/createtrip" element={<TravelAdd />} />}
           {logged && (
-            <Route path="/updatetrip/:id" element={<TravelUpdate />} />
+            <Route path="/updatetrip/:tripId" element={<TravelUpdate />} />
           )}
           {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
           {logged && (
             <Route
-              path="/trip/:id/activity/:id"
+              path="/trip/:tripId/activity/:activityId"
               element={<ActivityDetails />}
             />
           )}
           {logged && (
             <Route
-              path="/trip/:id/updateactivity/:id"
+              path="/trip/:tripId/updateactivity/:activityId"
               element={<ActivityUpdate />}
             />
           )}
-          {logged && <Route path="/trip/:id" element={<TravelDetails />} />}
+          {logged && <Route path="/trip/:tripId" element={<TravelDetails />} />}
           {logged && (
-            <Route path="/trip/:id/travelers" element={<Travelers />} />
+            <Route path="/trip/:tripId/travelers" element={<Travelers />} />
+          )}
+          {logged && (
+            <Route path="/trip/:tripId/filters" element={<Filters />} />
           )}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />

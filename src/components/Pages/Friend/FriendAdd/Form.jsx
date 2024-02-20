@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { useNavigate } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import MultipleSelector from '../../../Reusable/MultipleSelector/MultipleSelector';
@@ -18,18 +20,26 @@ const Form = () => {
   ];
 
   return (
-    <form className="formAddFriend" action="">
-      <div className="selector">
-        <MultipleSelector
-          placeholderContent="Rechercher des utilisateurs"
-          options={users}
+    <div className="formAddFriend" action="">
+      <form action="" className="formAdd">
+        <div className="selector">
+          <MultipleSelector
+            placeholderContent="Rechercher des utilisateurs"
+            options={users}
+          />
+        </div>
+        <div className="buttonValidate">
+          <SimpleButton type="button" textContent="Valider" />
+        </div>
+      </form>
+      <div className="buttonBack">
+        <SimpleButton
+          type="button"
+          textContent="Retour"
+          onClick={handleGoBack}
         />
       </div>
-      <div className="buttonsAddFriend">
-        <SimpleButton textContent="Valider" />
-        <SimpleButton textContent="Retour" onClick={handleGoBack} />
-      </div>
-    </form>
+    </div>
   );
 };
 

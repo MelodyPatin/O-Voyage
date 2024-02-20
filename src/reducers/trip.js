@@ -16,6 +16,7 @@ import {
   SAVE_MY_TRIPS,
   SHOW_TRAVELERS,
   SHOW_TRIP,
+  UPDATE_TRIP_COVER,
 } from '../actions/trip';
 
 export const initialState = {
@@ -123,6 +124,11 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         travelers: action.travelers,
+      };
+
+    case UPDATE_TRIP_COVER:
+      return {
+        ...state,
       };
 
     default:

@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { PencilIcon } from '@heroicons/react/24/solid';
 import './TravelPicture.scss';
+import { useParams } from 'react-router-dom';
+import { updateTripCover } from '../../../actions/trip';
 
 // Component that displays and allows the members of the trip to upload the travel cover photo
 const TravelPicture = () => {
   const currentTrip = useSelector((state) => state.trip.trip);
+  const dispatch = useDispatch();
+  const { tripId } = useParams();
 
   // State to store the new photo selected by the user
   const [newPhoto, setNewPhoto] = useState(null);
 
   // Function to handle changes when a new photo is selected
   const handlePhotoChange = (event) => {
+    console.log(event);
     const file = event.target.files[0];
     // If a file
     if (file) {
@@ -20,6 +24,7 @@ const TravelPicture = () => {
       const reader = new FileReader();
       // Set up an event listener for when the file has been read
       reader.onload = () => {
+        dispatch(updateTripCover(tripId));
         // When the file is successfully read, update the state with the result
         setNewPhoto(reader.result);
       };

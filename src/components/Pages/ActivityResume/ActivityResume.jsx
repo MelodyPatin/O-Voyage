@@ -12,7 +12,8 @@ import Tag from '../../Reusable/Tag/Tag';
 import IconButton from '../../Reusable/IconButton/IconButton';
 
 const ActivityResume = () => {
-  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const { activityId } = useParams(); // Get the 'id' parameter from the URL
+  const { tripId } = useParams();
 
   const currentActivity = useSelector((state) => state.activity.activity);
 
@@ -71,7 +72,7 @@ const ActivityResume = () => {
           </Link>
           <TrashIcon className="icon" />
             </div> */}
-        <Link to={`/trip/${id}/updateactivity/${id}`}>
+        <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
           <IconButton textContent="Modifier l'activité" icon="edit" />
         </Link>
         <IconButton textContent="Supprimer l'activité" icon="trash" />

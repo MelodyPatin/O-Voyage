@@ -9,9 +9,9 @@ export const SUBMIT_CREATE_ACTIVITY = 'SUBMIT_CREATE_ACTIVITY';
 export const UPDATE_SELECTED_TAG = 'UPDATE_SELECTED_TAG';
 export const HANDLE_ADD_TAG = 'HANDLE_ADD_TAG';
 
-export const fetchTripActivities = (id) => ({
+export const fetchTripActivities = (tripId) => ({
   type: FETCH_TRIP_ACTIVITIES,
-  id,
+  tripId,
 });
 
 export const saveTripActivities = (activities) => ({

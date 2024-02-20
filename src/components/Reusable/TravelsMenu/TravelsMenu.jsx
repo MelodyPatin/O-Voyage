@@ -3,12 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import './TravelsMenu.scss'; // Assurez-vous d'avoir un fichier de style pour le menu déroulant
-import { fetchATrip } from '../../../actions/trip';
+import { fetchMyTrips } from '../../../actions/trip';
 
 const TravelsMenu = () => {
   const trips = useSelector((state) => state.trip.myTrips);
   const currentTrip = useSelector((state) => state.trip.trip);
-  const { id } = useParams(); // Get the 'id' parameter from the URL
+  const { tripId } = useParams(); // Get the 'id' parameter from the URL
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!trips[0]) {
+      dispatch(fetchMyTrips());
+    }
+  }, []);
 
   // State to track whether the dropdown menu is open or closed
   const [isOpen, setIsOpen] = useState(false);
@@ -18,11 +25,9 @@ const TravelsMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchATrip(id));
-  }, [dispatch, id]);
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className="container">
@@ -31,9 +36,7 @@ const TravelsMenu = () => {
         <div className="dropdown-trigger" onClick={toggleMenu}>
           <div className="text">
             <p>Mes voyages</p>
-            <span>
-              {currentTrip ? currentTrip.name : 'Sélectionnez un voyage'}
-            </span>
+            <span>{currentTrip.name}</span>
           </div>
           {/* Display the appropriate icon based on the menu's state */}
           {isOpen && <ChevronUpIcon className="icon" />}
@@ -46,8 +49,12 @@ const TravelsMenu = () => {
             <ul>
               {trips.map(
                 (trip) =>
-                  trip.id !== parseInt(id, 10) && ( // Exclude the current trip
-                    <Link to={`/trip/${trip.id}`} key={trip.id}>
+                  trip.id !== parseInt(tripId, 10) && ( // Exclude the current trip
+                    <Link
+                      to={`/trip/${trip.id}`}
+                      key={trip.id}
+                      onClick={closeMenu}
+                    >
                       <li className="item">{trip.name}</li>
                     </Link>
                   )

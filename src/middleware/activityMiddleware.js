@@ -15,7 +15,7 @@ const activityMiddleware = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_TRIP_ACTIVITIES:
       api
-        .get(`/trip/${action.id}/activities`)
+        .get(`/trip/${action.tripId}/activities`)
         .then((response) => {
           store.dispatch(saveTripActivities(response.data));
         })
@@ -30,11 +30,10 @@ const activityMiddleware = (store) => (next) => (action) => {
       api
         .get(`/activity/${action.id}`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(showActivity(response.data));
         })
         .catch((error) => {
-          console.error(error);
+          console.error('Error in FETCH_ACTIVITY_LIKES:', error);
         });
 
       break;

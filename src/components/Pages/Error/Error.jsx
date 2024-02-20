@@ -15,7 +15,7 @@ const Error = ({ number, textContent }) => {
       <NavBarHeader />
       <ReturnTitle textContent={number} />
       <div className="errorContainer">
-        <p className="textContent">{textContent}</p>
+        <p className="textContent"> {textContent}</p>
         <Link to="/home">
           <SimpleButton textContent="Retour à l'accueil" />
         </Link>
