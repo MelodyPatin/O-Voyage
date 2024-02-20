@@ -162,9 +162,13 @@ const FormUserUpdate = ({ changeField }) => {
         <div className="buttonDelete">
           <SimpleButton textContent="Retour" onClick={handleGoBack} />
         </div>
-        <a href="" onClick={handleDeletePopup} className="deleteAccount">
+        <button
+          type="button"
+          onClick={handleDeletePopup}
+          className="deleteAccount"
+        >
           Supprimer mon compte
-        </a>
+        </button>
       </div>
       {/* Popup de succès ou d'échec */}
       {popupVisible && (

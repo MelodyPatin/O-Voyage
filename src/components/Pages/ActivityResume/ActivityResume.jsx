@@ -1,8 +1,7 @@
-import React from 'react';
-import { PencilIcon, TrashIcon } from '@heroicons/react/24/solid';
+import React, { useState } from 'react';
 
-import { useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
@@ -10,12 +9,18 @@ import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
 import './ActivityResume.scss';
 import Tag from '../../Reusable/Tag/Tag';
 import IconButton from '../../Reusable/IconButton/IconButton';
+import { deleteActivity } from '../../../actions/activity';
+import PopupButton from '../../Reusable/Popups/PopupButton';
 
 const ActivityResume = () => {
+  const dispatch = useDispatch();
   const { activityId } = useParams(); // Get the 'id' parameter from the URL
   const { tripId } = useParams();
-
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [modificationStatus, setModificationStatus] = useState(null);
   const currentActivity = useSelector((state) => state.activity.activity);
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   // Vérifiez si currentActivity est défini et a la structure attendue
   if (
@@ -26,6 +31,22 @@ const ActivityResume = () => {
     // Retournez un message ou un rendu alternatif si les données ne sont pas encore disponibles
     return <div>Merci de patienter...</div>;
   }
+
+  const handleDeletePopup = (event) => {
+    event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
+    setPopupVisible(true);
+    setModificationStatus('confirmation');
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    await dispatch(deleteActivity(currentActivity.id));
+    navigate(-1);
+  };
+
+  const handlePopupClose = () => {
+    setPopupVisible(false);
+  };
 
   // Utilisez la syntaxe optionnelle de chaîne pour éviter les erreurs si les propriétés ne sont pas définies
   const tagId = currentActivity.tags[0]?.id;
@@ -66,12 +87,32 @@ const ActivityResume = () => {
           text={currentActivity.tags[0].name}
           className="tag"
         />
-        <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
-          <IconButton textContent="Modifier l'activité" icon="edit" />
+        {currentActivity.creator.id === user.userId && (
+          <>
+            <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
+              <IconButton textContent="Modifier l'activité" icon="edit" />
+            </Link>
+            <IconButton
+              type="button"
+              onClick={handleDeletePopup}
+              textContent="Supprimer l'activité"
+              icon="trash"
+            />
+          </>
+        )}
+        <Link to={`/trip/${tripId}`}>
+          <SimpleButton textContent="Fermer" />
         </Link>
-        <IconButton textContent="Supprimer l'activité" icon="trash" />
-        <SimpleButton textContent="Fermer" />
       </div>
+      {/* Popup de succès ou d'échec */}
+      {modificationStatus === 'confirmation' && popupVisible && (
+        <PopupButton
+          textContent="Merci de confirmer la suppression de cette activité"
+          buttonContent="Confirmer"
+          onConfirmation={handleDelete}
+          onClose={handlePopupClose}
+        />
+      )}
     </div>
   );
 };

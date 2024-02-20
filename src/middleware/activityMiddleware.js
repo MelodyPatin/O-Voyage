@@ -10,9 +10,10 @@ import {
   HANDLE_ADD_TAG,
   saveActivityInfo,
   SUBMIT_UPDATE_ACTIVITY,
+  DELETE_ACTIVITY,
 } from '../actions/activity';
 
-const activityMiddleware = (store) => (next) => (action) => {
+const activityMiddleware = (store) => (next) => async (action) => {
   const { id } = store.getState().trip.trip;
   const {
     activityTitle,
@@ -63,7 +64,7 @@ const activityMiddleware = (store) => (next) => (action) => {
           const activityDates = response.data.openingTimeAndDays;
           const activityDescription = response.data.description;
           const activityAddress = response.data.postalAddress;
-          const city = response.data.city;
+          const { city } = response.data;
           const selectedCities = [
             {
               key: city.id,
@@ -91,7 +92,6 @@ const activityMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_CREATE_ACTIVITY:
-
       // Données à envoyer au format JSON
       const activityJsonData = {
         name: activityTitle,
@@ -121,8 +121,7 @@ const activityMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_UPDATE_ACTIVITY:
-
-    const cityId = selectedCities.map((city) => city.key);
+      const cityId = selectedCities.map((city) => city.key);
 
       // Données à envoyer au format JSON
       const activityUpdateJsonData = {
@@ -179,6 +178,24 @@ const activityMiddleware = (store) => (next) => (action) => {
           // Dispatch d'une action pour gérer l'erreur
         });
 
+      break;
+
+    case DELETE_ACTIVITY:
+      // Effectuer la requête axios pour supprimer le compte utilisateur
+      api
+        .delete(`/activity/${action.activityId}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        // Réinitialiser l'état de l'utilisateur
+        // store.dispatch(userDeleteSuccess('success'));
+        // store.dispatch(saveUserData('', '', '', ''));
+        .catch((error) => {
+          // Gestion des erreurs
+          console.error('Erreur lors de la requête:', error);
+          // Dispatchez une action d'échec si nécessaire
+          // store.dispatch(userDeleteFailure(error));
+        });
       break;
 
     default:

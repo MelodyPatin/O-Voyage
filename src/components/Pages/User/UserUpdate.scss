@@ -1,4 +1,5 @@
 .userUpdate {
+  position: relative;
   .header {
     .menu {
       .desktopItems {
@@ -52,7 +53,7 @@
       }
 
       .buttonValidate {
-        padding: 1rem 0;
+        padding-top: 1rem;
 
         button.ui.button.SimpleButton {
           width: 100%;
@@ -66,7 +67,8 @@
       padding: 0 1rem 2rem 0;
       font-family: 'Inria serif', serif;
       text-align: end;
-      display: block;
+      border: none;
+      background: none;
     }
 
     .buttonDelete {

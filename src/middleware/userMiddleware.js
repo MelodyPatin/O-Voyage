@@ -86,7 +86,8 @@ const userMiddleware = (store) => (next) => async (action) => {
               response.data.firstname,
               response.data.lastname,
               response.data.email,
-              response.data.avatarURL
+              response.data.avatarURL,
+              response.data.id
             )
           );
         })
@@ -108,8 +109,8 @@ const userMiddleware = (store) => (next) => async (action) => {
           console.log(response.data);
           const firstName = response.data[0].firstname;
           const lastName = response.data[0].lastname;
-          const avatarURL = response.data[0].avatarURL;
-          const email = response.data[0].email;
+          const { avatarURL } = response.data[0];
+          const { email } = response.data[0];
           const userId = response.data[0].id;
           store.dispatch(
             saveUserResultData(firstName, lastName, avatarURL, email, userId)
@@ -121,7 +122,7 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
 
     case ADD_FRIEND:
-      const friendId = action.friendId;
+      const { friendId } = action;
       const addFriendData = {
         id: friendId,
       };
@@ -215,22 +216,21 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
 
     case DELETE_USER:
-      {
-        try {
-          // Effectuer la requête axios pour supprimer le compte utilisateur
-          await api.delete('/user/deletea');
+      try {
+        // Effectuer la requête axios pour supprimer le compte utilisateur
+        await api.delete('/user/delete');
 
-          // Réinitialiser l'état de l'utilisateur
-          store.dispatch(userDeleteSuccess('success'));
-          store.dispatch(saveUserData('', '', '', ''));
-          store.dispatch(clickLogout());
-        } catch (error) {
-          // Gestion des erreurs
-          console.error('Erreur lors de la suppression du compte :', error);
-          // Dispatchez une action d'échec si nécessaire
-          store.dispatch(userDeleteFailure(error));
-        }
+        // Réinitialiser l'état de l'utilisateur
+        store.dispatch(userDeleteSuccess('success'));
+        store.dispatch(saveUserData('', '', '', ''));
+        store.dispatch(clickLogout());
+      } catch (error) {
+        // Gestion des erreurs
+        console.error('Erreur lors de la suppression du compte :', error);
+        // Dispatchez une action d'échec si nécessaire
+        store.dispatch(userDeleteFailure(error));
       }
+
       break;
     default:
   }

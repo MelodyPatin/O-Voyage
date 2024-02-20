@@ -52,16 +52,14 @@ export const fetchUserData = () => ({
   type: FETCH_USER_DATA,
 });
 
-export const saveUserData = (firstName, lastName, email, avatarURL) => ({
-  type: SAVE_USER_DATA,
+export const saveUserData = (
   firstName,
   lastName,
   email,
   avatarURL,
-});
-
-export const saveUserResultData = (firstName, lastName, email, avatarURL, userId) => ({
-  type: SAVE_USER_RESULT_DATA,
+  userId
+) => ({
+  type: SAVE_USER_DATA,
   firstName,
   lastName,
   email,
@@ -69,6 +67,20 @@ export const saveUserResultData = (firstName, lastName, email, avatarURL, userId
   userId,
 });
 
+export const saveUserResultData = (
+  firstName,
+  lastName,
+  email,
+  avatarURL,
+  userId
+) => ({
+  type: SAVE_USER_RESULT_DATA,
+  firstName,
+  lastName,
+  email,
+  avatarURL,
+  userId,
+});
 
 export const clickLogout = () => ({
   type: CLICK_LOGOUT,
