@@ -1,5 +1,6 @@
 import React from 'react';
 import { Rating } from 'semantic-ui-react';
+import { useDispatch } from 'react-redux';
 import './ActivityCard.scss';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
@@ -10,16 +11,19 @@ import {
   useActivityRating,
   useSetActivityRating,
 } from '../../../hooks/activity';
+import { fetchTripActivities } from '../../../actions/activity';
 
 const ActivityCard = ({ activity }) => {
+  const dispatch = useDispatch();
   const { tripId } = useParams();
   const [rating, isLoading] = useActivityRating(activity.id);
-  const [newRating, setNewRating, currentRating, isSubmitting] =
-    useSetActivityRating(activity.id);
+  const [newRating, setNewRating] = useSetActivityRating(activity.id);
 
-  const handleLike = () => {
-    setNewRating(currentRating);
+  const handleLike = async (e, { rating: clickedRating }) => {
+    await setNewRating(clickedRating);
+    dispatch(fetchTripActivities(tripId));
   };
+  console.log(activity);
 
   const activityTitle = activity.name;
   const shortenedTitle =

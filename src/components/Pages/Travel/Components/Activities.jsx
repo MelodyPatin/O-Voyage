@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import ActivityCard from '../../../Reusable/ActivityCard/ActivityCard';
 import IconButton from '../../../Reusable/IconButton/IconButton';
@@ -20,6 +19,8 @@ const Activities = () => {
     dispatch(fetchTripActivities(tripId));
   }, [dispatch, tripId]);
 
+  const sortedActivities = activities.slice().sort((a, b) => b.score - a.score);
+
   return (
     <div className="activities">
       {!isMobile && (
@@ -31,7 +32,7 @@ const Activities = () => {
       )}
       <div className="sliderContainer">
         <div className="activityList">
-          {activities.map((activity) => (
+          {sortedActivities.map((activity) => (
             <div className="activity" key={activity.id}>
               <ActivityCard activity={activity} />
             </div>
