@@ -130,9 +130,9 @@ export const fetchATrip = (id) => ({
   id,
 });
 
-export const fetchATripToUpdate = (id) => ({
+export const fetchATripToUpdate = (tripId) => ({
   type: FETCH_A_TRIP_TO_UPDATE,
-  id,
+  tripId,
 });
 
 export const showTrip = (trip) => ({
