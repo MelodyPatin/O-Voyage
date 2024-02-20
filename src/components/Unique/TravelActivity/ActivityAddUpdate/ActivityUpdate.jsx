@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './ActivityAddUpdate.scss';
 import { useMediaQuery } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -8,30 +8,43 @@ import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../Reusable/Step/StepInput';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
 import ProgressBar from '../../ProgressBar/ProgressBar';
-import StepTag from '../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../Reusable/Step/StepInputSelector';
 import PopupUpdate from '../../../Reusable/Popups/PopupUpdate';
 import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
+import { useParams } from 'react-router-dom';
+import {
+  changeActivityField,
+  fetchAnActivityToUpdate,
+} from '../../../../actions/activity';
+import StepTagUpdate from '../../../Reusable/Step/StepTagUpdate';
 
-const ActivityUpdate = ({
-  onDesktop,
-  activityTitle,
-  activityAddress,
-  activityCost,
-  activityDates,
-  activityUrl,
-  activityDescription,
-  activityTag,
-}) => {
+const ActivityUpdate = () => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchAnActivityToUpdate(id));
+  }, [dispatch, id]);
+
   const isMobile = useMediaQuery('(max-width: 767px)');
 
   const step = useSelector((state) => state.trip.step);
-
-  const options = [
-    { key: 'option1', text: 'Option 1', value: 'Option 1' },
-    { key: 'option2', text: 'Option 2', value: 'Option 2' },
-    { key: 'option3', text: 'Option 3', value: 'Option 3' },
-  ];
+  const activityTitle = useSelector((state) => state.activity.activityTitle);
+  const activityPrice = useSelector((state) => state.activity.activityPrice);
+  const activityUrl = useSelector((state) => state.activity.activityUrl);
+  const activityDates = useSelector((state) => state.activity.activityDates);
+  const activityAddress = useSelector(
+    (state) => state.activity.activityAddress
+  );
+  const activityDescription = useSelector(
+    (state) => state.activity.activityDescription
+  );
+  const cities = useSelector((state) => state.activity.selectedCities);
+  const citiesOptions = cities.map((city) => ({
+    key: city.key,
+    text: city.value,
+    value: city.value,
+  }));
 
   return (
     <div className="updateActivity">
@@ -41,9 +54,15 @@ const ActivityUpdate = ({
           <ReturnTitle textContent="Modifier la proposition" />
           <ProgressBar step={step} />
           <StepInput
+            inputValue={activityTitle}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityTitle"
             buttonContent="Continuer"
-            valueContent={activityTitle}
-            labelContent="Modifiez le titre de votre proposition*"
+            placeholderContent="Week-end à Paris avec les amis"
+            labelContent="Modifiez le titre*"
           />
         </div>
       )}
@@ -52,10 +71,17 @@ const ActivityUpdate = ({
           <ReturnTitleStep textContent="Modifier la proposition" />
           <ProgressBar step={step} />
           <StepInputSelector
+            valueInputContent={activityAddress}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityAddress"
             buttonContent="Continuer"
-            valueContent={activityAddress}
+            placeholderInputContent="Place George Pompidou, 75004 Paris"
+            placeholderSelectorContent="Modifiez la ville"
             labelContent="Modifiez l'adresse"
-            options={options}
+            options={citiesOptions}
           />
         </div>
       )}
@@ -65,8 +91,14 @@ const ActivityUpdate = ({
           <ProgressBar step={step} />
           <StepInput
             buttonContent="Continuer"
-            valueContent={activityCost}
-            labelContent="Renseignez le coût moyen"
+            placeholderContent="15€"
+            labelContent="Modifiez le coût moyen"
+            inputValue={activityPrice}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityPrice"
           />
         </div>
       )}
@@ -75,9 +107,15 @@ const ActivityUpdate = ({
           <ReturnTitleStep textContent="Modifier la proposition" />
           <ProgressBar step={step} />
           <StepTextarea
-            valueContent={activityDates}
+            inputValue={activityDates}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityDates"
+            textareaContent="11h-21h / Fermé le mardi"
             buttonContent="Continuer"
-            labelContent="Renseignez les jours et horaires d'ouverture"
+            labelContent="Modifiez les jours et horaires d'ouverture"
           />
         </div>
       )}
@@ -87,8 +125,14 @@ const ActivityUpdate = ({
           <ProgressBar step={step} />
           <StepInput
             buttonContent="Continuer"
-            valueContent={activityUrl}
-            labelContent="Renseignez le site internet"
+            placeholderContent="https://www.centrepompidou.fr"
+            labelContent="Modifiez le site internet"
+            inputValue={activityUrl}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityUrl"
           />
         </div>
       )}
@@ -97,9 +141,15 @@ const ActivityUpdate = ({
           <ReturnTitleStep textContent="Modifier la proposition" />
           <ProgressBar step={step} />
           <StepTextarea
-            valueContent={activityDescription}
+            inputValue={activityDescription}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityDescription"
+            textareaContent="La collection permanente est impressionnante !"
             buttonContent="Continuer"
-            labelContent="Ajoutez une description"
+            labelContent="Modifiez la description"
           />
         </div>
       )}
@@ -107,26 +157,14 @@ const ActivityUpdate = ({
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
           <ProgressBar step={step} />
-          <StepTag
-            buttonContent="Envoyer ma proposition"
-            labelContent="Sélectionnez un tag"
-            activityTag={activityTag}
+          <StepTagUpdate
+            buttonContent="Modifier ma proposition"
+            labelContent="Modifiez le tag"
           />
         </div>
       )}
     </div>
   );
-};
-
-ActivityUpdate.propTypes = {
-  onDesktop: PropTypes.bool.isRequired,
-  activityTitle: PropTypes.string,
-  activityAddress: PropTypes.string,
-  activityCost: PropTypes.string,
-  activityDates: PropTypes.string,
-  activityUrl: PropTypes.string,
-  activityDescription: PropTypes.string,
-  activityTag: PropTypes.string,
 };
 
 export default ActivityUpdate;

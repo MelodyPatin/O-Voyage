@@ -45,7 +45,6 @@ const Dashboard = () => {
 
   const handleCreateTrip = () => {
     dispatch(fetchCountries());
-    dispatch(fetchCities());
   };
 
   return (

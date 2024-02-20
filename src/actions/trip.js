@@ -7,10 +7,12 @@ export const FETCH_COUNTRIES = 'FETCH_COUNTRIES';
 export const FETCH_CITIES = 'FETCH_CITIES';
 export const FETCH_CITIES_SUCCESS = 'FETCH_CITIES_SUCCESS';
 export const SUBMIT_CREATE_TRAVEL = 'SUBMIT_CREATE_TRAVEL';
+export const SUBMIT_UPDATE_TRAVEL = 'SUBMIT_UPDATE_TRAVEL';
 export const ADD_CITY_TO_TRAVEL = 'ADD_CITY_TO_TRAVEL';
 export const ADD_TRAVELER_TO_TRAVEL = 'ADD_TRAVELER_TO_TRAVEL';
 export const SAVE_COUNTRIES = 'SAVE_COUNTRIES';
 export const SAVE_CITIES = 'SAVE_CITIES';
+export const SAVE_TRIP_INFO = 'SAVE_TRIP_INFO';
 export const UPDATE_SELECTED_COUNTRIES = 'UPDATE_SELECTED_COUNTRIES';
 export const UPDATE_SELECTED_CITIES = 'UPDATE_SELECTED_CITIES';
 export const SET_START_DATE = 'SET_START_DATE';
@@ -19,9 +21,12 @@ export const UPDATE_SELECTED_TRAVELERS = 'UPDATE_SELECTED_TRAVELERS';
 export const HANDLE_SUCCESSFUL_CREATE_TRAVEL =
   'HANDLE_SUCCESSFUL_CREATE_TRAVEL';
 export const FETCH_A_TRIP = 'FETCH_A_TRIP';
+export const FETCH_A_TRIP_TO_UPDATE = 'FETCH_A_TRIP_TO_UPDATE';
 export const SHOW_TRIP = 'SHOW_TRIP';
 export const FETCH_TRAVELERS = 'FETCH_TRAVELERS';
+export const FETCH_TRAVELERS_TO_UPDATE = 'FETCH_TRAVELERS_TO_UPDATE';
 export const SHOW_TRAVELERS = 'SHOW_TRAVELERS';
+export const SAVE_TRIP_TRAVELERS = 'SAVE_TRIP_TRAVELERS';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -62,6 +67,10 @@ export const fetchCitiesSuccess = (cities) => ({
 
 export const submitCreateTravel = () => ({
   type: SUBMIT_CREATE_TRAVEL,
+});
+
+export const submitUpdateTravel = () => ({
+  type: SUBMIT_UPDATE_TRAVEL,
 });
 
 export const addCityToTravel = () => ({
@@ -117,9 +126,25 @@ export const fetchATrip = (id) => ({
   id,
 });
 
+export const fetchATripToUpdate = (id) => ({
+  type: FETCH_A_TRIP_TO_UPDATE,
+  id,
+});
+
 export const showTrip = (trip) => ({
   type: SHOW_TRIP,
   trip,
+});
+
+export const saveTripInfo = (id, name, startDate, endDate, description, cities, formattedCountry) => ({
+  type: SAVE_TRIP_INFO,
+  id,
+  name,
+  startDate,
+  endDate,
+  description,
+  cities,
+  formattedCountry,
 });
 
 export const fetchTravelers = (id) => ({
@@ -127,7 +152,17 @@ export const fetchTravelers = (id) => ({
   id,
 });
 
+export const fetchTravelersToUpdate = (id) => ({
+  type: FETCH_TRAVELERS_TO_UPDATE,
+  id,
+});
+
 export const showTravelers = (travelers) => ({
   type: SHOW_TRAVELERS,
+  travelers,
+});
+
+export const saveTripTravelers = (travelers) => ({
+  type: SAVE_TRIP_TRAVELERS,
   travelers,
 });

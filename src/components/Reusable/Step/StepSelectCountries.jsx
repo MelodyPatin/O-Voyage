@@ -69,7 +69,7 @@ const StepSelectCountries = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.value}
+            selected={selected.map(country => country.value)} // Utiliser map pour obtenir un tableau de valeurs
             onChange={handleSelectionChange}
           />
         </div>

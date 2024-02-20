@@ -10,12 +10,11 @@ import {
   SET_END_DATE,
   UPDATE_SELECTED_TRAVELERS,
   HANDLE_SUCCESSFUL_CREATE_TRAVEL,
-  FETCH_A_TRIP,
-  FETCH_MY_TRIPS,
-  FETCH_TRAVELERS,
   SAVE_MY_TRIPS,
   SHOW_TRAVELERS,
   SHOW_TRIP,
+  SAVE_TRIP_INFO,
+  SAVE_TRIP_TRAVELERS,
 } from '../actions/trip';
 
 export const initialState = {
@@ -109,20 +108,34 @@ const tripReducer = (state = initialState, action = {}) => {
         tripId: action.tripId,
       }; // Ajout du point-virgule
 
-    case FETCH_A_TRIP:
-      return state; // Retourne l'état sans modification
-
     case SHOW_TRIP:
       return {
         ...state,
         trip: action.trip,
       };
-    // Retourne l'état sans modification
 
     case SHOW_TRAVELERS:
       return {
         ...state,
         travelers: action.travelers,
+      };
+
+    case SAVE_TRIP_INFO:
+      return {
+        ...state,
+        tripId: action.id,
+        tripTitle: action.name,
+        startDate: action.startDate,
+        endDate: action.endDate,
+        tripDescription: action.description,
+        selectedCities: action.cities,
+        selectedCountries: action.formattedCountry,
+      };
+
+    case SAVE_TRIP_TRAVELERS:
+      return {
+        ...state,
+        selectedTravelers: action.travelers,
       };
 
     default:

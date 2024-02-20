@@ -44,7 +44,7 @@ const StepSelectCities = ({
   };
 
   const selected = useSelector((state) => state.trip.selectedCities);
-
+  console.log(selected);
   return (
     <div className="StepSelect">
       <form autoComplete="off" onSubmit={handleClick}>
@@ -53,7 +53,7 @@ const StepSelectCities = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.value}
+            selected={selected.map(city => city.value)} // Utiliser map pour obtenir un tableau de valeurs
             onChange={handleSelectionChange}
           />
         </div>

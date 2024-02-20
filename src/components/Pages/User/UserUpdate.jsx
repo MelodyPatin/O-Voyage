@@ -6,7 +6,7 @@ import FormUserUpdate from './FormUserUpdate';
 
 const UserUpdate = () => (
   <div>
-    <NavBarHeader isLogged onDesktop={false} />
+    <NavBarHeader />
     <FormUserUpdate />
   </div>
 );

@@ -4,9 +4,9 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../SimpleButton/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCityToTravel, addTravelerToTravel, submitCreateTravel, updateSelectedTravelers } from '../../../actions/trip';
+import { addCityToTravel, addTravelerToTravel, submitCreateTravel, submitUpdateTravel, updateSelectedTravelers } from '../../../actions/trip';
 
-const StepSelectTravelers = ({
+const StepSelectTravelersUpdate = ({
   buttonContent,
   placeholderContent,
   labelContent,
@@ -16,7 +16,7 @@ const StepSelectTravelers = ({
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(submitCreateTravel());
+    dispatch(submitUpdateTravel());
   };
 
   const handleSelectionChange = (selected) => {
@@ -71,7 +71,7 @@ const StepSelectTravelers = ({
   );
 };
 
-StepSelectTravelers.propTypes = {
+StepSelectTravelersUpdate.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   placeholderContent: PropTypes.string,
@@ -84,4 +84,4 @@ StepSelectTravelers.propTypes = {
   ).isRequired,
 };
 
-export default StepSelectTravelers;
+export default StepSelectTravelersUpdate;
