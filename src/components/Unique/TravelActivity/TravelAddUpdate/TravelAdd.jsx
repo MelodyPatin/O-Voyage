@@ -15,7 +15,6 @@ import {
   handleStepNext,
   submitCreateTravel,
   updateSelectedCountries, // Importez updateSelectedCountries
-  fetchCities,
 } from '../../../../actions/trip';
 import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
 import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
@@ -45,16 +44,12 @@ const TravelAdd = () => {
 
   const friendsOptions = friends.map((friend) => ({
     key: friend.id,
-    text: `${friend.user2.firstname} ${friend.user2.lastname}`,
-    value: `${friend.user2.firstname} ${friend.user2.lastname}`,
+    text: `${friend.firstname} ${friend.lastname}`,
+    value: `${friend.firstname} ${friend.lastname}`,
   }));
 
-  const handleNextStep = () => {
-    dispatch(handleStepNext());
-  };
-
   const handleClick = () => {
-    handleNextStep();
+    dispatch(handleStepNext());
   };
 
   return (

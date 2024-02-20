@@ -7,6 +7,7 @@ import {
   TOGGLE_TAG_SELECTED,
   UPDATE_ACTIVITY_CITIES,
   UPDATE_SELECTED_TAG,
+  SAVE_ACTIVITY_INFO,
 } from '../actions/activity';
 
 export const initialState = {
@@ -77,6 +78,19 @@ const activityReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         selectedTag: [action.tag], // Écrase le tag précédemment sélectionné avec le nouveau tag
+      };
+
+    case SAVE_ACTIVITY_INFO:
+      return {
+        ...state,
+        activityTitle: action.activityTitle,
+        activityPrice: action.activityPrice,
+        activityUrl: action.activityUrl,
+        activityDates: action.activityDates,
+        activityDescription: action.activityDescription,
+        activityAddress: action.activityAddress,
+        selectedCities: action.selectedCities,
+        selectedTag: action.selectedTag,
       };
 
     default:

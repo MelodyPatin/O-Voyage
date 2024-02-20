@@ -17,11 +17,18 @@ import {
   FETCH_TRAVELERS,
   showTravelers,
   showTrip,
+  FETCH_A_TRIP_TO_UPDATE,
+  saveTripInfo,
+  FETCH_TRAVELERS_TO_UPDATE,
+  fetchTravelersToUpdate,
+  saveTripTravelers,
+  SUBMIT_UPDATE_TRAVEL,
   UPDATE_TRIP_COVER,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
-  const { tripId } = store.getState().trip;
+  const { tripId, tripTitle, startDate, endDate, tripDescription } =
+    store.getState().trip;
 
   switch (action.type) {
     case FETCH_MY_TRIPS:
@@ -50,9 +57,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_CREATE_TRAVEL:
-      const { tripTitle, startDate, endDate, tripDescription } =
-        store.getState().trip;
-
       // Données à envoyer au format JSON
       const tripJsonData = {
         name: tripTitle,
@@ -78,6 +82,29 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       break;
 
+    case SUBMIT_UPDATE_TRAVEL:
+      // Données à envoyer au format JSON
+      const tripUpdateJsonData = {
+        name: tripTitle,
+        startDate,
+        endDate,
+        description: tripDescription,
+      };
+
+      // Exécution de la requête
+      api
+        .put(`/trip/${tripId}`, tripUpdateJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+          console.log(response.data);
+          window.location.href = `/trip/${tripId}`;
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+
+      break;
     case ADD_CITY_TO_TRAVEL:
       const { selectedCities } = store.getState().trip;
 
@@ -109,10 +136,13 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
       const travelersIds = selectedTravelers.map((traveler) => traveler.key);
 
+      console.log(travelersIds);
       // Données à envoyer au format JSON
       const travelerJsonData = {
         travelersIds,
       };
+
+      console.log(travelerJsonData);
       // Exécution de la requête
       api
         .put(`/trip/${tripId}/addTraveler`, travelerJsonData)
@@ -138,6 +168,45 @@ const tripMiddleware = (store) => (next) => (action) => {
         });
       break;
 
+    case FETCH_A_TRIP_TO_UPDATE:
+      api
+        .get(`/trip/${action.id}`)
+        .then((response) => {
+          console.log(response.data);
+          const id = response.data.id;
+          const name = response.data.name;
+          const startDate = response.data.startDate;
+          const endDate = response.data.endDate;
+          const description = response.data.description;
+          const cities = response.data.cities.map((city) => ({
+            key: city.id,
+            value: city.name,
+          }));
+          const country = response.data.cities[0].country;
+          const formattedCountry = [
+            {
+              key: country.id,
+              value: country.name,
+            },
+          ];
+          store.dispatch(
+            saveTripInfo(
+              id,
+              name,
+              startDate,
+              endDate,
+              description,
+              cities,
+              formattedCountry
+            )
+          );
+          store.dispatch(fetchTravelersToUpdate(id));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+
     case FETCH_CITIES:
       const { countryId } = action;
       api
@@ -156,6 +225,23 @@ const tripMiddleware = (store) => (next) => (action) => {
         .get(`/trip/${action.id}/showTravelers`)
         .then((response) => {
           store.dispatch(showTravelers(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      break;
+
+    case FETCH_TRAVELERS_TO_UPDATE:
+      api
+        .get(`/trip/${action.id}/showTravelers`)
+        .then((response) => {
+          console.log(response.data);
+          const travelers = response.data.map((traveler) => ({
+            key: traveler.id,
+            value: traveler.firstname + ' ' + traveler.lastname,
+          }));
+          store.dispatch(saveTripTravelers(travelers));
+          console.log(travelers);
         })
         .catch((error) => {
           console.error(error);

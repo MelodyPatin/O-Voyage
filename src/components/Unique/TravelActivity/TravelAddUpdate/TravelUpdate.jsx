@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './TravelAddUpdate.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
@@ -7,33 +7,58 @@ import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 import StepInput from '../../../Reusable/Step/StepInput';
 import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
-import StepCalendar from '../../../Reusable/Step/StepCalendar';
-import ProgressBar from '../../ProgressBar/ProgressBar';
-import { changeTripField, handleStepNext } from '../../../../actions/trip';
+import {
+  changeTripField,
+  fetchATripToUpdate,
+  fetchCountries,
+  handleStepNext,
+} from '../../../../actions/trip';
+import { useParams } from 'react-router-dom';
+import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
+import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
+import ProgressBarTravel from '../../ProgressBar/ProgressBarTravel';
+import StepSelectTravelersUpdate from '../../../Reusable/Step/StepSelectTravelersUpdate';
+import StepCalendarUpdate from '../../../Reusable/Step/StepCalendarUpdate';
 
 const TravelUpdate = () => {
   const dispatch = useDispatch();
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchATripToUpdate(id));
+    dispatch(fetchCountries());
+  }, [dispatch, id]);
 
   const step = useSelector((state) => state.trip.step);
   const tripTitle = useSelector((state) => state.trip.tripTitle);
-  const tripCountries = useSelector((state) => state.trip.tripCountries);
-  const tripCities = useSelector((state) => state.trip.tripCities);
-  const tripDates = useSelector((state) => state.trip.tripDates);
   const tripDescription = useSelector((state) => state.trip.tripDescription);
-  const tripTravelers = useSelector((state) => state.trip.tripTravelers);
+  const countries = useSelector((state) => state.trip.countries);
+  const cities = useSelector((state) => state.trip.cities);
+  const selectedCities = useSelector((state) => state.trip.cities);
+  const friends = useSelector((state) => state.user.friends);
+  const startDate = useSelector((state) => state.trip.startDate);
+  const endDate = useSelector((state) => state.trip.endDate);
 
-  const options = [
-    { key: 'option1', text: 'Option 1', value: 'Option 1' },
-    { key: 'option2', text: 'Option 2', value: 'Option 2' },
-    { key: 'option3', text: 'Option 3', value: 'Option 3' },
-  ];
+  const countriesOptions = countries.map((country) => ({
+    key: country.id,
+    text: country.name,
+    value: country.name,
+  }));
 
-  const handleNextStep = () => {
-    dispatch(handleStepNext());
-  };
+  const citiesOptions = cities.map((city) => ({
+    key: city.id,
+    text: city.name,
+    value: city.name,
+  }));
+
+  const friendsOptions = friends.map((friend) => ({
+    key: friend.id,
+    text: `${friend.firstname} ${friend.lastname}`,
+    value: `${friend.firstname} ${friend.lastname}`,
+  }));
 
   const handleClick = () => {
-    handleNextStep();
+    dispatch(handleStepNext());
   };
 
   return (
@@ -42,28 +67,29 @@ const TravelUpdate = () => {
       {step === 1 && (
         <div className="updateTrip">
           <ReturnTitle textContent="Modifier le voyage" />
-          <ProgressBar step={step} />
+          <ProgressBarTravel step={step} />
           <StepInput
             inputValue={tripTitle}
             changeField={(newValue, identifier) => {
               const action = changeTripField(newValue, identifier);
               dispatch(action);
             }}
+            name="tripTitle"
             buttonContent="Continuer"
             placeholderContent="Week-end à Paris avec les amis"
-            labelContent="Modifiez le titre de votre voyage*"
+            labelContent="Modifiez le titre du voyage*"
           />
         </div>
       )}
       {step === 2 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
-          <ProgressBar step={step} />
-          <StepSelect
+          <ProgressBarTravel step={step} />
+          <StepSelectCountries
             buttonContent="Continuer"
-            valueContent={tripCountries}
-            labelContent="Sélectionnez un/des pays*"
-            options={options}
+            placeholderContent="France"
+            labelContent="Modifiez le/les pays*"
+            options={countriesOptions}
             handleClick={handleClick}
           />
         </div>
@@ -71,12 +97,12 @@ const TravelUpdate = () => {
       {step === 3 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
-          <ProgressBar step={step} />
-          <StepSelect
+          <ProgressBarTravel step={step} />
+          <StepSelectCities
             buttonContent="Continuer"
-            valueContent={tripCities}
-            labelContent="Sélectionnez une/des villes*"
-            options={options}
+            placeholderContent="Paris"
+            labelContent="Modifiez la/les villes*"
+            options={citiesOptions}
             handleClick={handleClick}
           />
         </div>
@@ -84,18 +110,19 @@ const TravelUpdate = () => {
       {step === 4 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
-          <ProgressBar step={step} />
-          <StepCalendar
-            buttonContent="Valider"
-            labelContent="Ajoutez les dates *"
-            tripDates={tripDates}
+          <ProgressBarTravel step={step} />
+          <StepCalendarUpdate
+            buttonContent="Continuer"
+            labelContent="Modifiez les dates *"
+            startDate={startDate}
+            endDate={endDate}
           />
         </div>
       )}
       {step === 5 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
-          <ProgressBar step={step} />
+          <ProgressBarTravel step={step} />
           <StepTextarea
             inputValue={tripDescription}
             changeField={(newValue, identifier) => {
@@ -105,18 +132,19 @@ const TravelUpdate = () => {
             placeholderContent={"Voyage surprise pour l'anniversaire de Jessie"}
             buttonContent="Continuer"
             labelContent="Modifiez la description"
+            name="tripDescription"
           />
         </div>
       )}
       {step === 6 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
-          <ProgressBar step={step} />
-          <StepSelect
-            buttonContent="Continuer"
-            valueContent={tripTravelers}
-            labelContent="Ajoutez un/des voyageurs*"
-            options={options}
+          <ProgressBarTravel step={step} />
+          <StepSelectTravelersUpdate
+            buttonContent="Modifier le voyage"
+            placeholderContent="Rechercher dans les amis"
+            labelContent="Modifiez les voyageurs*"
+            options={friendsOptions}
             handleClick={handleClick}
           />
         </div>

@@ -54,7 +54,7 @@ const StepInputSelector = ({
     dispatch(handleStepNext());
   };
 
-  const selected = useSelector((state) => state.trip.selectedCities);
+  const selected = useSelector((state) => state.activity.selectedCities);
 
   return (
     <div className="StepInputSelector">
@@ -71,7 +71,7 @@ const StepInputSelector = ({
         className="selector"
         placeholderContent={placeholderSelectorContent}
         options={options}
-        selected={selected.value}
+        selected={selected.map(city => city.value)} // Utiliser map pour obtenir un tableau de valeurs
         onChange={handleSelectionChange}
       />
       <SimpleButton textContent={buttonContent} onClick={handleClick} />

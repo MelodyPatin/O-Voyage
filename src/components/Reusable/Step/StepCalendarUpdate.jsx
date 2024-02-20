@@ -11,8 +11,13 @@ import {
   setStartDate,
 } from '../../../actions/trip';
 
-const StepCalendar = ({ buttonContent, labelContent }) => {
+const StepCalendarUpdate = ({ buttonContent, labelContent, startDate, endDate }) => {
   const dispatch = useDispatch();
+  const [selectedDates, setSelectedDates] = useState([startDate, endDate]);
+
+  useEffect(() => {
+    setSelectedDates([startDate, endDate]);
+  }, [startDate, endDate]);
 
   const handleClick = () => {
     dispatch(handleStepNext());
@@ -37,6 +42,7 @@ const StepCalendar = ({ buttonContent, labelContent }) => {
           select="range"
           display="inline"
           onChange={handleCalendarDates}
+          value={selectedDates}
         />
       </div>
       <SimpleButton textContent={buttonContent} onClick={handleClick} />
@@ -44,9 +50,11 @@ const StepCalendar = ({ buttonContent, labelContent }) => {
   );
 };
 
-StepCalendar.propTypes = {
+StepCalendarUpdate.propTypes = {
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
+  startDate: PropTypes.string, // Add prop types for startDate and endDate
+  endDate: PropTypes.string,
 };
 
-export default StepCalendar;
+export default StepCalendarUpdate;
