@@ -57,7 +57,7 @@ const ActivityResume = () => {
       <div className="content">
         <p>Activité : {currentActivity.name}</p>
         <p>Adresse : {currentActivity.postalAddress}</p>
-        <p>Prix : {currentActivity.price}€</p>
+        <p>Prix : {currentActivity.price}</p>
         <p>Horaires : {currentActivity.openingTimeAndDays}</p>
         <p>Site internet : {currentActivity.url} </p>
         <p>Description : {currentActivity.description} </p>
@@ -66,12 +66,6 @@ const ActivityResume = () => {
           text={currentActivity.tags[0].name}
           className="tag"
         />
-        {/* <div className="icons">
-          <Link to={`/updateactivity/${id}`}>
-            <PencilIcon className="icon" />
-          </Link>
-          <TrashIcon className="icon" />
-            </div> */}
         <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
           <IconButton textContent="Modifier l'activité" icon="edit" />
         </Link>
