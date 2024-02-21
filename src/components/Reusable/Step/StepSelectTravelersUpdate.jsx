@@ -1,10 +1,16 @@
 import React from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCityToTravel, addTravelerToTravel, submitCreateTravel, submitUpdateTravel, updateSelectedTravelers } from '../../../actions/trip';
+import {
+  addCityToTravel,
+  addTravelerToTravel,
+  submitCreateTravel,
+  submitUpdateTravel,
+  updateSelectedTravelers,
+} from '../../../actions/trip';
 
 const StepSelectTravelersUpdate = ({
   buttonContent,
@@ -57,7 +63,7 @@ const StepSelectTravelersUpdate = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.map(traveler => traveler.value)} // Utiliser map pour obtenir un tableau de valeurs
+            selected={selected.map((traveler) => traveler.value)} // Utiliser map pour obtenir un tableau de valeurs
             onChange={handleSelectionChange}
           />
         </div>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
-import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
+import SimpleButton from '../../Reusable/Buttons/SimpleButton';
 
 import './Error.scss';
 import Footer from '../../Reusable/Footer/Footer';

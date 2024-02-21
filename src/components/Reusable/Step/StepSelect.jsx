@@ -1,7 +1,7 @@
 import React from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCities, updateSelectedCountries } from '../../../actions/trip';

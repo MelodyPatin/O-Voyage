@@ -4,7 +4,7 @@ import './FriendAdd.scss';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import { useDispatch, useSelector } from 'react-redux';
-import FormAddFriend from './FormAddFriend';
+import FormAddFriend from './Components/FormAddFriend';
 import { changeSearchUsersField } from '../../../../actions/user';
 
 const FriendAdd = () => {

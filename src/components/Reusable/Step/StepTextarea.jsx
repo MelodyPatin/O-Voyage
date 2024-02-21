@@ -2,7 +2,7 @@ import React from 'react';
 import './Steps.scss';
 import { Form, TextArea } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import { useDispatch } from 'react-redux';
 import { handleStepNext } from '../../../actions/trip';
 import { fetchFriends } from '../../../actions/user';
@@ -26,7 +26,7 @@ const StepTextarea = ({
 
   const handleFetchFriends = () => {
     dispatch(fetchFriends());
-  }
+  };
 
   const handleChange = (evt) => {
     changeField(evt.target.value, name);
