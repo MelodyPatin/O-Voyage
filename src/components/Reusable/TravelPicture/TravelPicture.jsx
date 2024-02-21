@@ -9,9 +9,7 @@ const TravelPicture = ({ currentPhoto }) => {
   const dispatch = useDispatch();
 
   const currentPicture = useSelector((state) => state.trip.trip.backgroundPictureURL);
-  console.log(currentPicture);
   const tripId = useSelector((state) => state.trip.trip.id);
-  console.log(tripId);
 
   const handlePhotoChange = (event) => {
     console.log("toto");

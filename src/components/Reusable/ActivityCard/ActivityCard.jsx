@@ -59,7 +59,7 @@ const ActivityCard = ({ activity }) => {
         <p>{shortenedTitle}</p>
       </div>
       <div className="FlexColumn">
-        <Selector date={activity.date} />
+        <Selector date={activity.date} activityId={activity.id} />
         <Link to={`/trip/${tripId}/activity/${activity.id}`}>
           <SimpleButton textContent="En savoir plus" />
         </Link>
