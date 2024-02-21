@@ -109,16 +109,9 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case CLICK_LOGOUT:
-      localStorage.removeItem('token');
+      localStorage.clear(); // Efface tout le localStorage
 
-      return {
-        ...state,
-        firstnameValue: '',
-        lastname: '',
-        logged: false,
-        loggedOut: true,
-        signedUp: false,
-      };
+      return initialState;
 
     case UPDATE_LOGGED_OUT:
       return {
