@@ -3,7 +3,7 @@ import './UserUpdate.scss';
 
 import { useDispatch } from 'react-redux';
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
-import FormUserUpdate from './FormUserUpdate';
+import FormUserUpdate from './Components/FormUserUpdate';
 import { changeUserInput } from '../../../actions/user';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 

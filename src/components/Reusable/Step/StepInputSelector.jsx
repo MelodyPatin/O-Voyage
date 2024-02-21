@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './Steps.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import { handleStepNext } from '../../../actions/trip';
 import { updateActivityCities } from '../../../actions/activity';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';

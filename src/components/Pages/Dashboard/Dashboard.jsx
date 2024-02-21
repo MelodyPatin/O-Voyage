@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './Dashboard.scss';
 import HeaderConnected from '../../Reusable/HeaderConnected/HeaderConnected';
-import IconButton from '../../Reusable/IconButton/IconButton';
+import IconButton from '../../Reusable/Buttons/IconButton';
 import TravelCard from './Components/TravelCard';
 import Footer from '../../Reusable/Footer/Footer';
 import {

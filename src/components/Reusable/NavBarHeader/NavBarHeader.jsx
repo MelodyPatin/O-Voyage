@@ -2,8 +2,8 @@ import { React } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import './NavBarHeader.scss';
-import Menu from './Menu';
-import LoginLogoutButton from './LoginLogoutButton';
+import Menu from './Components/Menu';
+import LoginLogoutButton from './Components/LoginLogoutButton';
 
 const NavBarHeader = () => {
   const logged = useSelector((state) => state.user.logged);

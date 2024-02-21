@@ -2,7 +2,7 @@ import React from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import Tag from '../Tag/Tag';
 import { useDispatch } from 'react-redux';
 import { submitCreateActivity } from '../../../actions/activity';
@@ -14,7 +14,6 @@ const StepTag = ({
   labelContent,
   valueContent,
 }) => {
-
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -29,7 +28,12 @@ const StepTag = ({
           <Tag className="tag" text="Restaurant" category="restaurant" id={1} />
           <Tag className="tag" text="Activité" category="activity" id={4} />
           <Tag className="tag" text="Bar" category="pub" id={2} />
-          <Tag className="tag" text="Visite culturelle" category="culture" id={3} />
+          <Tag
+            className="tag"
+            text="Visite culturelle"
+            category="culture"
+            id={3}
+          />
         </div>
       </div>
       <SimpleButton

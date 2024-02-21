@@ -1,0 +1,107 @@
+@use 'src/styles/variables' as v;
+
+.ActivityCard {
+  width: 15rem;
+  height: 19.5rem;
+  padding: 1rem;
+  border-radius: 20px;
+  color: v.$darkColor;
+  font-size: 1.25rem;
+  margin: 0.5rem 0.5rem 1rem 0.5rem;
+  position: relative;
+  box-shadow: 2px 5px 8px v.$darkColor;
+
+  .title {
+    padding-top: 0.5rem;
+    font-family: 'Inria Serif', serif;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+  }
+
+  .ui.selection.dropdown {
+    background-color: v.$lightColor;
+
+    .visible.menu.transition {
+      background-color: v.$lightColor;
+    }
+  }
+
+  // Different styles based on the class of the ActivityCard
+  &.restaurant {
+    background-color: rgba(v.$restaurant, 0.5);
+    border: 5px solid v.$restaurant;
+  }
+
+  &.culture {
+    background-color: rgba(v.$culture, 0.5);
+    border: 5px solid v.$culture;
+  }
+
+  &.activity {
+    background-color: rgba(v.$activity, 0.5);
+    border: 5px solid v.$activity;
+  }
+
+  &.pub {
+    background-color: rgba(v.$pub, 0.5);
+    border: 5px solid v.$pub;
+  }
+
+  .FlexGap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .FlexColumn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 2rem 1rem;
+
+    .button.ui.button.SimpleButton {
+      position: absolute;
+      transform: translateX(-50%);
+      bottom: 75px;
+      text-decoration: underline;
+      width: 12.5rem;
+
+      // Hover effect for the SimpleButton
+      &:hover {
+        background-color: v.$lightColor;
+        color: v.$mainColor;
+      }
+    }
+
+    .ui.selection.dropdown {
+      position: absolute;
+      top: 120px;
+      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+      border: 1px solid v.$mainColor;
+
+      .item {
+        color: v.$mainColor;
+        border: 1px solid v.$mainColor;
+        border-bottom: 0;
+
+        // Hover effect for dropdown items
+        &:hover {
+          color: v.$lightColor;
+          background-color: v.$mainColor;
+        }
+      }
+    }
+  }
+
+  .hearth {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 2rem;
+    text-align: end;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+}

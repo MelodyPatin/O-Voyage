@@ -1,0 +1,29 @@
+@use 'src/styles/variables' as v;
+
+.filterList {
+  margin-top: 5rem;
+  .ReturnTitle {
+    background-color: v.$mainColor;
+
+    h3 {
+      color: v.$lightColor;
+    }
+
+    .arrowIcon {
+      color: v.$lightColor;
+    }
+  }
+
+  .filters {
+    padding: 1rem;
+    font-family: 'Montserrat', sans-serif;
+
+    .ui.accordion {
+      padding: 2rem 0;
+      .title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: bold;
+      }
+    }
+  }
+}

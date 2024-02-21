@@ -3,7 +3,7 @@ import './Steps.scss';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import LabelInput from '../LabelInput/LabelInput';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import { handleStepNext } from '../../../actions/trip';
 
 // Functional component : popup with input fields and a close button

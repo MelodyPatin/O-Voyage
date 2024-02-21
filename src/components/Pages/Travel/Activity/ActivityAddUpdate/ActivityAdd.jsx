@@ -1,0 +1,157 @@
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import './ActivityAddUpdate.scss';
+import NavBarHeader from '../../../../Reusable/NavBarHeader/NavBarHeader';
+import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
+import StepInput from '../../../../Reusable/Step/StepInput';
+import StepTextarea from '../../../../Reusable/Step/StepTextarea';
+import ProgressBar from '../../../../Reusable/ProgressBar/ProgressBar';
+import StepTag from '../../../../Reusable/Step/StepTag';
+import StepInputSelector from '../../../../Reusable/Step/StepInputSelector';
+import ReturnTitleStep from '../../../../Reusable/ReturnTitle/ReturnTitleStep';
+import { changeActivityField } from '../../../../../actions/activity';
+
+const ActivityAdd = () => {
+  const dispatch = useDispatch();
+
+  const step = useSelector((state) => state.trip.step);
+  const activityTitle = useSelector((state) => state.activity.activityTitle);
+  const activityPrice = useSelector((state) => state.activity.activityPrice);
+  const activityUrl = useSelector((state) => state.activity.activityUrl);
+  const activityDates = useSelector((state) => state.activity.activityDates);
+  const activityAddress = useSelector(
+    (state) => state.activity.activityAddress
+  );
+  const activityDescription = useSelector(
+    (state) => state.activity.activityDescription
+  );
+  const activityCities = useSelector((state) => state.trip.trip.cities);
+
+  const activityCitiesOptions = activityCities.map((city) => ({
+    key: city.id,
+    text: city.name,
+    value: city.name,
+  }));
+
+  return (
+    <div className="addActivity">
+      <NavBarHeader />
+      {step === 1 && (
+        <div className="addActivity">
+          <ReturnTitle textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepInput
+            inputValue={activityTitle}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityTitle"
+            buttonContent="Continuer"
+            placeholderContent="Week-end à Paris avec les amis"
+            labelContent="Donnez un titre à votre proposition*"
+          />
+        </div>
+      )}
+      {step === 2 && (
+        <div className="addActivity">
+          <ReturnTitleStep textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepInputSelector
+            valueInputContent={activityAddress}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityAddress"
+            buttonContent="Continuer"
+            placeholderInputContent="Place George Pompidou, 75004 Paris"
+            placeholderSelectorContent="Sélectionnez la ville"
+            labelContent="Renseignez l'adresse"
+            options={activityCitiesOptions}
+          />
+        </div>
+      )}
+      {step === 3 && (
+        <div className="addActivity">
+          <ReturnTitleStep textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepInput
+            buttonContent="Continuer"
+            placeholderContent="15€"
+            labelContent="Renseignez le coût moyen"
+            inputValue={activityPrice}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityPrice"
+          />
+        </div>
+      )}
+      {step === 4 && (
+        <div className="addActivity">
+          <ReturnTitleStep textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepTextarea
+            inputValue={activityDates}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityDates"
+            textareaContent="11h-21h / Fermé le mardi"
+            buttonContent="Continuer"
+            labelContent="Renseignez les jours et horaires d'ouverture"
+          />
+        </div>
+      )}
+      {step === 5 && (
+        <div className="addActivity">
+          <ReturnTitleStep textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepInput
+            buttonContent="Continuer"
+            placeholderContent="https://www.centrepompidou.fr"
+            labelContent="Renseignez le site internet"
+            inputValue={activityUrl}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityUrl"
+          />
+        </div>
+      )}
+      {step === 6 && (
+        <div className="addActivity">
+          <ReturnTitleStep textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepTextarea
+            inputValue={activityDescription}
+            changeField={(newValue, identifier) => {
+              const action = changeActivityField(newValue, identifier);
+              dispatch(action);
+            }}
+            name="activityDescription"
+            textareaContent="La collection permanente est impressionnante !"
+            buttonContent="Continuer"
+            labelContent="Ajoutez une description"
+          />
+        </div>
+      )}
+      {step === 7 && (
+        <div className="addActivity">
+          <ReturnTitleStep textContent="Proposition" />
+          <ProgressBar step={step} />
+          <StepTag
+            buttonContent="Envoyer ma proposition"
+            labelContent="Sélectionnez un tag"
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default ActivityAdd;

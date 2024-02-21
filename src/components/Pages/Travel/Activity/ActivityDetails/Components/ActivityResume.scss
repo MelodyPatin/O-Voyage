@@ -1,0 +1,54 @@
+@use 'src/styles/variables' as v;
+
+.ActivityResume {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .ReturnTitle h3 {
+    width: 60%;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1.5rem;
+    justify-content: space-between;
+
+    p {
+      font-size: 1.25rem;
+      line-height: 2rem;
+      margin: 1rem 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .tag {
+      margin-top: 1rem;
+      width: fit-content;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+  .icons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+    .icon {
+      width: 3rem;
+    }
+  }
+
+  .ui.button {
+    margin-top: 1rem;
+    width: 100%;
+
+    &:nth-child(1){
+      margin-top: 2rem;
+    }
+  }
+}

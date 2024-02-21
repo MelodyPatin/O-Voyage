@@ -4,7 +4,7 @@ import './FriendList.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, XMarkIcon } from '@heroicons/react/24/solid';
 import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
-import IconButton from '../../../Reusable/IconButton/IconButton';
+import IconButton from '../../../Reusable/Buttons/IconButton';
 import User from '../../../Reusable/User/User';
 import Footer from '../../../Reusable/Footer/Footer';
 import { fetchFriends } from '../../../../actions/user';

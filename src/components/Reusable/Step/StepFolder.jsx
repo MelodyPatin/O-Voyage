@@ -3,7 +3,7 @@ import './Steps.scss';
 import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 
 // Functional component : popup with input fields and a close button
 const StepFolder = ({ buttonContent, labelContent }) => {

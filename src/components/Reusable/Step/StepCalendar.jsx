@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
 import { Datepicker } from '@mobiscroll/react';
-import SimpleButton from '../SimpleButton/SimpleButton';
+import SimpleButton from '../Buttons/SimpleButton';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
 import { useDispatch } from 'react-redux';
 import {

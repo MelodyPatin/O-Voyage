@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './App.scss';
 import HomePage from '../Pages/HomePage/HomePage';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import Error from '../Pages/Error/Error';
@@ -13,17 +12,17 @@ import {
 import UserUpdate from '../Pages/User/UserUpdate';
 import FriendList from '../Pages/Friend/FriendList/FriendList';
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
-import TravelAdd from '../Unique/TravelActivity/TravelAddUpdate/TravelAdd';
-import TravelDetails from '../Pages/Travel/TravelDetails';
-import Travelers from '../Pages/Travel/Travelers';
-import TravelUpdate from '../Unique/TravelActivity/TravelAddUpdate/TravelUpdate';
-import ActivityAdd from '../Unique/TravelActivity/ActivityAddUpdate/ActivityAdd';
+import TravelAdd from '../Pages/Travel/TravelAddUpdate/TravelAdd';
+import TravelDetails from '../Pages/Travel/Details/TravelDetails';
+import Travelers from '../Pages/Travel/Travelers/Travelers';
+import TravelUpdate from '../Pages/Travel/TravelAddUpdate/TravelUpdate';
+import ActivityAdd from '../Pages/Travel/Activity/ActivityAddUpdate/ActivityAdd';
 import FAQ from '../Pages/FAQ/FAQ';
 import LegalNotice from '../Pages/LegalNotice/LegalNotice';
 import History from '../Pages/History/History';
-import ActivityDetails from '../Pages/Travel/ActivityDetails';
-import ActivityUpdate from '../Unique/TravelActivity/ActivityAddUpdate/ActivityUpdate';
-import Filters from '../Pages/Travel/Filters';
+import ActivityDetails from '../Pages/Travel/Activity/ActivityDetails/ActivityDetails';
+import ActivityUpdate from '../Pages/Travel/Activity/ActivityAddUpdate/ActivityUpdate';
+import Filters from '../Pages/Travel/Activity/Filters/Filters';
 
 function App() {
   const dispatch = useDispatch();
