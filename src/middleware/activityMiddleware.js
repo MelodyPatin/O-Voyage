@@ -11,6 +11,7 @@ import {
   saveActivityInfo,
   SUBMIT_UPDATE_ACTIVITY,
   DELETE_ACTIVITY,
+  HANDLE_ACTIVITY_DATE,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -191,6 +192,28 @@ const activityMiddleware = (store) => (next) => async (action) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
         });
+        
+    case HANDLE_ACTIVITY_DATE:
+
+      // Données à envoyer au format JSON
+      const activityDateUpdateJsonData = {
+        date: action.newDate,
+      };
+
+      console.log(activityDateUpdateJsonData);
+
+      // Exécution de la requête
+      api
+        .put(`/activity/${action.activityId}/date`, activityDateUpdateJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+
       break;
 
     default:

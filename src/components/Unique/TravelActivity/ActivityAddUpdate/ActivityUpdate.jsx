@@ -19,11 +19,11 @@ import StepTagUpdate from '../../../Reusable/Step/StepTagUpdate';
 
 const ActivityUpdate = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { activityId } = useParams();
 
   useEffect(() => {
-    dispatch(fetchAnActivityToUpdate(id));
-  }, [dispatch, id]);
+    dispatch(fetchAnActivityToUpdate(activityId));
+  }, [dispatch, activityId]);
 
   const isMobile = useMediaQuery('(max-width: 767px)');
 

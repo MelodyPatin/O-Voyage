@@ -174,7 +174,7 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case FETCH_A_TRIP_TO_UPDATE:
       api
-        .get(`/trip/${action.id}`)
+        .get(`/trip/${action.tripId}`)
         .then((response) => {
           console.log(response.data);
           const { id } = response.data;

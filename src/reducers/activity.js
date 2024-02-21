@@ -9,6 +9,7 @@ import {
   UPDATE_SELECTED_TAG,
   SAVE_ACTIVITY_INFO,
   DELETE_ACTIVITY,
+  UPDATE_ACTIVITY_DATE,
 } from '../actions/activity';
 
 export const initialState = {
@@ -97,6 +98,15 @@ const activityReducer = (state = initialState, action = {}) => {
     case DELETE_ACTIVITY:
       return {
         ...state,
+      };
+
+    case UPDATE_ACTIVITY_DATE:
+      const { activityId, newDate } = action.payload;
+      return {
+        ...state,
+        activities: state.activities.map((activity) =>
+          activity.id === activityId ? { ...activity, date: newDate } : activity
+        ),
       };
 
     default:

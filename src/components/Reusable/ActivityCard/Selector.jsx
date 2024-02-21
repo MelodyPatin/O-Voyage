@@ -1,48 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Select } from 'semantic-ui-react';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { handleActivityDate, updateActivityDate } from '../../../actions/activity';
 
-const Selector = ({ date: propDate }) => {
-  const currentTrip = useSelector((state) => state.trip.trip);
-  const [selectedDay, setSelectedDay] = useState(propDate); // Initialisez avec la valeur de la prop directement
+const Selector = ({ date: propDate, activityId }) => {
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Set the default selected day when the date prop changes
-    setSelectedDay(propDate || null);
-  }, [propDate]);
+  // Suppose your currentTrip comes from Redux or props
+  const currentTrip = { startDate: '2024-04-25', endDate: '2024-04-30' }; // Example
 
-  const formatDate = (dateString) => {
-    const options = {
+  const formatDateDisplay = (date) => {
+    return new Date(date).toLocaleDateString('fr-FR', {
+      weekday: 'long',
       day: 'numeric',
       month: 'long',
       year: 'numeric',
-      weekday: 'long',
-    };
-    const formattedDate = new Date(dateString).toLocaleDateString(
-      'fr-FR',
-      options
-    );
-    return formattedDate;
+    });
   };
 
-  // Function to generate an array of date options between startDate and endDate
+  const formatDateISO = (date) => {
+    return new Date(date).toISOString();
+  };
+
   const generateDateOptions = () => {
-    const startDate = new Date(currentTrip.startDate);
+    let startDate = new Date(currentTrip.startDate);
     const endDate = new Date(currentTrip.endDate);
     const dateOptions = [];
 
-    for (
-      let date = startDate;
-      date <= endDate;
-      date.setDate(date.getDate() + 1)
-    ) {
-      const formattedDate = formatDate(date);
-      dateOptions.push({
-        key: formattedDate,
-        value: formattedDate,
-        text: formattedDate,
-      });
+    while (startDate <= endDate) {
+      const dateValue = formatDateISO(startDate);
+      const dateText = formatDateDisplay(startDate);
+      dateOptions.push({ key: dateValue, value: dateValue, text: dateText });
+      startDate = new Date(startDate.setDate(startDate.getDate() + 1));
     }
 
     return dateOptions;
@@ -50,27 +40,27 @@ const Selector = ({ date: propDate }) => {
 
   const dayOptions = generateDateOptions();
 
-  const formattedSelectedDay = formatDate(selectedDay);
+  // Find the option that matches the propDate in ISO format
+  const selectedValue = dayOptions.find(option => option.value.startsWith(propDate.split('T')[0]))?.value;
 
   return (
     <Select
       placeholder="Sélectionner un jour"
       options={dayOptions}
       className="custom-select"
-      value={formattedSelectedDay}
-      onChange={(event, { value }) => {
-        setSelectedDay(value);
+      value={selectedValue}
+      onChange={(e, { value }) => {
+        // Here, the value is already in ISO format, ready to be used
+        dispatch(updateActivityDate(activityId, value));
+        dispatch(handleActivityDate(activityId, value));
       }}
     />
   );
 };
 
 Selector.propTypes = {
-  date: PropTypes.string, // Assurez-vous d'ajuster le type selon vos besoins
-};
-
-Selector.defaultProps = {
-  date: null, // ou la valeur par défaut que vous préférez
+  date: PropTypes.string.isRequired,
+  activityId: PropTypes.number.isRequired,
 };
 
 export default Selector;

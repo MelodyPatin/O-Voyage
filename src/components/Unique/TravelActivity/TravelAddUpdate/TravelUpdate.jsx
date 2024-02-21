@@ -22,12 +22,12 @@ import StepCalendarUpdate from '../../../Reusable/Step/StepCalendarUpdate';
 
 const TravelUpdate = () => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { tripId } = useParams();
 
   useEffect(() => {
-    dispatch(fetchATripToUpdate(id));
+    dispatch(fetchATripToUpdate(tripId));
     dispatch(fetchCountries());
-  }, [dispatch, id]);
+  }, [dispatch, tripId]);
 
   const step = useSelector((state) => state.trip.step);
   const tripTitle = useSelector((state) => state.trip.tripTitle);
