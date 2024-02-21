@@ -10,6 +10,7 @@ import {
   HANDLE_ADD_TAG,
   saveActivityInfo,
   SUBMIT_UPDATE_ACTIVITY,
+  HANDLE_ACTIVITY_DATE,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => (action) => {
@@ -91,7 +92,6 @@ const activityMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_CREATE_ACTIVITY:
-
       // Données à envoyer au format JSON
       const activityJsonData = {
         name: activityTitle,
@@ -121,8 +121,7 @@ const activityMiddleware = (store) => (next) => (action) => {
       break;
 
     case SUBMIT_UPDATE_ACTIVITY:
-
-    const cityId = selectedCities.map((city) => city.key);
+      const cityId = selectedCities.map((city) => city.key);
 
       // Données à envoyer au format JSON
       const activityUpdateJsonData = {
@@ -173,6 +172,29 @@ const activityMiddleware = (store) => (next) => (action) => {
           // Traitement de la réponse
           console.log(response.data);
           window.location.href = `/trip/${id}`;
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+
+      break;
+
+    case HANDLE_ACTIVITY_DATE:
+
+      // Données à envoyer au format JSON
+      const activityDateUpdateJsonData = {
+        date: action.newDate,
+      };
+
+      console.log(activityDateUpdateJsonData);
+
+      // Exécution de la requête
+      api
+        .put(`/activity/${action.activityId}/date`, activityDateUpdateJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+          console.log(response.data);
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);

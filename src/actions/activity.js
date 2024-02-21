@@ -11,6 +11,8 @@ export const SUBMIT_UPDATE_ACTIVITY = 'SUBMIT_UPDATE_ACTIVITY';
 export const UPDATE_SELECTED_TAG = 'UPDATE_SELECTED_TAG';
 export const HANDLE_ADD_TAG = 'HANDLE_ADD_TAG';
 export const SAVE_ACTIVITY_INFO = 'SAVE_ACTIVITY_INFO';
+export const UPDATE_ACTIVITY_DATE = 'UPDATE_ACTIVITY_DATE';
+export const HANDLE_ACTIVITY_DATE = 'HANDLE_ACTIVITY_DATE';
 
 export const fetchTripActivities = (tripId) => ({
   type: FETCH_TRIP_ACTIVITIES,
@@ -91,4 +93,15 @@ export const saveActivityInfo = (
   activityAddress,
   selectedCities,
   selectedTag,
+});
+
+export const updateActivityDate = (activityId, newDate) => ({
+  type: UPDATE_ACTIVITY_DATE,
+  payload: { activityId, newDate },
+});
+
+export const handleActivityDate = (activityId, newDate) => ({
+  type: HANDLE_ACTIVITY_DATE,
+  activityId,
+  newDate,
 });
