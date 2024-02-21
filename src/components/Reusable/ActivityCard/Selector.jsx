@@ -7,7 +7,6 @@ import { handleActivityDate, updateActivityDate } from '../../../actions/activit
 const Selector = ({ date: propDate, activityId }) => {
   const dispatch = useDispatch();
 
-  // Suppose your currentTrip comes from Redux or props
   const currentTrip = { startDate: '2024-04-25', endDate: '2024-04-30' }; // Example
 
   const formatDateDisplay = (date) => {
@@ -40,17 +39,18 @@ const Selector = ({ date: propDate, activityId }) => {
 
   const dayOptions = generateDateOptions();
 
-  // Find the option that matches the propDate in ISO format
-  const selectedValue = dayOptions.find(option => option.value.startsWith(propDate.split('T')[0]))?.value;
+  // Ensure propDate is not null or undefined before calling split
+  const selectedValue = propDate
+    ? dayOptions.find(option => option.value.startsWith(propDate.split('T')[0]))?.value
+    : null;
 
   return (
     <Select
       placeholder="Sélectionner un jour"
       options={dayOptions}
       className="custom-select"
-      value={selectedValue}
+      value={selectedValue || undefined} // Ensure the value is undefined if selectedValue is null, for compatibility
       onChange={(e, { value }) => {
-        // Here, the value is already in ISO format, ready to be used
         dispatch(updateActivityDate(activityId, value));
         dispatch(handleActivityDate(activityId, value));
       }}
