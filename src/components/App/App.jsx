@@ -25,6 +25,7 @@ import ActivityUpdate from '../Pages/Travel/Activity/ActivityAddUpdate/ActivityU
 import Filters from '../Pages/Travel/Activity/Filters/Filters';
 import Gallery from '../Pages/Travel/Gallery/Gallery';
 import FullSizePhoto from '../Pages/Travel/Gallery/FullSizePhoto';
+import AddTravelers from '../Pages/Travel/Travelers/AddTravelers';
 
 function App() {
   const dispatch = useDispatch();
@@ -97,6 +98,12 @@ function App() {
           {logged && <Route path="/trip/:tripId" element={<TravelDetails />} />}
           {logged && (
             <Route path="/trip/:tripId/travelers" element={<Travelers />} />
+          )}
+          {logged && (
+            <Route
+              path="/trip/:tripId/addtravelers"
+              element={<AddTravelers />}
+            />
           )}
           {logged && (
             <Route path="/trip/:tripId/filters" element={<Filters />} />
