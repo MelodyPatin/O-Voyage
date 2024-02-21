@@ -62,7 +62,7 @@ const FormAddFriend = ({
           onChange={changeField}
         />
         <div className="result">
-          <AvatarFriend userAvatar={userAvatar} />
+          {userAvatar && <AvatarFriend userAvatar={userAvatar} />}
           {userFirstName} {userLastName}
         </div>
       </form>
