@@ -1,6 +1,8 @@
 @use 'src/styles/variables' as v;
 
-.travelDetails, .travelGallery {
+.travelDetails,
+.travelGallery,
+.travelPhoto {
   position: relative;
 
   .containerFlex {

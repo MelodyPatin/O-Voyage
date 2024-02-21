@@ -24,7 +24,9 @@ const NavBarMobile = () => {
         <div className="circle">
           <PlusIcon className="plus" />
         </div>
-        <PhotoIcon className="icon picture" />
+        <Link to={`/trip/${tripId}/gallery`}>
+          <PhotoIcon className="icon picture" />
+        </Link>
         <ChatBubbleLeftRightIcon className="icon chat" />
       </div>
     </div>
