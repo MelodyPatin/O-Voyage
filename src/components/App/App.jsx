@@ -23,6 +23,7 @@ import History from '../Pages/History/History';
 import ActivityDetails from '../Pages/Travel/Activity/ActivityDetails/ActivityDetails';
 import ActivityUpdate from '../Pages/Travel/Activity/ActivityAddUpdate/ActivityUpdate';
 import Filters from '../Pages/Travel/Activity/Filters/Filters';
+import Gallery from '../Pages/Travel/Gallery/Gallery';
 
 function App() {
   const dispatch = useDispatch();
@@ -98,6 +99,9 @@ function App() {
           )}
           {logged && (
             <Route path="/trip/:tripId/filters" element={<Filters />} />
+          )}
+          {logged && (
+            <Route path="/trip/:tripId/gallery" element={<Gallery />} />
           )}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />

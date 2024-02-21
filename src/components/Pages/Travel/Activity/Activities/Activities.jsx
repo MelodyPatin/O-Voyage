@@ -31,14 +31,13 @@ const Activities = () => {
           {/* Vous pouvez ajouter ici un message ou un traitement spécial pour une seule activité */}
         </div>
       );
-    } else {
-      // Cas où il y a plusieurs activités
-      return sortedActivities.map((activity) => (
-        <div className="activity" key={activity.id}>
-          <ActivityCard activity={activity} />
-        </div>
-      ));
     }
+    // Cas où il y a plusieurs activités
+    return sortedActivities.map((activity) => (
+      <div className="activity" key={activity.id}>
+        <ActivityCard activity={activity} />
+      </div>
+    ));
   };
 
   return (
