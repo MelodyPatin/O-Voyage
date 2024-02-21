@@ -21,6 +21,26 @@ const Activities = () => {
 
   const sortedActivities = activities.slice().sort((a, b) => b.score - a.score);
 
+  // Gérer l'affichage selon le nombre d'activités
+  const renderActivities = () => {
+    if (sortedActivities.length === 1) {
+      // Cas où il y a une seule activité
+      return (
+        <div className="singleActivity">
+          <ActivityCard activity={sortedActivities[0]} />
+          {/* Vous pouvez ajouter ici un message ou un traitement spécial pour une seule activité */}
+        </div>
+      );
+    } else {
+      // Cas où il y a plusieurs activités
+      return sortedActivities.map((activity) => (
+        <div className="activity" key={activity.id}>
+          <ActivityCard activity={activity} />
+        </div>
+      ));
+    }
+  };
+
   return (
     <div className="activities">
       {!isMobile && (
@@ -32,11 +52,7 @@ const Activities = () => {
       )}
       <div className="sliderContainer">
         <div className="activityList">
-          {sortedActivities.map((activity) => (
-            <div className="activity" key={activity.id}>
-              <ActivityCard activity={activity} />
-            </div>
-          ))}
+          {renderActivities()}
         </div>
       </div>
       {!isMobile && (
