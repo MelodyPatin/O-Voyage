@@ -2,7 +2,10 @@ import React from 'react';
 import { Select } from 'semantic-ui-react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { handleActivityDate, updateActivityDate } from '../../../actions/activity';
+import {
+  handleActivityDate,
+  updateActivityDate,
+} from '../../../actions/activity';
 
 const Selector = ({ date: propDate, activityId }) => {
   const dispatch = useDispatch();
@@ -41,7 +44,10 @@ const Selector = ({ date: propDate, activityId }) => {
   const dayOptions = generateDateOptions();
 
   // Find the option that matches the propDate in ISO format
-  const selectedValue = dayOptions.find(option => option.value.startsWith(propDate.split('T')[0]))?.value;
+  const selectedValue =
+    propDate &&
+    dayOptions.find((option) => option.value.startsWith(propDate.split('T')[0]))
+      ?.value;
 
   return (
     <Select

@@ -32,21 +32,23 @@ const ActivityCard = ({ activity }) => {
       : activityTitle;
 
   let tag = '';
-  switch (activity.tags[0].id) {
-    case 1:
-      tag = 'restaurant';
-      break;
-    case 2:
-      tag = 'pub';
-      break;
-    case 3:
-      tag = 'culture';
-      break;
-    case 4:
-      tag = 'activity';
-      break;
-    default:
-      break;
+  if (activity.tags && activity.tags.length > 0 && activity.tags[0].id) {
+    switch (activity.tags[0].id) {
+      case 1:
+        tag = 'restaurant';
+        break;
+      case 2:
+        tag = 'pub';
+        break;
+      case 3:
+        tag = 'culture';
+        break;
+      case 4:
+        tag = 'activity';
+        break;
+      default:
+        break;
+    }
   }
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
@@ -12,6 +12,8 @@ const Actions = () => {
   const { tripId } = useParams(); // Get the 'id' parameter from the URL
   const isMobile = useMediaQuery('(max-width: 1024px)');
   const [popupVisible, setPopupVisible] = useState(false);
+  const user = useSelector((state) => state.user);
+  const CurrentTrip = useSelector((state) => state.trip.trip);
   const [modificationStatus, setModificationStatus] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,6 +34,9 @@ const Actions = () => {
     setPopupVisible(false);
   };
 
+  const isAdmin =
+    CurrentTrip && CurrentTrip.admin && CurrentTrip.admin.id === user.userId;
+
   return (
     <div>
       <div className="buttons">
@@ -48,15 +53,19 @@ const Actions = () => {
             </Link>
           </div>
         )}
-        <Link to={`/updatetrip/${tripId}`}>
-          <IconButton textContent="Modifier le voyage" icon="edit" />
-        </Link>
-        <IconButton
-          type="button"
-          onClick={handleDeletePopup}
-          textContent="Supprimer le voyage"
-          icon="trash"
-        />
+        {isAdmin && (
+          <>
+            <Link to={`/updatetrip/${tripId}`}>
+              <IconButton textContent="Modifier le voyage" icon="edit" />
+            </Link>
+            <IconButton
+              type="button"
+              onClick={handleDeletePopup}
+              textContent="Supprimer le voyage"
+              icon="trash"
+            />
+          </>
+        )}
 
         <IconButton textContent="Quitter le voyage" icon="close" />
       </div>

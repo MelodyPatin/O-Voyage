@@ -72,6 +72,11 @@ const ActivityResume = () => {
       break;
   }
 
+  const isAdmin =
+    currentActivity &&
+    currentActivity.creator &&
+    currentActivity.creator.id === user.userId;
+
   return (
     <div className="ActivityResume">
       <ReturnTitle avatar textContent={`#2 ${currentActivity.name}`} />
@@ -87,7 +92,7 @@ const ActivityResume = () => {
           text={currentActivity.tags[0].name}
           className="tag"
         />
-        {currentActivity.creator.id === user.userId && (
+        {isAdmin && (
           <>
             <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
               <IconButton textContent="Modifier l'activité" icon="edit" />
