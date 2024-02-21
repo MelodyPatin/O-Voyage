@@ -1,0 +1,33 @@
+@use 'src/styles/variables' as v;
+
+.galleryPicture {
+  position: relative;
+  overflow: visible;
+  padding-bottom: 2rem;
+
+  @media (min-width: 1024px) {
+    width: calc(100vw - 24rem);
+    height: calc(100vh - 137.5px);
+    border: 2px solid v.$mainColor;
+    border-radius: 10px;
+    padding: 4rem 1rem;
+  }
+
+  button.ui.button {
+    width: 17.25rem;
+  }
+
+  .addButton {
+    button.ui.button {
+      position: absolute;
+      top: -1.5rem;
+      left: 2rem;
+      margin-top: 0;
+    }
+  }
+
+  .pictureContainer {
+    overflow-x: auto;
+    height: 100%;
+  }
+}

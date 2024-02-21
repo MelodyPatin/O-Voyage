@@ -23,6 +23,9 @@ import History from '../Pages/History/History';
 import ActivityDetails from '../Pages/Travel/Activity/ActivityDetails/ActivityDetails';
 import ActivityUpdate from '../Pages/Travel/Activity/ActivityAddUpdate/ActivityUpdate';
 import Filters from '../Pages/Travel/Activity/Filters/Filters';
+import Gallery from '../Pages/Travel/Gallery/Gallery';
+import FullSizePhoto from '../Pages/Travel/Gallery/FullSizePhoto';
+import AddTravelers from '../Pages/Travel/Travelers/AddTravelers';
 
 function App() {
   const dispatch = useDispatch();
@@ -97,7 +100,22 @@ function App() {
             <Route path="/trip/:tripId/travelers" element={<Travelers />} />
           )}
           {logged && (
+            <Route
+              path="/trip/:tripId/addtravelers"
+              element={<AddTravelers />}
+            />
+          )}
+          {logged && (
             <Route path="/trip/:tripId/filters" element={<Filters />} />
+          )}
+          {logged && (
+            <Route path="/trip/:tripId/gallery" element={<Gallery />} />
+          )}
+          {logged && (
+            <Route
+              path="/trip/:tripId/gallery/photo"
+              element={<FullSizePhoto />}
+            />
           )}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />

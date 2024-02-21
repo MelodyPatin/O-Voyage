@@ -18,7 +18,7 @@ const DesktopItems = () => {
         <HomeIcon className="icon" />
         <p>Accueil</p>
       </NavLink>
-      <NavLink className="icon_label" to="/galerie">
+      <NavLink className="icon_label" to={`/trip/${tripId}/gallery`}>
         <PhotoIcon className="icon" />
         <p>Galerie</p>
       </NavLink>

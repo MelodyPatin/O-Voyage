@@ -26,7 +26,7 @@ const Actions = () => {
 
   const handleDelete = async (event) => {
     event.preventDefault();
-    await dispatch(deleteTrip(tripId));
+    await dispatch(deleteTrip(CurrentTrip.id));
     navigate('/dashboard');
   };
 

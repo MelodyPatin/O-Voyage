@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
 import './TravelsMenu.scss'; // Assurez-vous d'avoir un fichier de style pour le menu déroulant
-import { fetchMyTrips } from '../../../actions/trip';
+import { fetchATrip, fetchMyTrips } from '../../../actions/trip';
 
 const TravelsMenu = () => {
   const trips = useSelector((state) => state.trip.myTrips);
@@ -14,8 +14,9 @@ const TravelsMenu = () => {
   useEffect(() => {
     if (!trips[0]) {
       dispatch(fetchMyTrips());
+      dispatch(fetchATrip(tripId));
     }
-  }, []);
+  }, [dispatch, trips, tripId]);
 
   // State to track whether the dropdown menu is open or closed
   const [isOpen, setIsOpen] = useState(false);

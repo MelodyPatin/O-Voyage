@@ -1,12 +1,14 @@
 import React from 'react';
 import './TravelersList.scss';
 import { useSelector } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
 import User from '../../../../Reusable/User/User';
 import IconButton from '../../../../Reusable/Buttons/IconButton';
 import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 
 const TravelersList = () => {
   const travelers = useSelector((state) => state.trip.travelers);
+  const { tripId } = useParams();
 
   return (
     <div className="TravelersList">
@@ -20,7 +22,9 @@ const TravelersList = () => {
           </li>
         ))}
       </ul>
-      <IconButton icon="plus" textContent="Ajouter un voyageur" />
+      <Link to={`/trip/${tripId}/addtravelers`}>
+        <IconButton icon="plus" textContent="Ajouter un voyageur" />
+      </Link>
     </div>
   );
 };
