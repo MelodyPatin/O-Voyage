@@ -1,13 +1,13 @@
 import React from 'react';
 import { Select } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { handleActivityDate, updateActivityDate } from '../../../actions/activity';
 
 const Selector = ({ date: propDate, activityId }) => {
   const dispatch = useDispatch();
 
-  const currentTrip = { startDate: '2024-04-25', endDate: '2024-04-30' }; // Example
+  const currentTrip = useSelector((state) => state.trip.trip);
 
   const formatDateDisplay = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
