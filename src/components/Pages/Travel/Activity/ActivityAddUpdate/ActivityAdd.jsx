@@ -100,7 +100,7 @@ const ActivityAdd = () => {
               dispatch(action);
             }}
             name="activityDates"
-            textareaContent="11h-21h / Fermé le mardi"
+            placeholderContent="11h-21h / Fermé le mardi"
             buttonContent="Continuer"
             labelContent="Renseignez les jours et horaires d'ouverture"
           />
@@ -134,7 +134,7 @@ const ActivityAdd = () => {
               dispatch(action);
             }}
             name="activityDescription"
-            textareaContent="La collection permanente est impressionnante !"
+            placeholderContent="La collection permanente est impressionnante !"
             buttonContent="Continuer"
             labelContent="Ajoutez une description"
           />

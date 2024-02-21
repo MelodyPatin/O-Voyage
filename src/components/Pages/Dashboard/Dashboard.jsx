@@ -60,7 +60,7 @@ const Dashboard = () => {
       </Link>
       <div className="list">
         <div className="now">
-          <p className="when">J'y suis actuellement</p>
+          {currentTrips.length > 0 && <p className="when">J'y suis actuellement</p>}
           <div className="cardList">
             {currentTrips.map((trip) => (
               <TravelCard key={trip.id} trip={trip} />
@@ -68,7 +68,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="future">
-          <p className="when">C'est pour bientôt</p>
+          {futureTrips.length > 0 && <p className="when">C'est pour bientôt</p>}
           <div className="cardList">
             {futureTrips.map((trip) => (
               <TravelCard key={trip.id} trip={trip} />
@@ -76,7 +76,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="passed">
-          <p className="when">J'y suis allé.e</p>
+          {passedTrips.length > 0 && <p className="when">J'y étais</p>}
           <div className="cardList">
             {passedTrips.map((trip) => (
               <TravelCard key={trip.id} trip={trip} />

@@ -15,7 +15,7 @@ const Menu = () => {
       {/* Render desktop items if in desktop view */}
       {!isMobile && <DesktopItems />}
       {/* Render dropdown for notifications */}
-      <div className="icon_label">
+      <div className="icon_label notifications">
         <DropDownNotifications />
       </div>
       {/* Render dropdown for user settings */}
