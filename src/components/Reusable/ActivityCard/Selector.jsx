@@ -2,7 +2,10 @@ import React from 'react';
 import { Select } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { handleActivityDate, updateActivityDate } from '../../../actions/activity';
+import {
+  handleActivityDate,
+  updateActivityDate,
+} from '../../../actions/activity';
 
 const Selector = ({ date: propDate, activityId }) => {
   const dispatch = useDispatch();

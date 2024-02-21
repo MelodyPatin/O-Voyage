@@ -1,9 +1,9 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Steps.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../SimpleButton/SimpleButton';
-import { useDispatch, useSelector } from 'react-redux';
 import { handleStepNext } from '../../../actions/trip';
 import { updateActivityCities } from '../../../actions/activity';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
@@ -16,7 +16,6 @@ const StepInputSelector = ({
   labelContent,
   valueInputContent,
   options,
-  city,
   name,
   changeField,
 }) => {
@@ -35,14 +34,13 @@ const StepInputSelector = ({
         if (selectedCity) {
           // Retourner un objet avec les clés et valeurs appropriées
           return { key: selectedCity.key, value: selectedCity.value };
-        } else {
-          // Gérer le cas où aucun pays correspondant n'a été trouvé
-          console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCityName}`
-          );
-          // Retourner null pour indiquer un problème
-          return null;
         }
+        // Gérer le cas où aucun pays correspondant n'a été trouvé
+        console.error(
+          `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCityName}`
+        );
+        // Retourner null pour indiquer un problème
+        return null;
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 
@@ -58,22 +56,24 @@ const StepInputSelector = ({
 
   return (
     <div className="StepInputSelector">
-      <LabelInput
-        label={labelContent}
-        className="label-input"
-        placeholder={placeholderInputContent}
-        value={valueInputContent}
-        name={name}
-        type="text"
-        onChange={changeField}
-      />
-      <MultipleSelector
-        className="selector"
-        placeholderContent={placeholderSelectorContent}
-        options={options}
-        selected={selected.map(city => city.value)} // Utiliser map pour obtenir un tableau de valeurs
-        onChange={handleSelectionChange}
-      />
+      <div className="inputs">
+        <LabelInput
+          label={labelContent}
+          className="label-input"
+          placeholder={placeholderInputContent}
+          value={valueInputContent}
+          name={name}
+          type="text"
+          onChange={changeField}
+        />
+        <MultipleSelector
+          className="selector"
+          placeholderContent={placeholderSelectorContent}
+          options={options}
+          selected={selected.map((city) => city.value)} // Utiliser map pour obtenir un tableau de valeurs
+          onChange={handleSelectionChange}
+        />
+      </div>
       <SimpleButton textContent={buttonContent} onClick={handleClick} />
     </div>
   );
@@ -87,7 +87,6 @@ StepInputSelector.propTypes = {
   placeholderSelectorContent: PropTypes.string,
   changeField: PropTypes.func.isRequired,
   valueInputContent: PropTypes.string,
-  city: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string.isRequired,

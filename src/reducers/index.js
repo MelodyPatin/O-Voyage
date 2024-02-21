@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import userReducer from './user';
 import tripReducer from './trip';
 import activityReducer from './activity';
-import contentReducer from './content'
+import contentReducer from './content';
 
 // le reducer principal : met en place les "tiroirs" dans le state et indiquer quel reducer
 // s'occupe de quel tiroir

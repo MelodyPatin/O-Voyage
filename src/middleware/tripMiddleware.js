@@ -27,6 +27,7 @@ import {
   HANDLE_REMOVE_TRAVEL_PICTURE,
   HANDLE_ADD_TRAVEL_PICTURE,
   handleAddTravelPicture,
+  DELETE_TRIP,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
@@ -176,16 +177,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         .get(`/trip/${action.tripId}`)
         .then((response) => {
           console.log(response.data);
-          const id = response.data.id;
-          const name = response.data.name;
-          const startDate = response.data.startDate;
-          const endDate = response.data.endDate;
-          const description = response.data.description;
+          const { id } = response.data;
+          const { name } = response.data;
+          const { startDate } = response.data;
+          const { endDate } = response.data;
+          const { description } = response.data;
           const cities = response.data.cities.map((city) => ({
             key: city.id,
             value: city.name,
           }));
-          const country = response.data.cities[0].country;
+          const { country } = response.data.cities[0];
           const formattedCountry = [
             {
               key: country.id,
@@ -241,7 +242,7 @@ const tripMiddleware = (store) => (next) => (action) => {
           console.log(response.data);
           const travelers = response.data.map((traveler) => ({
             key: traveler.id,
-            value: traveler.firstname + ' ' + traveler.lastname,
+            value: `${traveler.firstname} ${traveler.lastname}`,
           }));
           store.dispatch(saveTripTravelers(travelers));
           console.log(travelers);
@@ -316,6 +317,19 @@ const tripMiddleware = (store) => (next) => (action) => {
           reader.readAsDataURL(fileInput);
         }
       }
+      break;
+
+    case DELETE_TRIP:
+      // Effectuer la requête axios pour supprimer le compte utilisateur
+      api
+        .delete(`/trip/${action.tripId}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Gestion des erreurs
+          console.error('Erreur lors de la requête:', error);
+        });
       break;
 
     default:

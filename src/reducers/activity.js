@@ -8,6 +8,7 @@ import {
   UPDATE_ACTIVITY_CITIES,
   UPDATE_SELECTED_TAG,
   SAVE_ACTIVITY_INFO,
+  DELETE_ACTIVITY,
   UPDATE_ACTIVITY_DATE,
 } from '../actions/activity';
 
@@ -92,6 +93,11 @@ const activityReducer = (state = initialState, action = {}) => {
         activityAddress: action.activityAddress,
         selectedCities: action.selectedCities,
         selectedTag: action.selectedTag,
+      };
+
+    case DELETE_ACTIVITY:
+      return {
+        ...state,
       };
 
     case UPDATE_ACTIVITY_DATE:

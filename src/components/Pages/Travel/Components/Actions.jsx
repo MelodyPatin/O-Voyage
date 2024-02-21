@@ -1,13 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from '@mui/material';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
 import IconButton from '../../../Reusable/IconButton/IconButton';
 import './Actions.scss';
+import { deleteTrip } from '../../../../actions/trip';
+import PopupButton from '../../../Reusable/Popups/PopupButton';
 
 const Actions = () => {
   const { tripId } = useParams(); // Get the 'id' parameter from the URL
   const isMobile = useMediaQuery('(max-width: 1024px)');
+  const [popupVisible, setPopupVisible] = useState(false);
+  const user = useSelector((state) => state.user);
+  const CurrentTrip = useSelector((state) => state.trip.trip);
+  const [modificationStatus, setModificationStatus] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleDeletePopup = (event) => {
+    event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
+    setPopupVisible(true);
+    setModificationStatus('confirmation');
+  };
+
+  const handleDelete = async (event) => {
+    event.preventDefault();
+    await dispatch(deleteTrip(tripId));
+    navigate('/dashboard');
+  };
+
+  const handlePopupClose = () => {
+    setPopupVisible(false);
+  };
+
+  const isAdmin =
+    CurrentTrip && CurrentTrip.admin && CurrentTrip.admin.id === user.userId;
 
   return (
     <div>
@@ -25,12 +53,30 @@ const Actions = () => {
             </Link>
           </div>
         )}
-        <Link to={`/updatetrip/${tripId}`}>
-          <IconButton textContent="Modifier le voyage" icon="edit" />
-        </Link>
-        <IconButton textContent="Supprimer le voyage" icon="trash" />
+        {isAdmin && (
+          <>
+            <Link to={`/updatetrip/${tripId}`}>
+              <IconButton textContent="Modifier le voyage" icon="edit" />
+            </Link>
+            <IconButton
+              type="button"
+              onClick={handleDeletePopup}
+              textContent="Supprimer le voyage"
+              icon="trash"
+            />
+          </>
+        )}
+
         <IconButton textContent="Quitter le voyage" icon="close" />
       </div>
+      {modificationStatus === 'confirmation' && popupVisible && (
+        <PopupButton
+          textContent="Merci de confirmer la suppression de ce voyage"
+          buttonContent="Confirmer"
+          onConfirmation={handleDelete}
+          onClose={handlePopupClose}
+        />
+      )}
     </div>
   );
 };

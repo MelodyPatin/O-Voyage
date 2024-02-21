@@ -11,6 +11,7 @@ export const SUBMIT_UPDATE_ACTIVITY = 'SUBMIT_UPDATE_ACTIVITY';
 export const UPDATE_SELECTED_TAG = 'UPDATE_SELECTED_TAG';
 export const HANDLE_ADD_TAG = 'HANDLE_ADD_TAG';
 export const SAVE_ACTIVITY_INFO = 'SAVE_ACTIVITY_INFO';
+export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const UPDATE_ACTIVITY_DATE = 'UPDATE_ACTIVITY_DATE';
 export const HANDLE_ACTIVITY_DATE = 'HANDLE_ACTIVITY_DATE';
 
@@ -95,6 +96,10 @@ export const saveActivityInfo = (
   selectedTag,
 });
 
+export const deleteActivity = (activityId) => ({
+  type: DELETE_ACTIVITY,
+  activityId,
+});
 export const updateActivityDate = (activityId, newDate) => ({
   type: UPDATE_ACTIVITY_DATE,
   payload: { activityId, newDate },

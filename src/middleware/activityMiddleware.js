@@ -10,10 +10,11 @@ import {
   HANDLE_ADD_TAG,
   saveActivityInfo,
   SUBMIT_UPDATE_ACTIVITY,
+  DELETE_ACTIVITY,
   HANDLE_ACTIVITY_DATE,
 } from '../actions/activity';
 
-const activityMiddleware = (store) => (next) => (action) => {
+const activityMiddleware = (store) => (next) => async (action) => {
   const { id } = store.getState().trip.trip;
   const {
     activityTitle,
@@ -64,7 +65,7 @@ const activityMiddleware = (store) => (next) => (action) => {
           const activityDates = response.data.openingTimeAndDays;
           const activityDescription = response.data.description;
           const activityAddress = response.data.postalAddress;
-          const city = response.data.city;
+          const { city } = response.data;
           const selectedCities = [
             {
               key: city.id,
@@ -180,6 +181,18 @@ const activityMiddleware = (store) => (next) => (action) => {
 
       break;
 
+    case DELETE_ACTIVITY:
+      // Effectuer la requête axios pour supprimer le compte utilisateur
+      api
+        .delete(`/activity/${action.activityId}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Gestion des erreurs
+          console.error('Erreur lors de la requête:', error);
+        });
+        
     case HANDLE_ACTIVITY_DATE:
 
       // Données à envoyer au format JSON

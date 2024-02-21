@@ -47,6 +47,7 @@ export const initialState = {
   avatarSearch: '',
   emailSearch: '',
   userIdSearch: 0,
+  userId: '',
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
