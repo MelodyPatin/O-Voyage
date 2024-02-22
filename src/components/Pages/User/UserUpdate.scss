@@ -1,3 +1,5 @@
+@use 'src/styles/variables' as v;
+
 .userUpdate {
   position: relative;
   .header {
@@ -79,4 +81,15 @@
       }
     }
   }
+}
+
+.errorMessage {
+  background-color: v.$secondaryColor;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  padding: 0;
+  line-height: 1.5rem;
+  text-align: center;
 }

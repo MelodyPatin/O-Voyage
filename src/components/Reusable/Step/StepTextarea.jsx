@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Steps.scss';
 import { Form, TextArea } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import SimpleButton from '../Buttons/SimpleButton';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { handleStepNext } from '../../../actions/trip';
-import { fetchFriends } from '../../../actions/user';
+import { clearErrorMessage, fetchFriends, setErrorMessage } from '../../../actions/user';
 
-// Functional component : popup with input fields and a close button
 const StepTextarea = ({
   inputValue,
   changeField,
@@ -17,11 +16,21 @@ const StepTextarea = ({
   name,
 }) => {
   const dispatch = useDispatch();
+  const [textValue, setTextValue] = useState(inputValue);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const inputId = `field-${name}`;
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (textValue.trim() === '') {
+      dispatch(setErrorMessage('Veuillez entrer du texte dans le champ.'));
+      return; // Arrêter la progression si le champ est vide
+    }
+
     dispatch(handleStepNext());
+    handleFetchFriends();
+    dispatch(clearErrorMessage());
   };
 
   const handleFetchFriends = () => {
@@ -29,6 +38,7 @@ const StepTextarea = ({
   };
 
   const handleChange = (evt) => {
+    setTextValue(evt.target.value);
     changeField(evt.target.value, name);
   };
 
@@ -41,7 +51,7 @@ const StepTextarea = ({
             <TextArea
               className="textarea"
               placeholder={placeholderContent}
-              value={inputValue}
+              value={textValue}
               name={name}
               type="text"
               onChange={handleChange}
@@ -49,13 +59,8 @@ const StepTextarea = ({
             />
           </Form>
         </div>
-        <SimpleButton
-          textContent={buttonContent}
-          onClick={() => {
-            handleClick();
-            handleFetchFriends();
-          }}
-        />
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        <SimpleButton textContent={buttonContent} onClick={handleClick} />
       </form>
     </div>
   );

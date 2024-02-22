@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -9,18 +9,22 @@ import SimpleButton from '../../../../../Reusable/Buttons/SimpleButton';
 import './ActivityResume.scss';
 import Tag from '../../../../../Reusable/Tag/Tag';
 import IconButton from '../../../../../Reusable/Buttons/IconButton';
-import { deleteActivity } from '../../../../../../actions/activity';
+import { deleteActivity, fetchTags } from '../../../../../../actions/activity';
 import PopupButton from '../../../../../Reusable/Popups/PopupButton';
 
 const ActivityResume = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { activityId } = useParams(); // Get the 'id' parameter from the URL
   const { tripId } = useParams();
   const [popupVisible, setPopupVisible] = useState(false);
   const [modificationStatus, setModificationStatus] = useState(null);
   const currentActivity = useSelector((state) => state.activity.activity);
   const user = useSelector((state) => state.user);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, []);
 
   // Vérifiez si currentActivity est défini et a la structure attendue
   if (
@@ -48,30 +52,6 @@ const ActivityResume = () => {
     setPopupVisible(false);
   };
 
-  // Utilisez la syntaxe optionnelle de chaîne pour éviter les erreurs si les propriétés ne sont pas définies
-  const tagId = currentActivity.tags[0]?.id;
-  let tag = '';
-
-  switch (tagId) {
-    case 1:
-      tag = 'restaurant selected';
-      break;
-    case 2:
-      tag = 'pub selected';
-      break;
-    case 3:
-      tag = 'culture selected';
-      break;
-    case 4:
-      tag = 'activity selected';
-      break;
-    // Add more cases if needed
-    default:
-      // Default case if none of the above conditions match
-      tag = '';
-      break;
-  }
-
   const isAdmin =
     currentActivity &&
     currentActivity.creator &&
@@ -88,8 +68,9 @@ const ActivityResume = () => {
         <p>Site internet : {currentActivity.url} </p>
         <p>Description : {currentActivity.description} </p>
         <Tag
-          category={tag}
+          key={currentActivity.tags[0].id}
           text={currentActivity.tags[0].name}
+          color={currentActivity.tags[0].color}
           className="tag"
         />
         {isAdmin &&

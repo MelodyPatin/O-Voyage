@@ -5,6 +5,7 @@ import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateSelectedCities } from '../../../actions/trip';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 const StepSelectCities = ({
   buttonContent,
@@ -19,45 +20,59 @@ const StepSelectCities = ({
     // Convertir chaque élément de selected en un objet { key, value }
     const newSelected = selected
       .map((selectedCityName) => {
-        // Trouver l'objet dans options qui correspond à ce nom de pays
+        // Trouver l'objet dans options qui correspond à ce nom de ville
         const selectedCity = options.find(
           (city) => city.value === selectedCityName
         );
 
-        // Vérifier si un pays correspondant a été trouvé
+        // Vérifier si une ville correspondante a été trouvée
         if (selectedCity) {
           // Retourner un objet avec les clés et valeurs appropriées
           return { key: selectedCity.key, value: selectedCity.value };
         } else {
-          // Gérer le cas où aucun pays correspondant n'a été trouvé
+          // Gérer le cas où aucune ville correspondante n'a été trouvée
           console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCityName}`
+            `Aucune ville correspondante trouvée pour la valeur sélectionnée: ${selectedCityName}`
           );
           // Retourner null pour indiquer un problème
           return null;
         }
       })
-      .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
+      .filter(Boolean); // Filtrer les éléments nuls (cas où aucune ville correspondante n'a été trouvée)
 
     // Dispatch de l'action pour mettre à jour les villes sélectionnées
     dispatch(updateSelectedCities(newSelected));
   };
 
-  const selected = useSelector((state) => state.trip.selectedCities);
-  console.log(selected);
+  const selectedCities = useSelector((state) => state.trip.selectedCities);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+
+  const handleStepClick = (e) => {
+    e.preventDefault();
+    if (selectedCities.length === 0) {
+      dispatch(setErrorMessage('Veuillez sélectionner au moins une ville.'));
+      return; // Arrêter la suite si aucune ville n'est sélectionnée
+    }
+
+    // Si des villes sont sélectionnées, passer à l'étape suivante
+    handleClick();
+    dispatch(clearErrorMessage());
+  };
+
   return (
     <div className="StepSelect">
-      <form autoComplete="off" onSubmit={handleClick}>
+      <form autoComplete="off">
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.map((city) => city.value)} // Utiliser map pour obtenir un tableau de valeurs
+            selected={selectedCities.map((city) => city.value)} // Utiliser map pour obtenir un tableau de valeurs
             onChange={handleSelectionChange}
           />
         </div>
-        <SimpleButton textContent={buttonContent} onClick={handleClick} />
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        <SimpleButton textContent={buttonContent} onClick={handleStepClick} />
       </form>
     </div>
   );

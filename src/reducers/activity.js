@@ -4,12 +4,12 @@ import {
   FETCH_AN_ACTIVITY,
   SHOW_ACTIVITY,
   CHANGE_ACTIVITY_FIELD,
-  TOGGLE_TAG_SELECTED,
   UPDATE_ACTIVITY_CITIES,
   UPDATE_SELECTED_TAG,
   SAVE_ACTIVITY_INFO,
   DELETE_ACTIVITY,
   UPDATE_ACTIVITY_DATE,
+  SAVE_TAGS,
 } from '../actions/activity';
 
 export const initialState = {
@@ -22,6 +22,7 @@ export const initialState = {
   activityDates: '',
   activityDescription: '',
   activityAddress: '',
+  tags: [],
   restaurantTag: false,
   activityTag: false,
   pubTag: false,
@@ -54,20 +55,6 @@ const activityReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
-      };
-
-    case TOGGLE_TAG_SELECTED:
-      // Réinitialise tous les autres tags à false et inverse la valeur du tag sélectionné
-      const updatedTags = {
-        restaurantTag: false,
-        activityTag: false,
-        pubTag: false,
-        cultureTag: false,
-        [action.category]: !state[action.category], // Inverse la valeur du tag sélectionné
-      };
-      return {
-        ...state,
-        ...updatedTags,
       };
 
     case UPDATE_ACTIVITY_CITIES: // Ajout
@@ -107,6 +94,12 @@ const activityReducer = (state = initialState, action = {}) => {
         activities: state.activities.map((activity) =>
           activity.id === activityId ? { ...activity, date: newDate } : activity
         ),
+      };
+
+    case SAVE_TAGS:
+      return {
+        ...state,
+        tags: action.tags 
       };
 
     default:

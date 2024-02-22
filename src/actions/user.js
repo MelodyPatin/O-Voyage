@@ -12,9 +12,13 @@ export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
 export const FETCH_FRIENDS = 'FETCH_FRIENDS';
 export const SAVE_FRIENDS = 'SAVE_FRIENDS';
 export const ADD_FRIEND = 'ADD_FRIEND';
+export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const USER_UPDATE_REQUEST = 'USER_UPDATE_REQUEST';
+export const USER_UPDATE_AVATAR = 'USER_UPDATE_AVATAR';
 export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
 export const USER_UPDATE_FAILURE = 'USER_UPDATE_FAILURE';
+export const USER_UPDATE_AVATAR_SUCCESS = 'USER_UPDATE_AVATAR_SUCCESS';
+export const USER_UPDATE_AVATAR_FAILURE = 'USER_UPDATE_AVATAR_FAILURE';
 export const UPDATE_USER_INPUT = 'UPDATE_USER_INPUT';
 export const CHANGE_USER_INPUT = 'CHANGE_USER_INPUT';
 export const DELETE_USER = 'DELETE_USER';
@@ -23,6 +27,26 @@ export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
 export const FETCH_USERS = 'FETCH_USERS';
 export const CHANGE_SEARCH_USERS_FIELD = 'CHANGE_SEARCH_USERS_FIELD';
 export const FETCH_USER_BY_MAIL = 'FETCH_USER_BY_MAIL';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const SIGNUP_ERROR = 'SIGNUP_ERROR';
+export const CLEAR_ERROR_MESSAGE = 'CLEAR_ERROR_MESSAGE';
+export const HANDLE_MODIFICATION_STATUS = 'HANDLE_MODIFICATION_STATUS';
+export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+
+export const loginError = (errorMessage) => ({
+  type: LOGIN_ERROR,
+  errorMessage,
+});
+
+export const signupError = (errorMessage) => ({
+  type: LOGIN_ERROR,
+  errorMessage,
+});
+
+export const setErrorMessage = (errorMessage) => ({
+  type: SET_ERROR_MESSAGE,
+  errorMessage,
+});
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
@@ -104,17 +128,35 @@ export const addFriend = (friendId) => ({
   friendId,
 });
 
+export const deleteFriend = (friendId) => ({
+  type: DELETE_FRIEND,
+  friendId,
+});
+
 export const userUpdateRequest = () => ({
   type: USER_UPDATE_REQUEST,
+});
+
+export const userUpdateAvatar = () => ({
+  type: USER_UPDATE_AVATAR,
 });
 
 export const userUpdateSuccess = () => ({
   type: USER_UPDATE_SUCCESS,
 });
+
 export const userUpdateFailure = (error) => ({
   type: USER_UPDATE_FAILURE,
   error,
 });
+
+export const userUpdateAvatarSuccess = () => ({
+  type: USER_UPDATE_AVATAR_SUCCESS,
+});
+export const userUpdateAvatarFailure = () => ({
+  type: USER_UPDATE_AVATAR_FAILURE,
+});
+
 
 export const updateUserInput = (fieldName, value) => ({
   type: UPDATE_USER_INPUT,
@@ -153,4 +195,12 @@ export const changeSearchUsersField = (value, identifier) => ({
 
 export const fetchUserByMail = () => ({
   type: FETCH_USER_BY_MAIL,
+});
+
+export const clearErrorMessage = () => ({
+  type: CLEAR_ERROR_MESSAGE,
+});
+
+export const handleModificationStatus = () => ({
+  type: HANDLE_MODIFICATION_STATUS,
 });

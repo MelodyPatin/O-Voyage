@@ -4,7 +4,6 @@ export const FETCH_AN_ACTIVITY = 'FETCH_AN_ACTIVITY';
 export const FETCH_AN_ACTIVITY_TO_UPDATE = 'FETCH_AN_ACTIVITY_TO_UPDATE';
 export const SHOW_ACTIVITY = 'SHOW_ACTIVITY';
 export const CHANGE_ACTIVITY_FIELD = 'CHANGE_ACTIVITY_FIELD';
-export const TOGGLE_TAG_SELECTED = 'TOGGLE_TAG_SELECTED';
 export const UPDATE_ACTIVITY_CITIES = 'UPDATE_ACTIVITY_CITIES';
 export const SUBMIT_CREATE_ACTIVITY = 'SUBMIT_CREATE_ACTIVITY';
 export const SUBMIT_UPDATE_ACTIVITY = 'SUBMIT_UPDATE_ACTIVITY';
@@ -14,6 +13,8 @@ export const SAVE_ACTIVITY_INFO = 'SAVE_ACTIVITY_INFO';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const UPDATE_ACTIVITY_DATE = 'UPDATE_ACTIVITY_DATE';
 export const HANDLE_ACTIVITY_DATE = 'HANDLE_ACTIVITY_DATE';
+export const FETCH_TAGS = 'FETCH_TAGS';
+export const SAVE_TAGS = 'SAVE_TAGS';
 
 export const fetchTripActivities = (tripId) => ({
   type: FETCH_TRIP_ACTIVITIES,
@@ -44,11 +45,6 @@ export const changeActivityField = (value, identifier) => ({
   type: CHANGE_ACTIVITY_FIELD,
   value,
   identifier,
-});
-
-export const toggleTagSelected = (category) => ({
-  type: TOGGLE_TAG_SELECTED,
-  category,
 });
 
 export const updateActivityCities = (selectedCities) => ({
@@ -109,4 +105,13 @@ export const handleActivityDate = (activityId, newDate) => ({
   type: HANDLE_ACTIVITY_DATE,
   activityId,
   newDate,
+});
+
+export const fetchTags = () => ({
+  type: FETCH_TAGS,
+});
+
+export const saveTags = (tags) => ({
+  type: SAVE_TAGS,
+  tags,
 });

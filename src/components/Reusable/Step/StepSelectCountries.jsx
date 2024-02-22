@@ -5,6 +5,7 @@ import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCities, updateSelectedCountries } from '../../../actions/trip';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 const StepSelectCountries = ({
   buttonContent,
@@ -18,7 +19,8 @@ const StepSelectCountries = ({
   const selectedCountries = useSelector(
     (state) => state.trip.selectedCountries
   );
-  console.log(selectedCountries);
+
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const handleFetchCities = () => {
     if (selectedCountries && selectedCountries.length > 0) {
@@ -26,7 +28,7 @@ const StepSelectCountries = ({
         dispatch(fetchCities(country.key));
       });
     } else {
-      console.log('Aucun pays sélectionné');
+      dispatch(setErrorMessage('Veuillez sélectionner au moins un pays.'));
     }
   };
 
@@ -59,7 +61,18 @@ const StepSelectCountries = ({
     dispatch(updateSelectedCountries(newSelected));
   };
 
-  const selected = useSelector((state) => state.trip.selectedCountries);
+  const handleStepClick = (e) => {
+    e.preventDefault();
+    if (selectedCountries.length === 0) {
+      dispatch(setErrorMessage('Veuillez sélectionner au moins un pays.'));
+      return; // Arrêter la suite si aucun pays n'est sélectionné
+    }
+
+    // Si des pays sont sélectionnés, passer à l'étape suivante
+    handleClick();
+    handleFetchCities();
+    dispatch(clearErrorMessage());
+  };
 
   return (
     <div className="StepSelect">
@@ -69,17 +82,12 @@ const StepSelectCountries = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.map((country) => country.value)} // Utiliser map pour obtenir un tableau de valeurs
+            selected={selectedCountries.map((country) => country.value)} // Utiliser map pour obtenir un tableau de valeurs
             onChange={handleSelectionChange}
           />
         </div>
-        <SimpleButton
-          textContent={buttonContent}
-          onClick={() => {
-            handleClick();
-            handleFetchCities();
-          }}
-        />
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+        <SimpleButton textContent={buttonContent} onClick={handleStepClick} />
       </form>
     </div>
   );

@@ -4,29 +4,43 @@ import PropTypes from 'prop-types';
 import { Datepicker } from '@mobiscroll/react';
 import SimpleButton from '../Buttons/SimpleButton';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   handleStepNext,
   setEndDate,
   setStartDate,
 } from '../../../actions/trip';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 const StepCalendar = ({ buttonContent, labelContent }) => {
   const dispatch = useDispatch();
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+  const [selectedDates, setSelectedDates] = useState([]);
 
   const handleClick = () => {
+    if (selectedDates.length !== 2) {
+      dispatch(
+        setErrorMessage(
+          'Veuillez sélectionner une date de début et une date de fin.'
+        )
+      );
+      return; // Arrêter la suite si aucune date n'est sélectionnée
+    }
+
     dispatch(handleStepNext());
+    dispatch(clearErrorMessage());
   };
 
   const handleCalendarDates = (event) => {
-    const selectedDates = event.value.map((date) => {
+    const dates = event.value.map((date) => {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
       const day = String(date.getDate()).padStart(2, '0');
       return `${year}-${month}-${day}`;
     });
-    dispatch(setStartDate(selectedDates[0]));
-    dispatch(setEndDate(selectedDates[1]));
+    setSelectedDates(dates);
+    dispatch(setStartDate(dates[0]));
+    dispatch(setEndDate(dates[1]));
   };
 
   return (
@@ -39,6 +53,7 @@ const StepCalendar = ({ buttonContent, labelContent }) => {
           onChange={handleCalendarDates}
         />
       </div>
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton textContent={buttonContent} onClick={handleClick} />
     </div>
   );

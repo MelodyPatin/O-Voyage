@@ -11,6 +11,7 @@ import {
   submitUpdateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
+import { clearErrorMessage } from '../../../actions/user';
 
 const StepSelectTravelersUpdate = ({
   buttonContent,
@@ -19,10 +20,12 @@ const StepSelectTravelersUpdate = ({
   options,
 }) => {
   const dispatch = useDispatch();
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitUpdateTravel());
+    dispatch(clearErrorMessage());
   };
 
   const handleSelectionChange = (selected) => {
@@ -67,6 +70,7 @@ const StepSelectTravelersUpdate = ({
             onChange={handleSelectionChange}
           />
         </div>
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton
           textContent={buttonContent}
           onClick={handleClick}

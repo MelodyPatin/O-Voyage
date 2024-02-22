@@ -12,6 +12,8 @@ import {
   SUBMIT_UPDATE_ACTIVITY,
   DELETE_ACTIVITY,
   HANDLE_ACTIVITY_DATE,
+  FETCH_TAGS,
+  saveTags,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -156,7 +158,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
       const { selectedTag } = store.getState().activity;
 
       console.log(selectedTag);
-      const tagId = selectedTag[0].key;
+      const tagId = selectedTag[0].id;
       console.log(tagId);
 
       // Données à envoyer au format JSON
@@ -192,9 +194,8 @@ const activityMiddleware = (store) => (next) => async (action) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
         });
-        
-    case HANDLE_ACTIVITY_DATE:
 
+    case HANDLE_ACTIVITY_DATE:
       // Données à envoyer au format JSON
       const activityDateUpdateJsonData = {
         date: action.newDate,
@@ -212,6 +213,19 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+        });
+
+      break;
+
+    case FETCH_TAGS:
+      api
+        .get(`/tags`)
+        .then((response) => {
+          console.log(response.data);
+          store.dispatch(saveTags(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
         });
 
       break;

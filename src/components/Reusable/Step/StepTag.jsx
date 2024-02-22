@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Steps.scss';
 import PropTypes from 'prop-types';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../Buttons/SimpleButton';
 import Tag from '../Tag/Tag';
-import { useDispatch } from 'react-redux';
-import { submitCreateActivity } from '../../../actions/activity';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTags, submitCreateActivity, updateSelectedTag } from '../../../actions/activity';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
-// Functional component : popup with input fields and a close button
 const StepTag = ({
   buttonContent,
   placeholderContent,
@@ -15,27 +15,46 @@ const StepTag = ({
   valueContent,
 }) => {
   const dispatch = useDispatch();
+  const [selectedTag, setSelectedTag] = useState(null);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+
+  useEffect(() => {
+    dispatch(fetchTags());
+  }, []);
 
   const handleClick = () => {
+    if (!selectedTag) {
+      dispatch(setErrorMessage('Veuillez sélectionner un tag.'));
+      return; // Arrêter la progression si aucune étiquette n'est sélectionnée
+    }
     dispatch(submitCreateActivity());
+    dispatch(clearErrorMessage());
   };
+
+  const handleTagClick = (tag) => {
+    setSelectedTag(tag);
+    dispatch(updateSelectedTag(tag));
+  };
+
+  const tags = useSelector((state) => state.activity.tags);
 
   return (
     <div className="StepTag">
       <div className="LabelInput">
         <p>{labelContent}</p>
         <div className="tags">
-          <Tag className="tag" text="Restaurant" category="restaurant" id={1} />
-          <Tag className="tag" text="Activité" category="activity" id={4} />
-          <Tag className="tag" text="Bar" category="pub" id={2} />
-          <Tag
-            className="tag"
-            text="Visite culturelle"
-            category="culture"
-            id={3}
-          />
+          {tags.map((tag) => (
+            <Tag
+              key={tag.id}
+              text={tag.name}
+              color={tag.color}
+              isSelected={selectedTag && selectedTag.id === tag.id}
+              onClick={() => handleTagClick(tag)}
+            />
+          ))}
         </div>
       </div>
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton
         textContent={buttonContent}
         onClick={handleClick}
