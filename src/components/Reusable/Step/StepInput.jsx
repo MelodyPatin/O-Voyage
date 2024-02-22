@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../Buttons/SimpleButton';
 import { handleStepNext } from '../../../actions/trip';
-import { setErrorMessage } from '../../../actions/user';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 // Functional component : popup with input fields and a close button
 const StepInput = ({
@@ -30,6 +30,7 @@ const StepInput = ({
 
     // Si le champ n'est pas vide, procéder à l'étape suivante
     dispatch(handleStepNext());
+    dispatch(clearErrorMessage());
   };
 
   return (

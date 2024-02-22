@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCities, updateSelectedCountries, setErrorMessage } from '../../../actions/trip';
+import { fetchCities, updateSelectedCountries } from '../../../actions/trip';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 const StepSelectCountries = ({
   buttonContent,
@@ -18,6 +19,8 @@ const StepSelectCountries = ({
   const selectedCountries = useSelector(
     (state) => state.trip.selectedCountries
   );
+
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const handleFetchCities = () => {
     if (selectedCountries && selectedCountries.length > 0) {
@@ -58,7 +61,8 @@ const StepSelectCountries = ({
     dispatch(updateSelectedCountries(newSelected));
   };
 
-  const handleStepClick = () => {
+  const handleStepClick = (e) => {
+    e.preventDefault();
     if (selectedCountries.length === 0) {
       dispatch(setErrorMessage('Veuillez sélectionner au moins un pays.'));
       return; // Arrêter la suite si aucun pays n'est sélectionné
@@ -67,6 +71,7 @@ const StepSelectCountries = ({
     // Si des pays sont sélectionnés, passer à l'étape suivante
     handleClick();
     handleFetchCities();
+    dispatch(clearErrorMessage());
   };
 
   return (
@@ -81,6 +86,7 @@ const StepSelectCountries = ({
             onChange={handleSelectionChange}
           />
         </div>
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton textContent={buttonContent} onClick={handleStepClick} />
       </form>
     </div>
