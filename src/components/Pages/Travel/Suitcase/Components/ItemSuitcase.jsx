@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './ItemSuitcase.scss';
 import { Checkbox } from 'semantic-ui-react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { TextField } from '@mui/material';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { removeListItem } from '../../../../../actions/suitcase';
 
-const ItemSuitcase = ({ index, item }) => {
+const ItemSuitcase = ({ index, item, itemId }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(item || '');
+
   const handleRemove = () => {
-    console.log("coucou on a supprimé l'input");
-    // dispatch(removeListItem(index)); // Dispatch de l'action pour supprimer l'élément dans le store Redux
+    dispatch(removeListItem(index, itemId));
   };
 
   const handleChange = (e) => {
@@ -24,7 +26,6 @@ const ItemSuitcase = ({ index, item }) => {
       <Checkbox className="checkbox" />
       {/* Input for item text */}
       <TextField
-        required
         className="inputSuitcase"
         placeholder="Nouvel item"
         fullWidth
@@ -42,6 +43,7 @@ const ItemSuitcase = ({ index, item }) => {
 ItemSuitcase.propTypes = {
   index: PropTypes.number.isRequired,
   item: PropTypes.string.isRequired,
+  itemId: PropTypes.number.isRequired,
 };
 
 export default ItemSuitcase;

@@ -20,10 +20,12 @@ const suitcaseReducer = (state = initialState, action = {}) => {
       };
 
     case REMOVE_LIST_ITEM:
-      const filteredList = state.list.filter((_, i) => i !== action.index);
+      const updatedList = state.list.slice(); // Créez une copie de la liste
+      updatedList.splice(action.index, 1); // Supprimez l'élément à l'index spécifié
+      console.log('Updated List:', updatedList);
       return {
         ...state,
-        list: filteredList,
+        list: updatedList,
       };
 
     case FETCH_LIST_REQUEST:

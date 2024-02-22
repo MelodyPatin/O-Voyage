@@ -5,25 +5,32 @@ import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 import './SuitcaseList.scss';
 import ItemSuitcase from './ItemSuitcase';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
-import { fetchListRequest } from '../../../../../actions/suitcase';
+import {
+  fetchListRequest,
+  saveListRequest,
+} from '../../../../../actions/suitcase';
 import IconButton from '../../../../Reusable/Buttons/IconButton';
 
 const SuitcaseList = () => {
-  const { tripId } = useParams();
-  const dispatch = useDispatch();
   const [updatedList, setUpdatedList] = useState([]); // State to manage the updated list
   const [newItem, setNewItem] = useState([{ name: '' }]); // État pour le nouvel item
-
-  useEffect(() => {
-    // Dispatchez l'action pour récupérer la liste lorsque le composant est monté
-    dispatch(fetchListRequest(tripId));
-  }, [dispatch, tripId]);
+  const dispatch = useDispatch();
 
   const list = useSelector((state) => state.suitcase.list);
 
   const handleAddItem = (e) => {
     e.preventDefault();
     setNewItem([...newItem, { name: '' }]);
+  };
+
+  const handleItemChange = (index, newValue) => {
+    const newList = [...updatedList];
+    newList[index] = newValue;
+    setUpdatedList(newList);
+  };
+
+  const handleSaveList = () => {
+    dispatch(saveListRequest(updatedList));
   };
 
   return (
@@ -34,13 +41,23 @@ const SuitcaseList = () => {
       <form action="">
         <ul>
           {list.map((item, index) => (
-            <li key={index}>
-              <ItemSuitcase index={index} item={item.name} />
+            <li key={item.id}>
+              <ItemSuitcase
+                index={index}
+                itemId={item.id}
+                item={item.name}
+                onItemChange={(newValue) => handleItemChange(index, newValue)}
+              />
             </li>
           ))}
           {newItem.map((item, index) => (
-            <li key={index}>
-              <ItemSuitcase index={index} item={item.name} />
+            <li key={item.id}>
+              <ItemSuitcase
+                index={index}
+                itemId={item.id}
+                item={item.name}
+                onItemChange={(newValue) => handleItemChange(index, newValue)}
+              />
             </li>
           ))}
         </ul>
@@ -51,7 +68,10 @@ const SuitcaseList = () => {
         >
           Ajouter un item
         </IconButton>
-        <SimpleButton textContent="Sauvegarder ma valise" />
+        <SimpleButton
+          textContent="Sauvegarder ma valise"
+          onClick={handleSaveList}
+        />
       </form>
       <SimpleButton textContent="Retour" />
     </div>
