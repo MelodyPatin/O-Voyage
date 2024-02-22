@@ -4,7 +4,6 @@ import {
   FETCH_AN_ACTIVITY,
   SHOW_ACTIVITY,
   CHANGE_ACTIVITY_FIELD,
-  TOGGLE_TAG_SELECTED,
   UPDATE_ACTIVITY_CITIES,
   UPDATE_SELECTED_TAG,
   SAVE_ACTIVITY_INFO,
@@ -56,20 +55,6 @@ const activityReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
-      };
-
-    case TOGGLE_TAG_SELECTED:
-      // Réinitialise tous les autres tags à false et inverse la valeur du tag sélectionné
-      const updatedTags = {
-        restaurantTag: false,
-        activityTag: false,
-        pubTag: false,
-        cultureTag: false,
-        [action.category]: !state[action.category], // Inverse la valeur du tag sélectionné
-      };
-      return {
-        ...state,
-        ...updatedTags,
       };
 
     case UPDATE_ACTIVITY_CITIES: // Ajout

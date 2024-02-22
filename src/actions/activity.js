@@ -4,7 +4,6 @@ export const FETCH_AN_ACTIVITY = 'FETCH_AN_ACTIVITY';
 export const FETCH_AN_ACTIVITY_TO_UPDATE = 'FETCH_AN_ACTIVITY_TO_UPDATE';
 export const SHOW_ACTIVITY = 'SHOW_ACTIVITY';
 export const CHANGE_ACTIVITY_FIELD = 'CHANGE_ACTIVITY_FIELD';
-export const TOGGLE_TAG_SELECTED = 'TOGGLE_TAG_SELECTED';
 export const UPDATE_ACTIVITY_CITIES = 'UPDATE_ACTIVITY_CITIES';
 export const SUBMIT_CREATE_ACTIVITY = 'SUBMIT_CREATE_ACTIVITY';
 export const SUBMIT_UPDATE_ACTIVITY = 'SUBMIT_UPDATE_ACTIVITY';
@@ -46,11 +45,6 @@ export const changeActivityField = (value, identifier) => ({
   type: CHANGE_ACTIVITY_FIELD,
   value,
   identifier,
-});
-
-export const toggleTagSelected = (category) => ({
-  type: TOGGLE_TAG_SELECTED,
-  category,
 });
 
 export const updateActivityCities = (selectedCities) => ({
