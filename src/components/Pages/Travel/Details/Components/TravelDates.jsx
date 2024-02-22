@@ -13,9 +13,17 @@ const TravelDates = () => {
     return formattedDate;
   };
 
+  const changeDateFormat = (dateString) => {
+    const dateObject = new Date(dateString);
+    const year = dateObject.getFullYear();
+    const month = ('0' + (dateObject.getMonth() + 1)).slice(-2); // Ajoute un zéro devant si nécessaire
+    const day = ('0' + dateObject.getDate()).slice(-2); // Ajoute un zéro devant si nécessaire
+    return `${year}-${month}-${day}`;
+  };
+
   return (
     <div className="travelDates">
-      {formatDate(currentTrip.startDate)} - {formatDate(currentTrip.endDate)}
+      {formatDate(changeDateFormat(currentTrip.startDate))} - {formatDate(changeDateFormat(currentTrip.endDate))}
     </div>
   );
 };
