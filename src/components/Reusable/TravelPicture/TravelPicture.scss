@@ -16,6 +16,7 @@
     height: 100%;
     object-fit: cover;
     object-position: center;
+    border-radius: 0;
   }
 
   // Styling for the hidden file input to select the new photo (triggered indirectly through a label and a visible icon -> more userfriendly)

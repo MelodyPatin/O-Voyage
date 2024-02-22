@@ -114,7 +114,7 @@ function App() {
           )}
           {logged && (
             <Route
-              path="/trip/:tripId/gallery/photo"
+              path="/trip/:tripId/gallery/:pictureId"
               element={<FullSizePhoto />}
             />
           )}
