@@ -156,6 +156,7 @@ const reducer = (state = initialState, action = {}) => {
     case HANDLE_MODIFICATION_STATUS:
       return {
         ...state,
+        password: '',
         modificationStatus: '',
       };
 
@@ -205,7 +206,7 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
       };
-  
+
     case SET_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
       return {
         ...state,
