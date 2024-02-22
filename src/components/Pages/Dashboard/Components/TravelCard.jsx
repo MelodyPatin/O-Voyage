@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './TravelCard.scss';
-
 import PropTypes from 'prop-types';
 
 const TravelCard = ({ trip }) => {
@@ -18,11 +17,24 @@ const TravelCard = ({ trip }) => {
       const currentDate = new Date();
       const travelStartDate = new Date(startDate);
 
-      // Calculate the difference in milliseconds
-      const difference = travelStartDate - currentDate;
+      // Extract year, month, and day from the dates
+      const currentYear = currentDate.getFullYear();
+      const currentMonth = currentDate.getMonth() + 1; // Month starts from 0
+      const currentDay = currentDate.getDate();
 
-      // Calculate days, hours, minutes, seconds from milliseconds
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const startYear = travelStartDate.getFullYear();
+      const startMonth = travelStartDate.getMonth() + 1; // Month starts from 0
+      const startDay = travelStartDate.getDate();
+
+      // Format the date as Y-M-D strings
+      const formattedCurrentDate = `${currentYear}-${currentMonth}-${currentDay}`;
+      const formattedStartDate = `${startYear}-${startMonth}-${startDay}`;
+
+      // Calculate the difference in milliseconds
+      const difference = travelStartDate.getTime() - currentDate.getTime();
+
+      // Calculate days from milliseconds, en ajoutant 1 pour arrondir au prochain jour
+      const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
       // Update the state with the countdown value
       setCountdown(days >= 0 ? days : null);
@@ -43,7 +55,7 @@ const TravelCard = ({ trip }) => {
           {/* Title of the travel */}
           <h3>{name}</h3>
           {/* Countdown of the days before the beginning of the travel */}
-          {countdown && <span>Départ dans {countdown} jours</span>}
+          {countdown > 0 && <span>Départ dans {countdown} jours</span>}
         </div>
       </Link>
     </div>
