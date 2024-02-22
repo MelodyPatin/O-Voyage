@@ -6,6 +6,7 @@ import userMiddleware from '../middleware/userMiddleware';
 import tripMiddleware from '../middleware/tripMiddleware';
 import activityMiddleware from '../middleware/activityMiddleware';
 import contentMiddleware from '../middleware/contentMiddleware';
+import suitcaseMiddleware from '../middleware/suitcaseMiddleware'
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
@@ -13,6 +14,7 @@ const enhancers = composeWithDevTools(
     tripMiddleware,
     activityMiddleware,
     contentMiddleware,
+    suitcaseMiddleware,
     // ... d'autres middlewares
   )
 );

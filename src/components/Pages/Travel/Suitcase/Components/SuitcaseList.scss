@@ -1,0 +1,44 @@
+@use 'src/styles/variables' as v;
+
+.suitcaseList {
+  background-color: v.$mainColor;
+  padding-bottom: 2rem;
+
+  h3 {
+    color: v.$lightColor;
+  }
+
+  .arrowIcon {
+    color: v.$lightColor;
+  }
+  li {
+    padding-left: 1rem;
+  }
+  // Styling for Semantic UI button inside the component
+  button.ui.button {
+    background-color: v.$lightColor;
+    color: v.$mainColor;
+    width: 90%;
+    margin: auto;
+    display: block;
+    margin-bottom: 1rem;
+
+    &:hover {
+      background-color: v.$mainColor;
+      color: v.$lightColor;
+
+      & i.icon {
+        color: v.$lightColor;
+      }
+    }
+
+    // Styling for the icon inside the button
+    i.icon {
+      color: v.$mainColor;
+    }
+  }
+
+  div.User {
+    align-items: center;
+  }
+}

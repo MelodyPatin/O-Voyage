@@ -2,7 +2,8 @@
 
 .travelDetails,
 .travelGallery,
-.travelPhoto {
+.travelPhoto,
+.suitcase {
   position: relative;
 
   .containerFlex {
@@ -24,7 +25,8 @@
         margin-top: 5rem;
       }
 
-      .TravelersList {
+      .TravelersList,
+      .suitcaseList {
         margin-top: 5rem;
         min-height: calc(100vh - 203px);
 
