@@ -17,6 +17,8 @@ import {
   USER_DELETE_FAILURE,
   CHANGE_SEARCH_USERS_FIELD,
   SAVE_USER_RESULT_DATA,
+  LOGIN_ERROR,
+  SIGNUP_ERROR,
 } from '../actions/user';
 
 export const initialState = {
@@ -48,6 +50,7 @@ export const initialState = {
   emailSearch: '',
   userIdSearch: 0,
   userId: '',
+  errorMessage: '',
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -175,6 +178,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
+      };
+
+    case LOGIN_ERROR: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+      };
+
+    case SIGNUP_ERROR: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
       };
 
     default:

@@ -18,6 +18,8 @@ import {
   FETCH_USER_BY_MAIL,
   saveUserResultData,
   ADD_FRIEND,
+  loginError,
+  signupError,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
@@ -44,6 +46,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
+          store.dispatch(loginError("Email ou mot de passe invalide"));
           // Dispatch d'une action pour gérer l'erreur
         });
 
@@ -70,7 +73,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
+          store.dispatch(signupError("Un compte avec cet email existe déjà"));
         });
 
       break;

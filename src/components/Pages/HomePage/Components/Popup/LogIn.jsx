@@ -1,17 +1,17 @@
 import React from 'react';
 import './Popups.scss';
 import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom'; // Importer useHistory depuis react-router-dom
+import { Link, useNavigate } from 'react-router-dom';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import Field from './Components/Field';
+import { useSelector } from 'react-redux';
 
-// Functional component : popup with input fields and a close button
 const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
-  const navigate = useNavigate(); // Utiliser useNavigate pour la navigation
+  const navigate = useNavigate();
+  const errorMessage = useSelector((state) => state.user.errorMessage); // Obtenez le message d'erreur du store
 
   const handleClosePopup = () => {
-    // Revenir à l'URL précédent lors de la fermeture de la popup
     navigate(-1);
   };
 
@@ -41,6 +41,7 @@ const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
             onChange={changeField}
           />
           <SimpleButton type="submit" textContent="Connexion" />
+          {errorMessage && <p className="errorMessage errorMessageInvalid">{errorMessage}</p>} {/* Afficher le message d'erreur s'il existe */}
         </form>
         <Link to="/home/signup">
           <p className="already-signed">Pas encore de compte ? S'inscrire</p>

@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Popups.scss';
 import PropTypes from 'prop-types';
-import { Link, useNavigate } from 'react-router-dom'; // Importer useHistory depuis react-router-dom
+import { Link, useNavigate } from 'react-router-dom';
 import { XCircleIcon } from '@heroicons/react/24/solid';
-import { Input } from 'semantic-ui-react';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import Field from './Components/Field';
+import { useSelector } from 'react-redux';
 
-// Functional component : popup with input fields and a close button
 const SignUp = ({
   firstnameValue,
   lastnameValue,
@@ -16,16 +15,60 @@ const SignUp = ({
   changeField,
   handleSignUp,
 }) => {
-  const navigate = useNavigate(); // Utiliser useNavigate pour la navigation
+  const navigate = useNavigate();
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isFieldsFilled, setIsFieldsFilled] = useState(true);
+
+  const errorMessage = useSelector((state) => state.user.errorMessage); // Obtenez le message d'erreur du store
 
   const handleClosePopup = () => {
-    // Naviguer vers l'url précédente lors de la fermeture de la popup
     navigate(-1);
   };
 
   const handleSignUpSubmit = (evt) => {
     evt.preventDefault();
+
+    // Vérification de tous les champs
+    if (
+      !firstnameValue ||
+      !lastnameValue ||
+      !signUpEmailValue ||
+      !signUpPasswordValue
+    ) {
+      // Afficher un message d'erreur indiquant que tous les champs doivent être remplis
+      setIsFieldsFilled(false);
+      return;
+    }
+
+    setIsFieldsFilled(true);
+
+    // Vérification de l'email
+    if (!validateEmail(signUpEmailValue)) {
+      setIsEmailValid(false);
+      return;
+    }
+    setIsEmailValid(true);
+
+    // Vérification du mot de passe
+    if (!validatePassword(signUpPasswordValue)) {
+      setIsPasswordValid(false);
+      return;
+    }
+    setIsPasswordValid(true);
+
+    // Tous les champs sont valides, envoyer la requête
     handleSignUp();
+  };
+
+  const validateEmail = (email) => {
+    return email.includes('@') && email.includes('.');
+  };
+
+  const validatePassword = (password) => {
+    // Vérification si le mot de passe contient au moins 6 caractères, une majuscule et un chiffre
+    const passwordRegex = /^(?=.*\d)(?=.*[A-Z]).{6,}$/;
+    return passwordRegex.test(password);
   };
 
   return (
@@ -55,6 +98,9 @@ const SignUp = ({
             onChange={changeField}
             value={signUpEmailValue}
           />
+          {!isEmailValid && (
+            <p className="errorMessage">Adresse email invalide</p>
+          )}
           <Field
             placeholder="Mot de passe"
             name="signUpPassword"
@@ -62,10 +108,26 @@ const SignUp = ({
             onChange={changeField}
             value={signUpPasswordValue}
           />
+          {!isPasswordValid && (
+            <>
+              <p className="errorMessage">Mot de passe invalide</p>
+              <p className="conditions">
+                au moins 6 caractères, une majuscule et un chiffre
+              </p>
+            </>
+          )}
           <SimpleButton textContent="S'inscrire" />
+          {!isFieldsFilled && (
+            <p className="errorMessage errorMessageFill">
+              Veuillez remplir tous les champs
+            </p>
+          )}
+          {errorMessage && (
+            <p className="errorMessage errorMessageMail">{errorMessage}</p>
+          )}{' '}
         </form>
         <Link to="/home/login">
-        <p className="already-signed">Déjà un compte ? Se connecter</p>
+          <p className="already-signed">Déjà un compte ? Se connecter</p>
         </Link>
       </div>
     </div>

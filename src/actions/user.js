@@ -23,6 +23,18 @@ export const USER_DELETE_FAILURE = 'USER_DELETE_FAILURE';
 export const FETCH_USERS = 'FETCH_USERS';
 export const CHANGE_SEARCH_USERS_FIELD = 'CHANGE_SEARCH_USERS_FIELD';
 export const FETCH_USER_BY_MAIL = 'FETCH_USER_BY_MAIL';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const SIGNUP_ERROR = 'SIGNUP_ERROR';
+
+export const loginError = (errorMessage) => ({
+  type: LOGIN_ERROR,
+  errorMessage,
+});
+
+export const signupError = (errorMessage) => ({
+  type: LOGIN_ERROR,
+  errorMessage,
+});
 
 export const changeLoginField = (value, identifier) => ({
   type: CHANGE_LOGIN_FIELD,
