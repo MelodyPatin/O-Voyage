@@ -6,6 +6,7 @@ import SimpleButton from '../Buttons/SimpleButton';
 import Tag from '../Tag/Tag';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags, submitCreateActivity, updateSelectedTag } from '../../../actions/activity';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 const StepTag = ({
   buttonContent,
@@ -15,13 +16,19 @@ const StepTag = ({
 }) => {
   const dispatch = useDispatch();
   const [selectedTag, setSelectedTag] = useState(null);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   useEffect(() => {
     dispatch(fetchTags());
   }, []);
 
   const handleClick = () => {
+    if (!selectedTag) {
+      dispatch(setErrorMessage('Veuillez sélectionner un tag.'));
+      return; // Arrêter la progression si aucune étiquette n'est sélectionnée
+    }
     dispatch(submitCreateActivity());
+    dispatch(clearErrorMessage());
   };
 
   const handleTagClick = (tag) => {
@@ -47,6 +54,7 @@ const StepTag = ({
           ))}
         </div>
       </div>
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton
         textContent={buttonContent}
         onClick={handleClick}

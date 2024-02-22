@@ -7,8 +7,8 @@ import SimpleButton from '../Buttons/SimpleButton';
 import { handleStepNext } from '../../../actions/trip';
 import { updateActivityCities } from '../../../actions/activity';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
-// Functional component : popup with input fields and a close button
 const StepInputSelector = ({
   buttonContent,
   placeholderInputContent,
@@ -20,36 +20,46 @@ const StepInputSelector = ({
   changeField,
 }) => {
   const dispatch = useDispatch();
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const handleSelectionChange = (selected) => {
     // Convertir chaque élément de selected en un objet { key, value }
     const newSelected = selected
       .map((selectedCityName) => {
-        // Trouver l'objet dans options qui correspond à ce nom de pays
+        // Trouver l'objet dans options qui correspond à ce nom de ville
         const selectedCity = options.find(
           (city) => city.value === selectedCityName
         );
 
-        // Vérifier si un pays correspondant a été trouvé
+        // Vérifier si une ville correspondante a été trouvée
         if (selectedCity) {
           // Retourner un objet avec les clés et valeurs appropriées
           return { key: selectedCity.key, value: selectedCity.value };
         }
-        // Gérer le cas où aucun pays correspondant n'a été trouvé
+        // Gérer le cas où aucune ville correspondante n'a été trouvée
         console.error(
-          `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCityName}`
+          `Aucune ville correspondante trouvée pour la valeur sélectionnée: ${selectedCityName}`
         );
         // Retourner null pour indiquer un problème
         return null;
       })
-      .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
+      .filter(Boolean); // Filtrer les éléments nuls (cas où aucune ville correspondante n'a été trouvée)
 
     // Dispatch de l'action pour mettre à jour les villes sélectionnées
     dispatch(updateActivityCities(newSelected));
   };
 
   const handleClick = () => {
+    if (selected.length === 0) {
+      dispatch(setErrorMessage("Veuillez sélectionner l'adresse et la ville."));
+      return; // Arrêter la progression si aucune ville n'est sélectionnée
+    }
+    if (!valueInputContent.trim()) {
+      dispatch(setErrorMessage('Veuillez saisir une valeur dans le champ.'));
+      return; // Arrêter la progression si le champ d'entrée est vide
+    }
     dispatch(handleStepNext());
+    dispatch(clearErrorMessage());
   };
 
   const selected = useSelector((state) => state.activity.selectedCities);
@@ -74,6 +84,7 @@ const StepInputSelector = ({
           onChange={handleSelectionChange}
         />
       </div>
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton textContent={buttonContent} onClick={handleClick} />
     </div>
   );
