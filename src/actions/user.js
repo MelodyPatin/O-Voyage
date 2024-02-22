@@ -12,6 +12,7 @@ export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
 export const FETCH_FRIENDS = 'FETCH_FRIENDS';
 export const SAVE_FRIENDS = 'SAVE_FRIENDS';
 export const ADD_FRIEND = 'ADD_FRIEND';
+export const DELETE_FRIEND = 'DELETE_FRIEND';
 export const USER_UPDATE_REQUEST = 'USER_UPDATE_REQUEST';
 export const USER_UPDATE_AVATAR = 'USER_UPDATE_AVATAR';
 export const USER_UPDATE_SUCCESS = 'USER_UPDATE_SUCCESS';
@@ -124,6 +125,11 @@ export const saveFriends = (friends) => ({
 
 export const addFriend = (friendId) => ({
   type: ADD_FRIEND,
+  friendId,
+});
+
+export const deleteFriend = (friendId) => ({
+  type: DELETE_FRIEND,
   friendId,
 });
 

@@ -22,12 +22,15 @@ import {
   signupError,
   USER_UPDATE_AVATAR,
   userUpdateAvatar,
+  DELETE_FRIEND,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
 import api from '../api';
 
 const userMiddleware = (store) => (next) => async (action) => {
+  const { friendId } = action;
+
   switch (action.type) {
     case SUBMIT_LOGIN:
       const { email, password } = store.getState().user;
@@ -127,7 +130,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
 
     case ADD_FRIEND:
-      const { friendId } = action;
       const addFriendData = {
         id: friendId,
       };
@@ -138,6 +140,20 @@ const userMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           console.log(response.data);
           window.location.href = `/dashboard`;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      break;
+
+    case DELETE_FRIEND:
+      // on doit envoyer le JWT dans le header Authorization de la requête, pour
+      // que le serveur nous fournisse NOS recettes préférées
+      api
+        .delete(`/friend/delete/${friendId}`)
+        .then((response) => {
+          console.log(response.data);
+          window.location.href = `/friends`;
         })
         .catch((error) => {
           console.log(error);
@@ -184,7 +200,9 @@ const userMiddleware = (store) => (next) => async (action) => {
 
           // Gestion de l'erreur
           if (error.response.status === 422) {
-            store.dispatch(userUpdateFailure("Un compte existe déjà avec cet email"));
+            store.dispatch(
+              userUpdateFailure('Un compte existe déjà avec cet email')
+            );
           }
         });
 
