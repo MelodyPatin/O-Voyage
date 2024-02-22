@@ -7,6 +7,7 @@ import Tag from '../Tag/Tag';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTags, submitUpdateActivity, updateSelectedTag } from '../../../actions/activity';
 import { useParams } from 'react-router-dom';
+import { clearErrorMessage } from '../../../actions/user';
 
 const StepTagUpdate = ({
   buttonContent,
@@ -15,15 +16,17 @@ const StepTagUpdate = ({
   valueContent,
 }) => {
   const dispatch = useDispatch();
-  const { id } = useParams();
+  const { activityId } = useParams();
   const [selectedTag, setSelectedTag] = useState(null);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   useEffect(() => {
     dispatch(fetchTags());
   }, []);
 
   const handleClick = () => {
-    dispatch(submitUpdateActivity(id));
+    dispatch(submitUpdateActivity(activityId));
+    dispatch(clearErrorMessage());
   };
 
   const handleTagClick = (tag) => {
@@ -49,6 +52,7 @@ const StepTagUpdate = ({
           ))}
         </div>
       </div>
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton
         textContent={buttonContent}
         onClick={handleClick}

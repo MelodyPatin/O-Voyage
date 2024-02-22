@@ -4,12 +4,13 @@ import PropTypes from 'prop-types';
 import { Datepicker } from '@mobiscroll/react';
 import SimpleButton from '../Buttons/SimpleButton';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   handleStepNext,
   setEndDate,
   setStartDate,
 } from '../../../actions/trip';
+import { clearErrorMessage } from '../../../actions/user';
 
 const StepCalendarUpdate = ({
   buttonContent,
@@ -19,6 +20,7 @@ const StepCalendarUpdate = ({
 }) => {
   const dispatch = useDispatch();
   const [selectedDates, setSelectedDates] = useState([startDate, endDate]);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   useEffect(() => {
     setSelectedDates([startDate, endDate]);
@@ -26,6 +28,7 @@ const StepCalendarUpdate = ({
 
   const handleClick = () => {
     dispatch(handleStepNext());
+    dispatch(clearErrorMessage());
   };
 
   const handleCalendarDates = (event) => {
@@ -50,6 +53,7 @@ const StepCalendarUpdate = ({
           value={selectedDates}
         />
       </div>
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton textContent={buttonContent} onClick={handleClick} />
     </div>
   );
