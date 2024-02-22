@@ -1,0 +1,30 @@
+@use 'src/styles/variables' as v;
+
+.ItemSuitcase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem;
+  gap: 0.5rem;
+
+  .checkbox {
+    transform: scale(2.5);
+    color: v.$lightColor;
+    margin-right: 1rem;
+  }
+
+  .inputSuitcase {
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 5px;
+    background-color: v.$lightColor;
+  }
+button{
+  border: none;
+  background: none;
+  padding: 0;
+}
+  .icon {
+    width: 3rem;
+    color: v.$lightColor;
+  }
+}

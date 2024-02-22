@@ -26,6 +26,7 @@ import Filters from '../Pages/Travel/Activity/Filters/Filters';
 import Gallery from '../Pages/Travel/Gallery/Gallery';
 import FullSizePhoto from '../Pages/Travel/Gallery/FullSizePhoto';
 import AddTravelers from '../Pages/Travel/Travelers/AddTravelers';
+import Suitcase from '../Pages/Travel/Suitcase/Suitcase';
 
 function App() {
   const dispatch = useDispatch();
@@ -116,6 +117,9 @@ function App() {
               path="/trip/:tripId/gallery/photo"
               element={<FullSizePhoto />}
             />
+          )}
+          {logged && (
+            <Route path="/trip/:tripId/suitcase" element={<Suitcase />} />
           )}
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />
