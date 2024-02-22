@@ -10,6 +10,7 @@ import {
   SAVE_ACTIVITY_INFO,
   DELETE_ACTIVITY,
   UPDATE_ACTIVITY_DATE,
+  SAVE_TAGS,
 } from '../actions/activity';
 
 export const initialState = {
@@ -22,6 +23,7 @@ export const initialState = {
   activityDates: '',
   activityDescription: '',
   activityAddress: '',
+  tags: [],
   restaurantTag: false,
   activityTag: false,
   pubTag: false,
@@ -107,6 +109,12 @@ const activityReducer = (state = initialState, action = {}) => {
         activities: state.activities.map((activity) =>
           activity.id === activityId ? { ...activity, date: newDate } : activity
         ),
+      };
+
+    case SAVE_TAGS:
+      return {
+        ...state,
+        tags: action.tags 
       };
 
     default:
