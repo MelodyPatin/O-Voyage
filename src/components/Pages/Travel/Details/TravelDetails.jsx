@@ -1,6 +1,6 @@
 import { React, useEffect } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
 import TravelsMenu from '../../../Reusable/TravelsMenu/TravelsMenu';
@@ -11,6 +11,7 @@ import GeneralInfos from './Components/GeneralInfos';
 import Activities from '../Activity/Activities/Activities';
 import Actions from './Components/Actions';
 import { fetchATrip } from '../../../../actions/trip';
+import SimpleButton from '../../../Reusable/Buttons/SimpleButton';
 
 const TravelDetails = () => {
   const { tripId } = useParams();

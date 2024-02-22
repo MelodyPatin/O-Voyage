@@ -4,6 +4,7 @@ import userReducer from './user';
 import tripReducer from './trip';
 import activityReducer from './activity';
 import contentReducer from './content';
+import suitcaseReducer from './suitcase';
 
 // le reducer principal : met en place les "tiroirs" dans le state et indiquer quel reducer
 // s'occupe de quel tiroir
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   trip: tripReducer,
   activity: activityReducer,
   content: contentReducer,
+  suitcase: suitcaseReducer,
 });
 
 export default rootReducer;
