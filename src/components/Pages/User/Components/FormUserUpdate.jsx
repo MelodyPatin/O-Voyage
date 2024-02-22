@@ -6,7 +6,10 @@ import '../UserUpdate.scss';
 import { Input } from 'semantic-ui-react';
 import SimpleButton from '../../../Reusable/Buttons/SimpleButton';
 import {
+  clearErrorMessage,
   deleteUser,
+  handleModificationStatus,
+  setErrorMessage,
   updateUserInput,
   userUpdateRequest,
 } from '../../../../actions/user';
@@ -16,9 +19,11 @@ import PopupMessage from '../../../Reusable/Popups/PopupMessage';
 import PopupButton from '../../../Reusable/Popups/PopupButton';
 
 const FormUserUpdate = ({ changeField }) => {
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const user = useSelector((state) => state.user);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const [editedValues, setEditedValues] = useState({
     firstnameValue: user.firstnameValue,
@@ -49,7 +54,7 @@ const FormUserUpdate = ({ changeField }) => {
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        dispatch(updateUserInput('avatar', reader.result)); // Mettez à jour le champ 'avatar' dans l'état Redux
+        dispatch(updateUserInput('avatarUpdate', reader.result)); // Mettez à jour le champ 'avatar' dans l'état Redux
         setEditedValues({ ...editedValues, avatar: reader.result });
       };
       reader.readAsDataURL(file);
@@ -57,7 +62,10 @@ const FormUserUpdate = ({ changeField }) => {
   };
 
   const [popupVisible, setPopupVisible] = useState(false);
-  const [modificationStatus, setModificationStatus] = useState(null);
+  const [modificationStatusTemp, setModificationStatusTemp] = useState(false);
+  const modificationStatus = useSelector(
+    (state) => state.user.modificationStatus
+  );
 
   // Effet pour afficher la popup lorsque le statut de la modification change
   useEffect(() => {
@@ -66,32 +74,47 @@ const FormUserUpdate = ({ changeField }) => {
     }
   }, [modificationStatus]);
 
-  const handleSubmit = async (event) => {
-    // Dispatch de l'action userUpdateRequest pour déclencher le middleware
-    // Cette action enverra les données à l'API
+  const handleSubmit = (event) => {
     event.preventDefault();
-    try {
-      // Effectuer la requête axios pour mettre à jour les données
-      const { firstResponse, secondResponse } = await dispatch(
-        userUpdateRequest()
-      );
-
-      console.log('First Response:', firstResponse);
-      console.log('Second Response:', secondResponse);
-
-      // Mise à jour du statut de la modification (succès)
-      setModificationStatus('success');
-      user.password = '';
-    } catch (error) {
-      // Mise à jour du statut de la modification (échec)
-      setModificationStatus('failure');
+  
+    // Vérification des champs prénom, nom et email
+    if (
+      editedValues.firstnameValue.trim() === '' ||
+      editedValues.lastnameValue.trim() === '' ||
+      editedValues.email.trim() === ''
+    ) {
+      // Afficher un message d'erreur ou prendre une autre action, comme empêcher la soumission
+      dispatch(setErrorMessage('Veuillez remplir nom prénom et email.'));
+      return; // Arrêter la soumission du formulaire
     }
+  
+    // Vérification du format de l'adresse email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(user.email)) {
+      dispatch(setErrorMessage("Veuillez entrer une adresse e-mail valide."));
+      return; // Arrêter la soumission du formulaire
+    }
+  
+    // Vérification du champ de mot de passe si non vide
+    if (user.password && user.password.trim() !== '') {
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/; // Expression régulière pour vérifier la présence d'au moins une majuscule, un chiffre et une longueur minimale de 6 caractères
+      if (!passwordRegex.test(user.password)) {
+        dispatch(setErrorMessage('Le mot de passe doit contenir au moins une majuscule, un chiffre et avoir une longueur minimale de 6 caractères.'));
+        return; // Arrêter la soumission du formulaire
+      }
+    }
+  
+    // Si tous les champs sont remplis et que le mot de passe est valide (s'il est non vide et qu'il passe la validation), procéder à la soumission du formulaire
+    dispatch(userUpdateRequest());
+    dispatch(clearErrorMessage());
   };
+  
+  
 
   const handleDeletePopup = (event) => {
     event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
     setPopupVisible(true);
-    setModificationStatus('confirmation');
+    setModificationStatusTemp('confirmation');
   };
 
   const handleDelete = async (event) => {
@@ -101,7 +124,7 @@ const FormUserUpdate = ({ changeField }) => {
       // Naviguer vers /home
       navigate('/home');
     } else {
-      setModificationStatus('failure');
+      setModificationStatusTemp('failure');
     }
   };
 
@@ -109,6 +132,7 @@ const FormUserUpdate = ({ changeField }) => {
     if (modificationStatus === 'success') {
       navigate(-1);
       setPopupVisible(false);
+      dispatch(handleModificationStatus());
     } else {
       setPopupVisible(false);
     }
@@ -155,6 +179,7 @@ const FormUserUpdate = ({ changeField }) => {
             <p>Photo de profil</p>
             <Input name="avatar" type="file" onChange={handleAvatarChange} />
           </div>
+          {errorMessage && <div className="errorMessage">{errorMessage}</div>}
           <div className="buttonValidate">
             <SimpleButton textContent="Valider" />
           </div>
@@ -171,17 +196,19 @@ const FormUserUpdate = ({ changeField }) => {
         </button>
       </div>
       {/* Popup de succès ou d'échec */}
-      {popupVisible && (
-        <PopupMessage
-          textContent={
-            modificationStatus === 'success'
-              ? 'Modification réussie !'
-              : 'Échec de la modification.'
-          }
-          onClose={handlePopupClose}
-        />
-      )}
-      {modificationStatus === 'confirmation' && popupVisible && (
+      {popupVisible &&
+        (modificationStatus === 'success' ? (
+          <PopupMessage
+            textContent="Modification réussie !"
+            onClose={handlePopupClose}
+          />
+        ) : modificationStatus === 'failure' ? (
+          <PopupMessage
+            textContent="Échec de la modification."
+            onClose={handlePopupClose}
+          />
+        ) : null)}
+      {modificationStatusTemp === 'confirmation' && popupVisible && (
         <PopupButton
           textContent="Merci de confirmer la suppression de votre compte"
           buttonContent="Confirmer"

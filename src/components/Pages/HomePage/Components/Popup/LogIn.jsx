@@ -5,13 +5,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import Field from './Components/Field';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearErrorMessage } from '../../../../../actions/user';
 
 const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const errorMessage = useSelector((state) => state.user.errorMessage); // Obtenez le message d'erreur du store
 
   const handleClosePopup = () => {
+    dispatch(clearErrorMessage());
     navigate(-1);
   };
 

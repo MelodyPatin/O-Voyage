@@ -19,6 +19,9 @@ import {
   SAVE_USER_RESULT_DATA,
   LOGIN_ERROR,
   SIGNUP_ERROR,
+  CLEAR_ERROR_MESSAGE,
+  HANDLE_MODIFICATION_STATUS,
+  SET_ERROR_MESSAGE,
 } from '../actions/user';
 
 export const initialState = {
@@ -38,6 +41,7 @@ export const initialState = {
   firstnameValue: '',
   lastnameValue: '',
   avatar: '',
+  avatarUpdate: '',
   // redirection
   redirectTo: null,
   myTrips: [],
@@ -51,6 +55,7 @@ export const initialState = {
   userIdSearch: 0,
   userId: '',
   errorMessage: '',
+  modificationStatus: '',
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -137,12 +142,21 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         password: '',
+        modificationStatus: 'success',
       };
 
     case USER_UPDATE_FAILURE:
       return {
         ...state,
         password: '',
+        modificationStatus: 'failure',
+        errorMessage: action.error,
+      };
+
+    case HANDLE_MODIFICATION_STATUS:
+      return {
+        ...state,
+        modificationStatus: '',
       };
 
     case UPDATE_USER_INPUT:
@@ -190,6 +204,18 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+      };
+  
+    case SET_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+      };
+
+    case CLEAR_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: '',
       };
 
     default:
