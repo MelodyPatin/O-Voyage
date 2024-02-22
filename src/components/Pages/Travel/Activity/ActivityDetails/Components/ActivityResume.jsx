@@ -92,7 +92,7 @@ const ActivityResume = () => {
           text={currentActivity.tags[0].name}
           className="tag"
         />
-        {isAdmin && (
+        {isAdmin &&
           <>
             <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
               <IconButton textContent="Modifier l'activité" icon="edit" />
@@ -104,7 +104,7 @@ const ActivityResume = () => {
               icon="trash"
             />
           </>
-        )}
+        }
         <Link to={`/trip/${tripId}`}>
           <SimpleButton textContent="Fermer" />
         </Link>
