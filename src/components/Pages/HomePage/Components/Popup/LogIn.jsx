@@ -1,7 +1,7 @@
 import React from 'react';
 import './Popups.scss';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom'; // Importer useHistory depuis react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Importer useHistory depuis react-router-dom
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import Field from './Components/Field';
@@ -42,6 +42,9 @@ const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
           />
           <SimpleButton type="submit" textContent="Connexion" />
         </form>
+        <Link to="/home/signup">
+          <p className="already-signed">Pas encore de compte ? S'inscrire</p>
+        </Link>
       </div>
     </div>
   );

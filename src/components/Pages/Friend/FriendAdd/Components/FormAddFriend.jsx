@@ -61,6 +61,11 @@ const FormAddFriend = ({
           type="text"
           onChange={changeField}
         />
+        <SimpleButton
+          type="button"
+          textContent="Rechercher"
+          onClick={loadResults}
+        />
         <div className="result">
           {userAvatar && <AvatarFriend userAvatar={userAvatar} />}
           {userFirstName} {userLastName}
