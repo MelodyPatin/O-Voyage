@@ -57,7 +57,13 @@
     }
 
     .ui.button{
-      margin: 2rem 0;
+      margin: 2rem 0 1rem;
+    }
+
+    .already-signed {
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 0;
     }
   }
 }
