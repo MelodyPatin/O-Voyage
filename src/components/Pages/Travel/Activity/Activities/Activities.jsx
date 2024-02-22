@@ -42,13 +42,13 @@ const Activities = () => {
 
   return (
     <div className="activities">
-      {!isMobile && (
+      {/* {!isMobile && (
         <Link to={`/trip/${tripId}/filters`}>
           <div className="filterButton">
             <SimpleButton textContent="Filtrer" />
           </div>
         </Link>
-      )}
+      )} */}
       <div className="sliderContainer">
         <div className="activityList">{renderActivities()}</div>
       </div>

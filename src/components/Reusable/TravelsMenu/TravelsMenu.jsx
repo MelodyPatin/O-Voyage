@@ -40,8 +40,8 @@ const TravelsMenu = () => {
             <span>{currentTrip.name}</span>
           </div>
           {/* Display the appropriate icon based on the menu's state */}
-          {isOpen && <ChevronUpIcon className="icon" />}
-          {!isOpen && <ChevronDownIcon className="icon" />}
+          {trips.length > 1 && isOpen && <ChevronUpIcon className="icon" />}
+          {trips.length > 1 && !isOpen && <ChevronDownIcon className="icon" />}
         </div>
         {/* Dropdown content section (visible when the menu is open) */}
         {isOpen && (

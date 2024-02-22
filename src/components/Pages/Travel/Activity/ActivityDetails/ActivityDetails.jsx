@@ -29,16 +29,7 @@ const ActivityDetails = () => {
           <TravelsMenu />
           <div className="containerFlex">
             <aside className="aside">
-              <ActivityResume
-                number="1"
-                activityTitle="Parlement de Budapest"
-                address="coucou"
-                price="0"
-                openTime="10h"
-                url="site"
-                description="yes"
-                activityCategory="pub"
-              />
+              <ActivityResume />
             </aside>
             <Activities />
           </div>

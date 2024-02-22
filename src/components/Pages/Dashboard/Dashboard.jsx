@@ -22,14 +22,25 @@ const Dashboard = () => {
 
   const trips = useSelector((state) => state.trip.myTrips);
   const tripsWithStatus = trips.map((trip) => {
-    const startDate = new Date(trip.startDate).getTime();
-    const endDate = new Date(trip.endDate).getTime();
-    const currentDate = new Date().getTime();
+    const startDate = new Date(trip.startDate);
+    const endDate = new Date(trip.endDate);
+    const currentDate = new Date();
 
-    if (currentDate >= startDate && currentDate <= endDate) {
+    const formatDateString = (date) => {
+      return date.toISOString().split('T')[0]; // Récupérer uniquement la partie "AAAA-MM-JJ"
+    };
+
+    const formattedStartDate = formatDateString(startDate);
+    const formattedEndDate = formatDateString(endDate);
+    const formattedCurrentDate = formatDateString(currentDate);
+
+    if (
+      formattedCurrentDate >= formattedStartDate &&
+      formattedCurrentDate <= formattedEndDate
+    ) {
       return { ...trip, status: 'current' };
     }
-    if (startDate > currentDate) {
+    if (formattedStartDate > formattedCurrentDate) {
       return { ...trip, status: 'future' };
     }
     return { ...trip, status: 'passed' };
@@ -60,7 +71,9 @@ const Dashboard = () => {
       </Link>
       <div className="list">
         <div className="now">
-          {currentTrips.length > 0 && <p className="when">J'y suis actuellement</p>}
+          {currentTrips.length > 0 && (
+            <p className="when">J'y suis actuellement</p>
+          )}
           <div className="cardList">
             {currentTrips.map((trip) => (
               <TravelCard key={trip.id} trip={trip} />
