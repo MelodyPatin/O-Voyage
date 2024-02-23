@@ -33,6 +33,11 @@ export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 export const CLEAR_ERROR_MESSAGE = 'CLEAR_ERROR_MESSAGE';
 export const HANDLE_MODIFICATION_STATUS = 'HANDLE_MODIFICATION_STATUS';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
+export const CLEAR_SEARCH_FRIEND = 'CLEAR_SEARCH_FRIEND';
+
+export const clearSearchFriend = () => ({
+  type: CLEAR_SEARCH_FRIEND,
+});
 
 export const loginError = (errorMessage) => ({
   type: LOGIN_ERROR,

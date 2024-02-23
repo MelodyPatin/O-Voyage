@@ -90,7 +90,6 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(handleStepReset());
           // Redirection après le succès de la requête
           window.location.href = `/trip/${response.data}`;
-          alert('Voyage créé avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -114,7 +113,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}`, tripUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          alert('Voyage mis à jour avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -176,10 +174,10 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${action.travelId}/addTraveler`, travelerUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          alert('Voyageur ajouté avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
+          alert("Echec de l'ajout du voyageur");
           // Dispatch d'une action pour gérer l'erreur
         });
       break;
@@ -338,11 +336,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}`)
         .then((response) => {
-          alert('Voyageur supprimé avec succès !');
         })
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
+          alert("Echec de la suppression du voyage");
         });
       break;
 
@@ -351,11 +349,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}/leaveTrip`)
         .then((response) => {
-          alert('Voyageur quitté avec succès !');
         })
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
+          alert("Echec : voyage non quitté");
         });
       break;
 

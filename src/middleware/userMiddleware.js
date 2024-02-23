@@ -24,6 +24,7 @@ import {
   userUpdateAvatar,
   DELETE_FRIEND,
   friendsFetched,
+  clearSearchFriend,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
@@ -76,7 +77,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleSuccessfulSignUp());
-          alert('Compte créé avec succès avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -140,10 +140,11 @@ const userMiddleware = (store) => (next) => async (action) => {
         .post('/friend/add', addFriendData)
         .then((response) => {
           store.dispatch(friendsFetched(false));
-          alert('Ami ajouté avec succès !');
+          store.dispatch(clearSearchFriend())
         })
         .catch((error) => {
           console.error(error);
+          alert("Echec de l'ajout d'ami");
         });
       break;
 
@@ -154,10 +155,10 @@ const userMiddleware = (store) => (next) => async (action) => {
         .delete(`/friend/delete/${friendId}`)
         .then((response) => {
           store.dispatch(friendsFetched(false));
-          alert('Ami supprimé avec succès !');
         })
         .catch((error) => {
           console.error(error);
+          alert("Echec de la suppression d'ami");
         });
       break;
 

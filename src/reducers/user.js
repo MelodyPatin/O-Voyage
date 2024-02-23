@@ -20,6 +20,7 @@ import {
   HANDLE_MODIFICATION_STATUS,
   SET_ERROR_MESSAGE,
   FRIENDS_FETCHED,
+  CLEAR_SEARCH_FRIEND,
 } from '../actions/user';
 
 export const initialState = {
@@ -105,14 +106,14 @@ const reducer = (state = initialState, action = {}) => {
         userId: action.userId,
       };
 
-    case SAVE_USER_RESULT_DATA:
+    case CLEAR_SEARCH_FRIEND:
       return {
         ...state,
-        firstNameSearch: action.firstName,
-        lastNameSearch: action.lastName,
-        avatarSearch: action.avatarURL,
-        emailSearch: action.email,
-        userIdSearch: action.userId,
+        firstNameSearch: '',
+        lastNameSearch: '',
+        avatarSearch: '',
+        emailSearch: '',
+        userIdSearch: '',
       };
 
     case CLICK_LOGOUT:
@@ -212,6 +213,17 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         friendsFetched: action.bool, // Définir friendsFetched à true une fois les amis chargés
+      };
+
+    case CLEAR_SEARCH_FRIEND:
+      return {
+        ...state,
+        searchUsersValue: '',
+        firstNameSearch: '',
+        lastNameSearch: '',
+        avatarSearch: '',
+        emailSearch: '',
+        userIdSearch: '',
       };
 
     default:

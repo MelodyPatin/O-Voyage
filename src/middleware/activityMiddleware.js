@@ -113,7 +113,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleAddTag(response.data.id));
-          alert('Activité créée avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -143,7 +142,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleAddTag(response.data.id));
-          alert('Activité mise à jour avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -182,11 +180,11 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .delete(`/activity/${action.activityId}`)
         .then((response) => {
-          alert('Activité supprimée avec succès !');
         })
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
+          alert("Echec de la suppression d'activité");
         });
 
     case HANDLE_ACTIVITY_DATE:
