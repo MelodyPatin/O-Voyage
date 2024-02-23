@@ -90,10 +90,12 @@ const tripMiddleware = (store) => (next) => (action) => {
           store.dispatch(handleStepReset());
           // Redirection après le succès de la requête
           window.location.href = `/trip/${response.data}`;
+          alert('Voyage créé avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la création du voyage.');
         });
 
       break;
@@ -112,13 +114,16 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}`, tripUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
+          alert('Voyage mis à jour avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la mise à jour du voyage.');
         });
 
       break;
+
     case ADD_CITY_TO_TRAVEL:
       const { selectedCities } = store.getState().trip;
 

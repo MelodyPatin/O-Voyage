@@ -1,4 +1,5 @@
 import api from '../api';
+
 import {
   FETCH_TRIP_ACTIVITIES,
   FETCH_AN_ACTIVITY,
@@ -112,10 +113,12 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleAddTag(response.data.id));
+          alert('Activité créée avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la création de l\'activité.');
         });
 
       break;
@@ -140,10 +143,12 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Traitement de la réponse
           store.dispatch(handleAddTag(response.data.id));
+          alert('Activité mise à jour avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la mise à jour de l\'activité.');
         });
 
       break;
