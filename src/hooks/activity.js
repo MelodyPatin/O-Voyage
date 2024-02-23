@@ -33,10 +33,6 @@ export const useSetActivityRating = (activityId) => {
       const existingVoteResponse = await api.get(`/vote/${activityId}/`);
       const existingVote = existingVoteResponse.data.rating;
 
-      console.log(existingVote);
-
-      console.log(newRating);
-
       if (existingVote !== 0) {
         await api.delete(`/vote/${activityId}`);
         setCurrentRating(null);

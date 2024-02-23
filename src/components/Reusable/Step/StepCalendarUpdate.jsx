@@ -60,10 +60,15 @@ const StepCalendarUpdate = ({
 };
 
 StepCalendarUpdate.propTypes = {
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  startDate: PropTypes.string, // Add prop types for startDate and endDate
-  endDate: PropTypes.string,
+};
+
+StepCalendarUpdate.defaultProps = {
+  startDate: '',
+  endDate: '',
 };
 
 export default StepCalendarUpdate;

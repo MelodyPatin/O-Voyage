@@ -17,10 +17,15 @@ const Tag = ({ text, color, isSelected, onClick }) => {
 };
 
 Tag.propTypes = {
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
   text: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  isSelected: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+};
+
+Tag.defaultProps = {
+  isSelected: false,
+  onClick: () => {}, // Fonction vide par défaut
 };
 
 export default Tag;

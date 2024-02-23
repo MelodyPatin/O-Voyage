@@ -15,6 +15,7 @@ export const UPDATE_ACTIVITY_DATE = 'UPDATE_ACTIVITY_DATE';
 export const HANDLE_ACTIVITY_DATE = 'HANDLE_ACTIVITY_DATE';
 export const FETCH_TAGS = 'FETCH_TAGS';
 export const SAVE_TAGS = 'SAVE_TAGS';
+export const CLEAR_CREATE_ACTIVITY_INFOS = 'CLEAR_CREATE_ACTIVITY_INFOS';
 
 export const fetchTripActivities = (tripId) => ({
   type: FETCH_TRIP_ACTIVITIES,
@@ -114,4 +115,8 @@ export const fetchTags = () => ({
 export const saveTags = (tags) => ({
   type: SAVE_TAGS,
   tags,
+});
+
+export const clearCreateActivityInfos = () => ({
+  type: CLEAR_CREATE_ACTIVITY_INFOS,
 });

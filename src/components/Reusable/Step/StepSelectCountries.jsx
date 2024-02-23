@@ -56,7 +56,6 @@ const StepSelectCountries = ({
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 
-    console.log(newSelected);
     // Dispatch de l'action pour mettre à jour les pays sélectionnés
     dispatch(updateSelectedCountries(newSelected));
   };
@@ -94,17 +93,21 @@ const StepSelectCountries = ({
 };
 
 StepSelectCountries.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelectCountries.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelectCountries;

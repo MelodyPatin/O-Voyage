@@ -14,11 +14,14 @@ const FriendList = () => {
   const dispatch = useDispatch();
 
   const friends = useSelector((state) => state.user.friends);
+  const friendsFetched = useSelector((state) => state.user.friendsFetched);
 
   useEffect(() => {
-    dispatch(fetchFriends());
-  }, []);
-
+    if (!friendsFetched) {
+      // Ne charge les amis que si ils n'ont pas déjà été chargés
+      dispatch(fetchFriends());
+    }
+  }, [dispatch, friendsFetched]);
 
   // Fonction pour supprimer un ami
   const handleDeleteFriend = (friendId) => {
@@ -44,7 +47,11 @@ const FriendList = () => {
           <li className="friend" key={friend.id}>
             <User user={friend} />
             {/* XMarkIcon for indicating friend deletion */}
-            <XMarkIcon className="icon" onClick={() => handleDeleteFriend(friend.id)} /> {/* Ajouter un gestionnaire d'événements onClick pour appeler handleDeleteFriend avec l'ID de l'ami */}
+            <XMarkIcon
+              className="icon"
+              onClick={() => handleDeleteFriend(friend.id)}
+            />{' '}
+            {/* Ajouter un gestionnaire d'événements onClick pour appeler handleDeleteFriend avec l'ID de l'ami */}
           </li>
         ))}
       </ul>

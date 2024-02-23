@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import DropDownSettings from './DropDownSettings';
 import DropDownNotifications from './DropDownNotifications';
@@ -9,6 +10,13 @@ import { clickLogout } from '../../../../actions/user';
 const Menu = () => {
   const isMobile = useMediaQuery('(max-width: 767px)');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // Fonction pour gérer la déconnexion
+  const handleLogout = () => {
+    dispatch(clickLogout());
+    navigate('/'); // Redirigez vers /home après la déconnexion
+  };
 
   return (
     <div className="menu">
@@ -20,11 +28,7 @@ const Menu = () => {
       </div>
       {/* Render dropdown for user settings */}
       <div className="icon_label">
-        <DropDownSettings
-          handleLogout={() => {
-            dispatch(clickLogout());
-          }}
-        />
+        <DropDownSettings handleLogout={handleLogout} />
       </div>
     </div>
   );

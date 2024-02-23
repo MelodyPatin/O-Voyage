@@ -10,6 +10,7 @@ import {
   DELETE_ACTIVITY,
   UPDATE_ACTIVITY_DATE,
   SAVE_TAGS,
+  CLEAR_CREATE_ACTIVITY_INFOS,
 } from '../actions/activity';
 
 export const initialState = {
@@ -99,7 +100,20 @@ const activityReducer = (state = initialState, action = {}) => {
     case SAVE_TAGS:
       return {
         ...state,
-        tags: action.tags 
+        tags: action.tags,
+      };
+
+    case CLEAR_CREATE_ACTIVITY_INFOS:
+      return {
+        ...state,
+        activityTitle: '',
+        activityPrice: '',
+        activityUrl: '',
+        activityDates: '',
+        activityDescription: '',
+        activityAddress: '',
+        selectedCities: [],
+        selectedTags: [],
       };
 
     default:

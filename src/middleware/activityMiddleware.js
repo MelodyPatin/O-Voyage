@@ -14,6 +14,7 @@ import {
   HANDLE_ACTIVITY_DATE,
   FETCH_TAGS,
   saveTags,
+  clearCreateActivityInfos,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -60,7 +61,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/activity/${action.id}`)
         .then((response) => {
-          console.log(response.data);
           const activityTitle = response.data.name;
           const activityPrice = response.data.price;
           const activityUrl = response.data.url;
@@ -106,14 +106,11 @@ const activityMiddleware = (store) => (next) => async (action) => {
         description: activityDescription,
       };
 
-      console.log(activityJsonData);
-
       // Exécution de la requête
       api
         .post(`/trip/${id}/activity/add`, activityJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
@@ -137,14 +134,11 @@ const activityMiddleware = (store) => (next) => async (action) => {
         description: activityDescription,
       };
 
-      console.log(activityUpdateJsonData);
-
       // Exécution de la requête
       api
         .put(`/activity/${action.activityId}`, activityUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
@@ -157,24 +151,19 @@ const activityMiddleware = (store) => (next) => async (action) => {
     case HANDLE_ADD_TAG:
       const { selectedTag } = store.getState().activity;
 
-      console.log(selectedTag);
       const tagId = selectedTag[0].id;
-      console.log(tagId);
 
       // Données à envoyer au format JSON
       const tagJsonData = {
         tag: tagId,
       };
 
-      console.log(tagJsonData);
-
       // Exécution de la requête
       api
         .put(`/activity/${action.activityId}/addtag`, tagJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
-          window.location.href = `/trip/${id}`;
+          store.dispatch(clearCreateActivityInfos())
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -188,7 +177,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .delete(`/activity/${action.activityId}`)
         .then((response) => {
-          console.log(response.data);
         })
         .catch((error) => {
           // Gestion des erreurs
@@ -201,14 +189,11 @@ const activityMiddleware = (store) => (next) => async (action) => {
         date: action.newDate,
       };
 
-      console.log(activityDateUpdateJsonData);
-
       // Exécution de la requête
       api
         .put(`/activity/${action.activityId}/date`, activityDateUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -221,7 +206,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/tags`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveTags(response.data));
         })
         .catch((error) => {

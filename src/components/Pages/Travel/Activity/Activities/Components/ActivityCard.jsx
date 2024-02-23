@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rating } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './ActivityCard.scss';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
@@ -23,7 +23,6 @@ const ActivityCard = ({ activity }) => {
     await setNewRating(clickedRating);
     dispatch(fetchTripActivities(tripId));
   };
-  console.log(activity);
 
   const activityTitle = activity.name;
   const shortenedTitle =
@@ -87,7 +86,10 @@ ActivityCard.propTypes = {
     name: PropTypes.string.isRequired,
     date: PropTypes.string,
     score: PropTypes.number.isRequired,
-    city: PropTypes.shape.isRequired,
+    city: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
     creator: PropTypes.shape({
       avatarURL: PropTypes.string.isRequired,
     }).isRequired,
@@ -97,6 +99,10 @@ ActivityCard.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+};
+
+ActivityCard.defaultProps = {
+  date: '',
 };
 
 export default ActivityCard;

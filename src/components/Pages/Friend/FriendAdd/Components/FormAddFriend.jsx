@@ -38,9 +38,8 @@ const FormAddFriend = ({
   };
 
   const handleAddFriend = () => {
-    console.log(friendId);
-    console.log('coucou les gars');
     dispatch(addFriend(friendId));
+    navigate('/friends');
   };
 
   return (

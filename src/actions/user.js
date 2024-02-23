@@ -10,6 +10,7 @@ export const SAVE_USER_RESULT_DATA = 'SAVE_USER_RESULT_DATA';
 export const CLICK_LOGOUT = 'CLICK_LOGOUT';
 export const UPDATE_LOGGED_OUT = 'UPDATE_LOGGED_OUT';
 export const FETCH_FRIENDS = 'FETCH_FRIENDS';
+export const FRIENDS_FETCHED = 'FRIENDS_FETCHED';
 export const SAVE_FRIENDS = 'SAVE_FRIENDS';
 export const ADD_FRIEND = 'ADD_FRIEND';
 export const DELETE_FRIEND = 'DELETE_FRIEND';
@@ -116,6 +117,11 @@ export const updateLoggedOut = () => ({
 
 export const fetchFriends = () => ({
   type: FETCH_FRIENDS,
+});
+
+export const friendsFetched = (bool) => ({
+  type: FRIENDS_FETCHED,
+  bool,
 });
 
 export const saveFriends = (friends) => ({

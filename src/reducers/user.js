@@ -22,6 +22,7 @@ import {
   CLEAR_ERROR_MESSAGE,
   HANDLE_MODIFICATION_STATUS,
   SET_ERROR_MESSAGE,
+  FRIENDS_FETCHED,
 } from '../actions/user';
 
 export const initialState = {
@@ -56,6 +57,7 @@ export const initialState = {
   userId: '',
   errorMessage: '',
   modificationStatus: '',
+  friendsFetched: false,
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -217,6 +219,12 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         errorMessage: '',
+      };
+
+    case FRIENDS_FETCHED:
+      return {
+        ...state,
+        friendsFetched: action.bool, // Définir friendsFetched à true une fois les amis chargés
       };
 
     default:

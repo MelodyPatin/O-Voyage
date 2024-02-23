@@ -59,8 +59,12 @@ const Selector = ({ date: propDate, activityId }) => {
 };
 
 Selector.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.string,
   activityId: PropTypes.number.isRequired,
+};
+
+Selector.defaultProps = {
+  date: '',
 };
 
 export default Selector;

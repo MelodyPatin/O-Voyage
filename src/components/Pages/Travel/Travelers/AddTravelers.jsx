@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
+import StepSelectAddTravelers from '../../../Reusable/Step/StepSelectAddTravelers';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
-import StepSelectTravelers from '../../../Reusable/Step/StepSelectTravelers';
 import { fetchFriends } from '../../../../actions/user';
 import './AddTravelers.scss';
 
@@ -25,12 +25,12 @@ const AddTravelers = () => {
     <div className="addTravelers">
       <NavBarHeader />
       <ReturnTitle textContent="Ajouter un/des voyageur(s)" />
-      <StepSelectTravelers
-        buttonContent="Ajouter"
-        placeholderContent="Rechercher dans les amis"
-        options={friendsOptions}
-        // handleClick={handleClick}
-      />
+      <StepSelectAddTravelers
+            buttonContent="Ajouter les voyageurs"
+            placeholderContent="Rechercher dans les amis"
+            labelContent="Modifiez les voyageurs*"
+            options={friendsOptions}
+          />
     </div>
   );
 };

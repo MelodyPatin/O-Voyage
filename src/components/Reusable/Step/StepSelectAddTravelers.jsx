@@ -4,48 +4,51 @@ import PropTypes from 'prop-types';
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCities, updateSelectedCountries } from '../../../actions/trip';
+import {
+  addCityToTravel,
+  addTravelerToTravelUpdate,
+  submitCreateTravel,
+  submitUpdateTravel,
+  updateSelectedTravelers,
+} from '../../../actions/trip';
+import { clearErrorMessage } from '../../../actions/user';
+import { useNavigate } from 'react-router-dom';
 
-const StepSelect = ({
+const StepSelectAddTravelers = ({
   buttonContent,
   placeholderContent,
   labelContent,
   options,
-  handleClick,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const errorMessage = useSelector((state) => state.user.errorMessage);
+  const travelId = useSelector((state) => state.trip.trip.id);
 
-  const selectedCountries = useSelector(
-    (state) => state.trip.selectedCountries
-  );
-
-  const handleFetchCities = () => {
-    if (selectedCountries && selectedCountries.length > 0) {
-      selectedCountries.map((country) => {
-        dispatch(fetchCities(country.key));
-      });
-    } else {
-      console.error('Aucun pays sélectionné');
-    }
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch(addTravelerToTravelUpdate(travelId));
+    dispatch(clearErrorMessage());
+    navigate(`/trip/${travelId}`);
   };
 
   const handleSelectionChange = (selected) => {
     // Convertir chaque élément de selected en un objet { key, value }
     const newSelected = selected
-      .map((selectedCountryName) => {
+      .map((selectedTravelerName) => {
         // Trouver l'objet dans options qui correspond à ce nom de pays
-        const selectedCountry = options.find(
-          (country) => country.value === selectedCountryName
+        const selectedTraveler = options.find(
+          (traveler) => traveler.value === selectedTravelerName
         );
 
         // Vérifier si un pays correspondant a été trouvé
-        if (selectedCountry) {
+        if (selectedTraveler) {
           // Retourner un objet avec les clés et valeurs appropriées
-          return { key: selectedCountry.key, value: selectedCountry.value };
+          return { key: selectedTraveler.key, value: selectedTraveler.value };
         } else {
           // Gérer le cas où aucun pays correspondant n'a été trouvé
           console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedCountryName}`
+            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
           );
           // Retourner null pour indiquer un problème
           return null;
@@ -53,11 +56,11 @@ const StepSelect = ({
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 
-    // Dispatch de l'action pour mettre à jour les pays sélectionnés
-    dispatch(updateSelectedCountries(newSelected));
+    // Dispatch de l'action pour mettre à jour les villes sélectionnées
+    dispatch(updateSelectedTravelers(newSelected));
   };
 
-  const selected = useSelector((state) => state.trip.selectedCountries);
+  const selected = useSelector((state) => state.trip.selectedTravelers);
 
   return (
     <div className="StepSelect">
@@ -67,27 +70,25 @@ const StepSelect = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.value}
+            selected={selected.map((traveler) => traveler.value)} // Utiliser map pour obtenir un tableau de valeurs
             onChange={handleSelectionChange}
           />
         </div>
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton
           textContent={buttonContent}
-          onClick={() => {
-            handleClick();
-            handleFetchCities();
-          }}
+          onClick={handleClick}
+          type="button"
         />
       </form>
     </div>
   );
 };
 
-StepSelect.propTypes = {
+StepSelectAddTravelers.propTypes = {
   placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  handleClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.number.isRequired,
@@ -97,8 +98,8 @@ StepSelect.propTypes = {
   ).isRequired,
 };
 
-StepSelect.defaultProps = {
+StepSelectAddTravelers.defaultProps = {
   placeholderContent: '',
 };
 
-export default StepSelect;
+export default StepSelectAddTravelers;

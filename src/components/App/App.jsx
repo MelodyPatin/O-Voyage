@@ -66,10 +66,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         {/* HomePage */}
-        {redirectHome && <Navigate to="/home" replace />}
+        {redirectHome && <Navigate to="/" replace />}
 
         <Routes>
-          <Route path="/home/*" element={<HomePage />} />
+          <Route path="/*" element={<HomePage />} />
           {logged && (
             <Route
               path="/dashboard"

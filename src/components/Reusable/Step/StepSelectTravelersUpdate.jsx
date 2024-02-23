@@ -6,12 +6,13 @@ import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addCityToTravel,
-  addTravelerToTravel,
+  handleStepReset,
   submitCreateTravel,
   submitUpdateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
 import { clearErrorMessage } from '../../../actions/user';
+import { useNavigate } from 'react-router-dom';
 
 const StepSelectTravelersUpdate = ({
   buttonContent,
@@ -20,12 +21,16 @@ const StepSelectTravelersUpdate = ({
   options,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const errorMessage = useSelector((state) => state.user.errorMessage);
+  const tripId = useSelector((state) => state.trip.tripId);
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitUpdateTravel());
     dispatch(clearErrorMessage());
+    navigate(`/trip/${tripId}`);
+    dispatch(handleStepReset());
   };
 
   const handleSelectionChange = (selected) => {
@@ -82,16 +87,20 @@ const StepSelectTravelersUpdate = ({
 };
 
 StepSelectTravelersUpdate.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelectTravelersUpdate.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelectTravelersUpdate;

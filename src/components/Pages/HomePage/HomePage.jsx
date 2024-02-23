@@ -56,7 +56,7 @@ const HomePage = () => {
       <Footer />
 
       {redirectDashboard && <Navigate to="/dashboard" replace />}
-      {redirectLogIn && <Navigate to="/home/login" replace />}
+      {redirectLogIn && <Navigate to="/login" replace />}
 
       <Routes>
         <Route
@@ -71,11 +71,6 @@ const HomePage = () => {
               }}
               handleLogin={() => {
                 dispatch(submitLogin());
-              }}
-              handleLogout={() => {
-                console.log('handleLogout');
-                // TODO: Effacez le pseudo et le token dans le state, et passez logged à false
-                // Dispatchez une action traitée par le reducer user
               }}
               isLogged={logged}
             />

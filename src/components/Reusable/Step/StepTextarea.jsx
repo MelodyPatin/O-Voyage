@@ -44,7 +44,6 @@ const StepTextarea = ({
 
   return (
     <div className="StepTextarea">
-      <form>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <Form>
@@ -61,18 +60,22 @@ const StepTextarea = ({
         </div>
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton textContent={buttonContent} onClick={handleClick} />
-      </form>
     </div>
   );
 };
 
 StepTextarea.propTypes = {
   inputValue: PropTypes.string,
-  changeField: PropTypes.func.isRequired,
   placeholderContent: PropTypes.string,
+  changeField: PropTypes.func.isRequired,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+};
+
+StepTextarea.defaultProps = {
+  inputValue: '',
+  placeholderContent: '',
 };
 
 export default StepTextarea;
