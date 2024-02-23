@@ -130,7 +130,7 @@ const SignUp = ({
             <p className="errorMessage errorMessageMail">{errorMessage}</p>
           )}{' '}
         </form>
-        <Link to="/home/login">
+        <Link to="/login">
           <p className="already-signed">Déjà un compte ? Se connecter</p>
         </Link>
       </div>

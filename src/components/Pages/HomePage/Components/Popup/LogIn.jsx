@@ -47,7 +47,7 @@ const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
           <SimpleButton type="submit" textContent="Connexion" />
           {errorMessage && <p className="errorMessage errorMessageInvalid">{errorMessage}</p>} {/* Afficher le message d'erreur s'il existe */}
         </form>
-        <Link to="/home/signup">
+        <Link to="/signup">
           <p className="already-signed">Pas encore de compte ? S'inscrire</p>
         </Link>
       </div>

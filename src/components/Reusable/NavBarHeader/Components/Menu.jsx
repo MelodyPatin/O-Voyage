@@ -15,7 +15,7 @@ const Menu = () => {
   // Fonction pour gérer la déconnexion
   const handleLogout = () => {
     dispatch(clickLogout());
-    navigate('/home'); // Redirigez vers /home après la déconnexion
+    navigate('/'); // Redirigez vers /home après la déconnexion
   };
 
   return (

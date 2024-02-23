@@ -122,7 +122,7 @@ const FormUserUpdate = ({ changeField }) => {
     await dispatch(deleteUser());
     if (user.deletionStatus === 'success') {
       // Naviguer vers /home
-      navigate('/home');
+      navigate('/');
     } else {
       setModificationStatusTemp('failure');
     }

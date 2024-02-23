@@ -9,13 +9,13 @@ const LoginLogoutButton = () => {
       <Button
         className="connectionButton"
         as={Link}
-        to="/home/login"
+        to="/login"
         content="Se connecter"
       />
       <Button
         className="connectionButton"
         as={Link}
-        to="/home/signup"
+        to="/signup"
         content="S'inscrire"
       />
     </div>

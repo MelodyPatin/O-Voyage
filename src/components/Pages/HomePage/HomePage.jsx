@@ -56,7 +56,7 @@ const HomePage = () => {
       <Footer />
 
       {redirectDashboard && <Navigate to="/dashboard" replace />}
-      {redirectLogIn && <Navigate to="/home/login" replace />}
+      {redirectLogIn && <Navigate to="/login" replace />}
 
       <Routes>
         <Route

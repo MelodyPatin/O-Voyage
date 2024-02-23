@@ -16,7 +16,7 @@ const Error = () => {
       <ReturnTitle textContent="Erreur 404" />
       <div className="errorContainer">
         <p className="textContent">Oops, page introuvable</p>
-        <Link to="/home">
+        <Link to="/">
           <SimpleButton textContent="Retour à l'accueil" />
         </Link>
       </div>
