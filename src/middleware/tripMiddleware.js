@@ -158,7 +158,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}/addTraveler`, travelerJsonData)
         .then((response) => {
           // Traitement de la réponse
-          // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -177,7 +176,7 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${action.travelId}/addTraveler`, travelerUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
+          alert('Voyageur ajouté avec succès !');
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -339,6 +338,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}`)
         .then((response) => {
+          alert('Voyageur supprimé avec succès !');
         })
         .catch((error) => {
           // Gestion des erreurs
@@ -351,6 +351,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}/leaveTrip`)
         .then((response) => {
+          alert('Voyageur quitté avec succès !');
         })
         .catch((error) => {
           // Gestion des erreurs

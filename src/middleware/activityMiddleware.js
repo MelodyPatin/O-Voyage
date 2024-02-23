@@ -182,6 +182,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .delete(`/activity/${action.activityId}`)
         .then((response) => {
+          alert('Activité supprimée avec succès !');
         })
         .catch((error) => {
           // Gestion des erreurs
