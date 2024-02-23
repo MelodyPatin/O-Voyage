@@ -23,7 +23,7 @@ const StepSelectTravelersUpdate = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const errorMessage = useSelector((state) => state.user.errorMessage);
-  const { tripId } = useParams();
+  const tripId = useSelector((state) => state.trip.tripId);
 
   const handleClick = (e) => {
     e.preventDefault();

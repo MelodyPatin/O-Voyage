@@ -20,7 +20,7 @@ const StepSelectTravelers = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { tripId } = useParams();
+  const tripId = useSelector((state) => state.trip.tripId);
 
   const handleClick = (e) => {
     e.preventDefault();
