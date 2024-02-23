@@ -2,6 +2,7 @@ import {
   ADD_PICTURE,
   FETCH_A_PICTURE,
   FETCH_PICTURES,
+  SHOW_PICTURES,
   fetchPictures,
   showPictures,
 } from '../actions/gallery';
@@ -13,7 +14,8 @@ const galleryMiddleware = (store) => (next) => async (action) => {
       try {
         const currentPage = 1;
         const response = await api.get(
-          `/album/${action.tripId}?page=${currentPage}`
+          `/album/trip/${action.tripId}/page/${currentPage}`,
+          currentPage
         );
         store.dispatch(showPictures(response.data));
       } catch (error) {
@@ -24,9 +26,8 @@ const galleryMiddleware = (store) => (next) => async (action) => {
 
     case FETCH_A_PICTURE:
       try {
-        const currentPage = 1;
         const response = await api.get(
-          `/album/trip/${action.tripId}/picture/${action.pictureId}`
+          `/trip/${action.tripId}/photo/${action.pictureId}`
         );
         store.dispatch(showPictures(response.data));
       } catch (error) {
@@ -39,14 +40,14 @@ const galleryMiddleware = (store) => (next) => async (action) => {
       try {
         const { base64Data } = action;
 
-        const response = await api.post(
-          `/album/trip/${action.tripId}/picture/`,
-          { picture: base64Data }
-        );
+        const response = await api.post(`/trip/${action.tripId}/photo/`, {
+          picture: base64Data,
+        });
         const newPicture = response.data;
-        store.dispatch(
-          showPictures([newPicture, ...store.getState().gallery.images])
-        );
+        store.dispatch({
+          type: SHOW_PICTURES,
+          pictures: [newPicture, ...store.getState().gallery.images],
+        });
       } catch (error) {
         console.error(error);
       }

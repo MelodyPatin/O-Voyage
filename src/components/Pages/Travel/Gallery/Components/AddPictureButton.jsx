@@ -20,7 +20,7 @@ const AddPictureButton = () => {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        resolve(reader.result.split(',')[1]);
+        resolve(reader.result);
       };
 
       reader.onerror = (error) => {

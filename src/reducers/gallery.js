@@ -7,7 +7,7 @@ import {
 } from '../actions/gallery';
 
 const initialState = {
-  images: [],
+  gallery: { images: [] },
   image: null,
 };
 
