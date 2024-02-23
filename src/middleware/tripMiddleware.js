@@ -28,11 +28,19 @@ import {
   HANDLE_ADD_TRAVEL_PICTURE,
   handleAddTravelPicture,
   DELETE_TRIP,
+  ADD_TRAVELER_TO_TRAVEL_UPDATE,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
-  const { tripId, tripTitle, startDate, endDate, tripDescription } =
-    store.getState().trip;
+  const {
+    tripId,
+    tripTitle,
+    startDate,
+    endDate,
+    tripDescription,
+    selectedTravelers,
+  } = store.getState().trip;
+  const travelersIds = selectedTravelers.map((traveler) => traveler.key);
 
   switch (action.type) {
     case FETCH_MY_TRIPS:
@@ -135,12 +143,7 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case ADD_TRAVELER_TO_TRAVEL:
-      const { selectedTravelers } = store.getState().trip;
 
-      // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
-      const travelersIds = selectedTravelers.map((traveler) => traveler.key);
-
-      console.log(travelersIds);
       // Données à envoyer au format JSON
       const travelerJsonData = {
         travelersIds,
@@ -154,6 +157,28 @@ const tripMiddleware = (store) => (next) => (action) => {
           // Traitement de la réponse
           // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
           window.location.href = `/trip/${tripId}`;
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+      break;
+
+    case ADD_TRAVELER_TO_TRAVEL_UPDATE:
+
+      // Données à envoyer au format JSON
+      const travelerUpdateJsonData = {
+        travelersIds,
+      };
+
+      console.log(travelerUpdateJsonData);
+      // Exécution de la requête
+      api
+        .put(`/trip/${action.travelId}/addTraveler`, travelerUpdateJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+          // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
+          window.location.href = `/trip/${action.travelId}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);

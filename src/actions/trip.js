@@ -10,6 +10,7 @@ export const SUBMIT_CREATE_TRAVEL = 'SUBMIT_CREATE_TRAVEL';
 export const SUBMIT_UPDATE_TRAVEL = 'SUBMIT_UPDATE_TRAVEL';
 export const ADD_CITY_TO_TRAVEL = 'ADD_CITY_TO_TRAVEL';
 export const ADD_TRAVELER_TO_TRAVEL = 'ADD_TRAVELER_TO_TRAVEL';
+export const ADD_TRAVELER_TO_TRAVEL_UPDATE = 'ADD_TRAVELER_TO_TRAVEL_UPDATE';
 export const SAVE_COUNTRIES = 'SAVE_COUNTRIES';
 export const SAVE_CITIES = 'SAVE_CITIES';
 export const SAVE_TRIP_INFO = 'SAVE_TRIP_INFO';
@@ -84,6 +85,11 @@ export const addCityToTravel = () => ({
 
 export const addTravelerToTravel = () => ({
   type: ADD_TRAVELER_TO_TRAVEL,
+});
+
+export const addTravelerToTravelUpdate = (travelId) => ({
+  type: ADD_TRAVELER_TO_TRAVEL_UPDATE,
+  travelId,
 });
 
 export const saveCountries = (countries) => ({
