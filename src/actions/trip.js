@@ -2,6 +2,7 @@ export const FETCH_MY_TRIPS = 'FETCH_MY_TRIPS';
 export const SAVE_MY_TRIPS = 'SAVE_MY_TRIPS';
 export const HANDLE_STEP_BACK = 'HANDLE_STEP_BACK';
 export const HANDLE_STEP_NEXT = 'HANDLE_STEP_NEXT';
+export const HANDLE_STEP_RESET = 'HANDLE_STEP_RESET';
 export const CHANGE_TRIP_FIELD = 'CHANGE_TRIP_FIELD';
 export const FETCH_COUNTRIES = 'FETCH_COUNTRIES';
 export const FETCH_CITIES = 'FETCH_CITIES';
@@ -33,6 +34,7 @@ export const SET_NEW_PICTURE = 'SET_NEW_PICTURE';
 export const HANDLE_REMOVE_TRAVEL_PICTURE = 'HANDLE_REMOVE_TRAVEL_PICTURE';
 export const HANDLE_ADD_TRAVEL_PICTURE = 'HANDLE_ADD_TRAVEL_PICTURE';
 export const DELETE_TRIP = 'DELETE_TRIP';
+export const LEAVE_TRIP = 'LEAVE_TRIP';
 
 export const changeTripField = (value, identifier) => ({
   type: CHANGE_TRIP_FIELD,
@@ -55,6 +57,10 @@ export const handleStepBack = () => ({
 
 export const handleStepNext = () => ({
   type: HANDLE_STEP_NEXT,
+});
+
+export const handleStepReset = () => ({
+  type: HANDLE_STEP_RESET,
 });
 
 export const fetchCountries = () => ({
@@ -200,5 +206,10 @@ export const handleAddTravelPicture = (travelId) => ({
 
 export const deleteTrip = (tripId) => ({
   type: DELETE_TRIP,
+  tripId,
+});
+
+export const leaveTrip = (tripId) => ({
+  type: LEAVE_TRIP,
   tripId,
 });

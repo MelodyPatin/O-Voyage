@@ -5,7 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import IconButton from '../../../../Reusable/Buttons/IconButton';
 import './Actions.scss';
-import { deleteTrip } from '../../../../../actions/trip';
+import { deleteTrip, leaveTrip } from '../../../../../actions/trip';
 import PopupButton from '../../../../Reusable/Popups/PopupButton';
 
 const Actions = () => {
@@ -24,9 +24,21 @@ const Actions = () => {
     setModificationStatus('confirmation');
   };
 
+  const handleLeavePopup = (event) => {
+    event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
+    setPopupVisible(true);
+    setModificationStatus('leave');
+  };
+
   const handleDelete = async (event) => {
     event.preventDefault();
     await dispatch(deleteTrip(CurrentTrip.id));
+    navigate('/dashboard');
+  };
+
+  const handleLeave = async (event) => {
+    event.preventDefault();
+    await dispatch(leaveTrip(CurrentTrip.id));
     navigate('/dashboard');
   };
 
@@ -72,13 +84,26 @@ const Actions = () => {
           </>
         )}
 
-        <IconButton textContent="Quitter le voyage" icon="close" />
+        <IconButton
+          type="button"
+          onClick={handleLeavePopup}
+          textContent="Quitter le voyage"
+          icon="close"
+        />
       </div>
       {modificationStatus === 'confirmation' && popupVisible && (
         <PopupButton
           textContent="Merci de confirmer la suppression de ce voyage"
           buttonContent="Confirmer"
           onConfirmation={handleDelete}
+          onClose={handlePopupClose}
+        />
+      )}
+      {modificationStatus === 'leave' && popupVisible && (
+        <PopupButton
+          textContent="Souhaitez vous vraiment quitter ce voyage ?"
+          buttonContent="Confirmer"
+          onConfirmation={handleLeave}
           onClose={handlePopupClose}
         />
       )}

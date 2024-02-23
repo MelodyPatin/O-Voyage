@@ -12,6 +12,7 @@ import {
   updateSelectedTravelers,
 } from '../../../actions/trip';
 import { clearErrorMessage } from '../../../actions/user';
+import { useNavigate } from 'react-router-dom';
 
 const StepSelectAddTravelers = ({
   buttonContent,
@@ -20,6 +21,7 @@ const StepSelectAddTravelers = ({
   options,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const errorMessage = useSelector((state) => state.user.errorMessage);
   const travelId = useSelector((state) => state.trip.trip.id);
 
@@ -27,6 +29,7 @@ const StepSelectAddTravelers = ({
     e.preventDefault();
     dispatch(addTravelerToTravelUpdate(travelId));
     dispatch(clearErrorMessage());
+    navigate(`/trip/${travelId}`);
   };
 
   const handleSelectionChange = (selected) => {

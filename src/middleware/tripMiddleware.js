@@ -29,6 +29,7 @@ import {
   handleAddTravelPicture,
   DELETE_TRIP,
   ADD_TRAVELER_TO_TRAVEL_UPDATE,
+  LEAVE_TRIP,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
@@ -109,7 +110,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // Traitement de la réponse
           console.log(response.data);
-          window.location.href = `/trip/${tripId}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -143,7 +143,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case ADD_TRAVELER_TO_TRAVEL:
-
       // Données à envoyer au format JSON
       const travelerJsonData = {
         travelersIds,
@@ -156,7 +155,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // Traitement de la réponse
           // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
-          window.location.href = `/trip/${tripId}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -165,7 +163,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case ADD_TRAVELER_TO_TRAVEL_UPDATE:
-
       // Données à envoyer au format JSON
       const travelerUpdateJsonData = {
         travelersIds,
@@ -178,7 +175,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .then((response) => {
           // Traitement de la réponse
           // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
-          window.location.href = `/trip/${action.travelId}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -348,6 +344,19 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Effectuer la requête axios pour supprimer le compte utilisateur
       api
         .delete(`/trip/${action.tripId}`)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Gestion des erreurs
+          console.error('Erreur lors de la requête:', error);
+        });
+      break;
+
+    case LEAVE_TRIP:
+      // Effectuer la requête axios pour supprimer le compte utilisateur
+      api
+        .delete(`/trip/${action.tripId}/leaveTrip`)
         .then((response) => {
           console.log(response.data);
         })

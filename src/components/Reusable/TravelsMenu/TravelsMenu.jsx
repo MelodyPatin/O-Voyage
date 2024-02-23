@@ -8,7 +8,7 @@ import { fetchATrip, fetchMyTrips } from '../../../actions/trip';
 const TravelsMenu = () => {
   const trips = useSelector((state) => state.trip.myTrips);
   const currentTrip = useSelector((state) => state.trip.trip);
-  const { tripId } = useParams(); // Get the 'id' parameter from the URL
+  const { tripId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {

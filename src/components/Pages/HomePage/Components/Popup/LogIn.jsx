@@ -21,6 +21,7 @@ const LogIn = ({ emailValue, passwordValue, changeField, handleLogin }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     handleLogin();
+    dispatch(clearErrorMessage());
   };
 
   return (

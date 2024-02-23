@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rating } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './ActivityCard.scss';
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
@@ -23,7 +23,6 @@ const ActivityCard = ({ activity }) => {
     await setNewRating(clickedRating);
     dispatch(fetchTripActivities(tripId));
   };
-  console.log(activity);
 
   const activityTitle = activity.name;
   const shortenedTitle =

@@ -9,9 +9,9 @@ import './Activities.scss';
 import { fetchTripActivities } from '../../../../../actions/activity';
 
 const Activities = () => {
-  const { tripId } = useParams();
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activity.activities);
+  const { tripId } = useParams();
 
   const isMobile = useMediaQuery('(max-width: 1024px)');
 

@@ -5,8 +5,14 @@ import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../Buttons/SimpleButton';
 import Tag from '../Tag/Tag';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchTags, submitCreateActivity, updateSelectedTag } from '../../../actions/activity';
+import {
+  fetchTags,
+  submitCreateActivity,
+  updateSelectedTag,
+} from '../../../actions/activity';
 import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
+import { handleStepReset } from '../../../actions/trip';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const StepTag = ({
   buttonContent,
@@ -15,8 +21,10 @@ const StepTag = ({
   valueContent,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [selectedTag, setSelectedTag] = useState(null);
   const errorMessage = useSelector((state) => state.user.errorMessage);
+  const { tripId } = useParams();
 
   useEffect(() => {
     dispatch(fetchTags());
@@ -29,6 +37,8 @@ const StepTag = ({
     }
     dispatch(submitCreateActivity());
     dispatch(clearErrorMessage());
+    dispatch(handleStepReset());
+    navigate(`/trip/${tripId}`);
   };
 
   const handleTagClick = (tag) => {

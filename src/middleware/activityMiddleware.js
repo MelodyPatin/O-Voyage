@@ -14,6 +14,7 @@ import {
   HANDLE_ACTIVITY_DATE,
   FETCH_TAGS,
   saveTags,
+  clearCreateActivityInfos,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -174,7 +175,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Traitement de la réponse
           console.log(response.data);
-          window.location.href = `/trip/${id}`;
+          store.dispatch(clearCreateActivityInfos())
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);

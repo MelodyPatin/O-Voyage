@@ -18,6 +18,7 @@ import {
   UPDATE_TRIP_COVER,
   SET_NEW_PICTURE,
   DELETE_TRIP,
+  HANDLE_STEP_RESET,
 } from '../actions/trip';
 
 export const initialState = {
@@ -55,6 +56,12 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         step: state.step + 1,
+      };
+
+    case HANDLE_STEP_RESET:
+      return {
+        ...state,
+        step: 1,
       };
 
     case CHANGE_TRIP_FIELD:

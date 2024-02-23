@@ -41,6 +41,7 @@ const FormAddFriend = ({
     console.log(friendId);
     console.log('coucou les gars');
     dispatch(addFriend(friendId));
+    navigate('/dashboard');
   };
 
   return (

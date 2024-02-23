@@ -9,13 +9,13 @@ import SimpleButton from '../../Reusable/Buttons/SimpleButton';
 import './Error.scss';
 import Footer from '../../Reusable/Footer/Footer';
 
-const Error = ({ number, textContent }) => {
+const Error = () => {
   return (
     <div className="error">
       <NavBarHeader />
-      <ReturnTitle textContent={number} />
+      <ReturnTitle textContent="Erreur 404" />
       <div className="errorContainer">
-        <p className="textContent"> {textContent}</p>
+        <p className="textContent">Oops, page introuvable</p>
         <Link to="/home">
           <SimpleButton textContent="Retour à l'accueil" />
         </Link>

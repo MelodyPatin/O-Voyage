@@ -140,7 +140,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         .post('/friend/add', addFriendData)
         .then((response) => {
           console.log(response.data);
-          window.location.href = `/dashboard`;
         })
         .catch((error) => {
           console.log(error);

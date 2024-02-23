@@ -6,10 +6,11 @@ import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import {
   addCityToTravel,
-  addTravelerToTravel,
+  handleStepReset,
   submitCreateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
+import { useNavigate } from 'react-router-dom';
 
 const StepSelectTravelers = ({
   buttonContent,
@@ -18,10 +19,14 @@ const StepSelectTravelers = ({
   options,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const tripId = useSelector((state) => state.trip.tripId);
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
+    navigate(`/trip/${tripId}`);
+    dispatch(handleStepReset());
   };
 
   const handleSelectionChange = (selected) => {

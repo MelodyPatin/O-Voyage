@@ -62,6 +62,7 @@ const SignUp = ({
 
     // Tous les champs sont valides, envoyer la requête
     handleSignUp();
+    dispatch(clearErrorMessage());
   };
 
   const validateEmail = (email) => {
