@@ -87,16 +87,20 @@ const StepSelectTravelersUpdate = ({
 };
 
 StepSelectTravelersUpdate.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelectTravelersUpdate.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelectTravelersUpdate;

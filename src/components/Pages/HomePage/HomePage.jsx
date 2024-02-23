@@ -72,11 +72,6 @@ const HomePage = () => {
               handleLogin={() => {
                 dispatch(submitLogin());
               }}
-              handleLogout={() => {
-                console.log('handleLogout');
-                // TODO: Effacez le pseudo et le token dans le state, et passez logged à false
-                // Dispatchez une action traitée par le reducer user
-              }}
               isLogged={logged}
             />
           }

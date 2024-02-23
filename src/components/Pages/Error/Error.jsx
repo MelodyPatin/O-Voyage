@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
@@ -23,11 +22,6 @@ const Error = () => {
       <Footer className="footer" />
     </div>
   );
-};
-
-Error.propTypes = {
-  number: PropTypes.string.isRequired,
-  textContent: PropTypes.string.isRequired,
 };
 
 export default Error;

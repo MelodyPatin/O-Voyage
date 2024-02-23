@@ -86,7 +86,10 @@ ActivityCard.propTypes = {
     name: PropTypes.string.isRequired,
     date: PropTypes.string,
     score: PropTypes.number.isRequired,
-    city: PropTypes.shape.isRequired,
+    city: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired,
     creator: PropTypes.shape({
       avatarURL: PropTypes.string.isRequired,
     }).isRequired,
@@ -96,6 +99,10 @@ ActivityCard.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+};
+
+ActivityCard.defaultProps = {
+  date: '',
 };
 
 export default ActivityCard;

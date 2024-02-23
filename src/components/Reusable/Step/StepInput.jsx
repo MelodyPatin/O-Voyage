@@ -54,11 +54,16 @@ const StepInput = ({
 
 StepInput.propTypes = {
   inputValue: PropTypes.string,
-  changeField: PropTypes.func.isRequired,
   placeholderContent: PropTypes.string,
+  changeField: PropTypes.func.isRequired,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+};
+
+StepInput.defaultProps = {
+  inputValue: '',
+  placeholderContent: '',
 };
 
 export default StepInput;

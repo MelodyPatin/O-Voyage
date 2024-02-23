@@ -18,7 +18,6 @@ const StepSelect = ({
   const selectedCountries = useSelector(
     (state) => state.trip.selectedCountries
   );
-  console.log(selectedCountries);
 
   const handleFetchCities = () => {
     if (selectedCountries && selectedCountries.length > 0) {
@@ -26,7 +25,7 @@ const StepSelect = ({
         dispatch(fetchCities(country.key));
       });
     } else {
-      console.log('Aucun pays sélectionné');
+      console.error('Aucun pays sélectionné');
     }
   };
 
@@ -54,7 +53,6 @@ const StepSelect = ({
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 
-    console.log(newSelected);
     // Dispatch de l'action pour mettre à jour les pays sélectionnés
     dispatch(updateSelectedCountries(newSelected));
   };
@@ -86,17 +84,21 @@ const StepSelect = ({
 };
 
 StepSelect.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelect.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelect;

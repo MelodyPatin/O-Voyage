@@ -5,12 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import {
-  addCityToTravel,
-  handleStepReset,
   submitCreateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
-import { useNavigate } from 'react-router-dom';
 
 const StepSelectTravelers = ({
   buttonContent,
@@ -19,14 +16,10 @@ const StepSelectTravelers = ({
   options,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const tripId = useSelector((state) => state.trip.tripId);
 
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
-    navigate(`/trip/${tripId}`);
-    dispatch(handleStepReset());
   };
 
   const handleSelectionChange = (selected) => {
@@ -81,16 +74,20 @@ const StepSelectTravelers = ({
 };
 
 StepSelectTravelers.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelectTravelers.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelectTravelers;

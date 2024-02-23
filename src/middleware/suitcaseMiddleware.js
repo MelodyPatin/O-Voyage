@@ -11,7 +11,6 @@ const suitcaseMiddleware = (store) => (next) => async (action) => {
     case FETCH_LIST_REQUEST:
       try {
         const response = await api.get(`/trip/${action.tripId}/items`);
-        console.log(`la liste : ${response}`);
         store.dispatch(saveListRequest(response.data));
       } catch (error) {
         console.error(error);

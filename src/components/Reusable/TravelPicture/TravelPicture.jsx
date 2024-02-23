@@ -12,7 +12,6 @@ const TravelPicture = ({ currentPhoto }) => {
   const tripId = useSelector((state) => state.trip.trip.id);
 
   const handlePhotoChange = (event) => {
-    console.log("toto");
     const file = event.target.files[0];
     if (file) {
       // Si un fichier a été sélectionné, vous pouvez le traiter ici, par exemple l'afficher

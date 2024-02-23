@@ -30,6 +30,7 @@ import {
   DELETE_TRIP,
   ADD_TRAVELER_TO_TRAVEL_UPDATE,
   LEAVE_TRIP,
+  handleStepReset,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
@@ -60,7 +61,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get('/country')
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveCountries(response.data));
         })
         .catch((error) => {
@@ -82,11 +82,14 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .post('/trip/add', tripJsonData)
         .then((response) => {
-          // Traitement de la réponse
           console.log(response.data);
+          // Traitement de la réponse
           store.dispatch(handleSuccessfulCreateTravel(response.data));
           store.dispatch(addCityToTravel());
           store.dispatch(addTravelerToTravel());
+          store.dispatch(handleStepReset());
+          // Redirection après le succès de la requête
+          window.location.href = `/trip/${response.data}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -109,7 +112,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}`, tripUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -122,7 +124,6 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
       const cityKeys = selectedCities.map((city) => city.key);
-      console.log(cityKeys[0]);
 
       // Données à envoyer au format JSON
       const cityJsonData = {
@@ -134,7 +135,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}/addcity`, cityJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response);
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -148,7 +148,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         travelersIds,
       };
 
-      console.log(travelerJsonData);
       // Exécution de la requête
       api
         .put(`/trip/${tripId}/addTraveler`, travelerJsonData)
@@ -168,7 +167,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         travelersIds,
       };
 
-      console.log(travelerUpdateJsonData);
       // Exécution de la requête
       api
         .put(`/trip/${action.travelId}/addTraveler`, travelerUpdateJsonData)
@@ -197,7 +195,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.tripId}`)
         .then((response) => {
-          console.log(response.data);
           const { id } = response.data;
           const { name } = response.data;
           const { startDate } = response.data;
@@ -260,13 +257,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.id}/showTravelers`)
         .then((response) => {
-          console.log(response.data);
           const travelers = response.data.map((traveler) => ({
             key: traveler.id,
             value: `${traveler.firstname} ${traveler.lastname}`,
           }));
           store.dispatch(saveTripTravelers(travelers));
-          console.log(travelers);
         })
         .catch((error) => {
           console.error(error);
@@ -277,8 +272,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .post(`/trip/${action.travelId}/delete_picture`)
         .then((response) => {
-          console.log(response.data);
-          console.log('yoyoyoyo');
           store.dispatch(handleAddTravelPicture(action.travelId));
         })
         .catch((error) => {
@@ -288,7 +281,6 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case HANDLE_ADD_TRAVEL_PICTURE:
       const { backgroundPictureURL } = store.getState().trip.trip;
-      console.log(backgroundPictureURL);
 
       // Données à envoyer au format JSON
       const urlJsonData = {
@@ -298,8 +290,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .post(`/trip/${action.travelId}/add_picture`, urlJsonData)
         .then((response) => {
-          console.log(response.data);
-          console.log('bloublou');
         })
         .catch((error) => {
           console.error(error);
@@ -316,7 +306,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         event.target.files.length > 0
       ) {
         const fileInput = event.target.files[0];
-        console.log(fileInput);
 
         if (fileInput) {
           const reader = new FileReader();
@@ -345,7 +334,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}`)
         .then((response) => {
-          console.log(response.data);
         })
         .catch((error) => {
           // Gestion des erreurs
@@ -358,7 +346,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}/leaveTrip`)
         .then((response) => {
-          console.log(response.data);
         })
         .catch((error) => {
           // Gestion des erreurs

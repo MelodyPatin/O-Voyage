@@ -79,17 +79,21 @@ const StepSelectCities = ({
 };
 
 StepSelectCities.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelectCities.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelectCities;

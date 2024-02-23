@@ -22,7 +22,6 @@ const suitcaseReducer = (state = initialState, action = {}) => {
     case REMOVE_LIST_ITEM:
       const updatedList = state.list.slice(); // Créez une copie de la liste
       updatedList.splice(action.index, 1); // Supprimez l'élément à l'index spécifié
-      console.log('Updated List:', updatedList);
       return {
         ...state,
         list: updatedList,

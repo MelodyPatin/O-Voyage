@@ -101,7 +101,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           );
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       break;
 
@@ -115,7 +115,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .post('/user/search', fetchUserByMailData)
         .then((response) => {
-          console.log(response.data);
           const firstName = response.data[0].firstname;
           const lastName = response.data[0].lastname;
           const { avatarURL } = response.data[0];
@@ -126,7 +125,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           );
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       break;
 
@@ -139,10 +138,10 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .post('/friend/add', addFriendData)
         .then((response) => {
-          console.log(response.data);
+          store.dispatch(friendsFetched(false));
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       break;
 
@@ -152,11 +151,10 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .delete(`/friend/delete/${friendId}`)
         .then((response) => {
-          console.log(response.data);
           store.dispatch(friendsFetched(false));
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       break;
 
@@ -186,7 +184,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .put('/user/me/update', updateUserData)
         .then((response) => {
-          console.log(response.data);
           // Traitez la réponse ici si nécessaire
           // Par exemple, dispatch des actions pour gérer les données mises à jour
           store.dispatch(userUpdateSuccess());
@@ -220,7 +217,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .post('/user/me/add_avatar', avatarData)
         .then((response) => {
-          console.log(response.data);
           // Traitez la réponse ici si nécessaire
           // Par exemple, dispatch des actions pour gérer les données mises à jour
           store.dispatch({ type: FETCH_USER_DATA });

@@ -91,20 +91,26 @@ const StepInputSelector = ({
 };
 
 StepInputSelector.propTypes = {
+  placeholderInputContent: PropTypes.string,
+  placeholderSelectorContent: PropTypes.string,
+  valueInputContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  placeholderInputContent: PropTypes.string,
-  placeholderSelectorContent: PropTypes.string,
   changeField: PropTypes.func.isRequired,
-  valueInputContent: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepInputSelector.defaultProps = {
+  placeholderInputContent: '',
+  placeholderSelectorContent: '',
+  valueInputContent: '',
 };
 
 export default StepInputSelector;

@@ -75,10 +75,15 @@ const StepTag = ({
 };
 
 StepTag.propTypes = {
+  valueContent: PropTypes.string,
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
-  valueContent: PropTypes.string,
+};
+
+StepTag.defaultProps = {
+  valueContent: '',
+  placeholderContent: '',
 };
 
 export default StepTag;
