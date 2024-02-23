@@ -6,13 +6,10 @@ import {
   CLICK_LOGOUT,
   UPDATE_LOGGED_OUT,
   SAVE_FRIENDS,
-  FETCH_FRIENDS,
-  USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAILURE,
   UPDATE_USER_INPUT,
   CHANGE_USER_INPUT,
-  DELETE_USER,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
   CHANGE_SEARCH_USERS_FIELD,
@@ -135,11 +132,6 @@ const reducer = (state = initialState, action = {}) => {
         friends: action.friends,
       };
 
-    case USER_UPDATE_REQUEST:
-      return {
-        ...state,
-      };
-
     case USER_UPDATE_SUCCESS:
       return {
         ...state,
@@ -172,11 +164,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
-      };
-
-    case DELETE_USER:
-      return {
-        ...state,
       };
 
     case USER_DELETE_SUCCESS:
