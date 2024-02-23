@@ -140,7 +140,6 @@ const userMiddleware = (store) => (next) => async (action) => {
         .post('/friend/add', addFriendData)
         .then((response) => {
           store.dispatch(friendsFetched(false));
-          store.dispatch(clearSearchFriend())
         })
         .catch((error) => {
           console.error(error);
