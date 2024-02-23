@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8001/api',
+  baseURL: 'http://theophile-bernard-server.eddi.cloud/api',
 });
 // intercepteur de request avec axios
 api.interceptors.request.use(
