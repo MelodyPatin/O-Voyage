@@ -23,6 +23,7 @@ import {
   USER_UPDATE_AVATAR,
   userUpdateAvatar,
   DELETE_FRIEND,
+  friendsFetched,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
@@ -153,7 +154,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         .delete(`/friend/delete/${friendId}`)
         .then((response) => {
           console.log(response.data);
-          window.location.href = `/friends`;
+          store.dispatch(friendsFetched(false));
         })
         .catch((error) => {
           console.log(error);
@@ -165,6 +166,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         .get(`/friend`)
         .then((response) => {
           store.dispatch(saveFriends(response.data));
+          store.dispatch(friendsFetched(true));
         })
         .catch((error) => {
           console.error(error);
