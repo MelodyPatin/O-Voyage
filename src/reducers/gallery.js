@@ -1,4 +1,5 @@
 import {
+  ADD_PICTURE,
   FETCH_A_PICTURE,
   FETCH_PICTURES,
   SHOW_A_PICTURE,
@@ -7,6 +8,7 @@ import {
 
 const initialState = {
   images: [],
+  image: null,
 };
 
 const galleryReducer = (state = initialState, action = {}) => {
@@ -17,7 +19,6 @@ const galleryReducer = (state = initialState, action = {}) => {
       };
 
     case SHOW_PICTURES:
-      console.log('SHOW_PICTURES action received');
       return {
         ...state,
         images: action.pictures,
@@ -29,10 +30,17 @@ const galleryReducer = (state = initialState, action = {}) => {
       };
 
     case SHOW_A_PICTURE:
-      console.log('SHOW_PICTURES action received');
       return {
         ...state,
         image: action.picture,
+      };
+
+    case ADD_PICTURE:
+      return {
+        ...state,
+        images: Array.isArray(state.images)
+          ? [action.picture, ...state.images]
+          : [action.picture],
       };
 
     default:

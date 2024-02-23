@@ -19,6 +19,7 @@ const ActivityResume = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [modificationStatus, setModificationStatus] = useState(null);
   const currentActivity = useSelector((state) => state.activity.activity);
+  const currentTrip = useSelector((state) => state.trip.trip);
   const user = useSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -72,7 +73,10 @@ const ActivityResume = () => {
       break;
   }
 
-  const isAdmin =
+  const isTripCreator =
+    currentTrip && currentTrip.admin && currentTrip.admin.id === user.userId;
+
+  const isActivityCreator =
     currentActivity &&
     currentActivity.creator &&
     currentActivity.creator.id === user.userId;
@@ -92,19 +96,20 @@ const ActivityResume = () => {
           text={currentActivity.tags[0].name}
           className="tag"
         />
-        {isAdmin &&
-          <>
-            <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
-              <IconButton textContent="Modifier l'activité" icon="edit" />
-            </Link>
-            <IconButton
-              type="button"
-              onClick={handleDeletePopup}
-              textContent="Supprimer l'activité"
-              icon="trash"
-            />
-          </>
-        }
+        {isActivityCreator ||
+          (isTripCreator && (
+            <>
+              <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
+                <IconButton textContent="Modifier l'activité" icon="edit" />
+              </Link>
+              <IconButton
+                type="button"
+                onClick={handleDeletePopup}
+                textContent="Supprimer l'activité"
+                icon="trash"
+              />
+            </>
+          ))}
         <Link to={`/trip/${tripId}`}>
           <SimpleButton textContent="Fermer" />
         </Link>

@@ -2,6 +2,7 @@ export const FETCH_PICTURES = 'FETCH_PICTURES';
 export const SHOW_PICTURES = 'SHOW_PICTURES';
 export const FETCH_A_PICTURE = 'FETCH_A_PICTURE';
 export const SHOW_A_PICTURE = 'SHOW_A_PICTURE';
+export const ADD_PICTURE = 'ADD_PICTURE';
 
 export const fetchPictures = (tripId) => ({
   type: FETCH_PICTURES,
@@ -22,4 +23,10 @@ export const fetchAPicture = (tripId, pictureId) => ({
 export const showAPicture = (picture) => ({
   type: SHOW_A_PICTURE,
   picture,
+});
+
+export const addPicture = (tripId, base64Data) => ({
+  type: ADD_PICTURE,
+  tripId,
+  base64Data,
 });
