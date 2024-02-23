@@ -24,7 +24,7 @@ const StepTag = ({
   const navigate = useNavigate();
   const [selectedTag, setSelectedTag] = useState(null);
   const errorMessage = useSelector((state) => state.user.errorMessage);
-  const { tripId } = useParams();
+  const tripId = useSelector((state) => state.trip.trip.id);
 
   useEffect(() => {
     dispatch(fetchTags());
