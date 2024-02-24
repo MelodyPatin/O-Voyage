@@ -7,7 +7,7 @@ import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../../Reusable/Buttons/IconButton';
 import User from '../../../Reusable/User/User';
 import Footer from '../../../Reusable/Footer/Footer';
-import { fetchFriends, deleteFriend } from '../../../../actions/user'; // Importer la fonction deleteFriend
+import { fetchFriends, deleteFriend, clearSearchFriend } from '../../../../actions/user'; // Importer la fonction deleteFriend
 
 const FriendList = () => {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ const FriendList = () => {
     if (!friendsFetched) {
       // Ne charge les amis que si ils n'ont pas déjà été chargés
       dispatch(fetchFriends());
+      dispatch(clearSearchFriend())
     }
   }, [dispatch, friendsFetched]);
 
