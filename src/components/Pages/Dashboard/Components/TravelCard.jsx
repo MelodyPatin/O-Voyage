@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import './TravelCard.scss';
 import PropTypes from 'prop-types';
 
-const TravelCard = ({ trip }) => {
-  if (!trip) {
-    return null;
-  }
-  const { name, startDate, backgroundPictureURL } = trip;
+import './TravelCard.scss';
 
+const TravelCard = ({ trip }) => {
   const [countdown, setCountdown] = useState(null);
 
+  const { name, startDate, backgroundPictureURL } = trip;
+
+  // State for countdown
+
+  // Effect to calculate countdown on component mount and when startDate changes
   useEffect(() => {
-    // Calculate the countdown when the component mounts
     const calculateCountdown = () => {
       const currentDate = new Date();
       const travelStartDate = new Date(startDate);
@@ -33,7 +33,7 @@ const TravelCard = ({ trip }) => {
       // Calculate the difference in milliseconds
       const difference = travelStartDate.getTime() - currentDate.getTime();
 
-      // Calculate days from milliseconds, en ajoutant 1 pour arrondir au prochain jour
+      // Calculate days from milliseconds, adding 1 to round to the next day
       const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
 
       // Update the state with the countdown value
@@ -44,8 +44,13 @@ const TravelCard = ({ trip }) => {
     calculateCountdown();
   }, [startDate]);
 
+  if (!trip) {
+    return null;
+  }
+
   return (
     <div className="cardContainer">
+      {/* Link to the travel details page */}
       <Link to={`/trip/${trip.id}`}>
         {/* Background image for the travel card */}
         <img className="cardPicture" src={backgroundPictureURL} alt="Travel" />

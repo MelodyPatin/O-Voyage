@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
-import { Input } from 'semantic-ui-react';
-
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
-import User from '../../../../Reusable/User/User';
-import api from '../../../../../api';
-import LabelInput from '../../../../Reusable/LabelInput/LabelInput';
 import { useDispatch, useSelector } from 'react-redux';
+import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
+import LabelInput from '../../../../Reusable/LabelInput/LabelInput';
 import { addFriend, fetchUserByMail } from '../../../../../actions/user';
 import AvatarFriend from '../../../../Reusable/Avatar/AvatarFriends';
 

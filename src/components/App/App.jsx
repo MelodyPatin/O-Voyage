@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,14 +31,13 @@ import Suitcase from '../Pages/Travel/Suitcase/Suitcase';
 
 function App() {
   const dispatch = useDispatch();
-
   const loggedOut = useSelector((state) => state.user.loggedOut);
   const logged = useSelector((state) => state.user.logged);
 
   const [redirectHome, setRedirectHome] = useState(false);
 
   useEffect(() => {
-    // Redirigez vers le tableau de bord après la connexion réussie
+    // Redirect to the connexion page after successful logout
     if (loggedOut && !redirectHome) {
       setRedirectHome(true);
     }
@@ -54,6 +54,7 @@ function App() {
     }
   }, [redirectHome, dispatch]);
 
+  // Effect to check for token and fetch user data on component mount
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -65,17 +66,16 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        {/* HomePage */}
+        {/* Redirect to HomePage after successful logout */}
         {redirectHome && <Navigate to="/" replace />}
 
         <Routes>
           <Route path="/*" element={<HomePage />} />
-          {logged && (
-            <Route
-              path="/dashboard"
-              element={<Dashboard onDesktop={false} />}
-            />
-          )}
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/legal-notice" element={<LegalNotice />} />
+          <Route path="/our-history" element={<History />} />
+          <Route path="*" element={<Error />} />
+          {logged && <Route path="/dashboard" element={<Dashboard />} />}
           {logged && <Route path="/me" element={<UserUpdate />} />}
           {logged && <Route path="/friends" element={<FriendList />} />}
           {logged && <Route path="/friends/add" element={<FriendAdd />} />}
@@ -121,10 +121,6 @@ function App() {
           {logged && (
             <Route path="/trip/:tripId/suitcase" element={<Suitcase />} />
           )}
-          <Route path="/faq" element={<FAQ />} />
-          <Route path="/legal-notice" element={<LegalNotice />} />
-          <Route path="/our-history" element={<History />} />
-          <Route path="*" element={<Error />} />
         </Routes>
       </header>
     </div>
