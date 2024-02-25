@@ -3,12 +3,17 @@
 #MultipleSelector {
   border: 1px solid v.$mainColor;
   background-color: v.$lightColor;
-  height: 3rem;
+  min-height: 3rem;
+  height: fit-content;
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;
 
   & .item {
     background-color: v.$lightColor;
     border-top: 1px solid v.$mainColor;
+  }
+
+  .visible.menu.transition {
+    height: auto;
   }
 }
