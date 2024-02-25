@@ -53,7 +53,7 @@ const ActivityCard = ({ activity }) => {
   return (
     <div className={`ActivityCard ${tag}`}>
       <div className="FlexGap">
-        <p>{activity.score}</p>
+        <p className='score'>{activity.score}</p>
         <AvatarFriend userAvatar={activity.creator.avatarURL} />
       </div>
       <div className="title">

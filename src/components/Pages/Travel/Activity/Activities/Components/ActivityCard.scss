@@ -51,6 +51,13 @@
   .FlexGap {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    .score {
+      padding: 2px 5px;
+      border: 3px solid black;
+      border-radius: 5px;
+    }
   }
 
   .FlexColumn {
@@ -81,10 +88,15 @@
       font-family: 'Montserrat', sans-serif;
       border: 1px solid v.$mainColor;
 
+      .visible.menu.transition {
+        height: 8.5rem;
+      }
+
       .item {
         color: v.$mainColor;
         border: 1px solid v.$mainColor;
         border-bottom: 0;
+        font-size: 0.8rem;
 
         // Hover effect for dropdown items
         &:hover {
