@@ -40,7 +40,6 @@ const AddPictureButton = () => {
     if (files.length > 0) {
       try {
         const base64Data = await convertFileToBase64(files[0]);
-        console.log('Base64 Data:', base64Data);
 
         // Assuming your API call to add a picture is synchronous
         await dispatch(addPicture(tripId, base64Data));

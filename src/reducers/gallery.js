@@ -7,7 +7,7 @@ import {
 } from '../actions/gallery';
 
 const initialState = {
-  images: [],
+  photos: [],
   page: 1,
   image: [],
   photosFetched: false,
@@ -24,10 +24,9 @@ const galleryReducer = (state = initialState, action = {}) => {
     case SHOW_PICTURES:
       return {
         ...state,
-        images: {
-          photos: action.pictures,
-        },
+        photos: action.pictures,
       };
+
     case FETCH_A_PICTURE:
       return {
         ...state,
@@ -42,9 +41,8 @@ const galleryReducer = (state = initialState, action = {}) => {
     case ADD_PICTURE:
       return {
         ...state,
-        images: Array.isArray(state.images)
-          ? [action.picture, ...state.images]
-          : [action.picture],
+        photos: [...state.photos.photos, action.base64Data],
+        photosFetched: false,
       };
 
     default:

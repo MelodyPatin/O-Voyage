@@ -3,6 +3,7 @@ import {
   FETCH_A_PICTURE,
   FETCH_PICTURES,
   SHOW_PICTURES,
+  fetchPictures,
   showPictures,
 } from '../actions/gallery';
 import api from '../api';
@@ -40,13 +41,8 @@ const galleryMiddleware = (store) => (next) => async (action) => {
           picture: base64Data,
         })
         .then((response) => {
-          const newPicture = response.data;
-          const currentPhotos = store.getState().gallery.images || [];
-
-          store.dispatch({
-            type: SHOW_PICTURES,
-            pictures: [newPicture, ...currentPhotos],
-          });
+          const currentPhotos = store.getState().gallery.photos.photos || {}; // Utiliser 'photos' au lieu de 'images'
+          store.dispatch(fetchPictures(action.tripId));
         })
         .catch((error) => {
           console.error(error);

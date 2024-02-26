@@ -17,7 +17,7 @@ const Picture = () => {
   }, [dispatch, photosFetched, tripId]);
 
   const selectPhotos = useCallback(
-    (state) => state.gallery.images?.photos?.photos || [],
+    (state) => state.gallery.photos?.photos || [],
     []
   );
 
