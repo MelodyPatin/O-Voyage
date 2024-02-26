@@ -27,30 +27,16 @@
     }
   }
 
-  // Different styles based on the class of the ActivityCard
-  &.restaurant {
-    background-color: rgba(v.$restaurant, 0.5);
-    border: 5px solid v.$restaurant;
-  }
-
-  &.culture {
-    background-color: rgba(v.$culture, 0.5);
-    border: 5px solid v.$culture;
-  }
-
-  &.activity {
-    background-color: rgba(v.$activity, 0.5);
-    border: 5px solid v.$activity;
-  }
-
-  &.pub {
-    background-color: rgba(v.$pub, 0.5);
-    border: 5px solid v.$pub;
-  }
-
   .FlexGap {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
+    .score {
+      padding: 2px 5px;
+      border: 3px solid black;
+      border-radius: 5px;
+    }
   }
 
   .FlexColumn {
@@ -81,10 +67,15 @@
       font-family: 'Montserrat', sans-serif;
       border: 1px solid v.$mainColor;
 
+      .visible.menu.transition {
+        height: 8.5rem;
+      }
+
       .item {
         color: v.$mainColor;
         border: 1px solid v.$mainColor;
         border-bottom: 0;
+        font-size: 0.8rem;
 
         // Hover effect for dropdown items
         &:hover {

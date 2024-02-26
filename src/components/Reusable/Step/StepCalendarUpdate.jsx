@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import './Steps.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Datepicker } from '@mobiscroll/react';
-import SimpleButton from '../Buttons/SimpleButton';
+
+import './Steps.scss';
 import '@mobiscroll/react/dist/css/mobiscroll.min.css';
-import { useDispatch } from 'react-redux';
+import { Datepicker } from '@mobiscroll/react';
+
+import SimpleButton from '../Buttons/SimpleButton';
+
 import {
   handleStepNext,
   setEndDate,
   setStartDate,
 } from '../../../actions/trip';
+import { clearErrorMessage } from '../../../actions/user';
 
 const StepCalendarUpdate = ({
   buttonContent,
@@ -19,15 +23,20 @@ const StepCalendarUpdate = ({
 }) => {
   const dispatch = useDispatch();
   const [selectedDates, setSelectedDates] = useState([startDate, endDate]);
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
+  // Update the selected dates when the component receives new start and end date props
   useEffect(() => {
     setSelectedDates([startDate, endDate]);
   }, [startDate, endDate]);
 
+  // Handle click event for the "Next" button
   const handleClick = () => {
     dispatch(handleStepNext());
+    dispatch(clearErrorMessage());
   };
 
+  // Handle changes in the selected dates on the calendar
   const handleCalendarDates = (event) => {
     const selectedDates = event.value.map((date) => {
       const year = date.getFullYear();
@@ -41,6 +50,7 @@ const StepCalendarUpdate = ({
 
   return (
     <div className="StepCalendar">
+      {/* Display the label and the Datepicker component for selecting date range */}
       <div className="LabelInput">
         <p>{labelContent}</p>
         <Datepicker
@@ -50,16 +60,23 @@ const StepCalendarUpdate = ({
           value={selectedDates}
         />
       </div>
+      {/* Display error message if any */}
+      {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton textContent={buttonContent} onClick={handleClick} />
     </div>
   );
 };
 
 StepCalendarUpdate.propTypes = {
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  startDate: PropTypes.string, // Add prop types for startDate and endDate
-  endDate: PropTypes.string,
+};
+
+StepCalendarUpdate.defaultProps = {
+  startDate: '',
+  endDate: '',
 };
 
 export default StepCalendarUpdate;

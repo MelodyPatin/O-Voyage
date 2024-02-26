@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
+
 import { ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/24/solid';
-import './TravelsMenu.scss'; // Assurez-vous d'avoir un fichier de style pour le menu déroulant
+import './TravelsMenu.scss';
+
 import { fetchATrip, fetchMyTrips } from '../../../actions/trip';
 
 const TravelsMenu = () => {
+  // Get trips and currentTrip from the Redux store
   const trips = useSelector((state) => state.trip.myTrips);
   const currentTrip = useSelector((state) => state.trip.trip);
-  const { tripId } = useParams(); // Get the 'id' parameter from the URL
+  // Get the tripId from the URL params
+  const { tripId } = useParams();
   const dispatch = useDispatch();
 
+  // Fetch the user's trips and the details of the current trip
   useEffect(() => {
     if (!trips[0]) {
       dispatch(fetchMyTrips());
@@ -26,6 +31,7 @@ const TravelsMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  // Function to close the menu
   const closeMenu = () => {
     setIsOpen(false);
   };
@@ -46,7 +52,7 @@ const TravelsMenu = () => {
         {/* Dropdown content section (visible when the menu is open) */}
         {isOpen && (
           <div className="dropdown-content">
-            {/* Contenu du menu déroulant */}
+            {/* Content of the dropdown menu */}
             <ul>
               {trips.map(
                 (trip) =>

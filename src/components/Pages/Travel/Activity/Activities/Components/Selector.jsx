@@ -1,14 +1,20 @@
 import React from 'react';
-import { Select } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { handleActivityDate, updateActivityDate } from '../../../../../../actions/activity';
+
+import { Select } from 'semantic-ui-react';
+
+import {
+  handleActivityDate,
+  updateActivityDate,
+} from '../../../../../../actions/activity';
 
 const Selector = ({ date: propDate, activityId }) => {
   const dispatch = useDispatch();
 
   const currentTrip = useSelector((state) => state.trip.trip);
 
+  // Format a date to display in a user-friendly way with the day
   const formatDateDisplay = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       weekday: 'long',
@@ -18,10 +24,12 @@ const Selector = ({ date: propDate, activityId }) => {
     });
   };
 
+  // Format a date to ISO format
   const formatDateISO = (date) => {
     return new Date(date).toISOString();
   };
 
+  // Generate date options for the Select component based on the trip's start and end dates
   const generateDateOptions = () => {
     let startDate = new Date(currentTrip.startDate);
     const endDate = new Date(currentTrip.endDate);
@@ -37,11 +45,14 @@ const Selector = ({ date: propDate, activityId }) => {
     return dateOptions;
   };
 
+  // Get the generated date options
   const dayOptions = generateDateOptions();
 
   // Ensure propDate is not null or undefined before calling split
   const selectedValue = propDate
-    ? dayOptions.find(option => option.value.startsWith(propDate.split('T')[0]))?.value
+    ? dayOptions.find((option) =>
+        option.value.startsWith(propDate.split('T')[0])
+      )?.value
     : null;
 
   return (
@@ -51,6 +62,7 @@ const Selector = ({ date: propDate, activityId }) => {
       className="custom-select"
       value={selectedValue || undefined} // Ensure the value is undefined if selectedValue is null, for compatibility
       onChange={(e, { value }) => {
+        // Dispatch actions to update and handle the activity date
         dispatch(updateActivityDate(activityId, value));
         dispatch(handleActivityDate(activityId, value));
       }}
@@ -59,8 +71,12 @@ const Selector = ({ date: propDate, activityId }) => {
 };
 
 Selector.propTypes = {
-  date: PropTypes.string.isRequired,
+  date: PropTypes.string,
   activityId: PropTypes.number.isRequired,
+};
+
+Selector.defaultProps = {
+  date: '',
 };
 
 export default Selector;

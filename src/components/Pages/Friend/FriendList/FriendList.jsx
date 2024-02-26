@@ -7,22 +7,31 @@ import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../../Reusable/Buttons/IconButton';
 import User from '../../../Reusable/User/User';
 import Footer from '../../../Reusable/Footer/Footer';
-import { fetchFriends } from '../../../../actions/user';
+import { fetchFriends, deleteFriend, clearSearchFriend } from '../../../../actions/user';
 
 const FriendList = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const friends = useSelector((state) => state.user.friends);
+  const friendsFetched = useSelector((state) => state.user.friendsFetched);
+
+  useEffect(() => {
+    if (!friendsFetched) {
+      // Ne charge les amis que si ils n'ont pas déjà été chargés
+      dispatch(fetchFriends());
+      dispatch(clearSearchFriend());
+    }
+  }, [dispatch, friendsFetched]);
+
+  // Fonction pour supprimer un ami
+  const handleDeleteFriend = (friendId) => {
+    dispatch(deleteFriend(friendId)); // Appeler la fonction deleteFriend avec l'ID de l'ami à supprimer
+  };
 
   const handleGoBack = () => {
     navigate(-1); // Navigates back to the previous page
   };
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFriends());
-  }, []);
-
-  const friends = useSelector((state) => state.user.friends);
 
   return (
     <div className="friends">
@@ -39,7 +48,11 @@ const FriendList = () => {
           <li className="friend" key={friend.id}>
             <User user={friend} />
             {/* XMarkIcon for indicating friend deletion */}
-            <XMarkIcon className="icon" />
+            <XMarkIcon
+              className="icon"
+              onClick={() => handleDeleteFriend(friend.id)}
+            />{' '}
+            {/* Ajouter un gestionnaire d'événements onClick pour appeler handleDeleteFriend avec l'ID de l'ami */}
           </li>
         ))}
       </ul>

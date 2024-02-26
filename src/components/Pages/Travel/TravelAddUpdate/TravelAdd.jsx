@@ -1,24 +1,20 @@
 import React from 'react';
-import './TravelAddUpdate.scss';
 import { useSelector, useDispatch } from 'react-redux';
+
+import './TravelAddUpdate.scss';
+
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 import StepInput from '../../../Reusable/Step/StepInput';
-import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
-import StepFolder from '../../../Reusable/Step/StepFolder';
 import StepCalendar from '../../../Reusable/Step/StepCalendar';
 import ProgressBarTravel from '../../../Reusable/ProgressBar/ProgressBarTravel';
-import {
-  changeTripField,
-  handleStepNext,
-  submitCreateTravel,
-  updateSelectedCountries, // Importez updateSelectedCountries
-} from '../../../../actions/trip';
 import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
 import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
 import StepSelectTravelers from '../../../Reusable/Step/StepSelectTravelers';
+
+import { changeTripField, handleStepNext } from '../../../../actions/trip';
 
 const TravelAdd = () => {
   const dispatch = useDispatch();
@@ -30,6 +26,7 @@ const TravelAdd = () => {
   const cities = useSelector((state) => state.trip.cities);
   const friends = useSelector((state) => state.user.friends);
 
+  // Options for dropdowns
   const countriesOptions = countries.map((country) => ({
     key: country.id,
     text: country.name,
@@ -48,6 +45,7 @@ const TravelAdd = () => {
     value: `${friend.firstname} ${friend.lastname}`,
   }));
 
+  // Function to handle "Continue" button click
   const handleClick = () => {
     dispatch(handleStepNext());
   };
@@ -55,6 +53,9 @@ const TravelAdd = () => {
   return (
     <div className="addTrip">
       <NavBarHeader />
+
+      {/* Render different steps based on the current step value */}
+      {/* Step 1: Input for trip title */}
       {step === 1 && (
         <div className="addTrip">
           <ReturnTitle textContent="Ajouter un voyage" />
@@ -72,6 +73,8 @@ const TravelAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 2: Select countries */}
       {step === 2 && (
         <div className="addTrip">
           <ReturnTitleStep textContent="Ajouter un voyage" />
@@ -85,6 +88,8 @@ const TravelAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 3: Select cities */}
       {step === 3 && (
         <div className="addTrip">
           <ReturnTitleStep textContent="Ajouter un voyage" />
@@ -98,6 +103,8 @@ const TravelAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 4: Calendar for dates */}
       {step === 4 && (
         <div className="addTrip">
           <ReturnTitleStep textContent="Ajouter un voyage" />
@@ -108,6 +115,8 @@ const TravelAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 5: Textarea for trip description */}
       {step === 5 && (
         <div className="addTrip">
           <ReturnTitleStep textContent="Ajouter un voyage" />
@@ -125,6 +134,8 @@ const TravelAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 6: Select travelers */}
       {step === 6 && (
         <div className="addTrip">
           <ReturnTitleStep textContent="Ajouter un voyage" />

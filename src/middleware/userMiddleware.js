@@ -18,12 +18,21 @@ import {
   FETCH_USER_BY_MAIL,
   saveUserResultData,
   ADD_FRIEND,
+  loginError,
+  signupError,
+  USER_UPDATE_AVATAR,
+  userUpdateAvatar,
+  DELETE_FRIEND,
+  friendsFetched,
+  clearSearchFriend,
 } from '../actions/user';
 
 import { fetchMyTrips } from '../actions/trip';
 import api from '../api';
 
 const userMiddleware = (store) => (next) => async (action) => {
+  const { friendId } = action;
+
   switch (action.type) {
     case SUBMIT_LOGIN:
       const { email, password } = store.getState().user;
@@ -44,6 +53,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
+          store.dispatch(loginError('Email ou mot de passe invalide'));
           // Dispatch d'une action pour gérer l'erreur
         });
 
@@ -70,7 +80,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
+          store.dispatch(signupError('Un compte avec cet email existe déjà'));
         });
 
       break;
@@ -92,7 +102,7 @@ const userMiddleware = (store) => (next) => async (action) => {
           );
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       break;
 
@@ -106,7 +116,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .post('/user/search', fetchUserByMailData)
         .then((response) => {
-          console.log(response.data);
           const firstName = response.data[0].firstname;
           const lastName = response.data[0].lastname;
           const { avatarURL } = response.data[0];
@@ -117,12 +126,11 @@ const userMiddleware = (store) => (next) => async (action) => {
           );
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
       break;
 
     case ADD_FRIEND:
-      const { friendId } = action;
       const addFriendData = {
         id: friendId,
       };
@@ -131,11 +139,26 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .post('/friend/add', addFriendData)
         .then((response) => {
-          console.log(response.data);
-          window.location.href = `/dashboard`;
+          store.dispatch(friendsFetched(false));
+          store.dispatch(clearSearchFriend());
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
+          alert("Echec de l'ajout d'ami");
+        });
+      break;
+
+    case DELETE_FRIEND:
+      // on doit envoyer le JWT dans le header Authorization de la requête, pour
+      // que le serveur nous fournisse NOS recettes préférées
+      api
+        .delete(`/friend/delete/${friendId}`)
+        .then((response) => {
+          store.dispatch(friendsFetched(false));
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("Echec de la suppression d'ami");
         });
       break;
 
@@ -144,6 +167,7 @@ const userMiddleware = (store) => (next) => async (action) => {
         .get(`/friend`)
         .then((response) => {
           store.dispatch(saveFriends(response.data));
+          store.dispatch(friendsFetched(true));
         })
         .catch((error) => {
           console.error(error);
@@ -151,69 +175,64 @@ const userMiddleware = (store) => (next) => async (action) => {
         });
       break;
 
-    case USER_UPDATE_REQUEST:
-      {
-        const userState = store.getState().user; // Get user state only once
+    case USER_UPDATE_REQUEST: {
+      const userState = store.getState().user; // Get user state only once
 
-        const updateUserData = {
-          firstname: userState.firstnameValue,
-          lastname: userState.lastnameValue,
-          email: userState.email,
-          password: userState.password,
-        };
+      const updateUserData = {
+        firstname: userState.firstnameValue,
+        lastname: userState.lastnameValue,
+        email: userState.email,
+        password: userState.password,
+      };
 
-        try {
-          // Log the data you're sending in the update request
-          console.log('Update Request Data:', updateUserData);
-
-          // Perform the axios request to update the data
-          const firstResponse = await api.put(
-            '/user/me/update',
-            updateUserData
-          );
-
-          // Log the first response
-          console.log('First Response:', firstResponse);
-
-          const avatarData = {
-            avatar: userState.avatar,
-          };
-
-          // Log the data you're sending in the add_avatar request
-          console.log('Add Avatar Request Data:', avatarData);
-
-          // Perform the axios request to add the avatar
-          const secondResponse = await api.post(
-            '/user/me/add_avatar',
-            avatarData
-          );
-
-          // Log the second response
-          console.log('Second Response:', secondResponse);
-
-          // Successful update
+      api
+        .put('/user/me/update', updateUserData)
+        .then((response) => {
+          // Traitez la réponse ici si nécessaire
+          // Par exemple, dispatch des actions pour gérer les données mises à jour
           store.dispatch(userUpdateSuccess());
+          // Vérifiez si avatarUpdate n'est pas vide
+          if (userState.avatarUpdate) {
+            // Si avatarUpdate n'est pas vide, appelez userUpdateAvatar
+            store.dispatch(userUpdateAvatar());
+          }
+        })
+        .catch((error) => {
+          console.error(error);
 
-          // Reload user data after the update
-          store.dispatch({ type: FETCH_USER_DATA });
-
-          return {
-            firstResponse,
-            secondResponse,
-          };
-        } catch (error) {
-          // Log any errors that occur
-          console.error('Error during API request:', error);
-
-          // Dispatch a failure action
-          store.dispatch(userUpdateFailure(error));
-
-          // Propagate the error to be caught in the handleSubmit catch block
-          throw error;
-        }
-      }
+          // Gestion de l'erreur
+          if (error.response.status === 422) {
+            store.dispatch(
+              userUpdateFailure('Un compte existe déjà avec cet email')
+            );
+          }
+        });
 
       break;
+    }
+
+    case USER_UPDATE_AVATAR: {
+      const userState = store.getState().user; // Get user state only once
+
+      const avatarData = {
+        avatar: userState.avatarUpdate,
+      };
+
+      api
+        .post('/user/me/add_avatar', avatarData)
+        .then((response) => {
+          // Traitez la réponse ici si nécessaire
+          // Par exemple, dispatch des actions pour gérer les données mises à jour
+          store.dispatch({ type: FETCH_USER_DATA });
+        })
+        .catch((error) => {
+          console.error(error);
+          // Gestion de l'erreur
+          store.dispatch(userUpdateFailure(error));
+        });
+
+      break;
+    }
 
     case DELETE_USER:
       try {

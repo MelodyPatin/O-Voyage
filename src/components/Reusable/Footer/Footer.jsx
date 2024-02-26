@@ -1,8 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import './Footer.scss';
 import { Icon } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
-import PropTypes from 'prop-types';
 
 const Footer = () => {
   return (

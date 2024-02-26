@@ -6,17 +6,21 @@ import {
   CLICK_LOGOUT,
   UPDATE_LOGGED_OUT,
   SAVE_FRIENDS,
-  FETCH_FRIENDS,
-  USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAILURE,
   UPDATE_USER_INPUT,
   CHANGE_USER_INPUT,
-  DELETE_USER,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
   CHANGE_SEARCH_USERS_FIELD,
   SAVE_USER_RESULT_DATA,
+  LOGIN_ERROR,
+  SIGNUP_ERROR,
+  CLEAR_ERROR_MESSAGE,
+  HANDLE_MODIFICATION_STATUS,
+  SET_ERROR_MESSAGE,
+  FRIENDS_FETCHED,
+  CLEAR_SEARCH_FRIEND,
 } from '../actions/user';
 
 export const initialState = {
@@ -36,6 +40,7 @@ export const initialState = {
   firstnameValue: '',
   lastnameValue: '',
   avatar: '',
+  avatarUpdate: '',
   // redirection
   redirectTo: null,
   myTrips: [],
@@ -48,6 +53,9 @@ export const initialState = {
   emailSearch: '',
   userIdSearch: 0,
   userId: '',
+  errorMessage: '',
+  modificationStatus: '',
+  friendsFetched: false,
 };
 
 /* reducer qui s'occupe de ce qui concerne l'utilisateur */
@@ -98,14 +106,15 @@ const reducer = (state = initialState, action = {}) => {
         userId: action.userId,
       };
 
-    case SAVE_USER_RESULT_DATA:
+    case CLEAR_SEARCH_FRIEND:
       return {
         ...state,
-        firstNameSearch: action.firstName,
-        lastNameSearch: action.lastName,
-        avatarSearch: action.avatarURL,
-        emailSearch: action.email,
-        userIdSearch: action.userId,
+        searchUsersValue: '',
+        firstNameSearch: '',
+        lastNameSearch: '',
+        avatarSearch: '',
+        emailSearch: '',
+        userIdSearch: '',
       };
 
     case CLICK_LOGOUT:
@@ -125,21 +134,26 @@ const reducer = (state = initialState, action = {}) => {
         friends: action.friends,
       };
 
-    case USER_UPDATE_REQUEST:
-      return {
-        ...state,
-      };
-
     case USER_UPDATE_SUCCESS:
       return {
         ...state,
         password: '',
+        modificationStatus: 'success',
       };
 
     case USER_UPDATE_FAILURE:
       return {
         ...state,
         password: '',
+        modificationStatus: 'failure',
+        errorMessage: action.error,
+      };
+
+    case HANDLE_MODIFICATION_STATUS:
+      return {
+        ...state,
+        password: '',
+        modificationStatus: '',
       };
 
     case UPDATE_USER_INPUT:
@@ -152,11 +166,6 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
-      };
-
-    case DELETE_USER:
-      return {
-        ...state,
       };
 
     case USER_DELETE_SUCCESS:
@@ -175,6 +184,46 @@ const reducer = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.identifier]: action.value,
+      };
+
+    case LOGIN_ERROR: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+      };
+
+    case SIGNUP_ERROR: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+      };
+
+    case SET_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+      };
+
+    case CLEAR_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
+      return {
+        ...state,
+        errorMessage: '',
+      };
+
+    case FRIENDS_FETCHED:
+      return {
+        ...state,
+        friendsFetched: action.bool, // Définir friendsFetched à true une fois les amis chargés
+      };
+
+    case SAVE_USER_RESULT_DATA:
+      return {
+        ...state,
+        firstNameSearch: action.firstName,
+        lastNameSearch: action.lastName,
+        avatarSearch: action.avatarURL,
+        emailSearch: action.email,
+        userIdSearch: action.userId,
       };
 
     default:

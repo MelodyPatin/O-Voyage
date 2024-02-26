@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
-import './FriendAdd.scss';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
-import { useDispatch, useSelector } from 'react-redux';
 import FormAddFriend from './Components/FormAddFriend';
+
 import { changeSearchUsersField } from '../../../../actions/user';
 
+import './FriendAdd.scss';
+
+// FriendAdd component for adding friends
 const FriendAdd = () => {
   const dispatch = useDispatch();
   const searchUsersValue = useSelector((state) => state.user.searchUsersValue);
@@ -15,6 +18,7 @@ const FriendAdd = () => {
     <div className="addAFriend">
       <NavBarHeader />
       <ReturnTitle textContent="Ajouter des amis" />
+      {/* Form to add a friend */}
       <FormAddFriend
         inputValue={searchUsersValue}
         changeField={(newValue, identifier) => {

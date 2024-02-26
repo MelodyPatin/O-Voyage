@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
-import { PencilIcon } from '@heroicons/react/24/solid';
-import './TravelPicture.scss'; // Assurez-vous d'avoir un fichier de style pour le composant
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { handleRemoveTravelPicture, setNewPicture } from '../../../actions/trip';
 
-const TravelPicture = ({ currentPhoto }) => {
+import { PencilIcon } from '@heroicons/react/24/solid';
+import './TravelPicture.scss';
 
+import {
+  handleRemoveTravelPicture,
+  setNewPicture,
+} from '../../../actions/trip';
+
+const TravelPicture = () => {
   const dispatch = useDispatch();
 
-  const currentPicture = useSelector((state) => state.trip.trip.backgroundPictureURL);
+  // Get the current trip picture URL and trip ID from the Redux store
+  const currentPicture = useSelector(
+    (state) => state.trip.trip.backgroundPictureURL
+  );
   const tripId = useSelector((state) => state.trip.trip.id);
 
+  // Handle the change when a new photo is selected
   const handlePhotoChange = (event) => {
-    console.log("toto");
+    // Get the selected file
     const file = event.target.files[0];
+    // If a file is selected, process it (e.g., display it)
     if (file) {
-      // Si un fichier a été sélectionné, vous pouvez le traiter ici, par exemple l'afficher
       const reader = new FileReader();
       reader.onload = () => {
+        // Dispatch Redux actions to set the new picture and remove the current picture
         dispatch(setNewPicture(reader.result));
         dispatch(handleRemoveTravelPicture(tripId));
       };
@@ -27,10 +36,10 @@ const TravelPicture = ({ currentPhoto }) => {
 
   return (
     <div className="TravelPicture">
-      {/* Afficher la photo (soit currentPhoto, soit newPhoto) */}
-      <img src={currentPicture} alt="Photo" className="photo" />
+      {/* Display the current trip photo (either currentPhoto or newPhoto) */}
+      <img src={currentPicture} alt="cover for the trip" className="photo" />
 
-      {/* Icône pour charger une nouvelle photo */}
+      {/* Icon to upload a new photo */}
       <label htmlFor="photo-upload" className="upload-icon">
         <input
           type="file"

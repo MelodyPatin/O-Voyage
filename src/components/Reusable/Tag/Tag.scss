@@ -1,73 +1,21 @@
-@use 'src/styles/variables' as v;
-
 .tag {
-  // General styling for tags
   display: inline-block;
   padding: 0.6rem;
   border-radius: 10px;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   font-size: 1.5rem;
+  border: 5px solid transparent; 
+}
 
-  p {
-    font-weight: bold;
-  }
+.tag p {
+  font-weight: bold;
+}
 
-  // Specific styling for the 'activity' category
-  &.activity {
-    border: solid 4px v.$activity;
-    color: v.$activity;
+.tag.selected {
+  color: #fff;
+}
 
-    // Specific styling if selected
-    &.selected {
-      background-color: v.$activity;
-      color: v.$lightColor;
-    }
-  }
-
-  // Specific styling for the 'culture' category
-  &.culture {
-    border: solid 4px v.$culture;
-    color: v.$culture;
-
-    &.selected {
-      background-color: v.$culture;
-      color: v.$lightColor;
-    }
-  }
-
-  // Specific styling for the 'restaurant' category
-  &.restaurant {
-    border: solid 4px v.$restaurant;
-    color: v.$restaurant;
-
-    &.selected {
-      background-color: v.$restaurant;
-      color: v.$lightColor;
-    }
-  }
-
-  // Specific styling for the 'pub' category
-  &.pub {
-    border: solid 4px v.$pub;
-    color: v.$pub;
-
-    &.selected {
-      background-color: v.$pub;
-      color: v.$lightColor;
-    }
-  }
-
-  // Common styling for 'day', 'city', and 'country' categories
-  &.day,
-  &.city,
-  &.country {
-    border: solid 4px v.$mainColor;
-    color: v.$mainColor;
-
-    &.selected {
-      background-color: rgba(v.$mainColor, 0.5);
-      color: v.$lightColor;
-    }
-  }
+.tag.selected p {
+  font-weight: bold;
 }

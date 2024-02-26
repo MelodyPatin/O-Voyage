@@ -1,18 +1,21 @@
 import { React, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import './ProfileInfo.scss';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
+
 import { fetchMyTrips } from '../../../actions/trip';
 import { fetchFriends } from '../../../actions/user';
 
 const ProfileInfo = () => {
+  // Extract user's first name, user's trips and friends from the Redux store
   const firstname = useSelector((state) => state.user.firstnameValue);
-
-  const dispatch = useDispatch();
-
   const trips = useSelector((state) => state.trip.myTrips);
   const friends = useSelector((state) => state.user.friends);
 
+  const dispatch = useDispatch();
+
+  // Fetch user's trips and friends if not already loaded
   useEffect(() => {
     if (!trips.length && !friends.length) {
       dispatch(fetchMyTrips());

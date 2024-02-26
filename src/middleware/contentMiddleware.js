@@ -25,7 +25,6 @@ const contentMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/our_history`)
         .then((response) => {
-          console.log("Réponse de l'API :", response.data);
           store.dispatch(saveHistoryContent(response.data));
         })
         .catch((error) => {

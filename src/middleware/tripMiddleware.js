@@ -28,11 +28,21 @@ import {
   HANDLE_ADD_TRAVEL_PICTURE,
   handleAddTravelPicture,
   DELETE_TRIP,
+  ADD_TRAVELER_TO_TRAVEL_UPDATE,
+  LEAVE_TRIP,
+  handleStepReset,
 } from '../actions/trip';
 
 const tripMiddleware = (store) => (next) => (action) => {
-  const { tripId, tripTitle, startDate, endDate, tripDescription } =
-    store.getState().trip;
+  const {
+    tripId,
+    tripTitle,
+    startDate,
+    endDate,
+    tripDescription,
+    selectedTravelers,
+  } = store.getState().trip;
+  const travelersIds = selectedTravelers.map((traveler) => traveler.key);
 
   switch (action.type) {
     case FETCH_MY_TRIPS:
@@ -51,7 +61,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get('/country')
         .then((response) => {
-          console.log(response.data);
           store.dispatch(saveCountries(response.data));
         })
         .catch((error) => {
@@ -73,15 +82,19 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .post('/trip/add', tripJsonData)
         .then((response) => {
-          // Traitement de la réponse
           console.log(response.data);
+          // Traitement de la réponse
           store.dispatch(handleSuccessfulCreateTravel(response.data));
           store.dispatch(addCityToTravel());
           store.dispatch(addTravelerToTravel());
+          store.dispatch(handleStepReset());
+          // Redirection après le succès de la requête
+          window.location.href = `/trip/${response.data}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la création du voyage.');
         });
 
       break;
@@ -100,25 +113,29 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}`, tripUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
-          window.location.href = `/trip/${tripId}`;
+          store.dispatch(addCityToTravel());
+          store.dispatch(addTravelerToTravel());
+          store.dispatch(handleStepReset());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la mise à jour du voyage.');
         });
 
       break;
+
     case ADD_CITY_TO_TRAVEL:
       const { selectedCities } = store.getState().trip;
 
       // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
       const cityKeys = selectedCities.map((city) => city.key);
-      console.log(cityKeys[0]);
+
+      // console.log(cityKeys);
 
       // Données à envoyer au format JSON
       const cityJsonData = {
-        id: cityKeys[0],
+        cityKeys,
       };
 
       // Exécution de la requête
@@ -126,7 +143,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}/addcity`, cityJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response);
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -135,28 +151,38 @@ const tripMiddleware = (store) => (next) => (action) => {
       break;
 
     case ADD_TRAVELER_TO_TRAVEL:
-      const { selectedTravelers } = store.getState().trip;
-
-      // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
-      const travelersIds = selectedTravelers.map((traveler) => traveler.key);
-
-      console.log(travelersIds);
       // Données à envoyer au format JSON
       const travelerJsonData = {
         travelersIds,
       };
 
-      console.log(travelerJsonData);
       // Exécution de la requête
       api
         .put(`/trip/${tripId}/addTraveler`, travelerJsonData)
         .then((response) => {
           // Traitement de la réponse
-          // Redirection vers l'URL du voyage une fois que l'ajout du voyageur est effectué avec succès
-          window.location.href = `/trip/${tripId}`;
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+      break;
+
+    case ADD_TRAVELER_TO_TRAVEL_UPDATE:
+      // Données à envoyer au format JSON
+      const travelerUpdateJsonData = {
+        travelersIds,
+      };
+
+      // Exécution de la requête
+      api
+        .put(`/trip/${action.travelId}/addTraveler`, travelerUpdateJsonData)
+        .then((response) => {
+          // Traitement de la réponse
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          alert("Echec de l'ajout du voyageur");
           // Dispatch d'une action pour gérer l'erreur
         });
       break;
@@ -176,7 +202,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.tripId}`)
         .then((response) => {
-          console.log(response.data);
           const { id } = response.data;
           const { name } = response.data;
           const { startDate } = response.data;
@@ -239,13 +264,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .get(`/trip/${action.id}/showTravelers`)
         .then((response) => {
-          console.log(response.data);
           const travelers = response.data.map((traveler) => ({
             key: traveler.id,
             value: `${traveler.firstname} ${traveler.lastname}`,
           }));
           store.dispatch(saveTripTravelers(travelers));
-          console.log(travelers);
         })
         .catch((error) => {
           console.error(error);
@@ -256,8 +279,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .post(`/trip/${action.travelId}/delete_picture`)
         .then((response) => {
-          console.log(response.data);
-          console.log('yoyoyoyo');
           store.dispatch(handleAddTravelPicture(action.travelId));
         })
         .catch((error) => {
@@ -267,7 +288,6 @@ const tripMiddleware = (store) => (next) => (action) => {
 
     case HANDLE_ADD_TRAVEL_PICTURE:
       const { backgroundPictureURL } = store.getState().trip.trip;
-      console.log(backgroundPictureURL);
 
       // Données à envoyer au format JSON
       const urlJsonData = {
@@ -277,8 +297,6 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .post(`/trip/${action.travelId}/add_picture`, urlJsonData)
         .then((response) => {
-          console.log(response.data);
-          console.log('bloublou');
         })
         .catch((error) => {
           console.error(error);
@@ -295,7 +313,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         event.target.files.length > 0
       ) {
         const fileInput = event.target.files[0];
-        console.log(fileInput);
 
         if (fileInput) {
           const reader = new FileReader();
@@ -324,11 +341,24 @@ const tripMiddleware = (store) => (next) => (action) => {
       api
         .delete(`/trip/${action.tripId}`)
         .then((response) => {
-          console.log(response.data);
         })
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
+          alert("Echec de la suppression du voyage");
+        });
+      break;
+
+    case LEAVE_TRIP:
+      // Effectuer la requête axios pour supprimer le compte utilisateur
+      api
+        .delete(`/trip/${action.tripId}/leaveTrip`)
+        .then((response) => {
+        })
+        .catch((error) => {
+          // Gestion des erreurs
+          console.error('Erreur lors de la requête:', error);
+          alert("Echec : voyage non quitté");
         });
       break;
 

@@ -3,11 +3,7 @@
 import { React, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  changeLoginField,
-  submitLogin,
-  submitSignUp,
-} from '../../../actions/user';
+
 import NavBar from '../../Reusable/NavBarHeader/NavBarHeader';
 import Header from './Components/Header';
 import Presentation from './Components/Presentation';
@@ -15,7 +11,14 @@ import LastPart from './Components/LastPart';
 import Footer from '../../Reusable/Footer/Footer';
 import LogIn from './Components/Popup/LogIn';
 import SignUp from './Components/Popup/SignUp';
-import Dashboard from '../Dashboard/Dashboard'; // Import Dashboard component
+import Dashboard from '../Dashboard/Dashboard';
+
+import {
+  changeLoginField,
+  submitLogin,
+  submitSignUp,
+} from '../../../actions/user';
+
 import './HomePage.scss';
 
 const HomePage = () => {
@@ -29,19 +32,19 @@ const HomePage = () => {
   const logged = useSelector((state) => state.user.logged);
   const signedUp = useSelector((state) => state.user.signedUp);
 
-  // Ajoutez un état local pour gérer la redirection
+  // Add local state to manage redirection
   const [redirectDashboard, setRedirectDashboard] = useState(false);
   const [redirectLogIn, setRedirectLogIn] = useState(false);
 
+  // Redirect to the dashboard after successful login
   useEffect(() => {
-    // Redirigez vers le tableau de bord après la connexion réussie
     if (logged) {
       setRedirectDashboard(true);
     }
   }, [logged]);
 
+  // Redirect to the login page after successful signup
   useEffect(() => {
-    // Redirigez vers le tableau de bord après la connexion réussie
     if (signedUp) {
       setRedirectLogIn(true);
     }
@@ -55,9 +58,11 @@ const HomePage = () => {
       <LastPart />
       <Footer />
 
+      {/* Conditional Redirects */}
       {redirectDashboard && <Navigate to="/dashboard" replace />}
-      {redirectLogIn && <Navigate to="/home/login" replace />}
+      {redirectLogIn && <Navigate to="/login" replace />}
 
+      {/* Routes for Login, Signup, and Dashboard */}
       <Routes>
         <Route
           path="/login"
@@ -71,11 +76,6 @@ const HomePage = () => {
               }}
               handleLogin={() => {
                 dispatch(submitLogin());
-              }}
-              handleLogout={() => {
-                console.log('handleLogout');
-                // TODO: Effacez le pseudo et le token dans le state, et passez logged à false
-                // Dispatchez une action traitée par le reducer user
               }}
               isLogged={logged}
             />

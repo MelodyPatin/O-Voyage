@@ -10,22 +10,24 @@ import {
 } from '@heroicons/react/24/outline';
 
 const NavBarMobile = () => {
+  // Access the current location and parameters from the URL
   const location = useLocation();
   const { tripId } = useParams();
 
-  let circleLink;
+  // Determine the 'add' link based on the current path
+  let addLink;
   switch (location.pathname) {
     case `/trip/${tripId}`:
-      circleLink = '/createactivity';
+      addLink = '/createactivity';
       break;
     case `/trip/${tripId}/travelers`:
-      circleLink = `/trip/${tripId}/addtravelers`;
+      addLink = `/trip/${tripId}/addtravelers`;
       break;
     case `/trip/${tripId}/gallery`:
-      circleLink = `/trip/${tripId}/addpicture`;
+      addLink = `/trip/${tripId}/addpicture`;
       break;
     default:
-      circleLink = '';
+      addLink = '';
   }
 
   return (
@@ -38,7 +40,7 @@ const NavBarMobile = () => {
         <Link to={`/trip/${tripId}/travelers`}>
           <UserGroupIcon className="icon user" />
         </Link>
-        <Link to={circleLink}>
+        <Link to={addLink}>
           <div className="circle">
             <PlusIcon className="plus" />
           </div>

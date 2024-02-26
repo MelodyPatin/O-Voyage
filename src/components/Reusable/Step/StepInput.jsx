@@ -1,10 +1,14 @@
 import React from 'react';
-import './Steps.scss';
 import PropTypes from 'prop-types';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+
+import './Steps.scss';
+
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../Buttons/SimpleButton';
+
 import { handleStepNext } from '../../../actions/trip';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 // Functional component : popup with input fields and a close button
 const StepInput = ({
@@ -16,9 +20,20 @@ const StepInput = ({
   name,
 }) => {
   const dispatch = useDispatch();
+  const errorMessage = useSelector((state) => state.user.errorMessage);
 
-  const handleClick = () => {
+  const handleClick = (event) => {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Check if the field is empty
+    if (!inputValue.trim()) {
+      dispatch(setErrorMessage('Ce champ ne peut pas être vide.'));
+      return;
+    }
+
+    // If the field is not empty, proceed to the next step
     dispatch(handleStepNext());
+    dispatch(clearErrorMessage());
   };
 
   return (
@@ -33,6 +48,7 @@ const StepInput = ({
           type="text"
           onChange={changeField}
         />
+        {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton textContent={buttonContent} onClick={handleClick} />
       </form>
     </div>
@@ -41,11 +57,16 @@ const StepInput = ({
 
 StepInput.propTypes = {
   inputValue: PropTypes.string,
-  changeField: PropTypes.func.isRequired,
   placeholderContent: PropTypes.string,
+  changeField: PropTypes.func.isRequired,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+};
+
+StepInput.defaultProps = {
+  inputValue: '',
+  placeholderContent: '',
 };
 
 export default StepInput;

@@ -1,12 +1,14 @@
 import React from 'react';
-import './Steps.scss';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './Steps.scss';
+
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
+
 import {
-  addCityToTravel,
-  addTravelerToTravel,
+  handleStepReset,
   submitCreateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
@@ -19,49 +21,54 @@ const StepSelectTravelers = ({
 }) => {
   const dispatch = useDispatch();
 
+  // Click handler for form submission
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
+    dispatch(handleStepReset());
   };
 
+  // Callback function to handle the selection change in the MultipleSelector
   const handleSelectionChange = (selected) => {
-    // Convertir chaque élément de selected en un objet { key, value }
+    // Convert each selected traveler name into an object { key, value }
     const newSelected = selected
       .map((selectedTravelerName) => {
-        // Trouver l'objet dans options qui correspond à ce nom de pays
+        // Find the object in options that corresponds to this traveler name
         const selectedTraveler = options.find(
           (traveler) => traveler.value === selectedTravelerName
         );
 
-        // Vérifier si un pays correspondant a été trouvé
+        // Check if a corresponding traveler was found
         if (selectedTraveler) {
-          // Retourner un objet avec les clés et valeurs appropriées
+          // Return an object with the appropriate keys and values
           return { key: selectedTraveler.key, value: selectedTraveler.value };
         }
-        // Gérer le cas où aucun pays correspondant n'a été trouvé
+        // Handle the case where no corresponding traveler was found
         console.error(
           `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
         );
-        // Retourner null pour indiquer un problème
+        // Return null to indicate a problem
         return null;
       })
-      .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
+      .filter(Boolean); // Filter out null items (cases where no corresponding traveler was found)
 
-    // Dispatch de l'action pour mettre à jour les villes sélectionnées
+    // Dispatch the action to update the selected travelers
     dispatch(updateSelectedTravelers(newSelected));
   };
 
+  // Retrieve selected travelers from the Redux store
   const selected = useSelector((state) => state.trip.selectedTravelers);
 
   return (
     <div className="StepSelect">
+      {/* Form with label and MultipleSelector for traveler selection */}
       <form autoComplete="off" onSubmit={handleClick}>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.map((traveler) => traveler.value)} // Utiliser map pour obtenir un tableau de valeurs
+            selected={selected.map((traveler) => traveler.value)}
             onChange={handleSelectionChange}
           />
         </div>
@@ -76,16 +83,20 @@ const StepSelectTravelers = ({
 };
 
 StepSelectTravelers.propTypes = {
+  placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
-  placeholderContent: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+};
+
+StepSelectTravelers.defaultProps = {
+  placeholderContent: '',
 };
 
 export default StepSelectTravelers;

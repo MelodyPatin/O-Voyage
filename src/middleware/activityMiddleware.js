@@ -1,4 +1,5 @@
 import api from '../api';
+
 import {
   FETCH_TRIP_ACTIVITIES,
   FETCH_AN_ACTIVITY,
@@ -12,6 +13,9 @@ import {
   SUBMIT_UPDATE_ACTIVITY,
   DELETE_ACTIVITY,
   HANDLE_ACTIVITY_DATE,
+  FETCH_TAGS,
+  saveTags,
+  clearCreateActivityInfos,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -58,7 +62,6 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/activity/${action.id}`)
         .then((response) => {
-          console.log(response.data);
           const activityTitle = response.data.name;
           const activityPrice = response.data.price;
           const activityUrl = response.data.url;
@@ -104,19 +107,17 @@ const activityMiddleware = (store) => (next) => async (action) => {
         description: activityDescription,
       };
 
-      console.log(activityJsonData);
-
       // Exécution de la requête
       api
         .post(`/trip/${id}/activity/add`, activityJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la création de l\'activité.');
         });
 
       break;
@@ -135,19 +136,17 @@ const activityMiddleware = (store) => (next) => async (action) => {
         description: activityDescription,
       };
 
-      console.log(activityUpdateJsonData);
-
       // Exécution de la requête
       api
         .put(`/activity/${action.activityId}`, activityUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+          alert('Erreur lors de la mise à jour de l\'activité.');
         });
 
       break;
@@ -155,24 +154,19 @@ const activityMiddleware = (store) => (next) => async (action) => {
     case HANDLE_ADD_TAG:
       const { selectedTag } = store.getState().activity;
 
-      console.log(selectedTag);
-      const tagId = selectedTag[0].key;
-      console.log(tagId);
+      const tagId = selectedTag[0].id;
 
       // Données à envoyer au format JSON
       const tagJsonData = {
         tag: tagId,
       };
 
-      console.log(tagJsonData);
-
       // Exécution de la requête
       api
         .put(`/activity/${action.activityId}/addtag`, tagJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
-          window.location.href = `/trip/${id}`;
+          store.dispatch(clearCreateActivityInfos())
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -186,32 +180,40 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .delete(`/activity/${action.activityId}`)
         .then((response) => {
-          console.log(response.data);
         })
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
+          alert("Echec de la suppression d'activité");
         });
-        
-    case HANDLE_ACTIVITY_DATE:
 
+    case HANDLE_ACTIVITY_DATE:
       // Données à envoyer au format JSON
       const activityDateUpdateJsonData = {
         date: action.newDate,
       };
-
-      console.log(activityDateUpdateJsonData);
 
       // Exécution de la requête
       api
         .put(`/activity/${action.activityId}/date`, activityDateUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
-          console.log(response.data);
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
+        });
+
+      break;
+
+    case FETCH_TAGS:
+      api
+        .get(`/tags`)
+        .then((response) => {
+          store.dispatch(saveTags(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
         });
 
       break;

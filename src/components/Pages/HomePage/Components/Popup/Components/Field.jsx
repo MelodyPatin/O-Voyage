@@ -1,24 +1,22 @@
-// == Import : npm
 import PropTypes from 'prop-types';
 
-// == Import : local
 import './Field.scss';
 
-// == Composant
 const Field = ({ value, type, name, placeholder, onChange }) => {
+  // Handle the change event of the input
   const handleChange = (evt) => {
     onChange(evt.target.value, name);
   };
 
+  // Generate a unique input ID based on the field name
   const inputId = `field-${name}`;
 
   return (
+    // Apply a CSS class based on whether the field has content
     <div className={value.length > 0 ? 'field field--has-content' : 'field'}>
       <input
-        // React - state
         value={value}
         onChange={handleChange}
-        // infos de base
         id={inputId}
         type={type}
         className="field-input"
@@ -26,6 +24,7 @@ const Field = ({ value, type, name, placeholder, onChange }) => {
         name={name}
       />
 
+      {/* Label element associated with the input */}
       <label htmlFor={inputId} className="field-label">
         {placeholder}
       </label>
@@ -41,11 +40,10 @@ Field.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-// Valeurs par défaut pour les props
+// Default values for props
 Field.defaultProps = {
   value: '',
   type: 'text',
 };
 
-// == Export
 export default Field;

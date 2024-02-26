@@ -9,13 +9,12 @@ import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 
 import {
-  handleStepReset,
-  submitUpdateTravel,
+  addTravelerToTravelUpdate,
   updateSelectedTravelers,
 } from '../../../actions/trip';
 import { clearErrorMessage } from '../../../actions/user';
 
-const StepSelectTravelersUpdate = ({
+const StepSelectAddTravelers = ({
   buttonContent,
   placeholderContent,
   labelContent,
@@ -23,20 +22,20 @@ const StepSelectTravelersUpdate = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // Retrieve error message from the Redux store
   const errorMessage = useSelector((state) => state.user.errorMessage);
-  const tripId = useSelector((state) => state.trip.tripId);
+  // Retrieve travel ID from the Redux store
+  const travelId = useSelector((state) => state.trip.trip.id);
 
   // Click handler for the form submission
   const handleClick = (e) => {
     e.preventDefault();
-    // Submit the updated travel information
-    dispatch(submitUpdateTravel());
-    // Clear any error messages
+    // Dispatch action to add selected travelers to the current travel
+    dispatch(addTravelerToTravelUpdate(travelId));
+    // Clear error messages
     dispatch(clearErrorMessage());
-    // Navigate to the trip details page after the update
-    navigate(`/trip/${tripId}`);
-    // Reset the step state to the initial step
-    dispatch(handleStepReset());
+    // Navigate to the travel details page
+    navigate(`/trip/${travelId}`);
   };
 
   // Callback function to handle the selection change in the MultipleSelector
@@ -58,7 +57,6 @@ const StepSelectTravelersUpdate = ({
         console.error(
           `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
         );
-        // Return null to indicate a problem
         return null;
       })
       .filter(Boolean); // Filter out null items (cases where no corresponding traveler was found)
@@ -79,7 +77,7 @@ const StepSelectTravelersUpdate = ({
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.map((traveler) => traveler.value)}
+            selected={selected.map((traveler) => traveler.value)} // Use map to get an array of values
             onChange={handleSelectionChange}
           />
         </div>
@@ -95,7 +93,7 @@ const StepSelectTravelersUpdate = ({
   );
 };
 
-StepSelectTravelersUpdate.propTypes = {
+StepSelectAddTravelers.propTypes = {
   placeholderContent: PropTypes.string,
   buttonContent: PropTypes.string.isRequired,
   labelContent: PropTypes.string.isRequired,
@@ -108,8 +106,8 @@ StepSelectTravelersUpdate.propTypes = {
   ).isRequired,
 };
 
-StepSelectTravelersUpdate.defaultProps = {
+StepSelectAddTravelers.defaultProps = {
   placeholderContent: '',
 };
 
-export default StepSelectTravelersUpdate;
+export default StepSelectAddTravelers;

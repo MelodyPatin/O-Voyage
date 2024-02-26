@@ -1,6 +1,6 @@
 import React from 'react';
-import './User.scss';
 import PropTypes from 'prop-types';
+import './User.scss';
 import AvatarFriend from '../Avatar/AvatarFriends';
 
 // Component representing a user
