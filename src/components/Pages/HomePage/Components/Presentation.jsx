@@ -1,10 +1,11 @@
 import React from 'react';
 import './Presentation.scss';
+import View from '../../../../assets/View1.png';
 
 const Presentation = () => {
   return (
     <div className="presentation">
-      <img src="../src/assets/View1.png" alt="" />
+      <img src={View} alt="" />
       <div>
         <h2 className="title">
           Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi.

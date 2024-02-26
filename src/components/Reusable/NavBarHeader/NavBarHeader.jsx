@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './NavBarHeader.scss';
 import Menu from './Components/Menu';
 import LoginLogoutButton from './Components/LoginLogoutButton';
+import Logo from '../../../assets/MainLogo.png';
 
 const NavBarHeader = () => {
   const logged = useSelector((state) => state.user.logged);
@@ -13,7 +14,7 @@ const NavBarHeader = () => {
       <Link to="/dashboard">
         <img
           className="logo"
-          src="/src/assets/MainLogo.png"
+          src={Logo}
           alt="Logo O'Voyage"
         />
       </Link>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.scss';
+import MockupMobile from '../../../../assets/MainMockupMobile.png';
 
 const Header = () => {
   return (
@@ -11,7 +12,7 @@ const Header = () => {
         </h1>
         <img
           className="mockup"
-          src="../src/assets/MainMockupMobile.png"
+          src={MockupMobile}
           alt="mockup"
         />
       </div>
