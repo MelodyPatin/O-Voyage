@@ -14,8 +14,6 @@ const galleryMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case FETCH_PICTURES:
 
-    console.log(currentPage);
-
       api
         .get(`/album/trip/${action.tripId}/page/${currentPage}`)
         .then((response) => {
