@@ -6,6 +6,7 @@ import './NavBarHeader.scss';
 
 import Menu from './Components/Menu';
 import LoginLogoutButton from './Components/LoginLogoutButton';
+import Logo from '../../../assets/MainLogo.png';
 
 const NavBarHeader = () => {
   // Check if the user is logged in
@@ -14,11 +15,7 @@ const NavBarHeader = () => {
   return (
     <div className="header">
       <Link to="/dashboard">
-        <img
-          className="logo"
-          src="/src/assets/MainLogo.png"
-          alt="Logo O'Voyage"
-        />
+        <img className="logo" src={Logo} alt="Logo O'Voyage" />
       </Link>
       {/* Display the menu if the user is logged in, otherwise display the login/logout button */}
       {logged && <Menu />}

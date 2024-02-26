@@ -47,7 +47,7 @@ const StepSelect = ({
 
         // Check if a corresponding country was found
         if (selectedCountry) {
-          // Retourner un objet avec les clés et valeurs appropriées
+          // Handle the case where no corresponding country was found
           return { key: selectedCountry.key, value: selectedCountry.value };
         }
         // Handle the case where no corresponding country was found
@@ -79,6 +79,7 @@ const StepSelect = ({
             onChange={handleSelectionChange}
           />
         </div>
+        {/* SimpleButton for triggering the click handler and fetching cities */}
         <SimpleButton
           textContent={buttonContent}
           onClick={() => {

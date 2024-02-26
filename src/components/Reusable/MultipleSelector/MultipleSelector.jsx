@@ -14,6 +14,7 @@ const MultipleSelector = ({
     const selectedOptions = data.value; // Get the selected options from the event data
     if (onChange) {
       onChange(selectedOptions); // Pass the selected options to the update function in the parent component
+    }
   };
 
   return (
