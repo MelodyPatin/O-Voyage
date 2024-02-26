@@ -32,12 +32,11 @@ function App() {
   const dispatch = useDispatch();
   const loggedOut = useSelector((state) => state.user.loggedOut);
   const logged = useSelector((state) => state.user.logged);
-  const navigate = useNavigate(); // Utilisation de useNavigate pour la navigation programmatique
+  const navigate = useNavigate();
 
   const [redirectHome, setRedirectHome] = useState(false);
 
   useEffect(() => {
-    // Redirection vers la page de connexion après une déconnexion réussie
     if (loggedOut && !redirectHome) {
       setRedirectHome(true);
     }
@@ -47,11 +46,10 @@ function App() {
     if (redirectHome) {
       dispatch(updateLoggedOut(false));
       setRedirectHome(false);
-      navigate('/'); // Redirection vers la page d'accueil après une déconnexion réussie
+      navigate('/');
     }
   }, [redirectHome, dispatch, navigate]);
 
-  // Vérification du token et récupération des données utilisateur lors du montage du composant
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -60,46 +58,48 @@ function App() {
     }
   }, []);
 
-  // Fonction pour rendre les routes privées
   const renderPrivateRoute = (path, element) => {
-    return logged ? <Route path={path} element={element} /> : <Navigate to="/" />;
-  };
+    return logged ? <Route path={path} element={element} /> : <Route path={path} element={<Navigate to="/" />} />;
+  };  
 
   return (
     <div className="App">
       <header className="App-header">
         <Routes>
+          {/* Routes publiques accessibles en tout temps */}
           <Route path="/*" element={<HomePage />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />
           <Route path="/our-history" element={<History />} />
           <Route path="*" element={<Error />} />
+          
+          {/* Routes privées nécessitant une connexion */}
+          {renderPrivateRoute('/dashboard', <Dashboard />)}
+          {renderPrivateRoute('/me', <UserUpdate />)}
+          {renderPrivateRoute('/friends', <FriendList />)}
+          {renderPrivateRoute('/friends/add', <FriendAdd />)}
+          {renderPrivateRoute('/createtrip', <TravelAdd />)}
+          {renderPrivateRoute('/updatetrip/:tripId', <TravelUpdate />)}
+          {renderPrivateRoute('/createactivity', <ActivityAdd />)}
+          {renderPrivateRoute(
+            '/trip/:tripId/activity/:activityId',
+            <ActivityDetails />
+          )}
+          {renderPrivateRoute(
+            '/trip/:tripId/updateactivity/:activityId',
+            <ActivityUpdate />
+          )}
+          {renderPrivateRoute('/trip/:tripId', <TravelDetails />)}
+          {renderPrivateRoute('/trip/:tripId/travelers', <Travelers />)}
+          {renderPrivateRoute('/trip/:tripId/addtravelers', <AddTravelers />)}
+          {renderPrivateRoute('/trip/:tripId/filters', <Filters />)}
+          {renderPrivateRoute('/trip/:tripId/gallery', <Gallery />)}
+          {renderPrivateRoute(
+            '/trip/:tripId/gallery/photo',
+            <FullSizePhoto />
+          )}
+          {renderPrivateRoute('/trip/:tripId/suitcase', <Suitcase />)}
         </Routes>
-        {renderPrivateRoute('/dashboard', <Dashboard />)}
-        {renderPrivateRoute('/me', <UserUpdate />)}
-        {renderPrivateRoute('/friends', <FriendList />)}
-        {renderPrivateRoute('/friends/add', <FriendAdd />)}
-        {renderPrivateRoute('/createtrip', <TravelAdd />)}
-        {renderPrivateRoute('/updatetrip/:tripId', <TravelUpdate />)}
-        {renderPrivateRoute('/createactivity', <ActivityAdd />)}
-        {renderPrivateRoute(
-          '/trip/:tripId/activity/:activityId',
-          <ActivityDetails />
-        )}
-        {renderPrivateRoute(
-          '/trip/:tripId/updateactivity/:activityId',
-          <ActivityUpdate />
-        )}
-        {renderPrivateRoute('/trip/:tripId', <TravelDetails />)}
-        {renderPrivateRoute('/trip/:tripId/travelers', <Travelers />)}
-        {renderPrivateRoute('/trip/:tripId/addtravelers', <AddTravelers />)}
-        {renderPrivateRoute('/trip/:tripId/filters', <Filters />)}
-        {renderPrivateRoute('/trip/:tripId/gallery', <Gallery />)}
-        {renderPrivateRoute(
-          '/trip/:tripId/gallery/photo',
-          <FullSizePhoto />
-        )}
-        {renderPrivateRoute('/trip/:tripId/suitcase', <Suitcase />)}
       </header>
     </div>
   );
