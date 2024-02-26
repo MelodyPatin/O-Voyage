@@ -8,6 +8,11 @@ const GeneralInfos = () => {
   const description = useSelector((state) => state.trip.trip.description);
   const cities = useSelector((state) => state.trip.trip.cities);
 
+  // Check if cities is undefined
+  if (!cities) {
+    return null; // or any fallback UI you prefer
+  }
+
   // Map over the cities array to extract the names
   const cityNames = cities.map(city => city.name);
 
