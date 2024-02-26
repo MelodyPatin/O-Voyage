@@ -15,14 +15,14 @@ const DesktopItems = () => {
   return (
     <div className="desktopItems">
       {/* NavLinks with icon */}
-      {/* <NavLink className="icon_label" to={`/trip/${tripId}`}>
+      <NavLink className="icon_label" to={`/trip/${tripId}`}>
         <HomeIcon className="icon" />
         <p>Accueil</p>
-      </NavLink> */}
-      {/* <NavLink className="icon_label" to={`/trip/${tripId}/gallery`}>
+      </NavLink>
+      <NavLink className="icon_label" to={`/trip/${tripId}/gallery`}>
         <PhotoIcon className="icon" />
         <p>Galerie</p>
-      </NavLink> */}
+      </NavLink>
       {/* <NavLink className="icon_label" to="/messagerie">
         <ChatBubbleLeftRightIcon className="icon" />
         <p>Messages</p>
