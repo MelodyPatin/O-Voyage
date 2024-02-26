@@ -5,9 +5,7 @@ import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  addCityToTravel,
   handleStepReset,
-  submitCreateTravel,
   submitUpdateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';

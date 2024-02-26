@@ -18,6 +18,7 @@ const ActivityCard = ({ activity }) => {
   const { tripId } = useParams();
   const [rating, isLoading] = useActivityRating(activity.id);
   const [newRating, setNewRating] = useSetActivityRating(activity.id);
+  const activityColor = useSelector((state) => state.activity.selectedTag[0].color)
 
   const handleLike = async (e, { rating: clickedRating }) => {
     await setNewRating(clickedRating);
@@ -30,28 +31,16 @@ const ActivityCard = ({ activity }) => {
       ? `${activityTitle.substring(0, 35)}...`
       : activityTitle;
 
-  let tag = '';
-  if (activity.tags && activity.tags.length > 0 && activity.tags[0].id) {
-    switch (activity.tags[0].id) {
-      case 1:
-        tag = 'restaurant';
-        break;
-      case 2:
-        tag = 'pub';
-        break;
-      case 3:
-        tag = 'culture';
-        break;
-      case 4:
-        tag = 'activity';
-        break;
-      default:
-        break;
-    }
-  }
+  // Dynamically determine the card color based on selectedTag color
+  const cardStyle = {
+    backgroundColor: `${activityColor}80`, // Background color with opacity
+    borderColor: activityColor, // Border color same as the activity color
+    borderWidth: '7px', // Border width
+    borderStyle: 'solid', // Border style
+  };
 
   return (
-    <div className={`ActivityCard ${tag}`}>
+    <div className="ActivityCard" style={cardStyle}>
       <div className="FlexGap">
         <p className='score'>{activity.score}</p>
         <AvatarFriend userAvatar={activity.creator.avatarURL} />
@@ -96,6 +85,7 @@ ActivityCard.propTypes = {
     tags: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number.isRequired,
+        color: PropTypes.string.isRequired, // Add color prop type
       })
     ).isRequired,
   }).isRequired,

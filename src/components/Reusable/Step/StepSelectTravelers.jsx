@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 import {
+  handleStepReset,
   submitCreateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
@@ -20,6 +21,7 @@ const StepSelectTravelers = ({
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
+    dispatch(handleStepReset());
   };
 
   const handleSelectionChange = (selected) => {
