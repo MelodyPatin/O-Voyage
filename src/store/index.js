@@ -6,7 +6,8 @@ import userMiddleware from '../middleware/userMiddleware';
 import tripMiddleware from '../middleware/tripMiddleware';
 import activityMiddleware from '../middleware/activityMiddleware';
 import contentMiddleware from '../middleware/contentMiddleware';
-import suitcaseMiddleware from '../middleware/suitcaseMiddleware'
+import suitcaseMiddleware from '../middleware/suitcaseMiddleware';
+import galleryMiddleware from '../middleware/galleryMiddleware';
 
 const enhancers = composeWithDevTools(
   applyMiddleware(
@@ -15,6 +16,7 @@ const enhancers = composeWithDevTools(
     activityMiddleware,
     contentMiddleware,
     suitcaseMiddleware,
+    galleryMiddleware
     // ... d'autres middlewares
   )
 );

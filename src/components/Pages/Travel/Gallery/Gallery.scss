@@ -1,0 +1,10 @@
+.main {
+  padding: 0.5rem;
+
+  @media (min-width: 600px) {
+    padding: 1.5rem;
+  }
+  @media (min-width: 767px) {
+    padding: 2.5rem;
+  }
+}

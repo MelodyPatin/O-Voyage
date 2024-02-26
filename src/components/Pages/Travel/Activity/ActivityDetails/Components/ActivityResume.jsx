@@ -20,6 +20,7 @@ const ActivityResume = () => {
   const [popupVisible, setPopupVisible] = useState(false);
   const [modificationStatus, setModificationStatus] = useState(null);
   const currentActivity = useSelector((state) => state.activity.activity);
+  const currentTrip = useSelector((state) => state.trip.trip);
   const user = useSelector((state) => state.user);
 
   // UseEffect to fetch tags when the component mounts
@@ -53,7 +54,7 @@ const ActivityResume = () => {
     setPopupVisible(false);
   };
 
-  const isAdmin =
+  const isActivityCreator =
     currentActivity &&
     currentActivity.creator &&
     currentActivity.creator.id === user.userId;
@@ -76,7 +77,7 @@ const ActivityResume = () => {
           className="tag"
         />
         {/* Display edit and delete buttons for admins */}
-        {isAdmin && (
+        {isActivityCreator && (
           <>
             <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
               <IconButton textContent="Modifier l'activité" icon="edit" />
