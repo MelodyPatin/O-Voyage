@@ -19,8 +19,8 @@ const PictureFullSize = () => {
     dispatch(fetchAPicture(tripId, pictureId));
   }, [dispatch, tripId, pictureId]);
 
-  const photo = useSelector((state) => state.gallery.gallery.images);
-  console.log(photo);
+  const photo = useSelector((state) => state.gallery.image);
+
   return (
     <div className="galleryPicture">
       {!isMobile && (
@@ -33,7 +33,7 @@ const PictureFullSize = () => {
       <div className="pictureContainer">
         <img
           className="photo"
-          src={photo}
+          src={photo.picture_url}
           alt="trip photo uploaded by the users"
         />
       </div>

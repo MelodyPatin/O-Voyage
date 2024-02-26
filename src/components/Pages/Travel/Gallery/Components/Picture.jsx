@@ -21,10 +21,12 @@ const Picture = () => {
     []
   );
 
-  const photos = useSelector((state) => {
+/*   const photos = useSelector((state) => {
     const selectedPhotos = selectPhotos(state);
     return selectedPhotos.map((photo) => photo);
-  });
+  }); */
+
+  const photos = useSelector((state) => state.gallery.photos.photos);
 
   return (
     <div className="picture">

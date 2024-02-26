@@ -4,6 +4,7 @@ import {
   FETCH_PICTURES,
   SHOW_PICTURES,
   fetchPictures,
+  showAPicture,
   showPictures,
 } from '../actions/gallery';
 import api from '../api';
@@ -26,7 +27,7 @@ const galleryMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/trip/${action.tripId}/photo/${action.pictureId}`)
         .then((response) => {
-          store.dispatch(showPictures(response.data));
+          store.dispatch(showAPicture(response.data));
         })
         .catch((error) => {
           console.error(error);
