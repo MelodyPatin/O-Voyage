@@ -1,14 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import './LastPart.scss';
+import Screens from '../../../../assets/Screens.png';
 
 const LastPart = () => {
   return (
     <div className="lastPart">
-      <img
-        src="../src/assets/Screens.png"
-        alt="mockups of what the mobile version of the site looks like"
-      />
+      <img src={Screens} alt="mockups" />
       <p>
         O'Voyage a été créé avec la passion de rassembler les gens autour
         d'aventures extraordinaires. Que chaque kilomètre parcouru soit source

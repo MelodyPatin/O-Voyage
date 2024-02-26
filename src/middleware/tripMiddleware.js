@@ -113,6 +113,9 @@ const tripMiddleware = (store) => (next) => (action) => {
         .put(`/trip/${tripId}`, tripUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
+          store.dispatch(addCityToTravel());
+          store.dispatch(addTravelerToTravel());
+          store.dispatch(handleStepReset());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -128,9 +131,11 @@ const tripMiddleware = (store) => (next) => (action) => {
       // Récupérer les clés de toutes les villes sélectionnées sous forme de tableau de nombres
       const cityKeys = selectedCities.map((city) => city.key);
 
+      // console.log(cityKeys);
+
       // Données à envoyer au format JSON
       const cityJsonData = {
-        id: cityKeys[0],
+        cityKeys,
       };
 
       // Exécution de la requête

@@ -8,6 +8,7 @@ import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
 
 import {
+  handleStepReset,
   submitCreateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
@@ -24,6 +25,7 @@ const StepSelectTravelers = ({
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(submitCreateTravel());
+    dispatch(handleStepReset());
   };
 
   // Callback function to handle the selection change in the MultipleSelector

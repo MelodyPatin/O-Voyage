@@ -1,14 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import './Presentation.scss';
+import View from '../../../../assets/View1.png';
 
 const Presentation = () => {
   return (
     <div className="presentation">
-      <img
-        src="../src/assets/View1.png"
-        alt="presentation of what the gallery page looks like"
-      />
+      <img src={View} alt="view picture" />
       <div>
         <h2 className="title">
           Bienvenue sur O'Voyage ! 🌍 Explorez le monde ensemble, créez des
