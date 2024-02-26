@@ -6,8 +6,8 @@
   width: 100%;
   display: flex;
   justify-content: space-around;
-  border-top: 2px solid v.$mainColor;
-  background-color: v.$lightColor;
+  border-top: 3px solid v.$lightColor;
+  background-color: v.$mainColor;
   overflow: visible; // Allows .solid to extend beyond the container
   z-index: 10; // Set a z-index value for the parent element
 
@@ -18,14 +18,14 @@
 
 .NavBarMobile {
   width: 100%;
-  padding: 0.5rem 0.5rem 2rem;
+  padding: 1.5rem 0.5rem;
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
 
   .icon {
     width: 3rem;
-    color: v.$mainColor;
+    color: v.$lightColor;
   }
   .picture {
     padding: 0;
@@ -35,23 +35,5 @@
     width: 5rem;
     margin-top: -2rem;
     z-index: 15; // Set a higher z-index for the .solid element
-  }
-
-  .circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 4.2rem;
-    height: 4.2rem;
-    background: linear-gradient(to right, v.$mainColor, #a5bbca);
-    border-radius: 50%;
-    border: 3px solid v.$lightColor;
-    margin-top: -2rem;
-    z-index: 15;
-
-    .plus {
-      color: v.$lightColor;
-      width: 3rem;
-    }
   }
 }

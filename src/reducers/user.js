@@ -76,13 +76,13 @@ const reducer = (state = initialState, action = {}) => {
 
     case HANDLE_SUCCESSFUL_LOGIN:
       localStorage.setItem('token', action.token);
+      localStorage.setItem('logged', true);
 
       return {
         ...state,
         // sécurité : on efface les identifiants du state dès qu'on a plus besoin
         email: '',
         password: '',
-        loggedState: true,
         logged: true,
       };
 

@@ -6,9 +6,6 @@ import { Image } from 'semantic-ui-react';
 const AvatarFriend = ({ userAvatar }) => <Image src={userAvatar} avatar />;
 
 AvatarFriend.propTypes = {
-  user: PropTypes.shape({
-    avatar: PropTypes.string,
-  }).isRequired,
   userAvatar: PropTypes.string.isRequired,
 };
 

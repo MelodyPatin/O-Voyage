@@ -63,7 +63,7 @@ const ActivityCard = ({ activity }) => {
       </div>
       {/* Display the activity title */}
       <div className="title">
-        <p>{renderActivityTitle()}</p>
+        {renderActivityTitle()}
       </div>
       {/* Display the date selector and link to details */}
       <div className="FlexColumn">

@@ -7,7 +7,11 @@ import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
 import IconButton from '../../../Reusable/Buttons/IconButton';
 import User from '../../../Reusable/User/User';
 import Footer from '../../../Reusable/Footer/Footer';
-import { fetchFriends, deleteFriend, clearSearchFriend } from '../../../../actions/user';
+import {
+  fetchFriends,
+  deleteFriend,
+  clearSearchFriend,
+} from '../../../../actions/user';
 
 const FriendList = () => {
   const navigate = useNavigate();

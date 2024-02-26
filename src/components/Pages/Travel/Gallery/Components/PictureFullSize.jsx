@@ -1,14 +1,25 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './GalleryPictures.scss';
 import { useMediaQuery } from '@mui/material';
 import './PictureFullSize.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
+import { fetchAPicture } from '../../../../../actions/gallery';
 
 const PictureFullSize = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
   const { tripId } = useParams();
+  const { pictureId } = useParams();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Dispatchez l'action pour récupérer la liste lorsque le composant est monté
+    dispatch(fetchAPicture(tripId, pictureId));
+  }, [dispatch, tripId, pictureId]);
+
+  const photo = useSelector((state) => state.gallery.image);
 
   return (
     <div className="galleryPicture">
@@ -22,7 +33,7 @@ const PictureFullSize = () => {
       <div className="pictureContainer">
         <img
           className="photo"
-          src="https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630"
+          src={photo.picture_url}
           alt="trip photo uploaded by the users"
         />
       </div>

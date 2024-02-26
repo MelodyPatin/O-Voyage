@@ -30,4 +30,19 @@
     overflow-x: auto;
     height: 100%;
   }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  
+    .pageButton {
+      background-color: v.$mainColor;
+      color: v.$lightColor;
+      padding: 0.5rem;
+      width: 8rem;
+      border-radius: 10px;
+      border: 0;
+    }
+  }
 }

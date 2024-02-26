@@ -32,6 +32,7 @@ function App() {
   const dispatch = useDispatch();
   const loggedOut = useSelector((state) => state.user.loggedOut);
   const logged = useSelector((state) => state.user.logged);
+  const loggedStorage = localStorage.getItem('logged')
   const navigate = useNavigate();
 
   const [redirectHome, setRedirectHome] = useState(false);
@@ -59,8 +60,12 @@ function App() {
   }, []);
 
   const renderPrivateRoute = (path, element) => {
-    return logged ? <Route path={path} element={element} /> : <Route path={path} element={<Navigate to="/" />} />;
-  };  
+    return (logged || loggedStorage) ? (
+      <Route path={path} element={element} />
+    ) : (
+      <Route path={path} element={<Navigate to="/" />} />
+    );
+  };
 
   return (
     <div className="App">
@@ -72,7 +77,7 @@ function App() {
           <Route path="/legal-notice" element={<LegalNotice />} />
           <Route path="/our-history" element={<History />} />
           <Route path="*" element={<Error />} />
-          
+
           {/* Routes privées nécessitant une connexion */}
           {renderPrivateRoute('/dashboard', <Dashboard />)}
           {renderPrivateRoute('/me', <UserUpdate />)}
@@ -86,6 +91,10 @@ function App() {
             <ActivityDetails />
           )}
           {renderPrivateRoute(
+            '/trip/:tripId/gallery/:pictureId',
+            <FullSizePhoto />
+          )}
+          {renderPrivateRoute(
             '/trip/:tripId/updateactivity/:activityId',
             <ActivityUpdate />
           )}
@@ -94,10 +103,7 @@ function App() {
           {renderPrivateRoute('/trip/:tripId/addtravelers', <AddTravelers />)}
           {renderPrivateRoute('/trip/:tripId/filters', <Filters />)}
           {renderPrivateRoute('/trip/:tripId/gallery', <Gallery />)}
-          {renderPrivateRoute(
-            '/trip/:tripId/gallery/photo',
-            <FullSizePhoto />
-          )}
+          {renderPrivateRoute('/trip/:tripId/gallery/photo', <FullSizePhoto />)}
           {renderPrivateRoute('/trip/:tripId/suitcase', <Suitcase />)}
         </Routes>
       </header>
