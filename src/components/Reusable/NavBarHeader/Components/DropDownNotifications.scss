@@ -23,8 +23,8 @@
     background-color: v.$secondaryColor;
     text-align: center;
     color: v.$lightColor;
-    line-height: 18px; // Assurez-vous que la hauteur de ligne est égale à la hauteur de l'élément
-    vertical-align: middle; // Centre le contenu verticalement
+    line-height: 18px; 
+    vertical-align: middle;
 
     @media (min-width: 767px) {
       right: 2.5rem;

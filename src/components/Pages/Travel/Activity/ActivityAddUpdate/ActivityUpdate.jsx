@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import './ActivityAddUpdate.scss';
-import { useMediaQuery } from '@mui/material';
-import PropTypes from 'prop-types';
+
 import NavBarHeader from '../../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../../Reusable/Step/StepInput';
@@ -10,23 +11,23 @@ import StepTextarea from '../../../../Reusable/Step/StepTextarea';
 import ProgressBar from '../../../../Reusable/ProgressBar/ProgressBar';
 import StepInputSelector from '../../../../Reusable/Step/StepInputSelector';
 import ReturnTitleStep from '../../../../Reusable/ReturnTitle/ReturnTitleStep';
-import { useParams } from 'react-router-dom';
+import StepTagUpdate from '../../../../Reusable/Step/StepTagUpdate';
+
 import {
   changeActivityField,
   fetchAnActivityToUpdate,
 } from '../../../../../actions/activity';
-import StepTagUpdate from '../../../../Reusable/Step/StepTagUpdate';
 
 const ActivityUpdate = () => {
   const dispatch = useDispatch();
   const { activityId } = useParams();
 
+  // Fetch activity data for update on component mount
   useEffect(() => {
     dispatch(fetchAnActivityToUpdate(activityId));
   }, [dispatch, activityId]);
 
-  const isMobile = useMediaQuery('(max-width: 767px)');
-
+  // Use the useSelector hook to get data from the Redux store
   const step = useSelector((state) => state.trip.step);
   const activityTitle = useSelector((state) => state.activity.activityTitle);
   const activityPrice = useSelector((state) => state.activity.activityPrice);
@@ -39,6 +40,8 @@ const ActivityUpdate = () => {
     (state) => state.activity.activityDescription
   );
   const cities = useSelector((state) => state.activity.selectedCities);
+
+  // Options for city selector
   const citiesOptions = cities.map((city) => ({
     key: city.key,
     text: city.value,
@@ -48,6 +51,9 @@ const ActivityUpdate = () => {
   return (
     <div className="updateActivity">
       <NavBarHeader />
+
+      {/* Render different steps based on the current step value */}
+      {/* Step 1: Input for activity title */}
       {step === 1 && (
         <div className="updateActivity">
           <ReturnTitle textContent="Modifier la proposition" />
@@ -65,6 +71,8 @@ const ActivityUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 2: Input for activity address and selector for the city */}
       {step === 2 && (
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
@@ -84,6 +92,8 @@ const ActivityUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 3: Input for activity cost */}
       {step === 3 && (
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
@@ -101,6 +111,8 @@ const ActivityUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 4: Input for activity oppening days and hours */}
       {step === 4 && (
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
@@ -118,6 +130,8 @@ const ActivityUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 5: Input for activity website */}
       {step === 5 && (
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
@@ -135,6 +149,8 @@ const ActivityUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 6: Input for activity description */}
       {step === 6 && (
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
@@ -152,6 +168,8 @@ const ActivityUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 7: Select for activity category */}
       {step === 7 && (
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />

@@ -1,14 +1,12 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
 import { useMediaQuery } from '@mui/material';
-import {
-  ChevronUpIcon,
-  ChevronDownIcon,
-  BellIcon,
-  XCircleIcon,
-} from '@heroicons/react/24/solid';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+
 import './DropDownSettings.scss';
+
 import Avatar from '../../Avatar/Avatar';
 import ProfileInfo from '../../ProfileInfo/ProfileInfo';
 
@@ -25,7 +23,13 @@ const DropDownSettings = ({ handleLogout }) => {
 
   return (
     <div className="DropDownMenu">
-      <div className="dropdown-trigger" onClick={toggleMenu}>
+      {/* Dropdown trigger */}
+      <div
+        className="dropdown-trigger"
+        onClick={toggleMenu}
+        role="button"
+        tabIndex={0}
+      >
         <div className="text">
           <Avatar className="avatar" />
           {!isMobile && <p className="notification-title">Vous</p>}
@@ -34,9 +38,10 @@ const DropDownSettings = ({ handleLogout }) => {
       {/* Dropdown content */}
       {isOpen && (
         <div className="dropdown-content settings">
+          {/* Display user profile information */}
           <ProfileInfo id="info" />
           <ul>
-            {/* Settings items */}
+            {/* Settings items with navigation links */}
             <Link to="/me">
               <li className="item">Modifier mon profil</li>
             </Link>

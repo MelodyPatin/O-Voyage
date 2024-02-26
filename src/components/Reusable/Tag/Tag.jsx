@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Tag.scss';
 
 const Tag = ({ text, color, isSelected, onClick }) => {
+  // Dynamic styling based on the isSelected prop
   const tagStyle = {
     backgroundColor: isSelected ? color : 'transparent',
     borderColor: color,
@@ -10,6 +11,7 @@ const Tag = ({ text, color, isSelected, onClick }) => {
   };
 
   return (
+    // Container for the tag with dynamic styles and click event
     <div className="tag" style={tagStyle} onClick={onClick}>
       <p>{text}</p>
     </div>
@@ -25,7 +27,7 @@ Tag.propTypes = {
 
 Tag.defaultProps = {
   isSelected: false,
-  onClick: () => {}, // Fonction vide par défaut
+  onClick: () => {},
 };
 
 export default Tag;

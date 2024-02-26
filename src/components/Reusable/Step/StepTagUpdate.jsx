@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import './Steps.scss';
 import PropTypes from 'prop-types';
-import LabelInput from '../LabelInput/LabelInput';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
+
+import './Steps.scss';
+
 import SimpleButton from '../Buttons/SimpleButton';
 import Tag from '../Tag/Tag';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTags, submitUpdateActivity, updateSelectedTag } from '../../../actions/activity';
-import { useNavigate, useParams } from 'react-router-dom';
-import { clearErrorMessage } from '../../../actions/user';
+
+import {
+  fetchTags,
+  submitUpdateActivity,
+  updateSelectedTag,
+} from '../../../actions/activity';
+import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 import { handleStepReset } from '../../../actions/trip';
 
 const StepTagUpdate = ({
@@ -18,33 +24,51 @@ const StepTagUpdate = ({
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { activityId } = useParams();
-  const [selectedTag, setSelectedTag] = useState(null);
+  const { activityId } = useParams(); // Get the activityId from the route parameters
+  const [selectedTag, setSelectedTag] = useState(null); // Local state for the selected tag
   const errorMessage = useSelector((state) => state.user.errorMessage);
   const tripId = useSelector((state) => state.trip.trip.id);
 
+  // Fetch tags from the server when the component mounts
   useEffect(() => {
     dispatch(fetchTags());
   }, []);
 
+  // Click handler for the button to submit the updated activity with the selected tag
   const handleClick = () => {
+    // Check if a tag is selected
+    if (!selectedTag) {
+      // Display an error message if no tag is selected
+      dispatch(setErrorMessage('Veuillez sélectionner un tag.'));
+      return; // Stop the progression if no tag is selected
+    }
+
+    // Submit the updated activity with the selected tag
     dispatch(submitUpdateActivity(activityId));
+    // Clear any error messages
     dispatch(clearErrorMessage());
+    // Reset the step state to the initial step
     dispatch(handleStepReset());
+    // Navigate to the trip details page after the activity is updated
     navigate(`/trip/${tripId}`);
   };
 
+  // Callback function to handle a tag click
   const handleTagClick = (tag) => {
+    // Update the local state with the selected tag
     setSelectedTag(tag);
+    // Dispatch an action to update the selected tag in the Redux store
     dispatch(updateSelectedTag(tag));
   };
 
+  // Retrieve the tags from the Redux store
   const tags = useSelector((state) => state.activity.tags);
 
   return (
     <div className="StepTag">
       <div className="LabelInput">
         <p>{labelContent}</p>
+        {/* Display tags with Tag components */}
         <div className="tags">
           {tags.map((tag) => (
             <Tag
@@ -57,6 +81,7 @@ const StepTagUpdate = ({
           ))}
         </div>
       </div>
+      {/* Display error message if present */}
       {errorMessage && <p className="errorMessage">{errorMessage}</p>}
       <SimpleButton
         textContent={buttonContent}

@@ -12,7 +12,6 @@
     0.7
   ); // Semi-transparent overlay background
 
-  // TODO really usefull?
   &:target {
     visibility: visible;
     display: block;

@@ -4,37 +4,43 @@
   position: relative;
   display: flex;
   align-items: center;
-  background: url('../../../../../../src/assets/LogoPicture.png') top/cover no-repeat;
-  height: 50vh;
+  background: url('../../../../../../src/assets/LogoPicture.png') top/cover
+    no-repeat;
+  height: 50vh; // Initial height
 
   @media (min-width: 900px) {
-    height: 80vh;
+    height: 80vh; // Adjusted height for larger screens
   }
 
   @media (min-width: 1200px) {
-    height: 100vh;
+    height: 100vh; // Further adjusted height for even larger screens
   }
 
   img {
-    display: none; /* Cacher l'image par défaut */
+    display: none; // Hide the image by default
 
     @media (min-width: 900px) {
-      display: block; /* Afficher l'image sur les écrans de 900 pixels et plus */
-      width: 95%;
+      display: block; //  Show the image on screens of 900 pixels and above
+      width: 80%;
+      margin: auto; // Center the image
     }
   }
 
   p {
     position: absolute;
     bottom: 0;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: v.$lightColor;
-    padding: 2rem;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
+    padding: 2rem; // Default padding
 
     @media (min-width: 600px) {
-      padding: 2rem 6rem;
+      padding: 2rem 6rem; // Adjusted padding for screens of 600 pixels and above
+    }
+
+    @media (min-width: 900px) {
+      padding: 1rem 4rem; // Further adjusted padding for screens of 900 pixels and above
     }
   }
 }

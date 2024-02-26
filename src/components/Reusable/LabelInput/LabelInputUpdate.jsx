@@ -11,10 +11,12 @@ const LabelInputUpdate = ({
   type,
   onChange,
 }) => {
+  // Event handler for input value changes
   const handleChange = (evt) => {
     onChange(evt, name);
   };
 
+  // Generate a unique input ID
   const inputId = `field-${name}`;
 
   return (

@@ -1,15 +1,16 @@
+import { NavLink, useParams } from 'react-router-dom';
+
 import {
   HomeIcon,
   PhotoIcon,
   ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/solid';
 
-import { NavLink, useParams } from 'react-router-dom';
-// Import NavLink from react-router-dom
 import './DesktopItems.scss';
 
 const DesktopItems = () => {
-  const { tripId } = useParams(); // Get the 'id' parameter from the URL
+  // Get the 'id' parameter from the URL
+  const { tripId } = useParams();
 
   return (
     <div className="desktopItems">
