@@ -9,6 +9,7 @@ export const SUBMIT_CREATE_ACTIVITY = 'SUBMIT_CREATE_ACTIVITY';
 export const SUBMIT_UPDATE_ACTIVITY = 'SUBMIT_UPDATE_ACTIVITY';
 export const UPDATE_SELECTED_TAG = 'UPDATE_SELECTED_TAG';
 export const HANDLE_ADD_TAG = 'HANDLE_ADD_TAG';
+export const HANDLE_REMOVE_TAG = 'HANDLE_REMOVE_TAG';
 export const SAVE_ACTIVITY_INFO = 'SAVE_ACTIVITY_INFO';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const UPDATE_ACTIVITY_DATE = 'UPDATE_ACTIVITY_DATE';
@@ -69,6 +70,11 @@ export const updateSelectedTag = (tag) => ({
 
 export const handleAddTag = (activityId) => ({
   type: HANDLE_ADD_TAG,
+  activityId,
+});
+
+export const handleRemoveTag = (activityId) => ({
+  type: HANDLE_REMOVE_TAG,
   activityId,
 });
 

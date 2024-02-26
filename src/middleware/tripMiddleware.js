@@ -135,8 +135,10 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       // Données à envoyer au format JSON
       const cityJsonData = {
-        cityKeys,
+        citiesID: cityKeys,
       };
+
+      console.log(cityJsonData);
 
       // Exécution de la requête
       api
