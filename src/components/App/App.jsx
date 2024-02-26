@@ -1,15 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import HomePage from '../Pages/HomePage/HomePage';
 import Dashboard from '../Pages/Dashboard/Dashboard';
 import Error from '../Pages/Error/Error';
-import {
-  updateLoggedOut,
-  fetchUserData,
-  handleSuccessfulLogin,
-} from '../../actions/user';
 import UserUpdate from '../Pages/User/UserUpdate';
 import FriendList from '../Pages/Friend/FriendList/FriendList';
 import FriendAdd from '../Pages/Friend/FriendAdd/FriendAdd';
@@ -28,33 +22,34 @@ import Gallery from '../Pages/Travel/Gallery/Gallery';
 import FullSizePhoto from '../Pages/Travel/Gallery/FullSizePhoto';
 import AddTravelers from '../Pages/Travel/Travelers/AddTravelers';
 import Suitcase from '../Pages/Travel/Suitcase/Suitcase';
+import {
+  updateLoggedOut,
+  fetchUserData,
+  handleSuccessfulLogin,
+} from '../../actions/user';
 
 function App() {
   const dispatch = useDispatch();
   const loggedOut = useSelector((state) => state.user.loggedOut);
   const logged = useSelector((state) => state.user.logged);
+  const navigate = useNavigate();
 
   const [redirectHome, setRedirectHome] = useState(false);
 
   useEffect(() => {
-    // Redirect to the connexion page after successful logout
     if (loggedOut && !redirectHome) {
       setRedirectHome(true);
     }
   }, [loggedOut, redirectHome]);
 
   useEffect(() => {
-    // Mettez à jour l'état loggedOut après la redirection vers la page d'accueil
     if (redirectHome) {
-      // Mettez loggedOut à false après la redirection
-      // Vous pouvez utiliser une autre action ou un moyen pour mettre à jour loggedOut dans le state Redux
-      // Par exemple, dispatchez une action pour mettre loggedOut à false dans votre reducer
       dispatch(updateLoggedOut(false));
       setRedirectHome(false);
+      navigate('/');
     }
-  }, [redirectHome, dispatch]);
+  }, [redirectHome, dispatch, navigate]);
 
-  // Effect to check for token and fetch user data on component mount
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token) {
@@ -63,64 +58,47 @@ function App() {
     }
   }, []);
 
+  const renderPrivateRoute = (path, element) => {
+    return logged ? <Route path={path} element={element} /> : <Route path={path} element={<Navigate to="/" />} />;
+  };  
+
   return (
     <div className="App">
       <header className="App-header">
-        {/* Redirect to HomePage after successful logout */}
-        {redirectHome && <Navigate to="/" replace />}
-
         <Routes>
+          {/* Routes publiques accessibles en tout temps */}
           <Route path="/*" element={<HomePage />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/legal-notice" element={<LegalNotice />} />
           <Route path="/our-history" element={<History />} />
           <Route path="*" element={<Error />} />
-          {logged && <Route path="/dashboard" element={<Dashboard />} />}
-          {logged && <Route path="/me" element={<UserUpdate />} />}
-          {logged && <Route path="/friends" element={<FriendList />} />}
-          {logged && <Route path="/friends/add" element={<FriendAdd />} />}
-          {logged && <Route path="/createtrip" element={<TravelAdd />} />}
-          {logged && (
-            <Route path="/updatetrip/:tripId" element={<TravelUpdate />} />
+          
+          {/* Routes privées nécessitant une connexion */}
+          {renderPrivateRoute('/dashboard', <Dashboard />)}
+          {renderPrivateRoute('/me', <UserUpdate />)}
+          {renderPrivateRoute('/friends', <FriendList />)}
+          {renderPrivateRoute('/friends/add', <FriendAdd />)}
+          {renderPrivateRoute('/createtrip', <TravelAdd />)}
+          {renderPrivateRoute('/updatetrip/:tripId', <TravelUpdate />)}
+          {renderPrivateRoute('/createactivity', <ActivityAdd />)}
+          {renderPrivateRoute(
+            '/trip/:tripId/activity/:activityId',
+            <ActivityDetails />
           )}
-          {logged && <Route path="/createactivity" element={<ActivityAdd />} />}
-          {logged && (
-            <Route
-              path="/trip/:tripId/activity/:activityId"
-              element={<ActivityDetails />}
-            />
+          {renderPrivateRoute(
+            '/trip/:tripId/updateactivity/:activityId',
+            <ActivityUpdate />
           )}
-          {logged && (
-            <Route
-              path="/trip/:tripId/updateactivity/:activityId"
-              element={<ActivityUpdate />}
-            />
+          {renderPrivateRoute('/trip/:tripId', <TravelDetails />)}
+          {renderPrivateRoute('/trip/:tripId/travelers', <Travelers />)}
+          {renderPrivateRoute('/trip/:tripId/addtravelers', <AddTravelers />)}
+          {renderPrivateRoute('/trip/:tripId/filters', <Filters />)}
+          {renderPrivateRoute('/trip/:tripId/gallery', <Gallery />)}
+          {renderPrivateRoute(
+            '/trip/:tripId/gallery/photo',
+            <FullSizePhoto />
           )}
-          {logged && <Route path="/trip/:tripId" element={<TravelDetails />} />}
-          {logged && (
-            <Route path="/trip/:tripId/travelers" element={<Travelers />} />
-          )}
-          {logged && (
-            <Route
-              path="/trip/:tripId/addtravelers"
-              element={<AddTravelers />}
-            />
-          )}
-          {logged && (
-            <Route path="/trip/:tripId/filters" element={<Filters />} />
-          )}
-          {logged && (
-            <Route path="/trip/:tripId/gallery" element={<Gallery />} />
-          )}
-          {logged && (
-            <Route
-              path="/trip/:tripId/gallery/photo"
-              element={<FullSizePhoto />}
-            />
-          )}
-          {logged && (
-            <Route path="/trip/:tripId/suitcase" element={<Suitcase />} />
-          )}
+          {renderPrivateRoute('/trip/:tripId/suitcase', <Suitcase />)}
         </Routes>
       </header>
     </div>

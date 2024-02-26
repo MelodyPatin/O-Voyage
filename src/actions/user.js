@@ -45,7 +45,7 @@ export const loginError = (errorMessage) => ({
 });
 
 export const signupError = (errorMessage) => ({
-  type: LOGIN_ERROR,
+  type: SIGNUP_ERROR,
   errorMessage,
 });
 
