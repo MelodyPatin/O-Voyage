@@ -3,7 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import PresentationCard from './PresentationCard';
 import Aurelien from '../../../../assets/profile-aurelien.jpeg';
-import Melody from '../../../../assets/profile-melody.png'
+import Melody from '../../../../assets/profile-melody.png';
 import Theophile from '../../../../assets/profile-theophile.jpeg';
 import Nicolas from '../../../../assets/profile-nico.jpg';
 
@@ -81,11 +81,8 @@ const ContentHistory = () => {
         </p>
         <p>
           Pendant ce mois intense chez O'Clock, nous avons intégré des
-          fonctionnalités telles qu'une carte interactive, une API météo pour
-          optimiser les activités en fonction des conditions climatiques, une
-          checklist individuelle, une gestion simplifiée des participants, un
-          espace de partage de photos, et un chat intégré pour faciliter la
-          communication au sein du groupe.
+          fonctionnalités telles qu'une checklist individuelle, une gestion
+          simplifiée des participants et un espace de partage de photos.
         </p>
         <p>
           Notre plateforme va au-delà de la simple planification de voyages ;
@@ -105,10 +102,28 @@ const ContentHistory = () => {
       <h2>Nous contacter</h2>
       <p>N'hésitez pas à nous contacter :</p>
       <ul>
-        <li>Aurélien: </li>
-        <li>Mélody: </li>
-        <li>Nicolas: </li>
-        <li>Théophile: </li>
+        <li>
+          Aurélien :{' '}
+          <a href="mailto:aurelien.guern@gmail.com">aurelien.guern@gmail.com</a>
+        </li>
+        <li>
+          Mélody :{' '}
+          <a href="mailto:melody.patin.dev@gmail.com">
+            melody.patin.dev@gmail.com
+          </a>
+        </li>
+        <li>
+          Nicolas :{' '}
+          <a href="mailto:nicolas.guillotte.pro@gmail.com">
+            nicolas.guillotte.pro@gmail.com
+          </a>
+        </li>
+        <li>
+          Théophile :{' '}
+          <a href="mailto:theophile.bernard@gmail.com">
+            theophile.bernard@gmail.com
+          </a>
+        </li>
       </ul>
     </div>
   );
