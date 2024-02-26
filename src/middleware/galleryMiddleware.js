@@ -3,7 +3,6 @@ import {
   FETCH_A_PICTURE,
   FETCH_PICTURES,
   SHOW_PICTURES,
-  fetchPictures,
   showPictures,
 } from '../actions/gallery';
 import api from '../api';
@@ -11,46 +10,47 @@ import api from '../api';
 const galleryMiddleware = (store) => (next) => async (action) => {
   switch (action.type) {
     case FETCH_PICTURES:
-      try {
-        const currentPage = 1;
-        const response = await api.get(
-          `/album/trip/${action.tripId}/page/${currentPage}`,
-          currentPage
-        );
-        store.dispatch(showPictures(response.data));
-      } catch (error) {
-        console.error(error);
-        // Handle the error
-      }
+      const currentPage = 1;
+      api
+        .get(`/album/trip/${action.tripId}/page/${currentPage}`, currentPage)
+        .then((response) => {
+          store.dispatch(showPictures(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       break;
 
     case FETCH_A_PICTURE:
-      try {
-        const response = await api.get(
-          `/trip/${action.tripId}/photo/${action.pictureId}`
-        );
-        store.dispatch(showPictures(response.data));
-      } catch (error) {
-        console.error(error);
-        // Handle the error
-      }
+      api
+        .get(`/trip/${action.tripId}/photo/${action.pictureId}`)
+        .then((response) => {
+          store.dispatch(showPictures(response.data));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
       break;
 
     case ADD_PICTURE:
-      try {
-        const { base64Data } = action;
+      const { base64Data } = action;
 
-        const response = await api.post(`/trip/${action.tripId}/photo/`, {
+      api
+        .post(`/trip/${action.tripId}/photo/`, {
           picture: base64Data,
+        })
+        .then((response) => {
+          const newPicture = response.data;
+          const currentPhotos = store.getState().gallery.images || [];
+
+          store.dispatch({
+            type: SHOW_PICTURES,
+            pictures: [newPicture, ...currentPhotos],
+          });
+        })
+        .catch((error) => {
+          console.error(error);
         });
-        const newPicture = response.data;
-        store.dispatch({
-          type: SHOW_PICTURES,
-          pictures: [newPicture, ...store.getState().gallery.images],
-        });
-      } catch (error) {
-        console.error(error);
-      }
       break;
 
     default:

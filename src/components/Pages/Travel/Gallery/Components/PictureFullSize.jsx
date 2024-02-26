@@ -17,9 +17,10 @@ const PictureFullSize = () => {
   useEffect(() => {
     // Dispatchez l'action pour récupérer la liste lorsque le composant est monté
     dispatch(fetchAPicture(tripId, pictureId));
-  }, []);
+  }, [dispatch, tripId, pictureId]);
 
-  const photo = useSelector((state) => state.gallery.images);
+  const photo = useSelector((state) => state.gallery.gallery.images);
+  console.log(photo);
   return (
     <div className="galleryPicture">
       {!isMobile && (

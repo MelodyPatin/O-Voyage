@@ -7,8 +7,10 @@ import {
 } from '../actions/gallery';
 
 const initialState = {
-  gallery: { images: [] },
-  image: null,
+  images: [],
+  page: 1,
+  image: [],
+  photosFetched: false,
 };
 
 const galleryReducer = (state = initialState, action = {}) => {
@@ -16,14 +18,16 @@ const galleryReducer = (state = initialState, action = {}) => {
     case FETCH_PICTURES:
       return {
         ...state,
+        photosFetched: true,
       };
 
     case SHOW_PICTURES:
       return {
         ...state,
-        images: action.pictures,
+        images: {
+          photos: action.pictures,
+        },
       };
-
     case FETCH_A_PICTURE:
       return {
         ...state,
