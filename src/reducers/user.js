@@ -109,6 +109,7 @@ const reducer = (state = initialState, action = {}) => {
     case CLEAR_SEARCH_FRIEND:
       return {
         ...state,
+        searchUsersValue: '',
         firstNameSearch: '',
         lastNameSearch: '',
         avatarSearch: '',
@@ -215,15 +216,14 @@ const reducer = (state = initialState, action = {}) => {
         friendsFetched: action.bool, // Définir friendsFetched à true une fois les amis chargés
       };
 
-    case CLEAR_SEARCH_FRIEND:
+    case SAVE_USER_RESULT_DATA:
       return {
         ...state,
-        searchUsersValue: '',
-        firstNameSearch: '',
-        lastNameSearch: '',
-        avatarSearch: '',
-        emailSearch: '',
-        userIdSearch: '',
+        firstNameSearch: action.firstName,
+        lastNameSearch: action.lastName,
+        avatarSearch: action.avatarURL,
+        emailSearch: action.email,
+        userIdSearch: action.userId,
       };
 
     default:

@@ -63,7 +63,7 @@ const ActivityCard = ({ activity }) => {
     <div className={`ActivityCard ${tag}`}>
       {/* Display the score and creator's avatar */}
       <div className="FlexGap">
-        <p>{activity.score}</p>
+        <p className='score'>{activity.score}</p>
         <AvatarFriend userAvatar={activity.creator.avatarURL} />
       </div>
       {/* Display the activity title */}
