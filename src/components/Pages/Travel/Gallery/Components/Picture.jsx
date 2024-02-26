@@ -9,10 +9,11 @@ const Picture = () => {
   const dispatch = useDispatch();
 
   const photosFetched = useSelector((state) => state.gallery.photosFetched);
+  const currentPage = useSelector((state) => state.gallery.currentPage);
 
   useEffect(() => {
     if (!photosFetched) {
-      dispatch(fetchPictures(tripId));
+      dispatch(fetchPictures(tripId, currentPage));
     }
   }, [dispatch, photosFetched, tripId]);
 

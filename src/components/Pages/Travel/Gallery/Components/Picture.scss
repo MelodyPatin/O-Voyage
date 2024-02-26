@@ -13,4 +13,20 @@
     object-position: center;
     border-radius: 10px;
   }
+
+  @media (min-width: 1025px) {
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes à partir de 1025px */
+    img {
+      height: 15rem; /* Réduire la hauteur des images */
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 1800px) {
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes à partir de 1800px */
+    img {
+      height: 20rem; /* Réduire davantage la hauteur des images */
+      width: 100%;
+    }
+  }
 }

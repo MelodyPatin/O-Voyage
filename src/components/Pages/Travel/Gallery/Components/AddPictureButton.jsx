@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addPicture } from '../../../../../actions/gallery';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
@@ -7,6 +7,7 @@ import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 const AddPictureButton = () => {
   const { tripId } = useParams();
   const dispatch = useDispatch();
+  const currentPage = useSelector((state) => state.gallery.currentPage);
 
   const fileInputRef = useRef(null);
 
@@ -42,7 +43,7 @@ const AddPictureButton = () => {
         const base64Data = await convertFileToBase64(files[0]);
 
         // Assuming your API call to add a picture is synchronous
-        await dispatch(addPicture(tripId, base64Data));
+        await dispatch(addPicture(tripId, base64Data, currentPage));
 
         // Optionally, you can dispatch a FETCH_PICTURES action to ensure the list is up-to-date
         // dispatch(fetchPictures(tripId));

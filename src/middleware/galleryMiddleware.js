@@ -10,11 +10,14 @@ import {
 import api from '../api';
 
 const galleryMiddleware = (store) => (next) => async (action) => {
+  const { currentPage } = action;
   switch (action.type) {
     case FETCH_PICTURES:
-      const currentPage = 1;
+
+    console.log(currentPage);
+
       api
-        .get(`/album/trip/${action.tripId}/page/${currentPage}`, currentPage)
+        .get(`/album/trip/${action.tripId}/page/${currentPage}`)
         .then((response) => {
           store.dispatch(showPictures(response.data));
         })
@@ -43,7 +46,7 @@ const galleryMiddleware = (store) => (next) => async (action) => {
         })
         .then((response) => {
           const currentPhotos = store.getState().gallery.photos.photos || {}; // Utiliser 'photos' au lieu de 'images'
-          store.dispatch(fetchPictures(action.tripId));
+          store.dispatch(fetchPictures(action.tripId, currentPage));
         })
         .catch((error) => {
           console.error(error);
