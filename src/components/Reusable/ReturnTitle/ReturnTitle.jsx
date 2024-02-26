@@ -1,15 +1,21 @@
 import React from 'react';
-import './ReturnTitle.scss';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { clearErrorMessage, handleModificationStatus } from '../../../actions/user';
+
+import './ReturnTitle.scss';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+
+import {
+  clearErrorMessage,
+  handleModificationStatus,
+} from '../../../actions/user';
 
 const ReturnTitle = ({ textContent }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  // Dispatch actions to clear error messages and handle modification status
   const handleGoBack = () => {
     dispatch(clearErrorMessage());
     dispatch(handleModificationStatus());
@@ -19,9 +25,8 @@ const ReturnTitle = ({ textContent }) => {
   return (
     <div className="ReturnTitle">
       <ArrowLeftIcon className="arrowIcon" onClick={handleGoBack} />
-      {/* Icone pour revenir à la page précédente */}
+      {/* Icon for going back to the previous page */}
       <h3>{textContent}</h3>
-      {/* Afficher l'Avatar si la propriété avatar est vraie */}
     </div>
   );
 };

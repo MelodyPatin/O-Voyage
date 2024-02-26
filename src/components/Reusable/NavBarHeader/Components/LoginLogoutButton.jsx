@@ -6,12 +6,14 @@ import './LoginLogoutButton.scss';
 const LoginLogoutButton = () => {
   return (
     <div className="buttonContainer">
+      {/* Button to navigate to the login page */}
       <Button
         className="connectionButton"
         as={Link}
         to="/login"
         content="Se connecter"
       />
+      {/* Button to navigate to the signup page */}
       <Button
         className="connectionButton"
         as={Link}

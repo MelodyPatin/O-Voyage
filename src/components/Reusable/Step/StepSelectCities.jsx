@@ -1,9 +1,11 @@
 import React from 'react';
-import './Steps.scss';
+import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
+import './Steps.scss';
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
-import { useDispatch, useSelector } from 'react-redux';
+
 import { updateSelectedCities } from '../../../actions/trip';
 import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
@@ -16,61 +18,68 @@ const StepSelectCities = ({
 }) => {
   const dispatch = useDispatch();
 
+  // Callback function to handle the selection change in the MultipleSelector
   const handleSelectionChange = (selected) => {
-    // Convertir chaque élément de selected en un objet { key, value }
+    // Convert each selected city name into an object { key, value }
     const newSelected = selected
       .map((selectedCityName) => {
-        // Trouver l'objet dans options qui correspond à ce nom de ville
+        // Find the object in options that corresponds to this city name
         const selectedCity = options.find(
           (city) => city.value === selectedCityName
         );
 
-        // Vérifier si une ville correspondante a été trouvée
+        // Check if a corresponding city was found
         if (selectedCity) {
-          // Retourner un objet avec les clés et valeurs appropriées
+          // Return an object with the appropriate keys and values
           return { key: selectedCity.key, value: selectedCity.value };
-        } else {
-          // Gérer le cas où aucune ville correspondante n'a été trouvée
-          console.error(
-            `Aucune ville correspondante trouvée pour la valeur sélectionnée: ${selectedCityName}`
-          );
-          // Retourner null pour indiquer un problème
-          return null;
         }
+        // Handle the case where no corresponding city was found
+        console.error(
+          `Aucune ville correspondante trouvée pour la valeur sélectionnée: ${selectedCityName}`
+        );
+        // Return null to indicate a problem
+        return null;
       })
-      .filter(Boolean); // Filtrer les éléments nuls (cas où aucune ville correspondante n'a été trouvée)
+      .filter(Boolean); // Filter out null items (cases where no corresponding city was found)
 
-    // Dispatch de l'action pour mettre à jour les villes sélectionnées
+    // Dispatch the action to update the selected cities
     dispatch(updateSelectedCities(newSelected));
   };
 
+  // Retrieve the selected cities from the Redux store
   const selectedCities = useSelector((state) => state.trip.selectedCities);
+  // Retrieve error message from the Redux store
   const errorMessage = useSelector((state) => state.user.errorMessage);
 
+  // Click handler for the form submission
   const handleStepClick = (e) => {
     e.preventDefault();
+
+    // Check if at least one city is selected
     if (selectedCities.length === 0) {
       dispatch(setErrorMessage('Veuillez sélectionner au moins une ville.'));
-      return; // Arrêter la suite si aucune ville n'est sélectionnée
+      return; // Stop the process if no city is selected
     }
 
-    // Si des villes sont sélectionnées, passer à l'étape suivante
+    // If cities are selected, proceed to the next step
     handleClick();
     dispatch(clearErrorMessage());
   };
 
   return (
     <div className="StepSelect">
+      {/* Form with label and MultipleSelector for city selection */}
       <form autoComplete="off">
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selectedCities.map((city) => city.value)} // Utiliser map pour obtenir un tableau de valeurs
+            selected={selectedCities.map((city) => city.value)}
             onChange={handleSelectionChange}
           />
         </div>
+        {/* Display error message if present */}
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton textContent={buttonContent} onClick={handleStepClick} />
       </form>

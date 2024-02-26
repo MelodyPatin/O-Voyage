@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import './ActivityAddUpdate.scss';
+
 import NavBarHeader from '../../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 import StepInput from '../../../../Reusable/Step/StepInput';
@@ -9,11 +11,13 @@ import ProgressBar from '../../../../Reusable/ProgressBar/ProgressBar';
 import StepTag from '../../../../Reusable/Step/StepTag';
 import StepInputSelector from '../../../../Reusable/Step/StepInputSelector';
 import ReturnTitleStep from '../../../../Reusable/ReturnTitle/ReturnTitleStep';
+
 import { changeActivityField } from '../../../../../actions/activity';
 
 const ActivityAdd = () => {
   const dispatch = useDispatch();
 
+  // Get step and activity details from the Redux store
   const step = useSelector((state) => state.trip.step);
   const activityTitle = useSelector((state) => state.activity.activityTitle);
   const activityPrice = useSelector((state) => state.activity.activityPrice);
@@ -27,6 +31,7 @@ const ActivityAdd = () => {
   );
   const activityCities = useSelector((state) => state.trip.trip.cities);
 
+  // Options for city selector
   const activityCitiesOptions = activityCities.map((city) => ({
     key: city.id,
     text: city.name,
@@ -36,6 +41,9 @@ const ActivityAdd = () => {
   return (
     <div className="addActivity">
       <NavBarHeader />
+
+      {/* Render different steps based on the current step value */}
+      {/* Step 1: Input for activity title */}
       {step === 1 && (
         <div className="addActivity">
           <ReturnTitle textContent="Proposition" />
@@ -53,6 +61,8 @@ const ActivityAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 2: Input for activity address and selector for the city */}
       {step === 2 && (
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
@@ -72,6 +82,8 @@ const ActivityAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 3: Input for activity cost */}
       {step === 3 && (
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
@@ -89,6 +101,8 @@ const ActivityAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 4: Input for activity oppening days and hours */}
       {step === 4 && (
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
@@ -106,6 +120,8 @@ const ActivityAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 5: Input for activity website */}
       {step === 5 && (
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
@@ -123,6 +139,8 @@ const ActivityAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 6: Input for activity description */}
       {step === 6 && (
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
@@ -140,6 +158,8 @@ const ActivityAdd = () => {
           />
         </div>
       )}
+
+      {/* Step 7: Select for activity category */}
       {step === 7 && (
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />

@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
 import '../UserUpdate.scss';
 import { Input } from 'semantic-ui-react';
+
 import SimpleButton from '../../../Reusable/Buttons/SimpleButton';
+import LabelInputUpdate from '../../../Reusable/LabelInput/LabelInputUpdate';
+import LabelInput from '../../../Reusable/LabelInput/LabelInput';
+import PopupMessage from '../../../Reusable/Popups/PopupMessage';
+import PopupButton from '../../../Reusable/Popups/PopupButton';
+
 import {
   clearErrorMessage,
   deleteUser,
@@ -13,10 +20,6 @@ import {
   updateUserInput,
   userUpdateRequest,
 } from '../../../../actions/user';
-import LabelInputUpdate from '../../../Reusable/LabelInput/LabelInputUpdate';
-import LabelInput from '../../../Reusable/LabelInput/LabelInput';
-import PopupMessage from '../../../Reusable/Popups/PopupMessage';
-import PopupButton from '../../../Reusable/Popups/PopupButton';
 
 const FormUserUpdate = ({ changeField }) => {
   const dispatch = useDispatch();
@@ -25,6 +28,7 @@ const FormUserUpdate = ({ changeField }) => {
   const user = useSelector((state) => state.user);
   const errorMessage = useSelector((state) => state.user.errorMessage);
 
+  // State to hold edited form values
   const [editedValues, setEditedValues] = useState({
     firstnameValue: user.firstnameValue,
     lastnameValue: user.lastnameValue,
@@ -33,7 +37,7 @@ const FormUserUpdate = ({ changeField }) => {
     avatar: user.avatar,
   });
 
-  // Effet pour mettre à jour les champs édités lorsque l'état Redux change
+  // Effect to update edited values when Redux state changes
   useEffect(() => {
     setEditedValues({
       firstnameValue: user.firstnameValue,
@@ -44,10 +48,12 @@ const FormUserUpdate = ({ changeField }) => {
     });
   }, [user]);
 
+  // Handle change in input fields
   const handleChange = (event, fieldName) => {
     dispatch(updateUserInput(fieldName, event.target.value));
   };
 
+  // Handle change in avatar input
   const handleAvatarChange = (event) => {
     const file = event.target.files[0];
 
@@ -61,73 +67,76 @@ const FormUserUpdate = ({ changeField }) => {
     }
   };
 
+  // State for popup visibility and modification status
   const [popupVisible, setPopupVisible] = useState(false);
   const [modificationStatusTemp, setModificationStatusTemp] = useState(false);
   const modificationStatus = useSelector(
     (state) => state.user.modificationStatus
   );
 
-  // Effet pour afficher la popup lorsque le statut de la modification change
+  // Effect to display popup when modification status changes
   useEffect(() => {
     if (modificationStatus !== null) {
       setPopupVisible(true);
     }
   }, [modificationStatus]);
 
+  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-  
-    // Vérification des champs prénom, nom et email
+
+    // Validation of form fields
     if (
       editedValues.firstnameValue.trim() === '' ||
       editedValues.lastnameValue.trim() === '' ||
       editedValues.email.trim() === ''
     ) {
-      // Afficher un message d'erreur ou prendre une autre action, comme empêcher la soumission
       dispatch(setErrorMessage('Veuillez remplir nom prénom et email.'));
-      return; // Arrêter la soumission du formulaire
+      return;
     }
-  
-    // Vérification du format de l'adresse email
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(user.email)) {
-      dispatch(setErrorMessage("Veuillez entrer une adresse e-mail valide."));
-      return; // Arrêter la soumission du formulaire
+      dispatch(setErrorMessage('Veuillez entrer une adresse e-mail valide.'));
+      return;
     }
-  
-    // Vérification du champ de mot de passe si non vide
+
     if (user.password && user.password.trim() !== '') {
-      const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/; // Expression régulière pour vérifier la présence d'au moins une majuscule, un chiffre et une longueur minimale de 6 caractères
+      const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{6,}$/; // Regular expression to check for the presence of at least one uppercase letter, one digit, and a minimum length of 6 characters
       if (!passwordRegex.test(user.password)) {
-        dispatch(setErrorMessage('Le mot de passe doit contenir au moins une majuscule, un chiffre et avoir une longueur minimale de 6 caractères.'));
-        return; // Arrêter la soumission du formulaire
+        dispatch(
+          setErrorMessage(
+            'Le mot de passe doit contenir au moins une majuscule, un chiffre et avoir une longueur minimale de 6 caractères.'
+          )
+        );
+        return;
       }
     }
-  
-    // Si tous les champs sont remplis et que le mot de passe est valide (s'il est non vide et qu'il passe la validation), procéder à la soumission du formulaire
+
+    // If all fields are filled and password is valid, submit the form
     dispatch(userUpdateRequest());
     dispatch(clearErrorMessage());
   };
-  
-  
 
+  // Handle delete account popup
   const handleDeletePopup = (event) => {
-    event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
+    event.preventDefault();
     setPopupVisible(true);
     setModificationStatusTemp('confirmation');
   };
 
+  // Handle account deletion
   const handleDelete = async (event) => {
     event.preventDefault();
     await dispatch(deleteUser());
     if (user.deletionStatus === 'success') {
-      // Naviguer vers /home
       navigate('/');
     } else {
       setModificationStatusTemp('failure');
     }
   };
 
+  // Close popup
   const handlePopupClose = () => {
     if (modificationStatus === 'success') {
       navigate(-1);
@@ -137,15 +146,17 @@ const FormUserUpdate = ({ changeField }) => {
       setPopupVisible(false);
     }
   };
-  // Revenir à la page précédente
+
+  // Go back to the previous page
   const handleGoBack = () => {
-    navigate(-1); // Navigates back to the previous page
+    navigate(-1);
   };
 
   return (
     <div>
       <div className="formUserUpdate">
         <form className="formUpdateProfile" onSubmit={handleSubmit}>
+          {/* Input fields for user details */}
           <LabelInputUpdate
             name="firstname"
             label="Prénom"
@@ -175,18 +186,22 @@ const FormUserUpdate = ({ changeField }) => {
             value={user.password}
             onChange={changeField}
           />
+          {/* Input field for avatar */}
           <div className="LabelInput">
             <p>Photo de profil</p>
             <Input name="avatar" type="file" onChange={handleAvatarChange} />
           </div>
           {errorMessage && <div className="errorMessage">{errorMessage}</div>}
+          {/* Submit button */}
           <div className="buttonValidate">
             <SimpleButton textContent="Valider" />
           </div>
         </form>
+        {/* Return button */}
         <div className="buttonDelete">
           <SimpleButton textContent="Retour" onClick={handleGoBack} />
         </div>
+        {/* Delete account button */}
         <button
           type="button"
           onClick={handleDeletePopup}
@@ -195,7 +210,7 @@ const FormUserUpdate = ({ changeField }) => {
           Supprimer mon compte
         </button>
       </div>
-      {/* Popup de succès ou d'échec */}
+      {/* Popup for success or failure */}
       {popupVisible &&
         (modificationStatus === 'success' ? (
           <PopupMessage
@@ -208,6 +223,7 @@ const FormUserUpdate = ({ changeField }) => {
             onClose={handlePopupClose}
           />
         ) : null)}
+      {/* Popup for confirmation of account deletion */}
       {modificationStatusTemp === 'confirmation' && popupVisible && (
         <PopupButton
           textContent="Merci de confirmer la suppression de votre compte"

@@ -3,6 +3,7 @@
 .buttonContainer {
   display: flex;
   gap: 0.5rem;
+  
   // Styling for the login/logout buttons
   .ui.button.connectionButton {
     background-color: v.$lightColor;

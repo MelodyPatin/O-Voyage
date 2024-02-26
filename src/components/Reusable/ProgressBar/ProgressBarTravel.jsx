@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './ProgressBar.scss';
 
 const ProgressBarTravel = ({ step }) => {
-  // Calculer la largeur en pourcentage en fonction de l'étape
+  // Calculate the width in percentage based on the current step
   const calculateWidth = (step) => {
     switch (step) {
       case 1:
@@ -24,7 +24,7 @@ const ProgressBarTravel = ({ step }) => {
   };
 
   return (
-    <div className="ProgressBar" style={{ width: calculateWidth(step) }}></div>
+    <div className="ProgressBar" style={{ width: calculateWidth(step) }} />
   );
 };
 

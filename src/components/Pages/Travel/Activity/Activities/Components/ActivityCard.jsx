@@ -1,12 +1,15 @@
 import React from 'react';
-import { Rating } from 'semantic-ui-react';
 import { useDispatch, useSelector } from 'react-redux';
-import './ActivityCard.scss';
-import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+
+import './ActivityCard.scss';
+import { Rating } from 'semantic-ui-react';
+
 import SimpleButton from '../../../../../Reusable/Buttons/SimpleButton';
 import Selector from './Selector';
 import AvatarFriend from '../../../../../Reusable/Avatar/AvatarFriends';
+
 import {
   useActivityRating,
   useSetActivityRating,
@@ -20,16 +23,22 @@ const ActivityCard = ({ activity }) => {
   const [newRating, setNewRating] = useSetActivityRating(activity.id);
   const activityColor = activity.tags[0].color;
 
+  // Function to handle the user's like on the activity
   const handleLike = async (e, { rating: clickedRating }) => {
     await setNewRating(clickedRating);
     dispatch(fetchTripActivities(tripId));
   };
 
-  const activityTitle = activity.name;
-  const shortenedTitle =
-    activityTitle.length > 35
-      ? `${activityTitle.substring(0, 35)}...`
-      : activityTitle;
+  // Function to render the activity title with ellipsis for long titles
+  const renderActivityTitle = () => {
+    const activityTitle = activity.name;
+    const shortenedTitle =
+      activityTitle.length > 35
+        ? `${activityTitle.substring(0, 35)}...`
+        : activityTitle;
+
+    return <p>{shortenedTitle}</p>;
+  };
 
   // Dynamically determine the card color based on selectedTag color
   const cardStyle = {
@@ -52,15 +61,18 @@ const ActivityCard = ({ activity }) => {
         </p>
         <AvatarFriend userAvatar={activity.creator.avatarURL} />
       </div>
+      {/* Display the activity title */}
       <div className="title">
-        <p>{shortenedTitle}</p>
+        <p>{renderActivityTitle()}</p>
       </div>
+      {/* Display the date selector and link to details */}
       <div className="FlexColumn">
         <Selector date={activity.date} activityId={activity.id} />
         <Link to={`/trip/${tripId}/activity/${activity.id}`}>
           <SimpleButton textContent="En savoir plus" />
         </Link>
       </div>
+      {/* Display the heart icon for liking the activity */}
       <div className="hearth">
         {!isLoading && (
           <Rating

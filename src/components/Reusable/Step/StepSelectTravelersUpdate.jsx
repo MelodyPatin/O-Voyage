@@ -1,16 +1,19 @@
 import React from 'react';
-import './Steps.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
+import './Steps.scss';
+
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
-import { useDispatch, useSelector } from 'react-redux';
+
 import {
   handleStepReset,
   submitUpdateTravel,
   updateSelectedTravelers,
 } from '../../../actions/trip';
 import { clearErrorMessage } from '../../../actions/user';
-import { useNavigate } from 'react-router-dom';
 
 const StepSelectTravelersUpdate = ({
   buttonContent,
@@ -23,56 +26,64 @@ const StepSelectTravelersUpdate = ({
   const errorMessage = useSelector((state) => state.user.errorMessage);
   const tripId = useSelector((state) => state.trip.tripId);
 
+  // Click handler for the form submission
   const handleClick = (e) => {
     e.preventDefault();
+    // Submit the updated travel information
     dispatch(submitUpdateTravel());
+    // Clear any error messages
     dispatch(clearErrorMessage());
+    // Navigate to the trip details page after the update
     navigate(`/trip/${tripId}`);
+    // Reset the step state to the initial step
     dispatch(handleStepReset());
   };
 
+  // Callback function to handle the selection change in the MultipleSelector
   const handleSelectionChange = (selected) => {
-    // Convertir chaque élément de selected en un objet { key, value }
+    // Convert each selected traveler name into an object { key, value }
     const newSelected = selected
       .map((selectedTravelerName) => {
-        // Trouver l'objet dans options qui correspond à ce nom de pays
+        // Find the object in options that corresponds to this traveler name
         const selectedTraveler = options.find(
           (traveler) => traveler.value === selectedTravelerName
         );
 
-        // Vérifier si un pays correspondant a été trouvé
+        // Check if a corresponding traveler was found
         if (selectedTraveler) {
-          // Retourner un objet avec les clés et valeurs appropriées
+          // Return an object with the appropriate keys and values
           return { key: selectedTraveler.key, value: selectedTraveler.value };
-        } else {
-          // Gérer le cas où aucun pays correspondant n'a été trouvé
-          console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
-          );
-          // Retourner null pour indiquer un problème
-          return null;
         }
+        // Handle the case where no corresponding traveler was found
+        console.error(
+          `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
+        );
+        // Return null to indicate a problem
+        return null;
       })
-      .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
+      .filter(Boolean); // Filter out null items (cases where no corresponding traveler was found)
 
-    // Dispatch de l'action pour mettre à jour les villes sélectionnées
+    // Dispatch the action to update the selected travelers
     dispatch(updateSelectedTravelers(newSelected));
   };
 
+  // Retrieve the selected travelers from the Redux store
   const selected = useSelector((state) => state.trip.selectedTravelers);
 
   return (
     <div className="StepSelect">
+      {/* Form with label and MultipleSelector for traveler selection */}
       <form autoComplete="off" onSubmit={handleClick}>
         <div className="LabelInput">
           <p>{labelContent}</p>
           <MultipleSelector
             placeholderContent={placeholderContent}
             options={options}
-            selected={selected.map((traveler) => traveler.value)} // Utiliser map pour obtenir un tableau de valeurs
+            selected={selected.map((traveler) => traveler.value)}
             onChange={handleSelectionChange}
           />
         </div>
+        {/* Display error message if present */}
         {errorMessage && <p className="errorMessage">{errorMessage}</p>}
         <SimpleButton
           textContent={buttonContent}
