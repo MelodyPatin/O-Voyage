@@ -9,8 +9,6 @@ const TravelCard = ({ trip }) => {
 
   const { name, startDate, backgroundPictureURL } = trip;
 
-  // State for countdown
-
   // Effect to calculate countdown on component mount and when startDate changes
   useEffect(() => {
     const calculateCountdown = () => {

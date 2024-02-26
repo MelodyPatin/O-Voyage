@@ -61,7 +61,7 @@ const ActivityResume = () => {
 
   return (
     <div className="ActivityResume">
-      <ReturnTitle textContent={`#2 ${currentActivity.name}`} />
+      <ReturnTitle textContent={currentActivity.name} />
       <div className="content">
         {/* Display various details about the activity */}
         <p>Activité : {currentActivity.name}</p>

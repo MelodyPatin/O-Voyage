@@ -21,9 +21,7 @@ const ActivityCard = ({ activity }) => {
   const { tripId } = useParams();
   const [rating, isLoading] = useActivityRating(activity.id);
   const [newRating, setNewRating] = useSetActivityRating(activity.id);
-  const activityColor = useSelector(
-    (state) => state.activity.selectedTag[0].color
-  );
+  const activityColor = activity.tags[0].color;
 
   // Function to handle the user's like on the activity
   const handleLike = async (e, { rating: clickedRating }) => {
@@ -50,10 +48,17 @@ const ActivityCard = ({ activity }) => {
     borderStyle: 'solid', // Border style
   };
 
+  // Dynamically determine the score element's border color
+  const scoreStyle = {
+    borderColor: activityColor, // Border color same as the activity color
+  };
+
   return (
     <div className="ActivityCard" style={cardStyle}>
       <div className="FlexGap">
-        <p className="score">{activity.score}</p>
+        <p className="score" style={scoreStyle}>
+          {activity.score}
+        </p>
         <AvatarFriend userAvatar={activity.creator.avatarURL} />
       </div>
       {/* Display the activity title */}

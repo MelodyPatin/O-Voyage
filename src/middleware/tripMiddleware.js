@@ -135,8 +135,10 @@ const tripMiddleware = (store) => (next) => (action) => {
 
       // Données à envoyer au format JSON
       const cityJsonData = {
-        cityKeys,
+        citiesID: cityKeys,
       };
+
+      console.log(cityJsonData);
 
       // Exécution de la requête
       api
@@ -345,7 +347,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
-          alert("Echec de la suppression du voyage");
         });
       break;
 

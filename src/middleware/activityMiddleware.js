@@ -16,6 +16,8 @@ import {
   FETCH_TAGS,
   saveTags,
   clearCreateActivityInfos,
+  HANDLE_REMOVE_TAG,
+  handleRemoveTag,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -28,6 +30,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
     selectedCities,
     activityUrl,
     activityDescription,
+    selectedTag,
   } = store.getState().activity;
 
   const cityKeys = selectedCities.map((city) => city.key);
@@ -37,6 +40,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
       api
         .get(`/trip/${action.tripId}/activities`)
         .then((response) => {
+          console.log(response.data);
           store.dispatch(saveTripActivities(response.data));
         })
         .catch((error) => {
@@ -117,7 +121,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
-          alert('Erreur lors de la création de l\'activité.');
+          alert("Erreur lors de la création de l'activité.");
         });
 
       break;
@@ -141,24 +145,23 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .put(`/activity/${action.activityId}`, activityUpdateJsonData)
         .then((response) => {
           // Traitement de la réponse
+          store.dispatch(handleRemoveTag(response.data.id));
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           // Dispatch d'une action pour gérer l'erreur
-          alert('Erreur lors de la mise à jour de l\'activité.');
+          alert("Erreur lors de la mise à jour de l'activité.");
         });
 
       break;
 
     case HANDLE_ADD_TAG:
-      const { selectedTag } = store.getState().activity;
-
-      const tagId = selectedTag[0].id;
+      const addTagId = store.getState().activity.selectedTag[0].id; // Rename tagId to removeTagId
 
       // Données à envoyer au format JSON
       const tagJsonData = {
-        tag: tagId,
+        tag: addTagId, // Use addTagId here
       };
 
       // Exécution de la requête
@@ -166,7 +169,26 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .put(`/activity/${action.activityId}/addtag`, tagJsonData)
         .then((response) => {
           // Traitement de la réponse
-          store.dispatch(clearCreateActivityInfos())
+          store.dispatch(clearCreateActivityInfos());
+        })
+        .catch((error) => {
+          console.error('Erreur lors de la requête:', error);
+          // Dispatch d'une action pour gérer l'erreur
+        });
+
+      break;
+
+    case HANDLE_REMOVE_TAG:
+      const removeTagId = store.getState().activity.activity.tags[0].id; // Rename tagId to removeTagId
+
+      console.log(removeTagId);
+
+      // Exécution de la requête
+      api
+        .delete(`/activity/${action.activityId}/removetag/${removeTagId}`)
+        .then((response) => {
+          // Traitement de la réponse
+          store.dispatch(clearCreateActivityInfos());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -179,8 +201,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
       // Effectuer la requête axios pour supprimer le compte utilisateur
       api
         .delete(`/activity/${action.activityId}`)
-        .then((response) => {
-        })
+        .then((response) => {})
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);

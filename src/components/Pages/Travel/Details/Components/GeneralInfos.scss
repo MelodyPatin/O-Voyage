@@ -4,8 +4,14 @@
   margin-top: 3rem;
 }
 
-.travelDates {
+.travelDates, .description, .city-names {
   text-align: center;
   padding: 2rem 0;
   font-family: 'Montserrat', sans-serif;
+}
+
+.description {
+  padding: 0 1rem;
+  line-height: 1.5rem;
+  font-weight: bold;
 }
