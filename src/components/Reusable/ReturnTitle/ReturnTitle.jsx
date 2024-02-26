@@ -1,29 +1,38 @@
 import React from 'react';
-import './ReturnTitle.scss';
-import { Icon } from 'semantic-ui-react';
-import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Avatar from '../Avatar/Avatar';
+import { useDispatch } from 'react-redux';
 
-const ReturnTitle = ({ textContent, avatar }) => {
-  // Check if the text exceeds 17 characters
-  const displayText =
-    textContent.length > 17 ? `${textContent.slice(0, 17)}...` : textContent;
+import './ReturnTitle.scss';
+import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+
+import {
+  clearErrorMessage,
+  handleModificationStatus,
+} from '../../../actions/user';
+
+const ReturnTitle = ({ textContent }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  // Dispatch actions to clear error messages and handle modification status
+  const handleGoBack = () => {
+    dispatch(clearErrorMessage());
+    dispatch(handleModificationStatus());
+    navigate(-1); // Navigates back to the previous page
+  };
 
   return (
     <div className="ReturnTitle">
-      <ArrowLeftIcon className="arrowIcon" />
+      <ArrowLeftIcon className="arrowIcon" onClick={handleGoBack} />
       {/* Icon for going back to the previous page */}
-      <h3>{displayText}</h3>
-      {avatar && <Avatar className="avatar" />}{' '}
-      {/* Display Avatar if avatar prop is true */}
+      <h3>{textContent}</h3>
     </div>
   );
 };
 
 ReturnTitle.propTypes = {
   textContent: PropTypes.string.isRequired,
-  avatar: PropTypes.bool,
 };
 
 export default ReturnTitle;

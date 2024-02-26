@@ -1,19 +1,24 @@
 import React from 'react';
-import './StepFolder.scss';
-import { Input } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import LabelInput from '../LabelInput/LabelInput';
-import SimpleButton from '../SimpleButton/SimpleButton';
+
+import './Steps.scss';
+import { Input } from 'semantic-ui-react';
+
+import SimpleButton from '../Buttons/SimpleButton';
 
 // Functional component : popup with input fields and a close button
 const StepFolder = ({ buttonContent, labelContent }) => {
   return (
     <div className="StepFolder">
-      <div className="LabelInput">
-        <p>{labelContent}</p>
-        <Input type="file" />
-      </div>
-      <SimpleButton textContent={buttonContent} />
+      {/* Form containing a label and an input field for file selection */}
+      <form>
+        <div className="LabelInput">
+          <p>{labelContent}</p>
+          {/* Input field for file selection */}
+          <Input type="file" />
+        </div>
+        <SimpleButton textContent={buttonContent} />
+      </form>
     </div>
   );
 };

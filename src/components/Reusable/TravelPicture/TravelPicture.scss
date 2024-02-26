@@ -1,11 +1,21 @@
-@use '../../../styles/variables' as v;
+@use 'src/styles/variables' as v;
 
 .TravelPicture {
+  position: relative;
+  aspect-ratio: 1/1.3; 
+  overflow: hidden; 
+
+  @media (min-width: 600px) {
+    aspect-ratio: 1.5/1; 
+  }
+
   img {
     display: block;
     margin: auto;
     width: 100%;
-    position: relative;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   // Styling for the hidden file input to select the new photo (triggered indirectly through a label and a visible icon -> more userfriendly)
@@ -17,11 +27,11 @@
   .icon {
     width: 2.5rem;
     color: v.$lightColor;
-    background-color: v.$darkColor;
+    background-color: rgba(v.$darkColor, 0.5);
     padding: 0.6rem;
     border-radius: 50%;
     position: absolute;
     right: 0.5rem;
-    top: 0.5rem;
+    bottom: 0.5rem;
   }
 }

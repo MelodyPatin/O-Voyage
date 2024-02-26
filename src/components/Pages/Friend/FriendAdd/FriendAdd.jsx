@@ -1,29 +1,35 @@
 import React from 'react';
-import './FriendAdd.scss';
+import { useDispatch, useSelector } from 'react-redux';
+
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
-import SimpleButton from '../../../Reusable/SimpleButton/SimpleButton';
-import MultipleSelector from '../../../Reusable/MultipleSelector/MultipleSelector';
+import FormAddFriend from './Components/FormAddFriend';
 
+import { changeSearchUsersField } from '../../../../actions/user';
+
+import './FriendAdd.scss';
+
+// FriendAdd component for adding friends
 const FriendAdd = () => {
-  const users = [
-    { key: 'option1', text: 'Option 1', value: 'Option 1' },
-    { key: 'option2', text: 'Option 2', value: 'Option 2' },
-    { key: 'option3', text: 'Option 3', value: 'Option 3' },
-  ];
+  const dispatch = useDispatch();
+  const searchUsersValue = useSelector((state) => state.user.searchUsersValue);
 
   return (
     <div className="addAFriend">
-      <NavBarHeader isLogged onDesktop={false} />
-      <ReturnTitle textContent="Ajouter des amis" avatar={false} />
-      <div className="selector">
-        <MultipleSelector
-          placeholderContent="Rechercher des utlisateurs"
-          options={users}
-        />
-      </div>
-      <SimpleButton textContent="Valider" />
-      <SimpleButton textContent="Retour" />
+      <NavBarHeader />
+      <ReturnTitle textContent="Ajouter des amis" />
+      {/* Form to add a friend */}
+      <FormAddFriend
+        inputValue={searchUsersValue}
+        changeField={(newValue, identifier) => {
+          const action = changeSearchUsersField(newValue, identifier);
+          dispatch(action);
+        }}
+        name="searchUsersValue"
+        buttonContent="Ajouter"
+        placeholderContent="user@mail.com"
+        labelContent="Rechercher un utilisateur"
+      />
     </div>
   );
 };

@@ -2,27 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Tag.scss';
 
-const Tag = ({ text, category }) => {
-  let tagClassName;
-  // Convert text to a valid class name, replacing spaces with dashes
-  if (category === 'tag') {
-    tagClassName = text.toLowerCase().replace(/\s/g, '-');
-  } else {
-    tagClassName = category.toLowerCase();
-  }
-  const isSelected = false;
+const Tag = ({ text, color, isSelected, onClick }) => {
+  // Dynamic styling based on the isSelected prop
+  const tagStyle = {
+    backgroundColor: isSelected ? color : 'transparent',
+    borderColor: color,
+    color: isSelected ? '#fff' : color,
+  };
 
   return (
-    // Render the Tag with appropriate class names based on text, category, and selection status
-    <div className={`tag ${tagClassName} ${isSelected ? 'selected' : ''}`}>
+    // Container for the tag with dynamic styles and click event
+    <div className="tag" style={tagStyle} onClick={onClick}>
       <p>{text}</p>
     </div>
   );
 };
 
 Tag.propTypes = {
+  isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
   text: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
+
+Tag.defaultProps = {
+  isSelected: false,
+  onClick: () => {},
 };
 
 export default Tag;

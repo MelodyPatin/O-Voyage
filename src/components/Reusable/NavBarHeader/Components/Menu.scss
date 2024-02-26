@@ -1,0 +1,13 @@
+@use 'src/styles/variables' as v;
+
+.menu {
+  display: flex;
+  gap: 1rem;
+  height: 4.5rem;
+  overflow: visible;
+  font-family: 'Montserrat', sans-serif;
+
+  .notifications {
+    display: none;
+  }
+}

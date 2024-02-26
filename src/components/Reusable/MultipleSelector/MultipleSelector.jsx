@@ -3,33 +3,46 @@ import './MultipleSelector.scss';
 import { Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-// Functional component : popup with input fields and a close button
 const MultipleSelector = ({
   placeholderContent,
   options,
+  onChange,
+  selected,
 }) => {
+  // Handle change in selection
+  const handleSelectionChange = (event, data) => {
+    const selectedOptions = data.value; // Get the selected options from the event data
+    if (onChange) {
+      onChange(selectedOptions); // Pass the selected options to the update function in the parent component
+    }
+  };
+
   return (
-        <Dropdown
-          placeholder={placeholderContent}
-          fluid
-          multiple
-          search
-          selection
-          options={options}
-          id="MultipleSelector"
-        />
+    <Dropdown
+      placeholder={placeholderContent}
+      fluid
+      multiple
+      search
+      selection
+      options={options}
+      id="MultipleSelector"
+      onChange={handleSelectionChange}
+      value={selected}
+    />
   );
 };
 
 MultipleSelector.propTypes = {
   placeholderContent: PropTypes.string,
+  selected: PropTypes.array,
   options: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      key: PropTypes.number.isRequired,
       text: PropTypes.string.isRequired,
       value: PropTypes.string.isRequired,
     })
   ).isRequired,
+  onChange: PropTypes.func,
 };
 
 export default MultipleSelector;

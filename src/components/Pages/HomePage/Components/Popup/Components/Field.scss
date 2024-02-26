@@ -1,0 +1,55 @@
+@use 'src/styles/variables' as v;
+
+.field {
+  margin-bottom: 0.5rem;
+  position: relative;
+
+  &-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 0.3rem;
+    height: 3rem;
+    font-family: 'Montserrat', sans-serif;
+    background-color: v.$lightColor;
+
+
+    &:focus {
+      border-color: v.$mainColor;
+    }
+  }
+
+  &-label {
+    display: none;
+    position: absolute;
+    background-color: v.$lightColor;
+    padding: 0.1rem;
+    top: -0.2rem;
+    left: 0.7rem;
+    color: v.$mainColor;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    animation: labelSlideUpAndShow 0.3s;
+  }
+
+  &--has-content {
+    .field-label {
+      display: block;
+    }
+    .field-input {
+      padding: 1.4em 0.7em 0.4em;
+    }
+  }
+}
+
+@keyframes labelSlideUpAndShow {
+  0% {
+    transform: translateY(1em);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0em);
+    opacity: 1;
+  }
+}

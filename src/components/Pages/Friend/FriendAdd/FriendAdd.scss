@@ -1,18 +1,77 @@
 .addAFriend {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  .selector {
-    flex: 1;
-    padding: 1.5rem;
-    text-align: center; // Center the content horizontally
+  .header {
+    .menu {
+      // Hide desktop items in the menu as it is not part of the MVP
+      .desktopItems {
+        display: none;
+      }
+    }
   }
 
-  button.ui.button.SimpleButton {
-    width: 90%; // Adjust the width as needed
-    margin: 1.5rem auto; // Center the element horizontally and add margin
-    display: block;
-    margin-top: auto;
+  .ReturnTitle {
+    @media (min-width: 767px) {
+      padding: 0rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 0rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 0rem 15rem;
+    }
+  }
+
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .formAddFriend {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1rem;
+
+    @media (min-width: 767px) {
+      padding: 4rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 4rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 4rem 15rem;
+    }
+
+    .result {
+      margin-top: 2rem;
+    }
+
+    .formAdd {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .selector {
+        flex: 1;
+        text-align: center; 
+      }
+    }
+  }
+}
+
+button.ui.button.SimpleButton {
+  width: 100%; 
+  display: block;
+  margin: 2rem auto 0;
+}
+
+.LabelInput {
+  width: 100%;
+
+  .ui.input {
+    margin-top: 2rem;
+    width: 100%;
   }
 }

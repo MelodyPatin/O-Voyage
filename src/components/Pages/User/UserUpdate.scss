@@ -1,0 +1,98 @@
+@use 'src/styles/variables' as v;
+
+.userUpdate {
+  position: relative;
+  .header {
+    .menu {
+      .desktopItems {
+        display: none;
+      }
+    }
+  }
+
+  .ReturnTitle {
+    // Media queries for different screen sizes
+    @media (min-width: 767px) {
+      padding: 0rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 0rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 0rem 15rem;
+    }
+  }
+
+  .formUserUpdate {
+    padding: 0rem 1rem;
+
+    // Media queries for different screen sizes
+    @media (min-width: 767px) {
+      padding: 0rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 0rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 0rem 15rem;
+    }
+
+    .formUpdateProfile {
+      padding-top: 1rem;
+
+      div.LabelInput {
+        width: 100%;
+        padding-top: 1.5rem;
+
+        .input {
+          width: 100%;
+          margin-bottom: 0;
+          font-size: 1rem;
+          padding-top: 0.5rem;
+          margin-top: 0.2rem;
+        }
+      }
+
+      .buttonValidate {
+        padding-top: 1rem;
+
+        button.ui.button.SimpleButton {
+          width: 100%;
+          max-width: 500rem;
+          margin: 1rem 0;
+        }
+      }
+    }
+
+    .deleteAccount {
+      padding: 0 1rem 2rem 0;
+      font-family: 'Inria serif', serif;
+      text-align: end;
+      border: none;
+      background: none;
+    }
+
+    .buttonDelete {
+      button.ui.button.SimpleButton {
+        width: 100%;
+        max-width: 500rem;
+        margin-bottom: 2rem;
+      }
+    }
+  }
+}
+
+.errorMessage {
+  background-color: v.$secondaryColor;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  padding: 0;
+  line-height: 1.5rem;
+  text-align: center;
+}

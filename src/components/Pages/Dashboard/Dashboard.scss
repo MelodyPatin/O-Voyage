@@ -1,0 +1,68 @@
+.dashboard {
+  // Header styling
+  .headerConnected {
+    .menu {
+      .desktopItems {
+        display: none;
+      }
+    }
+  }
+
+  // Title styling
+  h2 {
+    font-family: 'Inria Serif', serif;
+    font-size: 2.25rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem 0 3rem 0;
+  }
+
+  // Button styling
+  .ui.button {
+    @media (min-width: 600px) {
+      margin-bottom: 2rem;
+      max-width: 15rem;
+    }
+
+    @media (min-width: 900px) {
+      margin-bottom: 3rem;
+    }
+  }
+
+  // List section styling
+  .list {
+    @media (min-width: 900px) {
+      margin: 0 8rem;
+    }
+
+    .when {
+      padding: 2rem 0 1rem 1rem;
+    }
+
+    // Styling for the 3 sections
+    .now,
+    .future,
+    .passed {
+      // Styling for the card list
+      .cardList {
+        display: flex;
+        overflow: auto; // Enable horizontal scrolling
+        gap: 1rem;
+        width: 100%;
+        flex-wrap: nowrap;
+
+        // Styling for individual card containers
+        .cardContainer {
+          flex: 0 0 auto;
+          width: 80%;
+          aspect-ratio: 1.6/1;
+        }
+      }
+    }
+  }
+
+  .Footer {
+    margin-top: 3rem;
+  }
+}

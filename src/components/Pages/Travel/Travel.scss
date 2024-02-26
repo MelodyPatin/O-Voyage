@@ -1,0 +1,51 @@
+@use 'src/styles/variables' as v;
+
+.travelDetails,
+.travelGallery,
+.travelPhoto,
+.suitcase {
+  position: relative;
+
+  .containerFlex {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    .aside {
+      width: 21rem;
+      height: calc(100vh - 121.5px);
+      overflow-y: scroll;
+      border-top: 2px solid v.$mainColor;
+      border-right: 2px solid v.$mainColor;
+      border-top-right-radius: 10px;
+      position: relative;
+      margin-top: 1rem;
+
+      .ActivityResume {
+        margin-top: 5rem;
+      }
+
+      .TravelersList,
+      .suitcaseList {
+        margin-top: 5rem;
+        min-height: calc(100vh - 203px);
+
+        .ReturnTitle {
+          background-color: v.$lightColor;
+        }
+
+        h3 {
+          color: v.$mainColor;
+        }
+
+        .arrowIcon {
+          color: v.$mainColor;
+        }
+      }
+
+      .TravelPicture {
+        margin-top: 0rem;
+      }
+    }
+  }
+}

@@ -1,8 +1,12 @@
 .friends {
-  .arrow {
-    width: 2.25rem;
+  .header {
+    .menu {
+      .desktopItems {
+        display: none;
+      }
+    }
   }
-
+  
   h2 {
     font-family: 'Inria Serif', serif;
     font-size: 2.25rem;
@@ -10,6 +14,11 @@
     justify-content: center;
     gap: 1rem;
     padding: 1rem 0 3rem 0;
+
+    .arrow {
+      width: 2.25rem;
+      cursor: pointer;
+    }
   }
 
   .ui.button {
@@ -49,6 +58,7 @@
       .icon {
         width: 2rem;
         flex-shrink: 0;
+        cursor: pointer;
       }
     }
   }

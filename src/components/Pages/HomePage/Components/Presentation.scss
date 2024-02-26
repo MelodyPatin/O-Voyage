@@ -1,0 +1,54 @@
+@use 'src/styles/variables' as v;
+
+.presentation {
+  // Responsive layout for larger screens
+  @media (min-width: 900px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-bottom: 6rem;
+  }
+
+  img {
+    display: none;
+
+    // Responsive styling for larger screens
+    @media (min-width: 900px) {
+      display: block;
+      width: 28rem;
+      padding: 2rem 0 0 2rem;
+    }
+
+    // Additional breakpoints
+    @media (min-width: 1200px) {
+      display: block;
+      width: 28rem;
+      padding: 6rem 0 0 2rem;
+    }
+
+    @media (min-width: 2000px) {
+      display: block;
+      width: 28rem;
+      padding: 10rem 0 0 2rem;
+    }
+  }
+  .title,
+  .content {
+    padding: 1em 1em 0 1em;
+    color: v.$darkColor;
+    text-align: center;
+    line-height: 1.5rem;
+    font-family: 'Montserrat', sans-serif;
+
+    // Responsive styling for larger screens
+    @media (min-width: 900px) {
+      text-align: start;
+      max-width: 28rem;
+    }
+  }
+  .title {
+    border-bottom: 1px v.$darkColor solid;
+    font-size: 1.25rem;
+    padding: 1em;
+  }
+}

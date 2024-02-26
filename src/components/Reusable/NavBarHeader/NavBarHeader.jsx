@@ -1,20 +1,27 @@
-import React from 'react';
-import './NavBarHeader.scss';
-import PropTypes from 'prop-types';
-import Menu from './Menu';
-import LoginLogoutButton from './LoginLogoutButton';
+import { React } from 'react';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const NavBarHeader = ({ isLogged, onDesktop }) => {
+import './NavBarHeader.scss';
+
+import Menu from './Components/Menu';
+import LoginLogoutButton from './Components/LoginLogoutButton';
+import Logo from '../../../assets/MainLogo.png';
+
+const NavBarHeader = () => {
+  // Check if the user is logged in
+  const logged = useSelector((state) => state.user.logged);
+
   return (
     <div className="header">
-      <img src="/src/assets/MainLogo.png" alt="Logo O'Voyage" />
-      {isLogged && <Menu desktop={onDesktop} />}
-      {!isLogged && <LoginLogoutButton />}
+      <Link to="/dashboard">
+        <img className="logo" src={Logo} alt="Logo O'Voyage" />
+      </Link>
+      {/* Display the menu if the user is logged in, otherwise display the login/logout button */}
+      {logged && <Menu />}
+      {!logged && <LoginLogoutButton />}
     </div>
   );
 };
-NavBarHeader.propTypes = {
-  isLogged: PropTypes.bool,
-  onDesktop: PropTypes.bool,
-};
+
 export default NavBarHeader;

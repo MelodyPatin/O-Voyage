@@ -1,9 +1,18 @@
 .headerConnected {
-  background: url(../../../assets/BackgroundPictureHeaderConnected.png)
+  // Setting the background image for the header on mobile devices
+  background: url(../../../assets/BackgroundPictureHeaderConnectedMobileFading.png)
     bottom/cover no-repeat;
-  height: 60vh;
+  min-height: 400px;
+  height: 70vh;
   position: relative;
 
+  @media (min-width: 600px) {
+    // Changing the background image for larger screens
+    background: url(../../../assets/BackgroundPictureHeaderConnected.png)
+      bottom/cover no-repeat;
+  }
+
+  // Styling for the personal information section within the header
   .personnalInfos {
     position: absolute;
     top: 20vh;
@@ -17,15 +26,13 @@
     .ui.avatar.image {
       width: 5.5rem;
       height: 5.5rem;
-      margin: 0 0 1rem 0;
+      margin: 0 0 0.5rem 0;
 
       @media (min-width: 600px) {
+        // Adjusting avatar size for larger screens
         width: 10.5rem;
         height: 10.5rem;
       }
-    }
-    .ProfileInfo {
-      min-width: 12rem;
     }
   }
 }

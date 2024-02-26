@@ -1,30 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
-import SimpleButton from '../../Reusable/SimpleButton/SimpleButton';
-
-import './Error.scss';
+import SimpleButton from '../../Reusable/Buttons/SimpleButton';
 import Footer from '../../Reusable/Footer/Footer';
 
-const Error = ({ number, textContent }) => {
+import './Error.scss';
+
+// Error component renders a 404 error page
+const Error = () => {
   return (
     <div className="error">
       <NavBarHeader />
-      <ReturnTitle textContent={number} />
+      <ReturnTitle textContent="Erreur 404" />
       <div className="errorContainer">
-        <p className="textContent">{textContent}</p>
-        <SimpleButton textContent="Retour à l'accueil" />
+        <p className="textContent">Oops, page introuvable</p>
+        <Link to="/">
+          <SimpleButton textContent="Retour à l'accueil" />
+        </Link>
       </div>
       <Footer className="footer" />
     </div>
   );
-};
-
-Error.propTypes = {
-  number: PropTypes.string.isRequired,
-  textContent: PropTypes.string.isRequired,
 };
 
 export default Error;

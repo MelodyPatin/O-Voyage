@@ -1,26 +1,30 @@
-@use '../../../styles/variables' as v;
+@use 'src/styles/variables' as v;
 
 .homePage {
-  background: url('../../../assets/BackgroundPictureHomePage.png') top/cover
-    no-repeat;
+    // Set the background image with cover and no-repeat
+  background: url('../../../../src/assets/BackgroundPictureHomePageCompressed.png')
+    top/cover no-repeat;
   background-size: 300%;
-  background-position-y: -60px;
+  background-position-y: -60px; // Adjust the vertical position
 
+    // Media query for screens with a minimum width of 600px
   @media (min-width: 600px) {
     background-size: 130%;
   }
 
+    // Media query for screens with a minimum width of 900px
   @media (min-width: 900px) {
     background-size: 100%;
-    background: url('../../../assets/BackgroundPictureHomePage.png')
+    background: url('../../../../src/assets/BackgroundPictureHomePageCompressed.png')
       bottom/cover no-repeat;
-    height: 120vh;
-    background-position-y: -200px;
+    height: 120vh; // Set the height to 120 viewport heights
+    background-position-y: -200px; // Adjust the vertical position
   }
 
+    // Media query for screens with a minimum width of 1400px
   @media (min-width: 1400px) {
     background-size: 100%;
-    height: 130vh;
-    background-position-y: -300px;
+    height: 130vh; // Set the height to 130 viewport heights
+    background-position-y: -300px; // Adjust the vertical position
   }
 }

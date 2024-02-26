@@ -1,0 +1,65 @@
+@use 'src/styles/variables' as v;
+
+.addTravelers {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
+  .ReturnTitle {
+    @media (min-width: 767px) {
+      padding: 0 5rem;
+    }
+    @media (min-width: 1024px) {
+      padding: 0 10rem;
+    }
+    @media (min-width: 1280px) {
+      padding: 0 15rem;
+    }
+  }
+
+  .StepSelect {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex-grow: 1;
+
+    @media (min-width: 767px) {
+      padding: 4rem 5rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 4rem 10rem;
+    }
+
+    @media (min-width: 1280px) {
+      padding: 4rem 15rem;
+    }
+  }
+}
+
+.StepContainer {
+
+  .LabelInput {
+    flex: 1;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+}
+
+
+.StepCalendar,
+.StepFolder,
+.StepInput,
+.StepInputSelector,
+.StepSelect,
+.StepTag,
+.StepTextarea {
+  @extend .StepContainer;
+
+  height: fit-content;
+  gap: 1rem;
+}

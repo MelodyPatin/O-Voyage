@@ -1,8 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import './Footer.scss';
 import { Icon } from 'semantic-ui-react';
-import { NavLink } from 'react-router-dom'; // Import NavLink from react-router-dom
-import PropTypes from 'prop-types';
 
 const Footer = () => {
   return (
@@ -21,7 +21,7 @@ const Footer = () => {
           className={({ isActive }) =>
             isActive ? 'menu-link menu-link--active' : 'menu-link'
           }
-          to="/histoire"
+          to="/our-history"
         >
           Notre Histoire
         </NavLink>
@@ -29,20 +29,20 @@ const Footer = () => {
           className={({ isActive }) =>
             isActive ? 'menu-link menu-link--active' : 'menu-link'
           }
-          to="/mentions-legales"
+          to="/legal-notice"
         >
           Mentions légales
         </NavLink>
       </div>
       {/* Social media icons section */}
       <div className="socials">
-        <a href="#">
+        <a href="#" target="_blank">
           <Icon name="facebook official" size="large" />
         </a>
-        <a href="#">
+        <a href="#" target="_blank">
           <Icon name="instagram" size="large" />
         </a>
-        <a href="#">
+        <a href="#" target="_blank">
           <Icon name="twitter" size="large" />
         </a>
       </div>

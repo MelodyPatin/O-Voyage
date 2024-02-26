@@ -1,0 +1,94 @@
+@use 'src/styles/variables' as v;
+
+// Full-screen overlay for the modal
+.containerPopup {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+  position: fixed;
+  background-color: rgba(
+    v.$darkColor,
+    0.7
+  ); // Semi-transparent overlay background
+
+  &:target {
+    visibility: visible;
+    display: block;
+  }
+
+  .Popup {
+    // Center the modal vertically
+    display: block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    width: fit-content;
+    min-width: 80px;
+    max-width: 270px;
+    height: fit-content;
+    background-color: v.$lightColor;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 10px;
+
+    .icon {
+      width: 2.5rem;
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        color: v.$darkColor;
+      }
+    }
+
+    p {
+      font-size: 1.75rem;
+      font-weight: bold;
+      margin: 2rem 0;
+      line-height: 2rem;
+      font-family: 'Inria Serif', serif;
+      padding-top: 2rem;
+    }
+
+    .ui.button {
+      margin: 2rem 0 1rem;
+    }
+
+    .already-signed {
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .errorMessage {
+      background-color: v.$secondaryColor;
+      color: #fff;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+      padding: 0;
+      line-height: 1.5rem;
+    }
+
+    .errorMessageFill,
+    .errorMessageInvalid {
+      font-size: 0.9rem;
+    }
+
+    .errorMessageMail {
+      font-size: 1.1rem;
+    }
+
+    .conditions {
+      font-size: 0.9rem;
+      margin: 0;
+      padding: 0;
+      line-height: 1rem;
+    }
+  }
+}

@@ -1,36 +1,48 @@
-import React from 'react';
+import { React, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import './ProfileInfo.scss';
-import { Button, Icon } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
 import { GlobeAmericasIcon, UserGroupIcon } from '@heroicons/react/24/solid';
 
-const ProfileInfo = ({ firstName, nbTravels, nbFriends }) => {
+import { fetchMyTrips } from '../../../actions/trip';
+import { fetchFriends } from '../../../actions/user';
+
+const ProfileInfo = () => {
+  // Extract user's first name, user's trips and friends from the Redux store
+  const firstname = useSelector((state) => state.user.firstnameValue);
+  const trips = useSelector((state) => state.trip.myTrips);
+  const friends = useSelector((state) => state.user.friends);
+
+  const dispatch = useDispatch();
+
+  // Fetch user's trips and friends if not already loaded
+  useEffect(() => {
+    if (!trips.length && !friends.length) {
+      dispatch(fetchMyTrips());
+      dispatch(fetchFriends());
+    }
+  }, []);
+
   return (
     <div className="ProfileInfo">
       {/* Display user's first name */}
-      <p className="firstName">{firstName}</p>
+      <p className="firstName">{firstname}</p>
       <div className="TravelsFriends">
         {/* Display travel icon and number of travels */}
         <GlobeAmericasIcon className="icon" />
         <p>
           {'\u00A0'}
-          {nbTravels} voyages |{'\u00A0'}
+          {trips.length} voyages |{'\u00A0'}
         </p>
         {/* Display friends icon and number of friends */}
         <UserGroupIcon className="icon" />
         <p>
           {'\u00A0'}
-          {nbFriends} amis
+          {friends.length} amis
         </p>
       </div>
     </div>
   );
-};
-
-ProfileInfo.propTypes = {
-  firstName: PropTypes.string.isRequired,
-  nbTravels: PropTypes.number.isRequired,
-  nbFriends: PropTypes.number.isRequired,
 };
 
 export default ProfileInfo;

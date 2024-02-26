@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
 // Functional component : popup with a close buttona and a text message
-const PopupMessage = ({ textContent }) => {
+const PopupMessage = ({ textContent, onClose }) => {
   return (
-    <div className="container">
+    // Container to cover the background when the popup is displayed
+    <div className="containerBackground">
       <div className="Popup">
-        <XCircleIcon className="icon" />
+        <XCircleIcon className="icon" onClick={onClose} />
         <p>{textContent}</p>
       </div>
     </div>
@@ -17,6 +18,7 @@ const PopupMessage = ({ textContent }) => {
 
 PopupMessage.propTypes = {
   textContent: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default PopupMessage;

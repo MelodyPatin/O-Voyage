@@ -1,0 +1,46 @@
+@use 'src/styles/variables' as v;
+
+.lastPart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: url('../../../../../../src/assets/LogoPicture.png') top/cover
+    no-repeat;
+  height: 50vh; // Initial height
+
+  @media (min-width: 900px) {
+    height: 80vh; // Adjusted height for larger screens
+  }
+
+  @media (min-width: 1200px) {
+    height: 100vh; // Further adjusted height for even larger screens
+  }
+
+  img {
+    display: none; // Hide the image by default
+
+    @media (min-width: 900px) {
+      display: block; //  Show the image on screens of 900 pixels and above
+      width: 80%;
+      margin: auto; // Center the image
+    }
+  }
+
+  p {
+    position: absolute;
+    bottom: 0;
+    font-size: 1rem;
+    color: v.$lightColor;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    padding: 2rem; // Default padding
+
+    @media (min-width: 600px) {
+      padding: 2rem 6rem; // Adjusted padding for screens of 600 pixels and above
+    }
+
+    @media (min-width: 900px) {
+      padding: 1rem 4rem; // Further adjusted padding for screens of 900 pixels and above
+    }
+  }
+}
