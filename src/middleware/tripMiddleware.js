@@ -347,7 +347,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         .catch((error) => {
           // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
-          alert("Echec de la suppression du voyage");
         });
       break;
 
