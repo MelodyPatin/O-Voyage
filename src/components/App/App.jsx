@@ -32,6 +32,7 @@ function App() {
   const dispatch = useDispatch();
   const loggedOut = useSelector((state) => state.user.loggedOut);
   const logged = useSelector((state) => state.user.logged);
+  const loggedStorage = localStorage.getItem('logged')
   const navigate = useNavigate();
 
   const [redirectHome, setRedirectHome] = useState(false);
@@ -59,7 +60,7 @@ function App() {
   }, []);
 
   const renderPrivateRoute = (path, element) => {
-    return logged ? (
+    return (logged || loggedStorage) ? (
       <Route path={path} element={element} />
     ) : (
       <Route path={path} element={<Navigate to="/" />} />
