@@ -65,11 +65,11 @@ const Actions = () => {
             </Link>
           </div>
         )}
-        <div className="simpleButton">
+        {/* <div className="simpleButton">
           <Link to={`/trip/${tripId}/suitcase`}>
             <SimpleButton textContent="Préparer ma valise" />
           </Link>
-        </div>
+        </div> */}
         {isAdmin && (
           <>
             <Link to={`/updatetrip/${tripId}`}>
