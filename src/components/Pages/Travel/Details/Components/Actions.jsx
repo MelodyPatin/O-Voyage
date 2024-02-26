@@ -74,13 +74,13 @@ const Actions = () => {
               <IconButton textContent="Faire une proposition" icon="add" />
             </Link>
           </div>
-        )}"/src/assets/MainLogo.png"
+        )}
         {/* Mobile and desktop view */}
         <div className="simpleButton">
           <Link to={`/trip/${tripId}/suitcase`}>
             <SimpleButton textContent="Préparer ma valise" />
           </Link>
-        </div> */}
+        </div>
         {isAdmin && (
           <>
             <Link to={`/updatetrip/${tripId}`}>
