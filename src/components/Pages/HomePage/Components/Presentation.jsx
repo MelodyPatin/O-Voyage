@@ -5,7 +5,7 @@ import View from '../../../../assets/View1.png';
 const Presentation = () => {
   return (
     <div className="presentation">
-      <img src={View} alt="" />
+      <img src={View} alt="view picture" />
       <div>
         <h2 className="title">
           Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi.
