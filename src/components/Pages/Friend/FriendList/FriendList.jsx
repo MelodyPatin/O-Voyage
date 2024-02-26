@@ -20,7 +20,7 @@ const FriendList = () => {
     if (!friendsFetched) {
       // Ne charge les amis que si ils n'ont pas déjà été chargés
       dispatch(fetchFriends());
-      dispatch(clearSearchFriend())
+      dispatch(clearSearchFriend());
     }
   }, [dispatch, friendsFetched]);
 

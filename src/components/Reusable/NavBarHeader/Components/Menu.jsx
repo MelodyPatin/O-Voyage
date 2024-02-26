@@ -1,21 +1,25 @@
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
+
 import DropDownSettings from './DropDownSettings';
 import DropDownNotifications from './DropDownNotifications';
 import DesktopItems from './DesktopItems';
+
 import './Menu.scss';
+
 import { clickLogout } from '../../../../actions/user';
 
 const Menu = () => {
+  // Check if the view is in mobile mode
   const isMobile = useMediaQuery('(max-width: 767px)');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // Fonction pour gérer la déconnexion
+  // Function to handle user logout
   const handleLogout = () => {
     dispatch(clickLogout());
-    navigate('/'); // Redirigez vers /home après la déconnexion
+    navigate('/');
   };
 
   return (

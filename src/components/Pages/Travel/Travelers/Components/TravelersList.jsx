@@ -1,13 +1,18 @@
 import React from 'react';
-import './TravelersList.scss';
 import { useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
+
+import './TravelersList.scss';
+
 import User from '../../../../Reusable/User/User';
 import IconButton from '../../../../Reusable/Buttons/IconButton';
 import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 
 const TravelersList = () => {
+  // Get travelers data from Redux state
   const travelers = useSelector((state) => state.trip.travelers);
+
+  // Get tripId from URL params
   const { tripId } = useParams();
 
   return (

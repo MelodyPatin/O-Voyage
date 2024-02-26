@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-import ReturnTitle from '../../../../../Reusable/ReturnTitle/ReturnTitle';
-import SimpleButton from '../../../../../Reusable/Buttons/SimpleButton';
-
 import './ActivityResume.scss';
+
 import Tag from '../../../../../Reusable/Tag/Tag';
 import IconButton from '../../../../../Reusable/Buttons/IconButton';
-import { deleteActivity, fetchTags } from '../../../../../../actions/activity';
+import ReturnTitle from '../../../../../Reusable/ReturnTitle/ReturnTitle';
+import SimpleButton from '../../../../../Reusable/Buttons/SimpleButton';
 import PopupButton from '../../../../../Reusable/Popups/PopupButton';
+
+import { deleteActivity, fetchTags } from '../../../../../../actions/activity';
 
 const ActivityResume = () => {
   const dispatch = useDispatch();
@@ -22,22 +22,23 @@ const ActivityResume = () => {
   const currentActivity = useSelector((state) => state.activity.activity);
   const user = useSelector((state) => state.user);
 
+  // UseEffect to fetch tags when the component mounts
   useEffect(() => {
     dispatch(fetchTags());
   }, []);
 
-  // Vérifiez si currentActivity est défini et a la structure attendue
+  // Check if currentActivity is defined and has the expected structure
   if (
     !currentActivity ||
     !currentActivity.tags ||
     currentActivity.tags.length === 0
   ) {
-    // Retournez un message ou un rendu alternatif si les données ne sont pas encore disponibles
+    // Return a message or alternative rendering if data is not yet available
     return <div>Merci de patienter...</div>;
   }
 
   const handleDeletePopup = (event) => {
-    event.preventDefault(); // Pour éviter que le lien ne redirige vers une autre page
+    event.preventDefault(); // To prevent the link from redirecting to another page
     setPopupVisible(true);
     setModificationStatus('confirmation');
   };
@@ -45,7 +46,7 @@ const ActivityResume = () => {
   const handleDelete = async (event) => {
     event.preventDefault();
     await dispatch(deleteActivity(currentActivity.id));
-    navigate(-1);
+    navigate(-1); // Navigate back to the previous page
   };
 
   const handlePopupClose = () => {
@@ -59,8 +60,9 @@ const ActivityResume = () => {
 
   return (
     <div className="ActivityResume">
-      <ReturnTitle avatar textContent={`#2 ${currentActivity.name}`} />
+      <ReturnTitle textContent={`#2 ${currentActivity.name}`} />
       <div className="content">
+        {/* Display various details about the activity */}
         <p>Activité : {currentActivity.name}</p>
         <p>Adresse : {currentActivity.postalAddress}</p>
         <p>Prix : {currentActivity.price}</p>
@@ -73,7 +75,8 @@ const ActivityResume = () => {
           color={currentActivity.tags[0].color}
           className="tag"
         />
-        {isAdmin &&
+        {/* Display edit and delete buttons for admins */}
+        {isAdmin && (
           <>
             <Link to={`/trip/${tripId}/updateactivity/${activityId}`}>
               <IconButton textContent="Modifier l'activité" icon="edit" />
@@ -85,12 +88,12 @@ const ActivityResume = () => {
               icon="trash"
             />
           </>
-        }
+        )}
         <Link to={`/trip/${tripId}`}>
           <SimpleButton textContent="Fermer" />
         </Link>
       </div>
-      {/* Popup de succès ou d'échec */}
+      {/* Display a confirmation popup for deletion */}
       {modificationStatus === 'confirmation' && popupVisible && (
         <PopupButton
           textContent="Merci de confirmer la suppression de cette activité"

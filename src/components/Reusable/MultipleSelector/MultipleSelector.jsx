@@ -2,15 +2,18 @@ import React from 'react';
 import './MultipleSelector.scss';
 import { Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 
-const MultipleSelector = ({ placeholderContent, options, onChange, selected }) => {
-
+const MultipleSelector = ({
+  placeholderContent,
+  options,
+  onChange,
+  selected,
+}) => {
+  // Handle change in selection
   const handleSelectionChange = (event, data) => {
-    const selectedOptions = data.value; // Obtenez les options sélectionnées depuis les données de l'événement
+    const selectedOptions = data.value; // Get the selected options from the event data
     if (onChange) {
-      onChange(selectedOptions); // Passez les options sélectionnées à la fonction de mise à jour dans le composant parent
-    }
+      onChange(selectedOptions); // Pass the selected options to the update function in the parent component
   };
 
   return (

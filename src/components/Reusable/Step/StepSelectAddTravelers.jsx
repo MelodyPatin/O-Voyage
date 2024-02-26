@@ -1,9 +1,11 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Steps.scss';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import SimpleButton from '../Buttons/SimpleButton';
 import MultipleSelector from '../MultipleSelector/MultipleSelector';
-import { useDispatch, useSelector } from 'react-redux';
+
 import {
   addCityToTravel,
   addTravelerToTravelUpdate,
@@ -12,7 +14,6 @@ import {
   updateSelectedTravelers,
 } from '../../../actions/trip';
 import { clearErrorMessage } from '../../../actions/user';
-import { useNavigate } from 'react-router-dom';
 
 const StepSelectAddTravelers = ({
   buttonContent,
@@ -45,14 +46,13 @@ const StepSelectAddTravelers = ({
         if (selectedTraveler) {
           // Retourner un objet avec les clés et valeurs appropriées
           return { key: selectedTraveler.key, value: selectedTraveler.value };
-        } else {
-          // Gérer le cas où aucun pays correspondant n'a été trouvé
-          console.error(
-            `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
-          );
-          // Retourner null pour indiquer un problème
-          return null;
         }
+        // Gérer le cas où aucun pays correspondant n'a été trouvé
+        console.error(
+          `Aucun pays correspondant trouvé pour la valeur sélectionnée: ${selectedTravelerName}`
+        );
+        // Retourner null pour indiquer un problème
+        return null;
       })
       .filter(Boolean); // Filtrer les éléments nuls (cas où aucun pays correspondant n'a été trouvé)
 

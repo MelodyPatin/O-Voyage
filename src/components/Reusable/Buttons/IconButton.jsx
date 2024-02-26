@@ -2,8 +2,9 @@ import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
+// IconButton component for a button with an icon and text
 const IconButton = ({ textContent, icon, onClick }) => (
-  <Button onClick={onClick}> {/* Ajout de onClick sur le bouton */}
+  <Button onClick={onClick}>
     <Icon name={icon} /> {textContent}
   </Button>
 );
@@ -11,11 +12,11 @@ const IconButton = ({ textContent, icon, onClick }) => (
 IconButton.propTypes = {
   textContent: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired, // Ajout de onClick dans les propTypes
+  onClick: PropTypes.func,
 };
 
 IconButton.defaultProps = {
-  onClick: () => {}, // Fonction vide par défaut
+  onClick: () => {},
 };
 
 export default IconButton;

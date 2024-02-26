@@ -1,9 +1,12 @@
 import React from 'react';
-import './Steps.scss';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './Steps.scss';
+
 import LabelInput from '../LabelInput/LabelInput';
 import SimpleButton from '../Buttons/SimpleButton';
+
 import { handleStepNext } from '../../../actions/trip';
 import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
@@ -20,15 +23,15 @@ const StepInput = ({
   const errorMessage = useSelector((state) => state.user.errorMessage);
 
   const handleClick = (event) => {
-    event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+    event.preventDefault(); // Prevent the default form submission
 
-    // Vérifier si le champ est vide
+    // Check if the field is empty
     if (!inputValue.trim()) {
       dispatch(setErrorMessage('Ce champ ne peut pas être vide.'));
-      return; // Arrêter la soumission du formulaire
+      return;
     }
 
-    // Si le champ n'est pas vide, procéder à l'étape suivante
+    // If the field is not empty, proceed to the next step
     dispatch(handleStepNext());
     dispatch(clearErrorMessage());
   };

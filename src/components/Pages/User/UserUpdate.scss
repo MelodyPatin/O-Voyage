@@ -11,6 +11,7 @@
   }
 
   .ReturnTitle {
+    // Media queries for different screen sizes
     @media (min-width: 767px) {
       padding: 0rem 5rem;
     }
@@ -27,6 +28,7 @@
   .formUserUpdate {
     padding: 0rem 1rem;
 
+    // Media queries for different screen sizes
     @media (min-width: 767px) {
       padding: 0rem 5rem;
     }

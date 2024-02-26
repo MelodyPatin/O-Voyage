@@ -15,24 +15,25 @@ const Activities = () => {
 
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
+  // Fetch trip activities on component mount
   useEffect(() => {
     dispatch(fetchTripActivities(tripId));
   }, [dispatch, tripId]);
 
+  // Sort activities by score in descending order
   const sortedActivities = activities.slice().sort((a, b) => b.score - a.score);
 
-  // Gérer l'affichage selon le nombre d'activités
+  // Render activities based on the number of activities
   const renderActivities = () => {
     if (sortedActivities.length === 1) {
-      // Cas où il y a une seule activité
+      // Display for a single activity
       return (
         <div className="singleActivity">
           <ActivityCard activity={sortedActivities[0]} />
-          {/* Vous pouvez ajouter ici un message ou un traitement spécial pour une seule activité */}
         </div>
       );
     }
-    // Cas où il y a plusieurs activités
+    // Display for multiple activities
     return sortedActivities.map((activity) => (
       <div className="activity" key={activity.id}>
         <ActivityCard activity={activity} />
@@ -42,6 +43,7 @@ const Activities = () => {
 
   return (
     <div className="activities">
+      {/* Filter button (hidden for mobile view) */}
       {/* {!isMobile && (
         <Link to={`/trip/${tripId}/filters`}>
           <div className="filterButton">
@@ -49,9 +51,13 @@ const Activities = () => {
           </div>
         </Link>
       )} */}
+
+      {/* Container for activity list */}
       <div className="sliderContainer">
         <div className="activityList">{renderActivities()}</div>
       </div>
+
+      {/* Suggestion button (hidden for mobile view) */}
       {!isMobile && (
         <div className="suggestionButton">
           <Link to="/createactivity">

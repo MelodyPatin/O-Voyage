@@ -1,34 +1,39 @@
 import React, { useEffect } from 'react';
-import './TravelAddUpdate.scss';
 import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import './TravelAddUpdate.scss';
+
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../../Reusable/ReturnTitle/ReturnTitle';
 import ReturnTitleStep from '../../../Reusable/ReturnTitle/ReturnTitleStep';
 import StepInput from '../../../Reusable/Step/StepInput';
 import StepSelect from '../../../Reusable/Step/StepSelect';
 import StepTextarea from '../../../Reusable/Step/StepTextarea';
-import {
-  changeTripField,
-  fetchATripToUpdate,
-  fetchCountries,
-  handleStepNext,
-} from '../../../../actions/trip';
-import { useParams } from 'react-router-dom';
 import StepSelectCountries from '../../../Reusable/Step/StepSelectCountries';
 import StepSelectCities from '../../../Reusable/Step/StepSelectCities';
 import ProgressBarTravel from '../../../Reusable/ProgressBar/ProgressBarTravel';
 import StepSelectTravelersUpdate from '../../../Reusable/Step/StepSelectTravelersUpdate';
 import StepCalendarUpdate from '../../../Reusable/Step/StepCalendarUpdate';
 
+import {
+  changeTripField,
+  fetchATripToUpdate,
+  fetchCountries,
+  handleStepNext,
+} from '../../../../actions/trip';
+
 const TravelUpdate = () => {
   const dispatch = useDispatch();
   const { tripId } = useParams();
 
+  // Fetch data needed for updating the trip
   useEffect(() => {
     dispatch(fetchATripToUpdate(tripId));
     dispatch(fetchCountries());
   }, [dispatch, tripId]);
 
+  // Get the current step and trip details from the Redux store
   const step = useSelector((state) => state.trip.step);
   const tripTitle = useSelector((state) => state.trip.tripTitle);
   const tripDescription = useSelector((state) => state.trip.tripDescription);
@@ -39,6 +44,7 @@ const TravelUpdate = () => {
   const startDate = useSelector((state) => state.trip.startDate);
   const endDate = useSelector((state) => state.trip.endDate);
 
+  // Options for dropdowns
   const countriesOptions = countries.map((country) => ({
     key: country.id,
     text: country.name,
@@ -57,6 +63,7 @@ const TravelUpdate = () => {
     value: `${friend.firstname} ${friend.lastname}`,
   }));
 
+  // Function to handle "Continue" button click
   const handleClick = () => {
     dispatch(handleStepNext());
   };
@@ -64,6 +71,9 @@ const TravelUpdate = () => {
   return (
     <div className="updateTrip">
       <NavBarHeader />
+
+      {/* Render different steps based on the current step value */}
+      {/* Step 1: Input for trip title */}
       {step === 1 && (
         <div className="updateTrip">
           <ReturnTitle textContent="Modifier le voyage" />
@@ -81,6 +91,8 @@ const TravelUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 2: Select countries */}
       {step === 2 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
@@ -94,6 +106,8 @@ const TravelUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 3: Select cities */}
       {step === 3 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
@@ -107,6 +121,8 @@ const TravelUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 4: Calendar for dates */}
       {step === 4 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
@@ -119,6 +135,8 @@ const TravelUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 5: Textarea for trip description */}
       {step === 5 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />
@@ -136,6 +154,8 @@ const TravelUpdate = () => {
           />
         </div>
       )}
+
+      {/* Step 6: Select travelers */}
       {step === 6 && (
         <div className="updateTrip">
           <ReturnTitleStep textContent="Modifier le voyage" />

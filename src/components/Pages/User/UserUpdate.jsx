@@ -1,11 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+
 import './UserUpdate.scss';
 
-import { useDispatch } from 'react-redux';
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import FormUserUpdate from './Components/FormUserUpdate';
-import { changeUserInput } from '../../../actions/user';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
+
+import { changeUserInput } from '../../../actions/user';
 
 const UserUpdate = () => {
   const dispatch = useDispatch();

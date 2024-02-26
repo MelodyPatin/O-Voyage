@@ -1,4 +1,5 @@
 .headerConnected {
+  // Setting the background image for the header on mobile devices
   background: url(../../../assets/BackgroundPictureHeaderConnectedMobileFading.png)
     bottom/cover no-repeat;
   min-height: 400px;
@@ -6,10 +7,12 @@
   position: relative;
 
   @media (min-width: 600px) {
+    // Changing the background image for larger screens
     background: url(../../../assets/BackgroundPictureHeaderConnected.png)
-    bottom/cover no-repeat;
+      bottom/cover no-repeat;
   }
 
+  // Styling for the personal information section within the header
   .personnalInfos {
     position: absolute;
     top: 20vh;
@@ -26,6 +29,7 @@
       margin: 0 0 0.5rem 0;
 
       @media (min-width: 600px) {
+        // Adjusting avatar size for larger screens
         width: 10.5rem;
         height: 10.5rem;
       }

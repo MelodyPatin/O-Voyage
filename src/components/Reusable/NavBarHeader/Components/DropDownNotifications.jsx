@@ -1,11 +1,10 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState } from 'react';
-import {
-  ChevronUpIcon,
-  ChevronDownIcon,
-  BellIcon,
-} from '@heroicons/react/24/solid';
+import { BellIcon } from '@heroicons/react/24/solid';
 import { useMediaQuery } from '@mui/material';
+
 import './DropDownNotifications.scss';
+
 import User from '../../User/User';
 
 // Component for displaying notifications
@@ -21,10 +20,16 @@ const DropDownNotifications = () => {
 
   return (
     <div className="DropDownMenu">
-      <div className="dropdown-trigger" onClick={toggleMenu}>
+      <div
+        className="dropdown-trigger"
+        onClick={toggleMenu}
+        role="button"
+        tabIndex={0}
+      >
         <div className="text">
           <BellIcon className="bell" />
           {newNotif && <div className="nb-notifs">3</div>}
+          {/* Display notification title only on larger screens */}
           {!isMobile && <p className="notification-title">Notifications</p>}
         </div>
       </div>
