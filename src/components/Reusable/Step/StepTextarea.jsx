@@ -36,13 +36,6 @@ const StepTextarea = ({
   // Click handler for the button to proceed to the next step
   const handleClick = (e) => {
     e.preventDefault();
-    // Check if the textarea is empty
-    if (textValue.trim() === '') {
-      // Display an error message if the textarea is empty
-      dispatch(setErrorMessage('Veuillez entrer du texte dans le champ.'));
-      return; // Stop the progression if the textarea is empty
-    }
-
     // Dispatch an action to proceed to the next step
     dispatch(handleStepNext());
     // Fetch friends data

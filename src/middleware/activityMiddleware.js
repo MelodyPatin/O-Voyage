@@ -18,6 +18,7 @@ import {
   clearCreateActivityInfos,
   HANDLE_REMOVE_TAG,
   handleRemoveTag,
+  fetchTripActivities,
 } from '../actions/activity';
 
 const activityMiddleware = (store) => (next) => async (action) => {
@@ -121,6 +122,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Handle the response
           store.dispatch(handleAddTag(response.data.id));
+          store.dispatch(fetchTripActivities(id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
@@ -171,6 +173,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
         .then((response) => {
           // Handle the response
           store.dispatch(clearCreateActivityInfos());
+          store.dispatch(fetchTripActivities(id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);

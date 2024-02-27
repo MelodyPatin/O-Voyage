@@ -21,7 +21,10 @@ const SuitcaseList = () => {
   const { tripId } = useParams();
 
   const handleAddItem = (newItemName) => {
-    const maxId = itemList.reduce((max, item) => (item.id > max ? item.id : max), 0);
+    const maxId = itemList.reduce(
+      (max, item) => (item.id > max ? item.id : max),
+      0
+    );
     const newId = maxId + 1;
     const newItem = { id: newId, name: newItemName, checked: false };
     const newItemRequest = { name: newItemName, checked: false };
@@ -66,10 +69,21 @@ const SuitcaseList = () => {
             <Checkbox
               className="checkbox"
               checked={item.checked || false}
-              onChange={(e, data) => handleCheckboxChange(item.id, item.name, data.checked)}
+              onChange={(e, data) =>
+                handleCheckboxChange(item.id, item.name, data.checked)
+              }
             />
-            {item.name}
-            <XMarkIcon className='x-icon' onClick={() => handleRemoveItem(item.id)}>Supprimer</XMarkIcon> {/* Bouton pour supprimer l'élément */}
+            {item.name.length > 10 ? (
+              <span title={item.name}>{item.name.substring(0, 10)}...</span>
+            ) : (
+              <span>{item.name}</span>
+            )}
+            <XMarkIcon
+              className="x-icon"
+              onClick={() => handleRemoveItem(item.id)}
+            >
+              Supprimer
+            </XMarkIcon>
           </li>
         ))}
       </ul>

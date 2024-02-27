@@ -17,6 +17,7 @@ import {
   changeActivityField,
   fetchAnActivityToUpdate,
 } from '../../../../../actions/activity';
+import StepInputOptionnal from '../../../../Reusable/Step/StepInputOptionnal';
 
 const ActivityUpdate = () => {
   const dispatch = useDispatch();
@@ -87,7 +88,7 @@ const ActivityUpdate = () => {
             buttonContent="Continuer"
             placeholderInputContent="Place George Pompidou, 75004 Paris"
             placeholderSelectorContent="Modifiez la ville"
-            labelContent="Modifiez l'adresse"
+            labelContent="Modifiez l'adresse*"
             options={citiesOptions}
           />
         </div>
@@ -98,7 +99,7 @@ const ActivityUpdate = () => {
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
           <ProgressBar step={step} />
-          <StepInput
+          <StepInputOptionnal
             buttonContent="Continuer"
             placeholderContent="15€"
             labelContent="Modifiez le coût moyen"
@@ -136,7 +137,7 @@ const ActivityUpdate = () => {
         <div className="updateActivity">
           <ReturnTitleStep textContent="Modifier la proposition" />
           <ProgressBar step={step} />
-          <StepInput
+          <StepInputOptionnal
             buttonContent="Continuer"
             placeholderContent="https://www.centrepompidou.fr"
             labelContent="Modifiez le site internet"
@@ -176,7 +177,7 @@ const ActivityUpdate = () => {
           <ProgressBar step={step} />
           <StepTagUpdate
             buttonContent="Modifier ma proposition"
-            labelContent="Modifiez le tag"
+            labelContent="Modifiez le tag*"
           />
         </div>
       )}

@@ -11,7 +11,7 @@ import { handleStepNext } from '../../../actions/trip';
 import { clearErrorMessage, setErrorMessage } from '../../../actions/user';
 
 // Functional component : popup with input fields and a close button
-const StepInput = ({
+const StepInputOptionnal = ({
   inputValue,
   changeField,
   placeholderContent,
@@ -24,34 +24,6 @@ const StepInput = ({
 
   const handleClick = (event) => {
     event.preventDefault(); // Prevent the default form submission
-
-    // Check if the field is empty
-    if (!inputValue.trim()) {
-      dispatch(setErrorMessage('Ce champ ne peut pas être vide.'));
-      return;
-    }
-
-    // Check if the labelContent contains the word "internet"
-    const labelContainsInternet = labelContent
-      .toLowerCase()
-      .includes('internet');
-
-    // If labelContent contains "internet", proceed to the next step without character limit check
-    if (labelContainsInternet) {
-      dispatch(handleStepNext());
-      dispatch(clearErrorMessage());
-      return;
-    }
-
-    // Check if the field exceeds 50 characters for other cases
-    if (inputValue.length > 50) {
-      dispatch(
-        setErrorMessage('La valeur ne peut pas dépasser 50 caractères.')
-      );
-      return;
-    }
-
-    // If the field is not empty and doesn't exceed 50 characters, proceed to the next step
     dispatch(handleStepNext());
     dispatch(clearErrorMessage());
   };
@@ -75,7 +47,7 @@ const StepInput = ({
   );
 };
 
-StepInput.propTypes = {
+StepInputOptionnal.propTypes = {
   inputValue: PropTypes.string,
   placeholderContent: PropTypes.string,
   changeField: PropTypes.func.isRequired,
@@ -84,9 +56,9 @@ StepInput.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-StepInput.defaultProps = {
+StepInputOptionnal.defaultProps = {
   inputValue: '',
   placeholderContent: '',
 };
 
-export default StepInput;
+export default StepInputOptionnal;
