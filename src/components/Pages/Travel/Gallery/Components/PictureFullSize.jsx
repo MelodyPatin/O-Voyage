@@ -9,20 +9,24 @@ import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import { fetchAPicture } from '../../../../../actions/gallery';
 
 const PictureFullSize = () => {
+  // Checking if the screen size is below 1024px to determine if it's a mobile view
   const isMobile = useMediaQuery('(max-width: 1024px)');
+  // Extracting tripId and pictureId parameters from the URL
   const { tripId } = useParams();
   const { pictureId } = useParams();
   const dispatch = useDispatch();
 
+  // Fetching the picture data when the component mounts
   useEffect(() => {
-    // Dispatchez l'action pour récupérer la liste lorsque le composant est monté
     dispatch(fetchAPicture(tripId, pictureId));
   }, [dispatch, tripId, pictureId]);
 
+  // Selecting the picture data from the Redux store
   const photo = useSelector((state) => state.gallery.image);
 
   return (
     <div className="galleryPicture">
+      {/* Render the "Retour" button only for non-mobile views */}
       {!isMobile && (
         <div className="addButton">
           <Link to={`/trip/${tripId}/gallery`}>
@@ -30,6 +34,7 @@ const PictureFullSize = () => {
           </Link>
         </div>
       )}
+      {/* Container for displaying the full-size picture */}
       <div className="pictureContainer">
         <img
           className="photo"

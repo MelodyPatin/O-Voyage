@@ -15,14 +15,14 @@ const Picture = () => {
     if (!photosFetched) {
       dispatch(fetchPictures(tripId, currentPage));
     }
-  }, [dispatch, photosFetched, tripId]);
+  }, [dispatch, photosFetched, tripId, currentPage]);
 
   const selectPhotos = useCallback(
     (state) => state.gallery.photos?.photos || [],
     []
   );
 
-/*   const photos = useSelector((state) => {
+  /*   const photos = useSelector((state) => {
     const selectedPhotos = selectPhotos(state);
     return selectedPhotos.map((photo) => photo);
   }); */

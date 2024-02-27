@@ -12,13 +12,16 @@ import SimpleButton from '../../../Reusable/Buttons/SimpleButton';
 import './Gallery.scss';
 
 const FullSizePhoto = () => {
+  // Checking if the screen size is below 1024px to determine if it's a mobile view
   const isMobile = useMediaQuery('(max-width: 1024px)');
+  // Extracting the tripId parameter from the URL
   const { tripId } = useParams();
 
   return (
     <div className="travelPhoto">
       {!isMobile ? (
         <>
+          {/* Conditionally rendering different components based on the screen size */}
           <NavBarHeader />
           <TravelsMenu />
           <div className="containerFlex">
@@ -31,6 +34,7 @@ const FullSizePhoto = () => {
         </>
       ) : (
         <>
+          {/* Components for mobile screens */}
           <HeaderConnected />
           <TravelsMenu />
           <div className="main">
