@@ -69,11 +69,18 @@ const Actions = () => {
           </div>
         ) : (
           // Mobile view
-          <div className="simpleButton">
-            <Link to="/createactivity">
-              <IconButton textContent="Faire une proposition" icon="add" />
-            </Link>
-          </div>
+          <>
+            <div className="simpleButton">
+              <Link to={`/trip/${tripId}/filters`}>
+                <SimpleButton textContent="Filtrer" />
+              </Link>
+            </div>
+            <div className="simpleButton">
+              <Link to="/createactivity">
+                <IconButton textContent="Faire une proposition" icon="add" />
+              </Link>
+            </div>
+          </>
         )}
         {/* Mobile and desktop view */}
         {/* <div className="simpleButton">

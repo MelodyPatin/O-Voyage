@@ -2,26 +2,58 @@ import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
-import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
+
 import ActivityCard from './Components/ActivityCard';
 import IconButton from '../../../../Reusable/Buttons/IconButton';
+import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
+
 import './Activities.scss';
+
 import { fetchTripActivities } from '../../../../../actions/activity';
 
 const Activities = () => {
   const dispatch = useDispatch();
   const activities = useSelector((state) => state.activity.activities);
   const { tripId } = useParams();
+  const filters = useSelector((state) => state.filter);
 
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   // Fetch trip activities on component mount
   useEffect(() => {
-    dispatch(fetchTripActivities(tripId));
-  }, [dispatch, tripId]);
+    dispatch(fetchTripActivities(tripId, filters));
+  }, [dispatch, tripId, filters]);
+
+  const filterActivities = () => {
+    return activities.filter((activity) => {
+      // Check if activity tags are included in selected tags
+      const isTagMatch =
+        filters.selectedTags.length === 0 ||
+        filters.selectedTags.some((tag) => activity.tags[0].name.includes(tag));
+
+      // Check if activity city is included in selected cities
+      const isCityMatch =
+        filters.selectedCities.length === 0 ||
+        filters.selectedCities.includes(activity.city.name);
+
+      // Check if activity date is included in selected days
+      const isDayMatch =
+        filters.selectedDays.length === 0 ||
+        filters.selectedDays.some(
+          (selectedDay) =>
+            new Date(selectedDay).setUTCHours(0, 0, 0, 0) ===
+            new Date(activity.date).setUTCHours(0, 0, 0, 0)
+        );
+
+      return isTagMatch && isCityMatch && isDayMatch;
+    });
+  };
+  const filteredActivities = filterActivities();
 
   // Sort activities by score in descending order
-  const sortedActivities = activities.slice().sort((a, b) => b.score - a.score);
+  const sortedActivities = filteredActivities
+    .slice()
+    .sort((a, b) => b.score - a.score);
 
   // Render activities based on the number of activities
   const renderActivities = () => {
@@ -44,13 +76,13 @@ const Activities = () => {
   return (
     <div className="activities">
       {/* Filter button (hidden for mobile view) */}
-      {/* {!isMobile && (
+      {!isMobile && (
         <Link to={`/trip/${tripId}/filters`}>
           <div className="filterButton">
             <SimpleButton textContent="Filtrer" />
           </div>
         </Link>
-      )} */}
+      )}
 
       {/* Container for activity list */}
       <div className="sliderContainer">
