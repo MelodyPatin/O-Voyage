@@ -24,10 +24,6 @@ export const initialState = {
   activityDescription: '',
   activityAddress: '',
   tags: [],
-  restaurantTag: false,
-  activityTag: false,
-  pubTag: false,
-  cultureTag: false,
   selectedCities: [],
   selectedTag: [],
 };
