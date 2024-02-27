@@ -13,6 +13,7 @@ import StepInputSelector from '../../../../Reusable/Step/StepInputSelector';
 import ReturnTitleStep from '../../../../Reusable/ReturnTitle/ReturnTitleStep';
 
 import { changeActivityField } from '../../../../../actions/activity';
+import StepInputOptionnal from '../../../../Reusable/Step/StepInputOptionnal';
 
 const ActivityAdd = () => {
   const dispatch = useDispatch();
@@ -77,7 +78,7 @@ const ActivityAdd = () => {
             buttonContent="Continuer"
             placeholderInputContent="Place George Pompidou, 75004 Paris"
             placeholderSelectorContent="Sélectionnez la ville"
-            labelContent="Renseignez l'adresse"
+            labelContent="Renseignez l'adresse*"
             options={activityCitiesOptions}
           />
         </div>
@@ -88,7 +89,7 @@ const ActivityAdd = () => {
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
           <ProgressBar step={step} />
-          <StepInput
+          <StepInputOptionnal
             buttonContent="Continuer"
             placeholderContent="15€"
             labelContent="Renseignez le coût moyen"
@@ -126,7 +127,7 @@ const ActivityAdd = () => {
         <div className="addActivity">
           <ReturnTitleStep textContent="Proposition" />
           <ProgressBar step={step} />
-          <StepInput
+          <StepInputOptionnal
             buttonContent="Continuer"
             placeholderContent="https://www.centrepompidou.fr"
             labelContent="Renseignez le site internet"
@@ -166,7 +167,7 @@ const ActivityAdd = () => {
           <ProgressBar step={step} />
           <StepTag
             buttonContent="Envoyer ma proposition"
-            labelContent="Sélectionnez un tag"
+            labelContent="Sélectionnez un tag*"
           />
         </div>
       )}

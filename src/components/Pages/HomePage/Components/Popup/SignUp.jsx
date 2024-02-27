@@ -10,7 +10,7 @@ import { XCircleIcon } from '@heroicons/react/24/solid';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import Field from './Components/Field';
 
-import { clearErrorMessage } from '../../../../../actions/user';
+import { clearErrorMessage, setErrorMessage } from '../../../../../actions/user';
 
 // SignUp component for user registration
 const SignUp = ({
@@ -47,7 +47,6 @@ const SignUp = ({
     return passwordRegex.test(password);
   };
 
-  // Handle signup form submission
   const handleSignUpSubmit = (evt) => {
     evt.preventDefault();
 
@@ -58,21 +57,35 @@ const SignUp = ({
       !signUpEmailValue ||
       !signUpPasswordValue
     ) {
-      // Displays an error message to make sure the user filles all the fields
+      // Displays an error message to make sure the user fills all the fields
       setIsFieldsFilled(false);
       return;
     }
 
     setIsFieldsFilled(true);
 
-    // Validate password
+    // Check if firstname exceeds 50 characters
+    if (firstnameValue.length > 50) {
+      dispatch(
+        setErrorMessage('Le prénom ne peut pas dépasser 50 caractères.')
+      );
+      return;
+    }
+
+    // Check if lastname exceeds 50 characters
+    if (lastnameValue.length > 50) {
+      dispatch(setErrorMessage('Le nom ne peut pas dépasser 50 caractères.'));
+      return;
+    }
+
+    // Validate email
     if (!validateEmail(signUpEmailValue)) {
       setIsEmailValid(false);
       return;
     }
     setIsEmailValid(true);
 
-    // Vérification du mot de passe
+    // Validate password
     if (!validatePassword(signUpPasswordValue)) {
       setIsPasswordValid(false);
       return;

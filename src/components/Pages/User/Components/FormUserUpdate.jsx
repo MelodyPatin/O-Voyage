@@ -91,7 +91,23 @@ const FormUserUpdate = ({ changeField }) => {
       editedValues.lastnameValue.trim() === '' ||
       editedValues.email.trim() === ''
     ) {
-      dispatch(setErrorMessage('Veuillez remplir nom prénom et email.'));
+      dispatch(
+        setErrorMessage("Veuillez remplir le prénom, le nom et l'email.")
+      );
+      return;
+    }
+
+    // Check if firstname exceeds 50 characters
+    if (editedValues.firstnameValue.length > 50) {
+      dispatch(
+        setErrorMessage('Le prénom ne peut pas dépasser 50 caractères.')
+      );
+      return;
+    }
+
+    // Check if lastname exceeds 50 characters
+    if (editedValues.lastnameValue.length > 50) {
+      dispatch(setErrorMessage('Le nom ne peut pas dépasser 50 caractères.'));
       return;
     }
 
