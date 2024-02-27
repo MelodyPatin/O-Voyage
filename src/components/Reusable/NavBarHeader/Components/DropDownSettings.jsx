@@ -12,7 +12,7 @@ import ProfileInfo from '../../ProfileInfo/ProfileInfo';
 
 // Component for displaying user settings
 const DropDownSettings = ({ handleLogout }) => {
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isMobile = useMediaQuery('(max-width: 1024px)');
 
   const [isOpen, setIsOpen] = useState(false); // State to manage dropdown visibility
 

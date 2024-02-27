@@ -18,9 +18,10 @@ export const FETCH_TAGS = 'FETCH_TAGS';
 export const SAVE_TAGS = 'SAVE_TAGS';
 export const CLEAR_CREATE_ACTIVITY_INFOS = 'CLEAR_CREATE_ACTIVITY_INFOS';
 
-export const fetchTripActivities = (tripId) => ({
+export const fetchTripActivities = (tripId, filters) => ({
   type: FETCH_TRIP_ACTIVITIES,
   tripId,
+  filters,
 });
 
 export const saveTripActivities = (activities) => ({

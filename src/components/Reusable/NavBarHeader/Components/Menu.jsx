@@ -12,7 +12,7 @@ import { clickLogout } from '../../../../actions/user';
 
 const Menu = () => {
   // Check if the view is in mobile mode
-  const isMobile = useMediaQuery('(max-width: 767px)');
+  const isMobile = useMediaQuery('(max-width: 1024px)');
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

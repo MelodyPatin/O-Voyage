@@ -1,33 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Accordion } from 'semantic-ui-react';
-import ReturnTitle from '../../../../../Reusable/ReturnTitle/ReturnTitle';
+import { useMediaQuery } from '@mui/material';
 
 import './FilterList.scss';
 
+import ReturnTitle from '../../../../../Reusable/ReturnTitle/ReturnTitle';
 import SimpleButton from '../../../../../Reusable/Buttons/SimpleButton';
+
 import { fetchATrip } from '../../../../../../actions/trip';
 import { fetchTags } from '../../../../../../actions/activity';
 import { updateFilters } from '../../../../../../actions/filters';
 
 const FilterList = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { tripId } = useParams();
 
-  useEffect(() => {
-    dispatch(fetchATrip(tripId));
-    dispatch(fetchTags());
-  }, [dispatch, tripId]);
+  // Media query hook for responsive design
+  const isMobile = useMediaQuery('(max-width: 1024px)');
 
   const currentTrip = useSelector((state) => state.trip.trip);
   const tags = useSelector((state) => state.activity.tags);
   const cities = currentTrip ? currentTrip.cities : [];
 
+  // State for selected tags, cities, and days
   const [selectedTags, setSelectedTags] = useState([]);
   const [selectedCities, setSelectedCities] = useState([]);
   const [selectedDays, setSelectedDays] = useState([]);
 
+  // Fetch trip details and tags on component mount
+  useEffect(() => {
+    dispatch(fetchATrip(tripId));
+    dispatch(fetchTags());
+  }, [dispatch, tripId]);
+
+  // Handler to navigate back
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
+  // Function to format date for display
   const formatDateDisplay = (date) => {
     return new Date(date).toLocaleDateString('fr-FR', {
       weekday: 'long',
@@ -37,10 +51,12 @@ const FilterList = () => {
     });
   };
 
+  // Function to format date to ISO string
   const formatDateISO = (date) => {
     return new Date(date).toISOString();
   };
 
+  // Function to generate date options for the Accordion
   const generateDateOptions = () => {
     let startDate = new Date(currentTrip.startDate);
     const endDate = new Date(currentTrip.endDate);
@@ -65,10 +81,11 @@ const FilterList = () => {
     return dateOptions;
   };
 
+  // Generate date options on component mount
   const dayOptions = generateDateOptions();
 
+  // Handler for day click to update selected days
   const handleDayClick = (dateValue) => {
-    // Use the functional form to ensure the most up-to-date state
     setSelectedDays((prevSelectedDays) => {
       const isSelected = prevSelectedDays.includes(dateValue);
 
@@ -82,7 +99,7 @@ const FilterList = () => {
   };
 
   useEffect(() => {
-    // This effect will be triggered whenever selectedDays changes
+    // Effect triggered whenever selectedDays changes
     dispatch(
       updateFilters({
         selectedTags,
@@ -92,8 +109,8 @@ const FilterList = () => {
     );
   }, [selectedDays, dispatch, selectedTags, selectedCities]);
 
+  // Handler for city click to update selected cities
   const handleCityClick = (cityValue) => {
-    // Use the functional form to ensure the most up-to-date state
     setSelectedCities((prevSelectedCities) => {
       const isSelected = prevSelectedCities.includes(cityValue);
 
@@ -107,7 +124,7 @@ const FilterList = () => {
   };
 
   useEffect(() => {
-    // This effect will be triggered whenever selectedCities changes
+    // Effect triggered whenever selectedCities changes
     dispatch(
       updateFilters({
         selectedTags,
@@ -117,8 +134,8 @@ const FilterList = () => {
     );
   }, [selectedCities, dispatch, selectedTags, selectedDays]);
 
+  // Handler for tag click to update selected tags
   const handleTagClick = (tagValue) => {
-    // Use the functional form to ensure the most up-to-date state
     setSelectedTags((prevSelectedTags) => {
       const isSelected = prevSelectedTags.includes(tagValue);
 
@@ -132,7 +149,7 @@ const FilterList = () => {
   };
 
   useEffect(() => {
-    // This effect will be triggered whenever selectedTags changes
+    // Effect triggered whenever selectedTags changes
     dispatch(
       updateFilters({
         selectedTags,
@@ -142,10 +159,7 @@ const FilterList = () => {
     );
   }, [selectedTags, dispatch, selectedDays, selectedCities]);
 
-  const handleFilterSubmit = (e) => {
-    e.preventDefault();
-    // Logique pour traiter les filtres sélectionnés ou déclencher une action
-  };
+  // Accordion panels for categories, days, and cities
   const panels = [
     {
       key: 'panel-1',
@@ -194,72 +208,14 @@ const FilterList = () => {
   return (
     <div className="filterList">
       <ReturnTitle textContent="Filtrer" />
-      <form className="filters" onSubmit={handleFilterSubmit}>
-        <p>Reinitialiser tous les filtres</p>
-        <Accordion
-          defaultActiveIndex={[0, 2]}
-          panels={panels}
-          exclusive={false}
-          fluid
-        />
-        <SimpleButton textContent="Filtrer" />
-      </form>
+      <div className="filters">
+        <Accordion panels={panels} exclusive={false} fluid />
+        {isMobile && (
+          <SimpleButton textContent="Filtrer" onClick={handleGoBack} />
+        )}
+      </div>
     </div>
   );
 };
 
 export default FilterList;
-
-// import React from 'react';
-// import { Accordion } from 'semantic-ui-react';
-// import ReturnTitle from '../../../../../Reusable/ReturnTitle/ReturnTitle';
-
-// import './FilterList.scss';
-// import SimpleButton from '../../../../../Reusable/Buttons/SimpleButton';
-
-// const FilterList = () => {
-//   const handleFilterSubmit = (e) => {
-//     e.preventDefault();
-//     // Logique pour traiter les filtres sélectionnés ou déclencher une action
-//   };
-//   const panels = [
-//     {
-//       key: 'panel-1',
-//       title: 'Tag',
-//       content: 'Contenu pour Tags',
-//     },
-//     {
-//       key: 'panel-2',
-//       title: 'Jours',
-//       content: 'Contenu pour Jours',
-//     },
-//     {
-//       key: 'panel-3',
-//       title: 'Villes',
-//       content: 'Contenu pour Ville',
-//     },
-//     {
-//       key: 'panel-4',
-//       title: 'Pays',
-//       content: 'Contenu pour Pays',
-//     },
-//   ];
-
-//   return (
-//     <div className="filterList">
-//       <ReturnTitle textContent="Filtrer" />
-//       <form className="filters" onSubmit={handleFilterSubmit}>
-//         <p>Reinitialiser tous les filtres</p>
-//         <Accordion
-//           defaultActiveIndex={[0, 2]}
-//           panels={panels}
-//           exclusive={false}
-//           fluid
-//         />
-//         <SimpleButton textContent="Filtrer" />
-//       </form>
-//     </div>
-//   );
-// };
-
-// export default FilterList;

@@ -1,60 +1,73 @@
 @use 'src/styles/variables' as v;
 
 .filterList {
-  margin-top: 5rem;
+  @media (min-width: 1024px) {
+    margin-top: 5rem;
+  }
   .ReturnTitle {
     background-color: v.$mainColor;
-
-    h3 {
-      color: v.$lightColor;
+    @media (min-width: 767px) {
+      padding: 0 5rem;
     }
-
-    .arrowIcon {
-      color: v.$lightColor;
+    @media (min-width: 1024px) {
+      padding: 1rem;
     }
   }
 
-  .filters {
+  h3 {
+    color: v.$lightColor;
+  }
+
+  .arrowIcon {
+    color: v.$lightColor;
+  }
+}
+
+.filters {
+  padding: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  @media (min-width: 767px) {
+    padding: 0 5rem;
+  }
+  @media (min-width: 1024px) {
     padding: 1rem;
-    font-family: 'Montserrat', sans-serif;
+  }
 
-    .ui.accordion {
-      padding: 2rem 0;
-      .title {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: bold;
+  .ui.accordion {
+    padding: 2rem 0;
+    .title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: bold;
+    }
+
+    .dayOption,
+    .cityOption {
+      margin: 5px;
+      display: inline-block;
+      padding: 0.6rem;
+      border: 2px solid v.$mainColor;
+      border-radius: 5px;
+      cursor: pointer;
+      color: v.$mainColor;
+      font-weight: bold;
+
+      &.selected {
+        background-color: rgba(v.$mainColor, 0.5);
+        color: v.$lightColor;
       }
+    }
 
-      .dayOption,
-      .cityOption {
-        margin: 5px; /* Espacement entre chaque élément de la liste */
-        display: inline-block;
-        padding: 0.6rem;
-        border: 2px solid v.$mainColor;
-        border-radius: 5px;
-        cursor: pointer;
-        color: v.$mainColor;
-        font-weight: bold;
+    .tagOptions {
+      margin: 5px;
+      display: inline-block;
+      padding: 0.6rem;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
 
-        &.selected {
-          background-color: rgba(v.$mainColor, 0.5);
-          color: v.$lightColor;
-        }
-      }
-
-      .tagOptions {
-        margin: 5px; /* Espacement entre chaque élément de la liste */
-        display: inline-block;
-        padding: 0.6rem;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      }
-
-      /* Style pour le texte à l'intérieur de chaque jour */
-      .filterList .day-option p {
-        margin: 0;
-      }
+    .filterList .day-option p {
+      margin: 0;
     }
   }
 }
