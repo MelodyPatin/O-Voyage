@@ -122,8 +122,6 @@ const tripMiddleware = (store) => (next) => (action) => {
         citiesID: cityKeys,
       };
 
-      console.log(cityJsonData);
-
       api
         .put(`/trip/${tripId}/addcity`, cityJsonData)
         .then((response) => {})
