@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import NavBarHeader from '../../Reusable/NavBarHeader/NavBarHeader';
 import ReturnTitle from '../../Reusable/ReturnTitle/ReturnTitle';
 import Footer from '../../Reusable/Footer/Footer';
@@ -13,7 +13,6 @@ const History = () => {
   useEffect(() => {
     dispatch(fetchHistoryContent());
   }, [dispatch]);
-
 
   return (
     <div className="history">

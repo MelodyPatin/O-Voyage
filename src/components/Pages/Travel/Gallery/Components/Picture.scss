@@ -15,17 +15,17 @@
   }
 
   @media (min-width: 1025px) {
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes à partir de 1025px */
+    grid-template-columns: repeat(3, 1fr); /* 3 columns from 1025px */
     img {
-      height: 15rem; /* Réduire la hauteur des images */
+      height: 15rem; /* Reduce the height of images */
       width: 100%;
     }
   }
 
   @media (min-width: 1800px) {
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes à partir de 1800px */
+    grid-template-columns: repeat(4, 1fr); /* 4 columns from 1800px */
     img {
-      height: 20rem; /* Réduire davantage la hauteur des images */
+      height: 20rem; /* Further reduce the height of images */
       width: 100%;
     }
   }

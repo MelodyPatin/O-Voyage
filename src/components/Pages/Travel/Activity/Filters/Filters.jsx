@@ -1,27 +1,25 @@
-import { React, useEffect } from 'react';
+import { React } from 'react';
 import { useMediaQuery } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import HeaderConnected from '../../../../Reusable/HeaderConnected/HeaderConnected';
-import TravelsMenu from '../../../../Reusable/TravelsMenu/TravelsMenu';
-import NavBarMobile from '../../../../Reusable/NavBarMobile/NavBarMobile';
-import NavBarHeader from '../../../../Reusable/NavBarHeader/NavBarHeader';
+
 import '../../Travel.scss';
-import GeneralInfos from '../../Details/Components/GeneralInfos';
+
+import TravelsMenu from '../../../../Reusable/TravelsMenu/TravelsMenu';
+import NavBarHeader from '../../../../Reusable/NavBarHeader/NavBarHeader';
 import Activities from '../Activities/Activities';
-import TravelersList from '../../Travelers/Components/TravelersList';
-import { fetchTravelers } from '../../../../../actions/trip';
 import FilterList from './Components/FilterList';
 
 const Filters = () => {
+  // Using the useMediaQuery hook to detect if the screen width is less than 1024px
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
   return (
     <div className="travelDetails">
+      {/* If the screen is not mobile */}
       {!isMobile ? (
         <>
           <NavBarHeader />
           <TravelsMenu />
+          {/* Flexible container with a filter sidebar and the activities list */}
           <div className="containerFlex">
             <aside className="aside">
               <FilterList />
@@ -31,7 +29,7 @@ const Filters = () => {
         </>
       ) : (
         <>
-          <HeaderConnected />
+          <NavBarHeader />
           <FilterList />
         </>
       )}

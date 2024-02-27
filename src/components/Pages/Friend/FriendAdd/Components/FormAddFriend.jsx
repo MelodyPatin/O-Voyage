@@ -23,16 +23,18 @@ const FormAddFriend = ({
   const userLastName = useSelector((state) => state.user.lastNameSearch);
   const friendId = useSelector((state) => state.user.userIdSearch);
 
-  // récupérer les résultats dans l'API
+  // Function to fetch user results based on email
   const loadResults = () => {
     dispatch(fetchUserByMail());
   };
 
+  // Function to handle going back to the previous page
   const handleGoBack = (event) => {
-    event.preventDefault(); // Empêche le comportement par défaut du formulaire
-    navigate(-1); // Navigue vers la page précédente
+    event.preventDefault();
+    navigate(-1);
   };
 
+  // Function to handle adding a friend
   const handleAddFriend = () => {
     dispatch(addFriend(friendId));
     navigate('/friends');
@@ -44,7 +46,7 @@ const FormAddFriend = ({
         className="formAdd"
         onSubmit={(event) => {
           event.preventDefault();
-          loadResults();
+          loadResults(); // Calls the loadResults function on form submission
         }}
       >
         <LabelInput
@@ -56,21 +58,25 @@ const FormAddFriend = ({
           type="text"
           onChange={changeField}
         />
+        {/* Button to trigger the search for user results */}
         <SimpleButton
           type="button"
           textContent="Rechercher"
           onClick={loadResults}
         />
+        {/* Displaying user results */}
         <div className="result">
           {userAvatar && <AvatarFriend userAvatar={userAvatar} />}
           {userFirstName} {userLastName}
         </div>
       </form>
+      {/* Button to add the displayed user as a friend */}
       <SimpleButton
         type="button"
         textContent="Ajouter"
         onClick={handleAddFriend}
       />
+      {/* Button to go back to the previous page */}
       <div className="buttonBack">
         <SimpleButton
           type="button"
