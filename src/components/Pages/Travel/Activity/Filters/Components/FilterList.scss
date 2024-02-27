@@ -24,6 +24,37 @@
         font-family: 'Montserrat', sans-serif;
         font-weight: bold;
       }
+
+      .dayOption,
+      .cityOption {
+        margin: 5px; /* Espacement entre chaque élément de la liste */
+        display: inline-block;
+        padding: 0.6rem;
+        border: 2px solid v.$mainColor;
+        border-radius: 5px;
+        cursor: pointer;
+        color: v.$mainColor;
+        font-weight: bold;
+
+        &.selected {
+          background-color: rgba(v.$mainColor, 0.5);
+          color: v.$lightColor;
+        }
+      }
+
+      .tagOptions {
+        margin: 5px; /* Espacement entre chaque élément de la liste */
+        display: inline-block;
+        padding: 0.6rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      /* Style pour le texte à l'intérieur de chaque jour */
+      .filterList .day-option p {
+        margin: 0;
+      }
     }
   }
 }
