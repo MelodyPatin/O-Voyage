@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import './GalleryPictures.scss';
 import { useMediaQuery } from '@mui/material';
-import './PictureFullSize.scss';
 import { useDispatch, useSelector } from 'react-redux';
+
+import './GalleryPictures.scss';
+import './PictureFullSize.scss';
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
+
 import { fetchAPicture } from '../../../../../actions/gallery';
 
 const PictureFullSize = () => {

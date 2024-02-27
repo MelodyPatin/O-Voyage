@@ -1,21 +1,27 @@
 import React, { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addPicture } from '../../../../../actions/gallery';
+
 import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 
+import { addPicture } from '../../../../../actions/gallery';
+
 const AddPictureButton = () => {
+  // Extracting tripId from the URL params
   const { tripId } = useParams();
   const dispatch = useDispatch();
   const currentPage = useSelector((state) => state.gallery.currentPage);
 
+  // Ref for the hidden file input element
   const fileInputRef = useRef(null);
 
+  // Function to trigger the file input click when the "Ajouter une photo" button is clicked
   const handleAddPhoto = () => {
     // Trigger click on the hidden file input
     fileInputRef.current.click();
   };
 
+  // Function to convert a file to base64 format using FileReader
   const convertFileToBase64 = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -32,24 +38,16 @@ const AddPictureButton = () => {
     });
   };
 
-  // Handle file selection
+  // Handle file selection and dispatching the action to add the picture
   const handleFileChange = async (event) => {
     const { files } = event.target;
 
-    // Dispatch the action to add the new photo (you can modify this based on your needs)
-    // For example, dispatching the action with the first selected file
     if (files.length > 0) {
       try {
         const base64Data = await convertFileToBase64(files[0]);
-
-        // Assuming your API call to add a picture is synchronous
         await dispatch(addPicture(tripId, base64Data, currentPage));
-
-        // Optionally, you can dispatch a FETCH_PICTURES action to ensure the list is up-to-date
-        // dispatch(fetchPictures(tripId));
       } catch (error) {
         console.error(error);
-        // Handle the error
       }
     }
   };
@@ -65,6 +63,7 @@ const AddPictureButton = () => {
           ref={fileInputRef} // Connect the ref to the input element
           style={{ display: 'none' }} // Hide the input
         />
+        {/* Button triggering the hidden file input */}
         <SimpleButton
           onClick={handleAddPhoto}
           textContent="Ajouter une photo"
