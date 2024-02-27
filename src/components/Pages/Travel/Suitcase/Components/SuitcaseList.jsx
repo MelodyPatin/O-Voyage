@@ -1,79 +1,78 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 import './SuitcaseList.scss';
-import ItemSuitcase from './ItemSuitcase';
-import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import {
-  fetchListRequest,
-  saveListRequest,
+  addItem,
+  addItemRequest,
+  removeListItem,
+  toggleCheckbox,
+  updateItem,
+  //removeItemRequest, // Importez l'action removeItemRequest
 } from '../../../../../actions/suitcase';
-import IconButton from '../../../../Reusable/Buttons/IconButton';
+import { Checkbox } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 const SuitcaseList = () => {
-  const [updatedList, setUpdatedList] = useState([]); // State to manage the updated list
-  const [newItem, setNewItem] = useState([{ name: '' }]); // État pour le nouvel item
   const dispatch = useDispatch();
+  const itemList = useSelector((state) => state.suitcase.itemList);
+  const [newItemName, setNewItemName] = useState('');
+  const { tripId } = useParams();
 
-  const list = useSelector((state) => state.suitcase.list);
+  const handleAddItem = (newItemName) => {
+    const maxId = itemList.reduce((max, item) => (item.id > max ? item.id : max), 0);
+    const newId = maxId + 1;
+    const newItem = { id: newId, name: newItemName, checked: false };
+    const newItemRequest = { name: newItemName, checked: false };
+    dispatch(addItemRequest(newItemRequest, tripId));
+  };
 
-  const handleAddItem = (e) => {
+  const handleCheckboxChange = (id, name, checked) => {
+    dispatch(toggleCheckbox({ id, name, checked }));
+    dispatch(updateItem({ id, name, checked }));
+  };
+
+  const handleRemoveItem = (id) => {
+    dispatch(removeListItem(id, tripId)); // Dispatchez l'action pour supprimer l'élément
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setNewItem([...newItem, { name: '' }]);
-  };
-
-  const handleItemChange = (index, newValue) => {
-    const newList = [...updatedList];
-    newList[index] = newValue;
-    setUpdatedList(newList);
-  };
-
-  const handleSaveList = () => {
-    dispatch(saveListRequest(updatedList));
+    if (newItemName.trim() !== '') {
+      handleAddItem(newItemName);
+      setNewItemName('');
+    }
   };
 
   return (
     <div className="suitcaseList">
-      {/* Title for the list  */}
       <ReturnTitle textContent="Ma valise" />
-      {/* List of users */}
-      <form action="">
-        <ul>
-          {list.map((item, index) => (
-            <li key={item.id}>
-              <ItemSuitcase
-                index={index}
-                itemId={item.id}
-                item={item.name}
-                onItemChange={(newValue) => handleItemChange(index, newValue)}
-              />
-            </li>
-          ))}
-          {newItem.map((item, index) => (
-            <li key={item.id}>
-              <ItemSuitcase
-                index={index}
-                itemId={item.id}
-                item={item.name}
-                onItemChange={(newValue) => handleItemChange(index, newValue)}
-              />
-            </li>
-          ))}
-        </ul>
-        <IconButton
-          textContent="Ajouter un item"
-          icon="add"
-          onClick={handleAddItem}
-        >
-          Ajouter un item
-        </IconButton>
-        <SimpleButton
-          textContent="Sauvegarder ma valise"
-          onClick={handleSaveList}
+      <form className="form-suitcase" onSubmit={handleSubmit}>
+        <input
+          className="input-item"
+          type="text"
+          placeholder="Nouvel item"
+          value={newItemName}
+          onChange={(e) => setNewItemName(e.target.value)}
         />
+        <button className="submit-button" type="submit">
+          Ajouter
+        </button>
       </form>
-      <SimpleButton textContent="Retour" />
+      <ul className="items-list">
+        {itemList.map((item) => (
+          <li className="item" key={item.id}>
+            <Checkbox
+              className="checkbox"
+              checked={item.checked || false}
+              onChange={(e, data) => handleCheckboxChange(item.id, item.name, data.checked)}
+            />
+            {item.name}
+            <XMarkIcon className='x-icon' onClick={() => handleRemoveItem(item.id)}>Supprimer</XMarkIcon> {/* Bouton pour supprimer l'élément */}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

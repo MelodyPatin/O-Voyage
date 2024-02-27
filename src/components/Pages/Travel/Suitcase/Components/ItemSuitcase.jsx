@@ -6,15 +6,15 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import { TextField } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { removeListItem } from '../../../../../actions/suitcase';
+//import { removeListItem } from '../../../../../actions/suitcase';
 
 const ItemSuitcase = ({ index, item, itemId }) => {
   const dispatch = useDispatch();
   const [value, setValue] = useState(item || '');
 
-  const handleRemove = () => {
+  /* const handleRemove = () => {
     dispatch(removeListItem(index, itemId));
-  };
+  }; */
 
   const handleChange = (e) => {
     setValue(e.target.value);

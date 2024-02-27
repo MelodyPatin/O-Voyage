@@ -4,16 +4,58 @@
   background-color: v.$mainColor;
   padding-bottom: 2rem;
 
-  h3 {
+  .form-suitcase {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 1rem auto;
+
+    .input-item {
+      background-color: v.$lightColor;
+      border: none;
+      border-radius: 5px;
+      height: 3rem;
+      width: 65%;
+      padding: 0.5rem;
+    }
+
+    .submit-button {
+      background-color: v.$lightColor;
+      border: 2px solid v.$lightColor;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: v.$mainColor;
+        color: v.$lightColor;
+      }
+    }
+  }
+  .items-list {
+    padding: 1rem;
+    font-size: 2rem;
+    margin-left: 0.5rem;
     color: v.$lightColor;
+
+    .checkbox {
+      transform: scale(2);
+      margin-right: 1rem;
+    }
+
+    .item {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .x-icon {
+      background-color: v.$lightColor;
+      color: v.$mainColor;
+      border-radius: 50%;
+      width: 2rem;
+    }
   }
 
-  .arrowIcon {
-    color: v.$lightColor;
-  }
-  li {
-    padding-left: 1rem;
-  }
   // Styling for Semantic UI button inside the component
   button.ui.button {
     background-color: v.$lightColor;
@@ -26,15 +68,6 @@
     &:hover {
       background-color: v.$mainColor;
       color: v.$lightColor;
-
-      & i.icon {
-        color: v.$lightColor;
-      }
-    }
-
-    // Styling for the icon inside the button
-    i.icon {
-      color: v.$mainColor;
     }
   }
 
