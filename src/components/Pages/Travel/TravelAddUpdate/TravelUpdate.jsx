@@ -163,7 +163,7 @@ const TravelUpdate = () => {
           <StepSelectTravelersUpdate
             buttonContent="Modifier le voyage"
             placeholderContent="Rechercher dans les amis"
-            labelContent="Modifiez les voyageurs*"
+            labelContent="Modifiez les voyageurs"
             options={friendsOptions}
             handleClick={handleClick}
           />

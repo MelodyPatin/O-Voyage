@@ -143,7 +143,7 @@ const TravelAdd = () => {
           <StepSelectTravelers
             buttonContent="Créer le voyage"
             placeholderContent="Rechercher dans les amis"
-            labelContent="Sélectionnez un/des voyageurs*"
+            labelContent="Sélectionnez un/des voyageurs"
             options={friendsOptions}
             handleClick={handleClick}
           />
