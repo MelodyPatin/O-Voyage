@@ -1,79 +1,91 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import ReturnTitle from '../../../../Reusable/ReturnTitle/ReturnTitle';
 import './SuitcaseList.scss';
-import ItemSuitcase from './ItemSuitcase';
-import SimpleButton from '../../../../Reusable/Buttons/SimpleButton';
 import {
-  fetchListRequest,
-  saveListRequest,
+  addItem,
+  addItemRequest,
+  toggleCheckbox,
+  updateItem,
 } from '../../../../../actions/suitcase';
-import IconButton from '../../../../Reusable/Buttons/IconButton';
+import { Checkbox } from 'semantic-ui-react';
+import { useParams } from 'react-router-dom';
 
 const SuitcaseList = () => {
-  const [updatedList, setUpdatedList] = useState([]); // State to manage the updated list
-  const [newItem, setNewItem] = useState([{ name: '' }]); // État pour le nouvel item
   const dispatch = useDispatch();
+  const itemList = useSelector((state) => state.suitcase.itemList);
+  const [newItemName, setNewItemName] = useState('');
+  const { tripId } = useParams();
 
-  const list = useSelector((state) => state.suitcase.list);
+  const handleAddItem = (newItemName) => {
+    // Récupérez le plus grand ID existant dans la liste des éléments
+    const maxId = itemList.reduce(
+      (max, item) => (item.id > max ? item.id : max),
+      0
+    );
 
-  const handleAddItem = (e) => {
+    // Générez un nouvel ID en ajoutant 1 au plus grand ID existant
+    const newId = maxId + 1;
+
+    // Créez le nouvel objet d'élément avec les propriétés nécessaires
+    const newItem = {
+      id: newId,
+      name: newItemName,
+      checked: false,
+    };
+
+    const newItemRequest = {
+      name: newItemName,
+      checked: false,
+    };
+
+    // Dispatchez l'action pour ajouter le nouvel élément
+    //dispatch(addItem(newItem));
+    dispatch(addItemRequest(newItemRequest, tripId));
+  };
+
+  const handleCheckboxChange = (id, name, checked) => {
+    dispatch(toggleCheckbox({ id, name, checked }));
+    dispatch(updateItem({ id, name, checked }));
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setNewItem([...newItem, { name: '' }]);
-  };
-
-  const handleItemChange = (index, newValue) => {
-    const newList = [...updatedList];
-    newList[index] = newValue;
-    setUpdatedList(newList);
-  };
-
-  const handleSaveList = () => {
-    dispatch(saveListRequest(updatedList));
+    if (newItemName.trim() !== '') {
+      handleAddItem(newItemName);
+      setNewItemName('');
+    }
   };
 
   return (
     <div className="suitcaseList">
-      {/* Title for the list  */}
       <ReturnTitle textContent="Ma valise" />
-      {/* List of users */}
-      <form action="">
-        <ul>
-          {list.map((item, index) => (
-            <li key={item.id}>
-              <ItemSuitcase
-                index={index}
-                itemId={item.id}
-                item={item.name}
-                onItemChange={(newValue) => handleItemChange(index, newValue)}
-              />
-            </li>
-          ))}
-          {newItem.map((item, index) => (
-            <li key={item.id}>
-              <ItemSuitcase
-                index={index}
-                itemId={item.id}
-                item={item.name}
-                onItemChange={(newValue) => handleItemChange(index, newValue)}
-              />
-            </li>
-          ))}
-        </ul>
-        <IconButton
-          textContent="Ajouter un item"
-          icon="add"
-          onClick={handleAddItem}
-        >
-          Ajouter un item
-        </IconButton>
-        <SimpleButton
-          textContent="Sauvegarder ma valise"
-          onClick={handleSaveList}
+      <form className="form-suitcase" onSubmit={handleSubmit}>
+        <input
+          className="input-item"
+          type="text"
+          placeholder="Nouvel item"
+          value={newItemName}
+          onChange={(e) => setNewItemName(e.target.value)}
         />
+        <button className="submit-button" type="submit">
+          Ajouter
+        </button>
       </form>
-      <SimpleButton textContent="Retour" />
+      <ul className="items-list">
+        {itemList.map((item) => (
+          <li className="item" key={item.id}>
+            <Checkbox
+              className="checkbox"
+              checked={item.checked || false}
+              onChange={(e, data) =>
+                handleCheckboxChange(item.id, item.name, data.checked)
+              }
+            />
+            {item.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

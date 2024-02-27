@@ -1,18 +1,15 @@
+import { useSelector, useDispatch } from 'react-redux'; // Importez useSelector
+import { fetchListRequest } from '../../../../actions/suitcase';
 import { useMediaQuery } from '@mui/material';
-import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import NavBarHeader from '../../../Reusable/NavBarHeader/NavBarHeader';
 import TravelsMenu from '../../../Reusable/TravelsMenu/TravelsMenu';
-import TravelersList from '../Travelers/Components/TravelersList';
-import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
-import NavBarMobile from '../../../Reusable/NavBarMobile/NavBarMobile';
 import SuitcaseList from './Components/SuitcaseList';
 import Activities from '../Activity/Activities/Activities';
-import '../Travel.scss';
+import HeaderConnected from '../../../Reusable/HeaderConnected/HeaderConnected';
 import GeneralInfos from '../Details/Components/GeneralInfos';
-
-import { fetchListRequest } from '../../../../actions/suitcase';
+import NavBarMobile from '../../../Reusable/NavBarMobile/NavBarMobile';
 
 const Suitcase = () => {
   const isMobile = useMediaQuery('(max-width: 1024px)');
@@ -22,7 +19,10 @@ const Suitcase = () => {
   useEffect(() => {
     // Dispatchez l'action pour récupérer la liste lorsque le composant est monté
     dispatch(fetchListRequest(tripId));
-  }, []);
+  }, []); // Ajoutez tripId à la liste de dépendances de useEffect
+
+  // Utilisez useSelector pour extraire tripId de l'état Redux
+  const tripIdRedux = useSelector(state => state.tripId);
 
   return (
     <div className="suitcase">
@@ -32,7 +32,8 @@ const Suitcase = () => {
           <TravelsMenu />
           <div className="containerFlex">
             <aside className="aside">
-              <SuitcaseList />
+              {/* Passez tripId comme prop à SuitcaseList */}
+              <SuitcaseList tripId={tripIdRedux} />
             </aside>
             <Activities />
           </div>
@@ -42,7 +43,8 @@ const Suitcase = () => {
           <HeaderConnected />
           <TravelsMenu />
           <GeneralInfos />
-          <SuitcaseList />
+          {/* Passez tripId comme prop à SuitcaseList */}
+          <SuitcaseList tripId={tripIdRedux} />
           <NavBarMobile />
         </>
       )}
