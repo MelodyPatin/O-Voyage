@@ -20,19 +20,21 @@ const FriendList = () => {
   const friends = useSelector((state) => state.user.friends);
   const friendsFetched = useSelector((state) => state.user.friendsFetched);
 
+  // useEffect to fetch friends when the component mounts
   useEffect(() => {
     if (!friendsFetched) {
-      // Ne charge les amis que si ils n'ont pas déjà été chargés
+      // Fetch friends only if they haven't been fetched before
       dispatch(fetchFriends());
       dispatch(clearSearchFriend());
     }
   }, [dispatch, friendsFetched]);
 
-  // Fonction pour supprimer un ami
+  // Function to handle deleting a friend
   const handleDeleteFriend = (friendId) => {
-    dispatch(deleteFriend(friendId)); // Appeler la fonction deleteFriend avec l'ID de l'ami à supprimer
+    dispatch(deleteFriend(friendId)); // Calling the deleteFriend function with the friend's ID to delete
   };
 
+  // Function to navigate back to the previous page
   const handleGoBack = () => {
     navigate(-1); // Navigates back to the previous page
   };
@@ -55,8 +57,7 @@ const FriendList = () => {
             <XMarkIcon
               className="icon"
               onClick={() => handleDeleteFriend(friend.id)}
-            />{' '}
-            {/* Ajouter un gestionnaire d'événements onClick pour appeler handleDeleteFriend avec l'ID de l'ami */}
+            />
           </li>
         ))}
       </ul>

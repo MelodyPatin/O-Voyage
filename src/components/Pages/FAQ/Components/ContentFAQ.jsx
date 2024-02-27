@@ -1,9 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 
 const ContentFAQ = () => {
-
   return (
     <ul className="faqContent">
       <li>
