@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from 'react';
-import { useSelector } from 'react-redux';
 import PresentationCard from './PresentationCard';
 import Aurelien from '../../../../assets/profile-aurelien.jpeg';
 import Melody from '../../../../assets/profile-melody.png';
@@ -8,11 +7,6 @@ import Theophile from '../../../../assets/profile-theophile.jpeg';
 import Nicolas from '../../../../assets/profile-nico.jpg';
 
 const ContentHistory = () => {
-  const content = useSelector((state) => state.content.contentHistory);
-  const aventureContent =
-    content && content.notre_aventure ? content.notre_aventure.content : '';
-  const contactContent =
-    content && content.contact ? content.contact.content : '';
 
   return (
     <div className="historyContent">
