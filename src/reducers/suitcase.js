@@ -1,5 +1,3 @@
-// reducers.js
-
 import {
   ADD_LIST_ITEM,
   FETCH_LIST_REQUEST,
@@ -20,8 +18,8 @@ const suitcaseReducer = (state = initialState, action = {}) => {
       };
 
     case REMOVE_LIST_ITEM:
-      const updatedList = state.list.slice(); // Créez une copie de la liste
-      updatedList.splice(action.index, 1); // Supprimez l'élément à l'index spécifié
+      const updatedList = state.list.slice();
+      updatedList.splice(action.index, 1);
       return {
         ...state,
         list: updatedList,

@@ -51,13 +51,13 @@ const galleryReducer = (state = initialState, action = {}) => {
     case HANDLE_NEXT_PAGE:
       return {
         ...state,
-        currentPage: state.currentPage+1,
+        currentPage: state.currentPage + 1,
       };
 
     case HANDLE_PREVIOUS_PAGE:
       return {
         ...state,
-        currentPage: state.currentPage-1,
+        currentPage: state.currentPage - 1,
       };
 
     default:

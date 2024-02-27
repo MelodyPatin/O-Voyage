@@ -88,25 +88,25 @@ const tripReducer = (state = initialState, action = {}) => {
         selectedCountries: action.selectedCountries,
       };
 
-    case UPDATE_SELECTED_CITIES: // Ajout
+    case UPDATE_SELECTED_CITIES:
       return {
         ...state,
         selectedCities: action.selectedCities,
       };
 
-    case UPDATE_SELECTED_TRAVELERS: // Ajout
+    case UPDATE_SELECTED_TRAVELERS:
       return {
         ...state,
         selectedTravelers: action.selectedTravelers,
       };
 
-    case SET_START_DATE: // Ajout
+    case SET_START_DATE:
       return {
         ...state,
         startDate: action.startDate,
       };
 
-    case SET_END_DATE: // Ajout
+    case SET_END_DATE:
       return {
         ...state,
         endDate: action.endDate,
@@ -116,7 +116,7 @@ const tripReducer = (state = initialState, action = {}) => {
       return {
         ...state,
         tripId: action.tripId,
-      }; // Ajout du point-virgule
+      };
 
     case SHOW_TRIP:
       return {
