@@ -17,15 +17,9 @@ const enhancers = composeWithDevTools(
     contentMiddleware,
     suitcaseMiddleware,
     galleryMiddleware
-    // ... d'autres middlewares
   )
 );
 
-const store = createStore(
-  // reducer
-  reducer,
-  // enhancers
-  enhancers
-);
+const store = createStore(reducer, enhancers);
 
 export default store;

@@ -16,7 +16,6 @@ const contentMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error(error);
-          // Gestion de l'erreur
         });
 
       break;
@@ -29,7 +28,6 @@ const contentMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error(error);
-          // Gestion de l'erreur
         });
 
       break;

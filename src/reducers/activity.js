@@ -34,42 +34,50 @@ export const initialState = {
 
 const activityReducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    // Fetching trip activities - No state change, just return the current state
     case FETCH_TRIP_ACTIVITIES:
       return state;
 
+    // Saving trip activities to state
     case SAVE_TRIP_ACTIVITIES:
       return {
         ...state,
         activities: action.activities,
       };
 
+    // Fetching an individual activity - No state change, just return the current state
     case FETCH_AN_ACTIVITY:
       return state;
 
+    // Showing an individual activity in state
     case SHOW_ACTIVITY:
       return {
         ...state,
         activity: action.activity,
       };
 
+    // Changing a field in the activity form
     case CHANGE_ACTIVITY_FIELD:
       return {
         ...state,
         [action.identifier]: action.value,
       };
 
-    case UPDATE_ACTIVITY_CITIES: // Ajout
+    // Updating selected cities in the activity form
+    case UPDATE_ACTIVITY_CITIES:
       return {
         ...state,
         selectedCities: action.selectedCities,
       };
 
+    // Updating the selected tag in the activity form
     case UPDATE_SELECTED_TAG:
       return {
         ...state,
-        selectedTag: [action.tag], // Écrase le tag précédemment sélectionné avec le nouveau tag
+        selectedTag: [action.tag],
       };
 
+    // Saving activity information to state
     case SAVE_ACTIVITY_INFO:
       return {
         ...state,
@@ -83,11 +91,13 @@ const activityReducer = (state = initialState, action = {}) => {
         selectedTag: action.selectedTag,
       };
 
+    // Deleting an activity - No state change, just return the current state
     case DELETE_ACTIVITY:
       return {
         ...state,
       };
 
+    // Updating the date of an activity in the activities list
     case UPDATE_ACTIVITY_DATE:
       const { activityId, newDate } = action.payload;
       return {
@@ -97,12 +107,14 @@ const activityReducer = (state = initialState, action = {}) => {
         ),
       };
 
+    // Saving tags to state
     case SAVE_TAGS:
       return {
         ...state,
         tags: action.tags,
       };
 
+    // Clearing activity form information in state
     case CLEAR_CREATE_ACTIVITY_INFOS:
       return {
         ...state,

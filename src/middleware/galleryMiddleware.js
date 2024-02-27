@@ -2,7 +2,6 @@ import {
   ADD_PICTURE,
   FETCH_A_PICTURE,
   FETCH_PICTURES,
-  SHOW_PICTURES,
   fetchPictures,
   showAPicture,
   showPictures,
@@ -43,7 +42,7 @@ const galleryMiddleware = (store) => (next) => async (action) => {
           picture: base64Data,
         })
         .then((response) => {
-          const currentPhotos = store.getState().gallery.photos.photos || {}; // Utiliser 'photos' au lieu de 'images'
+          const currentPhotos = store.getState().gallery.photos.photos || {};
           store.dispatch(fetchPictures(action.tripId, currentPage));
         })
         .catch((error) => {

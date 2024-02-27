@@ -36,6 +36,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
   const cityKeys = selectedCities.map((city) => city.key);
 
   switch (action.type) {
+    // Fetch activities for a specific trip
     case FETCH_TRIP_ACTIVITIES:
       api
         .get(`/trip/${action.tripId}/activities`)
@@ -44,11 +45,12 @@ const activityMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error(error);
-          // Gestion de l'erreur
+          // Error handling
         });
 
       break;
 
+    // Fetch details of a specific activity
     case FETCH_AN_ACTIVITY:
       api
         .get(`/activity/${action.id}`)
@@ -61,34 +63,38 @@ const activityMiddleware = (store) => (next) => async (action) => {
 
       break;
 
+    // Fetch details of an activity for updating
     case FETCH_AN_ACTIVITY_TO_UPDATE:
       api
         .get(`/activity/${action.id}`)
         .then((response) => {
-          const activityTitle = response.data.name;
-          const activityPrice = response.data.price;
-          const activityUrl = response.data.url;
-          const activityDates = response.data.openingTimeAndDays;
-          const activityDescription = response.data.description;
-          const activityAddress = response.data.postalAddress;
+          // Extract data from the response to pre-fill form fields
+          // Dispatch action to save the pre-filled information
+          const activityTitleUpdate = response.data.name;
+          const activityPriceUpdate = response.data.price;
+          const activityUrlUpdate = response.data.url;
+          const activityDatesUpdate = response.data.openingTimeAndDays;
+          const activityDescriptionUpdate = response.data.description;
+          const activityAddressUpdate = response.data.postalAddress;
           const { city } = response.data;
-          const selectedCities = [
+          const selectedCitiesUpdate = [
             {
               key: city.id,
               value: city.name,
             },
           ];
-          const selectedTag = response.data.tags;
+          const selectedTagUpdate = response.data.tags;
+
           store.dispatch(
             saveActivityInfo(
-              activityTitle,
-              activityPrice,
-              activityUrl,
-              activityDates,
-              activityDescription,
-              activityAddress,
-              selectedCities,
-              selectedTag
+              activityTitleUpdate,
+              activityPriceUpdate,
+              activityUrlUpdate,
+              activityDatesUpdate,
+              activityDescriptionUpdate,
+              activityAddressUpdate,
+              selectedCitiesUpdate,
+              selectedTagUpdate
             )
           );
         })
@@ -99,7 +105,7 @@ const activityMiddleware = (store) => (next) => async (action) => {
       break;
 
     case SUBMIT_CREATE_ACTIVITY:
-      // Données à envoyer au format JSON
+      // Prepare data for creating a new activity
       const activityJsonData = {
         name: activityTitle,
         postalAddress: activityAddress,
@@ -110,25 +116,24 @@ const activityMiddleware = (store) => (next) => async (action) => {
         description: activityDescription,
       };
 
-      // Exécution de la requête
       api
         .post(`/trip/${id}/activity/add`, activityJsonData)
         .then((response) => {
-          // Traitement de la réponse
+          // Handle the response
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
           alert("Erreur lors de la création de l'activité.");
         });
 
       break;
 
+    // Submit updates for an existing activity
     case SUBMIT_UPDATE_ACTIVITY:
       const cityId = selectedCities.map((city) => city.key);
 
-      // Données à envoyer au format JSON
+      // Prepare data for updating an activity
       const activityUpdateJsonData = {
         name: activityTitle,
         postalAddress: activityAddress,
@@ -139,97 +144,91 @@ const activityMiddleware = (store) => (next) => async (action) => {
         description: activityDescription,
       };
 
-      // Exécution de la requête
       api
         .put(`/activity/${action.activityId}`, activityUpdateJsonData)
         .then((response) => {
-          // Traitement de la réponse
+          // Handle the response
           store.dispatch(handleRemoveTag(response.data.id));
           store.dispatch(handleAddTag(response.data.id));
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
           alert("Erreur lors de la mise à jour de l'activité.");
         });
 
       break;
 
+    // Add a tag to an activity
     case HANDLE_ADD_TAG:
       const addTagId = store.getState().activity.selectedTag[0].id; // Rename tagId to removeTagId
 
-      // Données à envoyer au format JSON
       const tagJsonData = {
-        tag: addTagId, // Use addTagId here
+        tag: addTagId,
       };
 
-      // Exécution de la requête
       api
         .put(`/activity/${action.activityId}/addtag`, tagJsonData)
         .then((response) => {
-          // Traitement de la réponse
+          // Handle the response
           store.dispatch(clearCreateActivityInfos());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
         });
 
       break;
 
+    // Remove a tag from an activity
     case HANDLE_REMOVE_TAG:
-      const removeTagId = store.getState().activity.activity.tags[0].id; // Rename tagId to removeTagId
+      const removeTagId = store.getState().activity.activity.tags[0].id;
 
-      console.log(removeTagId);
-
-      // Exécution de la requête
       api
         .delete(`/activity/${action.activityId}/removetag/${removeTagId}`)
         .then((response) => {
-          // Traitement de la réponse
+          // Handle the response
           store.dispatch(clearCreateActivityInfos());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
         });
 
       break;
 
+    // Delete an activity
     case DELETE_ACTIVITY:
-      // Effectuer la requête axios pour supprimer le compte utilisateur
       api
         .delete(`/activity/${action.activityId}`)
         .then((response) => {})
         .catch((error) => {
-          // Gestion des erreurs
           console.error('Erreur lors de la requête:', error);
           alert("Echec de la suppression d'activité");
         });
 
+      break;
+
+    // Handle date updates for an activity
     case HANDLE_ACTIVITY_DATE:
-      // Données à envoyer au format JSON
       const activityDateUpdateJsonData = {
         date: action.newDate,
       };
 
-      // Exécution de la requête
       api
         .put(`/activity/${action.activityId}/date`, activityDateUpdateJsonData)
         .then((response) => {
-          // Traitement de la réponse
+          // Handle the response
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
-          // Dispatch d'une action pour gérer l'erreur
         });
 
       break;
 
+    // Fetch the categories of the activities
     case FETCH_TAGS:
       api
         .get(`/tags`)
         .then((response) => {
+          // Save fetched tags to the state
           store.dispatch(saveTags(response.data));
         })
         .catch((error) => {
