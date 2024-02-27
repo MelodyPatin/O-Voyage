@@ -5,11 +5,14 @@ import './SuitcaseList.scss';
 import {
   addItem,
   addItemRequest,
+  removeListItem,
   toggleCheckbox,
   updateItem,
+  //removeItemRequest, // Importez l'action removeItemRequest
 } from '../../../../../actions/suitcase';
 import { Checkbox } from 'semantic-ui-react';
 import { useParams } from 'react-router-dom';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 const SuitcaseList = () => {
   const dispatch = useDispatch();
@@ -18,35 +21,20 @@ const SuitcaseList = () => {
   const { tripId } = useParams();
 
   const handleAddItem = (newItemName) => {
-    // Récupérez le plus grand ID existant dans la liste des éléments
-    const maxId = itemList.reduce(
-      (max, item) => (item.id > max ? item.id : max),
-      0
-    );
-
-    // Générez un nouvel ID en ajoutant 1 au plus grand ID existant
+    const maxId = itemList.reduce((max, item) => (item.id > max ? item.id : max), 0);
     const newId = maxId + 1;
-
-    // Créez le nouvel objet d'élément avec les propriétés nécessaires
-    const newItem = {
-      id: newId,
-      name: newItemName,
-      checked: false,
-    };
-
-    const newItemRequest = {
-      name: newItemName,
-      checked: false,
-    };
-
-    // Dispatchez l'action pour ajouter le nouvel élément
-    //dispatch(addItem(newItem));
+    const newItem = { id: newId, name: newItemName, checked: false };
+    const newItemRequest = { name: newItemName, checked: false };
     dispatch(addItemRequest(newItemRequest, tripId));
   };
 
   const handleCheckboxChange = (id, name, checked) => {
     dispatch(toggleCheckbox({ id, name, checked }));
     dispatch(updateItem({ id, name, checked }));
+  };
+
+  const handleRemoveItem = (id) => {
+    dispatch(removeListItem(id, tripId)); // Dispatchez l'action pour supprimer l'élément
   };
 
   const handleSubmit = (e) => {
@@ -78,11 +66,10 @@ const SuitcaseList = () => {
             <Checkbox
               className="checkbox"
               checked={item.checked || false}
-              onChange={(e, data) =>
-                handleCheckboxChange(item.id, item.name, data.checked)
-              }
+              onChange={(e, data) => handleCheckboxChange(item.id, item.name, data.checked)}
             />
             {item.name}
+            <XMarkIcon className='x-icon' onClick={() => handleRemoveItem(item.id)}>Supprimer</XMarkIcon> {/* Bouton pour supprimer l'élément */}
           </li>
         ))}
       </ul>

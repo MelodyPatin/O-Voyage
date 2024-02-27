@@ -29,7 +29,6 @@
         color: v.$lightColor;
       }
     }
-
   }
   .items-list {
     padding: 1rem;
@@ -39,11 +38,21 @@
 
     .checkbox {
       transform: scale(2);
-      margin-right: 2rem;
+      margin-right: 1rem;
     }
 
     .item {
       margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .x-icon {
+      background-color: v.$lightColor;
+      color: v.$mainColor;
+      border-radius: 50%;
+      width: 2rem;
     }
   }
 

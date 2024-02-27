@@ -4,6 +4,7 @@ export const ADD_ITEM_REQUEST = 'ADD_ITEM_REQUEST';
 export const TOGGLE_CHECKBOX = 'TOGGLE_CHECKBOX';
 export const FETCH_LIST_REQUEST = 'FETCH_LIST_REQUEST';
 export const SAVE_LIST_REQUEST = 'SAVE_LIST_REQUEST';
+export const REMOVE_LIST_ITEM = 'REMOVE_LIST_ITEM';
 
 export const fetchListRequest = (tripId) => ({
   type: FETCH_LIST_REQUEST,
@@ -34,4 +35,10 @@ export const toggleCheckbox = (item) => ({
 export const saveListRequest = (updatedList) => ({
   type: SAVE_LIST_REQUEST,
   updatedList,
+});
+
+export const removeListItem = (itemId, tripId) => ({
+  type: REMOVE_LIST_ITEM,
+  itemId,
+  tripId,
 });
