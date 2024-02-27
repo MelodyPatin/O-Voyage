@@ -4,6 +4,13 @@
   background-color: v.$mainColor;
   padding-bottom: 2rem;
 
+  .ReturnTitle {
+    color: v.$lightColor ;
+    @media (min-width: 1024px) {
+      color: v.$mainColor ;
+    }
+  }
+
   .form-suitcase {
     display: flex;
     gap: 1rem;
@@ -53,6 +60,7 @@
       color: v.$mainColor;
       border-radius: 50%;
       width: 2rem;
+      cursor: pointer;
     }
   }
 

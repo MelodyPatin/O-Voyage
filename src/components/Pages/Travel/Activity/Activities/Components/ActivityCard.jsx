@@ -21,7 +21,7 @@ const ActivityCard = ({ activity }) => {
   const { tripId } = useParams();
   const [rating, isLoading] = useActivityRating(activity.id);
   const [newRating, setNewRating] = useSetActivityRating(activity.id);
-  const activityColor = activity.tags[0].color;
+  const activityColor = activity.tags[0]?.color ?? 'defaultColor';
 
   // Function to handle the user's like on the activity
   const handleLike = async (e, { rating: clickedRating }) => {
