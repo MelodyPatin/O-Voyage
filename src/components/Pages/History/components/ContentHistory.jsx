@@ -14,21 +14,6 @@ const ContentHistory = () => {
   const contactContent =
     content && content.contact ? content.contact.content : '';
 
-  /*   return (
-    <div className="historyContent">
-      <h2>La Dream Team</h2>
-      <div className="cards">
-        <PresentationCard firstname="Aurélien" />
-        <PresentationCard firstname="Mélody" />
-        <PresentationCard firstname="Nicolas" />
-        <PresentationCard firstname="Théophile" />
-      </div>
-      <div>{aventureContent}🌍✨</div>
-      <div>{contactContent}</div>
-    </div>
-  );
-}; */
-
   return (
     <div className="historyContent">
       <h2>La Dream Team</h2>

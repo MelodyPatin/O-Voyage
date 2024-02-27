@@ -38,37 +38,3 @@ const ContentFAQ = () => {
 };
 
 export default ContentFAQ;
-
-/* eslint-disable react/no-unescaped-entities */
-/* import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFaqContent } from '../../../../actions/content';
-
-const ContentFAQ = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFaqContent());
-  }, [dispatch]);
-
-  const content = useSelector((state) => state.content);
-  const questions = Object.keys(content.contentFaq.content);
-  const answers = Object.values(content.contentFaq.content);
-
-  return (
-    <div className="faqContent">
-      {questions.map((question, index) => (
-        <ul key={index} className="faq-item">
-          <li>
-            <p className="question">{questions}</p>
-          </li>
-          <li>
-            <p className="answer">{answers}</p>
-          </li>
-        </ul>
-      ))}
-    </div>
-  );
-};
-
-export default ContentFAQ; */

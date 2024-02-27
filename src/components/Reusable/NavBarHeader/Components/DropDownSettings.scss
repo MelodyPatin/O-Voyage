@@ -1,6 +1,18 @@
 @use 'src/styles/variables' as v;
 
 .DropDownMenu {
+  border-radius: 10px;
+  display: inline-block;
+  margin: auto;
+  position: relative;
+
+  .notification-title {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-top: 0.5rem;
+    cursor: pointer;
+  }
+
   .ui.avatar.image {
     width: 2.75rem;
     height: 2.75rem;
@@ -10,6 +22,24 @@
   }
 
   .dropdown-content {
+    color: v.$lightColor;
+    background-color: v.$mainColor;
+    width: 20rem;
+    max-height: 18.5rem;
+    position: absolute;
+    top: 100%;
+    right: 0rem;
+    z-index: 100;
+    border-radius: 10px 0 10px 10px;
+    margin-top: 0.5rem;
+    padding: 1rem;
+  
+    .item {
+      line-height: 2rem;
+      font-size: 1.25rem;
+      margin: 1rem 0 0;
+    }
+
     &.settings {
       height: fit-content;
 
@@ -27,3 +57,8 @@
     }
   }
 }
+
+
+
+
+

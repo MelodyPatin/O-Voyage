@@ -3,7 +3,6 @@ import { NavLink, useParams } from 'react-router-dom';
 import {
   HomeIcon,
   PhotoIcon,
-  ChatBubbleLeftRightIcon,
 } from '@heroicons/react/24/solid';
 
 import './DesktopItems.scss';
@@ -23,10 +22,6 @@ const DesktopItems = () => {
         <PhotoIcon className="icon" />
         <p>Galerie</p>
       </NavLink>
-      {/* <NavLink className="icon_label" to="/messagerie">
-        <ChatBubbleLeftRightIcon className="icon" />
-        <p>Messages</p>
-      </NavLink> */}
     </div>
   );
 };
