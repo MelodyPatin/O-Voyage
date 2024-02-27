@@ -1,11 +1,12 @@
-// suitcaseReducer.js
-
-import { ADD_ITEM, SAVE_LIST_REQUEST, TOGGLE_CHECKBOX } from '../actions/suitcase';
+import {
+  ADD_ITEM,
+  SAVE_LIST_REQUEST,
+  TOGGLE_CHECKBOX,
+} from '../actions/suitcase';
 
 const initialState = {
   itemList: [], // Contiendra la liste des éléments de la valise
 };
-
 export const suitcaseReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ITEM:
@@ -13,7 +14,6 @@ export const suitcaseReducer = (state = initialState, action) => {
         ...state,
         itemList: [...state.itemList, action.item],
       };
-
     case TOGGLE_CHECKBOX:
       return {
         ...state,
@@ -23,16 +23,13 @@ export const suitcaseReducer = (state = initialState, action) => {
             : item
         ),
       };
-
     case SAVE_LIST_REQUEST:
       return {
         ...state,
         itemList: action.updatedList,
       };
-
     default:
       return state;
   }
 };
-
 export default suitcaseReducer;

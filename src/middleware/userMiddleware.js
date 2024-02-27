@@ -27,7 +27,6 @@ import {
   clearSearchFriend,
 } from '../actions/user';
 
-import { fetchMyTrips } from '../actions/trip';
 import api from '../api';
 
 const userMiddleware = (store) => (next) => async (action) => {
@@ -37,24 +36,20 @@ const userMiddleware = (store) => (next) => async (action) => {
     case SUBMIT_LOGIN:
       const { email, password } = store.getState().user;
 
-      // Données à envoyer au format JSON
       const logInJsonData = {
         username: email,
         password,
       };
 
-      // Exécution de la requête
       api
         .post('/login_check', logInJsonData)
         .then((response) => {
-          // Traitement de la réponse
           store.dispatch(handleSuccessfulLogin(response.data.token));
           store.dispatch(fetchUserData());
         })
         .catch((error) => {
           console.error('Erreur lors de la requête:', error);
           store.dispatch(loginError('Email ou mot de passe invalide'));
-          // Dispatch d'une action pour gérer l'erreur
         });
 
       break;
@@ -63,7 +58,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       const { signUpEmail, signUpPassword, lastnameValue, firstnameValue } =
         store.getState().user;
 
-      // Données à envoyer au format JSON
       const signUpJsonData = {
         firstname: firstnameValue,
         lastname: lastnameValue,
@@ -71,11 +65,9 @@ const userMiddleware = (store) => (next) => async (action) => {
         password: signUpPassword,
       };
 
-      // Exécution de la requête
       api
         .post('/user/add', signUpJsonData)
         .then((response) => {
-          // Traitement de la réponse
           store.dispatch(handleSuccessfulSignUp());
         })
         .catch((error) => {
@@ -86,8 +78,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
 
     case FETCH_USER_DATA:
-      // on doit envoyer le JWT dans le header Authorization de la requête, pour
-      // que le serveur nous fournisse NOS recettes préférées
       api
         .get('/user/me')
         .then((response) => {
@@ -111,8 +101,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       const fetchUserByMailData = {
         email: searchUsersValue,
       };
-      // on doit envoyer le JWT dans le header Authorization de la requête, pour
-      // que le serveur nous fournisse NOS recettes préférées
       api
         .post('/user/search', fetchUserByMailData)
         .then((response) => {
@@ -134,8 +122,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       const addFriendData = {
         id: friendId,
       };
-      // on doit envoyer le JWT dans le header Authorization de la requête, pour
-      // que le serveur nous fournisse NOS recettes préférées
       api
         .post('/friend/add', addFriendData)
         .then((response) => {
@@ -149,8 +135,6 @@ const userMiddleware = (store) => (next) => async (action) => {
       break;
 
     case DELETE_FRIEND:
-      // on doit envoyer le JWT dans le header Authorization de la requête, pour
-      // que le serveur nous fournisse NOS recettes préférées
       api
         .delete(`/friend/delete/${friendId}`)
         .then((response) => {
@@ -171,12 +155,11 @@ const userMiddleware = (store) => (next) => async (action) => {
         })
         .catch((error) => {
           console.error(error);
-          // Gestion de l'erreur
         });
       break;
 
     case USER_UPDATE_REQUEST: {
-      const userState = store.getState().user; // Get user state only once
+      const userState = store.getState().user;
 
       const updateUserData = {
         firstname: userState.firstnameValue,
@@ -188,19 +171,13 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .put('/user/me/update', updateUserData)
         .then((response) => {
-          // Traitez la réponse ici si nécessaire
-          // Par exemple, dispatch des actions pour gérer les données mises à jour
           store.dispatch(userUpdateSuccess());
-          // Vérifiez si avatarUpdate n'est pas vide
           if (userState.avatarUpdate) {
-            // Si avatarUpdate n'est pas vide, appelez userUpdateAvatar
             store.dispatch(userUpdateAvatar());
           }
         })
         .catch((error) => {
           console.error(error);
-
-          // Gestion de l'erreur
           if (error.response.status === 422) {
             store.dispatch(
               userUpdateFailure('Un compte existe déjà avec cet email')
@@ -212,8 +189,7 @@ const userMiddleware = (store) => (next) => async (action) => {
     }
 
     case USER_UPDATE_AVATAR: {
-      const userState = store.getState().user; // Get user state only once
-
+      const userState = store.getState().user;
       const avatarData = {
         avatar: userState.avatarUpdate,
       };
@@ -221,13 +197,10 @@ const userMiddleware = (store) => (next) => async (action) => {
       api
         .post('/user/me/add_avatar', avatarData)
         .then((response) => {
-          // Traitez la réponse ici si nécessaire
-          // Par exemple, dispatch des actions pour gérer les données mises à jour
           store.dispatch({ type: FETCH_USER_DATA });
         })
         .catch((error) => {
           console.error(error);
-          // Gestion de l'erreur
           store.dispatch(userUpdateFailure(error));
         });
 
@@ -236,17 +209,13 @@ const userMiddleware = (store) => (next) => async (action) => {
 
     case DELETE_USER:
       try {
-        // Effectuer la requête axios pour supprimer le compte utilisateur
         await api.delete('/user/delete');
 
-        // Réinitialiser l'état de l'utilisateur
         store.dispatch(userDeleteSuccess('success'));
         store.dispatch(saveUserData('', '', '', ''));
         store.dispatch(clickLogout());
       } catch (error) {
-        // Gestion des erreurs
         console.error('Erreur lors de la suppression du compte :', error);
-        // Dispatchez une action d'échec si nécessaire
         store.dispatch(userDeleteFailure(error));
       }
 

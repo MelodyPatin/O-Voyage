@@ -8,10 +8,7 @@ import suitcaseReducer from './suitcase';
 import galleryReducer from './gallery';
 import filtersReducer from './filters';
 
-// le reducer principal : met en place les "tiroirs" dans le state et indiquer quel reducer
-// s'occupe de quel tiroir
 const rootReducer = combineReducers({
-  // nom du tiroir: reducer qui s'en occupe
   user: userReducer,
   trip: tripReducer,
   activity: activityReducer,

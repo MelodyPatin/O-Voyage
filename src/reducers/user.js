@@ -25,27 +25,20 @@ import {
 
 export const initialState = {
   logged: false,
-  // indique si l'utilisateur est déconnecté
   loggedOut: false,
-  // indique si l'utilisateur a créé son compte
   signedUp: false,
-  // contenu du champ email du formulaire de login
   email: '',
-  // contenu du champ password du formulaire de login
   password: '',
-  // contenu du champ email du formulaire de signup
   signUpEmail: '',
-  // contenu du champ password du formulaire de signup
   signUpPassword: '',
   firstnameValue: '',
   lastnameValue: '',
   avatar: '',
   avatarUpdate: '',
-  // redirection
   redirectTo: null,
   myTrips: [],
   friends: [],
-  deletionStatus: null, // Peut être 'success' ou 'failure'
+  deletionStatus: null,
   searchUsersValue: '',
   firstNameSearch: '',
   lastNameSearch: '',
@@ -58,7 +51,6 @@ export const initialState = {
   friendsFetched: false,
 };
 
-/* reducer qui s'occupe de ce qui concerne l'utilisateur */
 const reducer = (state = initialState, action = {}) => {
   switch (action.type) {
     case CHANGE_LOGIN_FIELD:
@@ -66,13 +58,6 @@ const reducer = (state = initialState, action = {}) => {
         ...state,
         [action.identifier]: action.value,
       };
-    /*
-      avec les ifs, si on ajoute un champ dans le formulaire il faut ajouter
-      un nouveau if.
-      Avec cette syntaxe, le reducer est prêt pour n'importe quel ajout de champ
-      MAIS il faut que le nom du champ dans le state soit présent dans le payload
-      de l'action
-    */
 
     case HANDLE_SUCCESSFUL_LOGIN:
       localStorage.setItem('token', action.token);
@@ -80,7 +65,6 @@ const reducer = (state = initialState, action = {}) => {
 
       return {
         ...state,
-        // sécurité : on efface les identifiants du state dès qu'on a plus besoin
         email: '',
         password: '',
         logged: true,
@@ -118,7 +102,7 @@ const reducer = (state = initialState, action = {}) => {
       };
 
     case CLICK_LOGOUT:
-      localStorage.clear(); // Efface tout le localStorage
+      localStorage.clear();
 
       return initialState;
 
@@ -186,25 +170,25 @@ const reducer = (state = initialState, action = {}) => {
         [action.identifier]: action.value,
       };
 
-    case LOGIN_ERROR: // Nouveau cas pour gérer l'action LOGIN_ERROR
+    case LOGIN_ERROR:
       return {
         ...state,
-        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+        errorMessage: action.errorMessage,
       };
 
-    case SIGNUP_ERROR: // Nouveau cas pour gérer l'action LOGIN_ERROR
+    case SIGNUP_ERROR:
       return {
         ...state,
-        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+        errorMessage: action.errorMessage,
       };
 
-    case SET_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
+    case SET_ERROR_MESSAGE:
       return {
         ...state,
-        errorMessage: action.errorMessage, // Mettre à jour le message d'erreur dans le state
+        errorMessage: action.errorMessage,
       };
 
-    case CLEAR_ERROR_MESSAGE: // Nouveau cas pour gérer l'action LOGIN_ERROR
+    case CLEAR_ERROR_MESSAGE:
       return {
         ...state,
         errorMessage: '',
@@ -213,7 +197,7 @@ const reducer = (state = initialState, action = {}) => {
     case FRIENDS_FETCHED:
       return {
         ...state,
-        friendsFetched: action.bool, // Définir friendsFetched à true une fois les amis chargés
+        friendsFetched: action.bool,
       };
 
     case SAVE_USER_RESULT_DATA:
